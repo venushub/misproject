@@ -8,3 +8,12 @@ class Bug(models.Model):
     def __str__(self):
         return self.bugId
 
+
+
+
+class ActivityType(models.Model):
+    activityTypeName =models.CharField(max_length=50)
+    activityTypeDesc =models.TextField()
+
+    def __str__(self):
+        return self.activityTypeName

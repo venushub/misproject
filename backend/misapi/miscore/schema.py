@@ -13,6 +13,7 @@ class ActivityTypeType(DjangoObjectType):
         model = ActivityType
 
 
+
 class Query(object):
     all_bugs = graphene.List(BugType)
 
@@ -25,3 +26,4 @@ class Query(object):
 
     def resolve_all_activity_types(self, info, **kwargs):
         return ActivityType.objects.all()
+

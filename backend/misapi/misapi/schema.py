@@ -5,7 +5,7 @@ import miscore.bugs.schema
 
 
 
-class Mutation(miscore.users.schema.Mutation, miscore.bugs.schema.Mutation, graphene.ObjectType,):
+class Mutation(miscore.users.schema.Mutation, miscore.bugs.schema.Mutation, graphene.ObjectType):
     pass
 
 

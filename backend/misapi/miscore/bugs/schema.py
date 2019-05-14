@@ -1,6 +1,6 @@
 import graphene
 from graphene_django import DjangoObjectType
- from miscore.models import Bug
+from miscore.models import Bug
 
 
 class BugType(DjangoObjectType):
@@ -18,7 +18,7 @@ class Query(object):
 
 class CreateBug(graphene.Mutation):
     id = graphene.Int()
-    bugID = graphene.String()
+    bugId = graphene.String()
     bugDesc = graphene.String()
 
     class Arguments:
@@ -35,8 +35,8 @@ class CreateBug(graphene.Mutation):
         
 
         return CreateBug(
-            id = bug.id
-            bugId = bug.bugId
+            id = bug.id,
+            bugId = bug.bugId,
             bugDesc = bug.bugDesc
         )
     

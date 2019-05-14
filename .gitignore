@@ -1,3 +1,5 @@
 backend/myenv/
 
 frontend/misgui/node_modules/
+
+*__pycache__

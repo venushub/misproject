@@ -1,11 +1,11 @@
 import graphene
 
 import miscore.schema
-import misapi.users.schema
+import miscore.users.schema
 
 
 
-class Mutation(misapi.users.schema.Mutation, graphene.ObjectType,):
+class Mutation(miscore.users.schema.Mutation, graphene.ObjectType,):
     pass
 
 

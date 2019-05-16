@@ -3,3 +3,5 @@ backend/myenv/
 frontend/misgui/node_modules/
 
 *.pyc
+
+*.swp

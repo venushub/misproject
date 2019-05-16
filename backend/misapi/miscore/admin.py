@@ -1,8 +1,9 @@
 from django.contrib import admin
 
-from .models import Bug, ActivityType
+from .models import Bug, ActivityType, Activity
 # Register your models here.
 admin.site.register(Bug)
 
 admin.site.register(ActivityType)
 
+admin.site.register(Activity)

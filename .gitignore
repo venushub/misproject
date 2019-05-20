@@ -5,3 +5,5 @@ frontend/misgui/node_modules/
 *.pyc
 
 *.swp
+
+frontend/misgui/package-lock.json

@@ -4,7 +4,7 @@ from miscore.models import Activity
 from miscore.models import ActivityType as ActivityTypeModel
 
 from miscore.activitytype.schema import ActivityTypeType
-from miscore.users.schema import UserType
+from users.schema import UserType
 
 class ActivityType(DjangoObjectType):
     class Meta:

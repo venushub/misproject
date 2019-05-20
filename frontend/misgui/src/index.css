@@ -1,13 +1,66 @@
-body {
+.registration_content{
+  box-sizing: border-box;
+  box-align: center;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  display: flex; 
+  width: 100vw;
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  
+ 
+  
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.registration-form{
+  border: 5px solid black;
+  display: flex;
+  flex-direction: column;
+  font-family: "Times New Roman", Times, serif;
+  text-align: justify;
+  line-height: 25px;
+  padding: 80px;
+  letter-spacing: 1px;
+  border-radius: 12px;
+  box-shadow: 5px 10px #888888;} 
+
+.submit-button{
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 2px 1px;
+  cursor: pointer;
+  border-radius: 12px;
 }
+
+  .cancel-button{
+    background-color: red;  
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px 1px;
+    cursor: pointer;
+    border-radius: 12px}
+
+  .thicker{
+    font-weight: bold;
+  }
+  .img{
+    align-items: center; 
+    height: 100px;
+    width: 100px;
+    object-fit: cover;  
+    
+    
+    
+  }

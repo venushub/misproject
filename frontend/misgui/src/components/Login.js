@@ -9,15 +9,17 @@ class Login extends Component {
 
     this.state = {
       email : '',
-      password : ''
+      password : '',
     }
   }
+
 
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value
     })
   }
+
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -34,15 +36,17 @@ class Login extends Component {
     });
   }
 
+
   render(){
     return(
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>email</label>
-          <input type="text" id='email' onChange={this.handleChange} value={this.state.email} />
-          <label>password</label>
-          <input type="password" id='password' onChange={this.handleChange} value={this.state.password} />
-          <button>Login</button >
+      <div className="mycontent">
+          <form className="login-form" onSubmit={this.handleSubmit}>
+            <img className="loginimg" src={require('../images/loginicon.png')}  />
+            <label className="form-input-label">email</label>
+            <input className="form-input" type="text" id='email' onChange={this.handleChange} value={this.state.email} />
+            <label className="form-input-label">password</label>
+            <input className="form-input" type="password" id='password' onChange={this.handleChange} value={this.state.password} />
+            <button className="login-button">Login</button >
         </form>
       </div>
     )

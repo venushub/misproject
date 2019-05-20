@@ -24,7 +24,7 @@ class CreateBug(graphene.Mutation):
     class Arguments:
         bugId = graphene.String(required= True)
         bugDesc =graphene.String(required=True)
-        
+
 
     def mutate(self, info, bugId, bugDesc):
         bug = Bug(
@@ -32,14 +32,13 @@ class CreateBug(graphene.Mutation):
             bugDesc =bugDesc,
         )
         bug.save()
-        
 
         return CreateBug(
             id = bug.id,
             bugId = bug.bugId,
             bugDesc = bug.bugDesc
         )
-    
+
 
 
 class Mutation(graphene.ObjectType):

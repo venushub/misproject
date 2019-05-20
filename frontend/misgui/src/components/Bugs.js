@@ -8,7 +8,6 @@ class Bugs extends Component {
     return (
       <div>
         <h2>Bug List</h2>
-
       </div>
     );
   }

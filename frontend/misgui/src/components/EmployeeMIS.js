@@ -40,12 +40,12 @@ class Home extends Component {
         }
     }).then(res => {
       console.log(res)
-      localStorage.setItem('cool-jwt', res.data.tokenAuth.token)
+      localStorage.setItem('cool-jwt', res.datSa.tokenAuth.token)
     });
   }
 
   render()
-  
+
   {
     const elements = [' ','Bug id-1022', 'Bug id-862', 'Bug id-863','Bug id-1040', 'fBug id-998'];
     const my_select_tag = <select required name=" module_name" className="form-input">
@@ -55,7 +55,10 @@ class Home extends Component {
 
     </select>
     return(
-      <div className = "registration_content" >
+
+
+    
+        <div className = "registration_content" >
         <form className ="registration-form"  onSubmit={this.handleSubmit}>
          < img  className="img"src={require('../Images/employee.png')}/>
           <label className="date">Date</label>
@@ -78,12 +81,7 @@ class Home extends Component {
           {my_select_tag}
           <label >Modul-Details</label>
           <input className="form-input" required  name="module_details" type="text" id='details'onChange={this.handleChange} name ="details" value={this.state.details} /> 
-          <button className="login-button">Submit</button >
-
-
-          
-         
-
+          <button className="login-button">Submit</button>
         </form>
       </div>
     )

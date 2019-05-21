@@ -53,7 +53,7 @@ class Login extends Component {
             <input className="form-input" type="text" id='email'onChange={this.handleChange} name ="email" value={this.state.email} />
             <label className="form-input-label">Password</label>
             <input className="form-input" type="password" id='password'   onChange={this.handleChange} value={this.state.password} />
-            <button className="login-button">Login</button >
+            <button className="login-button">Sign-in</button >
             <button className="signup-button" onClick={this.handleSignupclick} >Sign-up</button >
             <span class="psw">Forgot <a href="#">password?</a></span>
         </form>

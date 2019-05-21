@@ -39,12 +39,13 @@ class Home extends Component {
       localStorage.setItem('cool-jwt', res.data.tokenAuth.token)
     });
   }
-
+  
   render(){
     return(
       <div className = "registration_content" >
         <form className ="registration-form  thicker "  onSubmit={this.handleSubmit}>
          < img  className="img"src={require('../Images/signup.png')}/>
+      
           <label className="form-input-label">Name</label>
           <input className="form-input" type ="text" id='name'  onChange={this.handleChange} value={this.state.name} />
           <label className="form-input-label">E-Mail</label>
@@ -53,9 +54,9 @@ class Home extends Component {
           <input className="form-input" type="password" id='password'  onChange={this.handleChange} value={this.state.password} />
           <label className="form-input-label">Confirm Password</label>
           <input className="form-input" type="password" id='confirm_password' onChange={this.handleChange} value={this.state.confirm_password} />
-          <button className="submit-button">Login</button >
+          <button className="submit-button">Submit</button >
           <button className="cancel-button">Cancel</button>
-
+          
         </form>
       </div>
     )

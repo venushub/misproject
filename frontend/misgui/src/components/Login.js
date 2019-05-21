@@ -21,6 +21,13 @@ class Login extends Component {
   }
 
 
+  handleSignupclick =(e) =>{
+    e.preventDefault();
+    console.log("OK")
+    this.props.history.push("/")
+  }
+
+
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(this.state)
@@ -41,12 +48,14 @@ class Login extends Component {
     return(
       <div className="mycontent">
           <form className="login-form" onSubmit={this.handleSubmit}>
-            <img className="loginimg" src={require('../images/loginicon.png')}  />
-            <label className="form-input-label">email</label>
-            <input className="form-input" type="text" id='email' onChange={this.handleChange} value={this.state.email} />
-            <label className="form-input-label">password</label>
-            <input className="form-input" type="password" id='password' onChange={this.handleChange} value={this.state.password} />
+            <img className="loginimg" src={require('../Images/loginicon.png')}  />
+            <label className="form-input-label"  for= "email">E-mail</label>
+            <input className="form-input" type="text" id='email'onChange={this.handleChange} name ="email" value={this.state.email} />
+            <label className="form-input-label">Password</label>
+            <input className="form-input" type="password" id='password'   onChange={this.handleChange} value={this.state.password} />
             <button className="login-button">Login</button >
+            <button className="signup-button" onClick={this.handleSignupclick} >Sign-up</button >
+            <span class="psw">Forgot <a href="#">password?</a></span>
         </form>
       </div>
     )

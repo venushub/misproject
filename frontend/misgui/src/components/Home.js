@@ -45,14 +45,14 @@ class Home extends Component {
       <div className = "registration_content" >
         <form className ="registration-form  thicker "  onSubmit={this.handleSubmit}>
          < img  className="img"src={require('../Images/signup.png')}/>
-          <label>Name</label>
-          <input type="text" id='name' placeholder="Enter Name" onChange={this.handleChange} value={this.state.name} />
-          <label>E-Mail</label>
-          <input type="text" id='email' placeholder ="Enter E-mail" onChange={this.handleChange} value={this.state.email} />
-          <label>Password</label>
-          <input type="password" id='password'  placeholder="Enter Password" onChange={this.handleChange} value={this.state.password} />
-          <label>Confirm Password</label>
-          <input type="password" id='confirm_password' placeholder="Re-enter Password" onChange={this.handleChange} value={this.state.confirm_password} />
+          <label className="form-input-label">Name</label>
+          <input className="form-input" type ="text" id='name'  onChange={this.handleChange} value={this.state.name} />
+          <label className="form-input-label">E-Mail</label>
+          <input className="form-input" type="text" id='email'  onChange={this.handleChange} value={this.state.email} />
+          <label className="form-input-label">Password</label>
+          <input className="form-input" type="password" id='password'  onChange={this.handleChange} value={this.state.password} />
+          <label className="form-input-label">Confirm Password</label>
+          <input className="form-input" type="password" id='confirm_password' onChange={this.handleChange} value={this.state.confirm_password} />
           <button className="submit-button">Login</button >
           <button className="cancel-button">Cancel</button>
 

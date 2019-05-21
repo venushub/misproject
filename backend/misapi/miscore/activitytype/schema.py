@@ -14,7 +14,6 @@ class Query(object):
         return ActivityType.objects.all()
 
 
-
 class CreateActivityType(graphene.Mutation):
     id = graphene.Int()
     activityTypeName= graphene.String()

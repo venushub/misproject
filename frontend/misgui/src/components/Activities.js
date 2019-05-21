@@ -2,7 +2,24 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import {getActivitiesQuery} from './queries/queries'
 
-class Bugs extends Component {
+class Activities extends Component {
+
+  constructor(props){
+    super(props)
+
+    this.state = {
+      date : '',
+      day : '',
+      start_time : '',
+      end_time : '',
+      module_name: '',
+      module_details: ''
+    }
+  }
+
+
+
+
   render() {
     console.log(this.props)
     return (
@@ -13,4 +30,4 @@ class Bugs extends Component {
   }
 }
 
-export default graphql(getActivitiesQuery)(Bugs);
+export default graphql(getActivitiesQuery)(Activities);

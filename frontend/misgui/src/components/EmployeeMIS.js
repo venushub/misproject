@@ -8,11 +8,12 @@ class Home extends Component {
     super(props)
 
     this.state = {
-      name : '',
-      email : '',
-      password : '',
-      confirm_password : '',
-      submit : ''
+      date : '',
+      day : '',
+      start_time : '',
+      end_time : '',
+      module_name: '',
+      module_details: ''
     }
   }
 

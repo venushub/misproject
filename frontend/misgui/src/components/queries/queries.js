@@ -10,10 +10,31 @@ const getBugsQuery = gql`
 }
 `
 
+const getActivitiesQuery = gql`
+{
+  allActivities {
+    activityType {
+      activityTypeName
+    }
+    activityDescription
+    activityStartTime
+    activityEndTime
+  }
+}
+`
+
 const getTokenMutation = gql`
-    mutation TokenAuth($username: String!, $password: String!){
+    mutation tokenAuth($username: String!, $password: String!){
         tokenAuth(username: $username, password: $password){
             token
+        }
+    }
+`;
+
+const verifyTokenMutation = gql`
+    mutation verifyToken($token: String!){
+        verifyToken(token: $token){
+            payload
         }
     }
 `;
@@ -28,4 +49,4 @@ const getTokenMutation = gql`
 //   }
 // `
 
-export {getBugsQuery, getTokenMutation};
+export {getBugsQuery, getTokenMutation, verifyTokenMutation, getActivitiesQuery};

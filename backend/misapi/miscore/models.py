@@ -23,6 +23,8 @@ class Activity(models.Model):
         'ActivityType',
         related_name = 'activitytype',
         on_delete = models.CASCADE)
+    activityUser = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    activityTypeIdentifier = models.CharField(max_length=50)
     activityDescription =models.TextField()
     activityStartTime = models.DateTimeField()
     activityEndTime = models.DateTimeField()

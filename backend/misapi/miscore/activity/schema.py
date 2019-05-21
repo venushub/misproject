@@ -2,7 +2,6 @@ import graphene
 from graphene_django import DjangoObjectType
 from miscore.models import Activity
 from miscore.models import ActivityType as ActivityTypeModel
-
 from miscore.activitytype.schema import ActivityTypeType
 from users.schema import UserType
 
@@ -28,6 +27,7 @@ class Query(object):
     all_activities = graphene.List(ActivityType)
 
     def resolve_all_activities(self, info, **kwargs):
+        print("the user currently logged in is", info.context.user)
         return Activity.objects.all()
 
 
@@ -38,24 +38,30 @@ class CreateActivity(graphene.Mutation):
     activityDescription = graphene.String()
     activityStartTime = graphene.String()
     activityEndTime = graphene.String()
+    activityUser = graphene.Field(UserType)
+    activityTypeIdentifier = graphene.String()
 
     class Arguments:
         activityTypeArg= graphene.String()
         activityDescriptionArg = graphene.String()
         activityStartTimeArg = graphene.String()
         activityEndTimeArg = graphene.String()
+        activityTypeIdentifierArg = graphene.String()
 
 
-    def mutate(self, info,  activityTypeArg, activityDescriptionArg, activityStartTimeArg, activityEndTimeArg):
+    def mutate(self, info,  activityTypeArg, activityDescriptionArg, activityStartTimeArg, activityEndTimeArg, activityTypeIdentifierArg):
         print("activity type instance is ")
         print(ActivityTypeModel)
-        activityTypeInstance = ActivityTypeModel.objects.all().first()
+        activityTypeInstance = ActivityTypeModel.objects.get(activityTypeName = activityTypeArg)
+        activityUserInstance = info.context.user
         print("activity type instance is after ", activityTypeInstance)
         activity = Activity(
             activityType=  activityTypeInstance,
-            activityDescription = activityDescriptionArg,
+            activityUser= activityUserInstance,
+            activityDescription= activityDescriptionArg,
             activityStartTime = activityStartTimeArg,
-            activityEndTime = activityEndTimeArg
+            activityEndTime = activityEndTimeArg,
+            activityTypeIdentifier = activityTypeIdentifierArg
         )
 
         activity.save()
@@ -63,6 +69,7 @@ class CreateActivity(graphene.Mutation):
         return CreateActivity(
             id = activity.id,
             activityType=  activity.activityType,
+            activityUser= activity.activityUser,
             activityDescription = activity.activityDescription,
             activityStartTime = activity.activityStartTime,
             activityEndTime = activity.activityEndTime,

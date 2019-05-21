@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import { graphql, compose } from 'react-apollo';
 import {verifyTokenMutation} from './queries/queries'
 import { getToken } from './helpers/getToken';
+import { withRouter } from 'react-router-dom';
+
 
 class AuthenticatedComponent extends Component {
   constructor(props){
@@ -10,29 +12,40 @@ class AuthenticatedComponent extends Component {
   this.state = {
     user : undefined
   };
-
 }
 
 componentDidMount(){
-
   const token = getToken();
   this.props.verifyTokenMutation({
     variables : {
       token : token
     }
-  }).then(res => console.log(res)).catch(err => {
+  }).then(res => {
+    this.setState({
+      user: res.data
+    })
+  }).catch(err => {
+    localStorage.removeItem('cool-jwt')
      this.props.history.push('/login');
   })
 }
 
-render(){
-  return(
-    <div>kya chalre</div>
-  )
+render() {
+  if (this.state.user === undefined) {
+    return (
+      <div><h1>Loading...</h1></div>
+    );
+  }
+
+  return (
+    <div>
+      {this.props.children}
+    </div>
+  );
 }
 
 }
 
 export default compose(
     graphql(verifyTokenMutation, { name: "verifyTokenMutation" })
-)(AuthenticatedComponent);
+)(withRouter(AuthenticatedComponent));

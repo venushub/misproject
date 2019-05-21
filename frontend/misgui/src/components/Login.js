@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { graphql, compose } from 'react-apollo';
 import {getTokenMutation} from './queries/queries'
+import { Link , NavLink} from 'react-router-dom'
 
 
 class Login extends Component {
@@ -10,6 +11,7 @@ class Login extends Component {
     this.state = {
       email : '',
       password : '',
+      error : ''
     }
   }
 
@@ -33,11 +35,26 @@ class Login extends Component {
     }).then(res => {
       console.log(res)
       localStorage.setItem('cool-jwt', res.data.tokenAuth.token)
+      this.props.history.push('/activities');
+    }).catch(err => {
+      this.setState({
+        error : 'Invalid Credentials'
+      })
+      console.log("error aya")
     });
   }
 
 
   render(){
+
+    let errorprone = ''
+
+    if(this.state.error === ''){
+      errorprone = <p></p>
+    } else {
+      errorprone = <p>{this.state.error}</p>
+    }
+
     return(
       <div className="mycontent">
           <form className="login-form" onSubmit={this.handleSubmit}>
@@ -47,6 +64,8 @@ class Login extends Component {
             <label className="form-input-label">password</label>
             <input className="form-input" type="password" id='password' onChange={this.handleChange} value={this.state.password} />
             <button className="login-button">Login</button >
+            <Link className="register-link" to="/register">New User Register Here</Link>
+            {errorprone}
         </form>
       </div>
     )

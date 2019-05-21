@@ -39,6 +39,19 @@ const verifyTokenMutation = gql`
     }
 `;
 
+
+const createUserMutation = gql`
+  mutation createUser($username: String!, $password: String!){
+    createUser(username: $username, password: $password){
+      user{
+        username
+        email
+      }
+    }
+  }
+`;
+
+
 // const addBookMutation = gql`
 //
 //   mutation($username:String!, $password:String!) {
@@ -49,4 +62,4 @@ const verifyTokenMutation = gql`
 //   }
 // `
 
-export {getBugsQuery, getTokenMutation, verifyTokenMutation, getActivitiesQuery};
+export {getBugsQuery, getTokenMutation, verifyTokenMutation, getActivitiesQuery, createUserMutation};

@@ -28,7 +28,7 @@ class Query(object):
 
     def resolve_all_activities(self, info, **kwargs):
         print("the user currently logged in is", info.context.user)
-        return Activity.objects.all()
+        return Activity.objects.filter(activityUser = info.context.user.id)
 
 
 class CreateActivity(graphene.Mutation):

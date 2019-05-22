@@ -25,7 +25,7 @@ componentDidMount(){
       user: res.data
     })
   }).catch(err => {
-    localStorage.removeItem('cool-jwt')
+    //localStorage.removeItem('cool-jwt')
      this.props.history.push('/login');
   })
 }

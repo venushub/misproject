@@ -10,12 +10,27 @@ const getBugsQuery = gql`
 }
 `
 
+
+const getProjectsQuery = gql`
+{
+  allProjects {
+    id
+    projectname
+    projectDesc
+  }
+}
+`
+
 const getActivitiesQuery = gql`
 {
   allActivities {
+    activityProject {
+      projectName
+    }
     activityType {
       activityTypeName
     }
+    activityTypeIdentifier
     activityDescription
     activityStartTime
     activityEndTime
@@ -30,6 +45,16 @@ const getTokenMutation = gql`
         }
     }
 `;
+
+
+const createActivityMutation = gql`
+    mutation createActivity($activityProjectArg: String!, $activityTypeArg: String!, $activityTypeIdentifierArg: String!, $activityDescriptionArg: String!, $activityStartTimeArg: String!, $activityEndTimeArg: String!){
+        createActivity(activityProjectArg: $activityProjectArg, activityTypeArg: $activityTypeArg, activityTypeIdentifierArg : $activityTypeIdentifierArg, activityDescriptionArg: $activityDescriptionArg, activityStartTimeArg : $activityStartTimeArg, activityEndTimeArg: $activityEndTimeArg){
+            activity
+        }
+    }
+`;
+
 
 const verifyTokenMutation = gql`
     mutation verifyToken($token: String!){
@@ -62,4 +87,4 @@ const createUserMutation = gql`
 //   }
 // `
 
-export {getBugsQuery, getTokenMutation, verifyTokenMutation, getActivitiesQuery, createUserMutation};
+export {getBugsQuery, getTokenMutation, verifyTokenMutation, getActivitiesQuery, createUserMutation, createActivityMutation, getProjectsQuery};

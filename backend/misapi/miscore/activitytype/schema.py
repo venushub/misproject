@@ -14,7 +14,6 @@ class Query(object):
         return ActivityType.objects.all()
 
 
-
 class CreateActivityType(graphene.Mutation):
     id = graphene.Int()
     activityTypeName= graphene.String()
@@ -23,22 +22,23 @@ class CreateActivityType(graphene.Mutation):
     class Arguments:
         activityTypeName = graphene.String(required= True)
         activityTypeDesc=graphene.String(required=True)
-        
+
 
     def mutate(self, info,  activityTypeName, activityTypeDesc):
+        print(info)
         activity = ActivityType(
             activityTypeName=  activityTypeName,
             activityTypeDesc =  activityTypeDesc,
         )
         activity.save()
-        
+
 
         return CreateActivityType(
             id = activity.id,
             activityTypeName=  activity.activityTypeName,
             activityTypeDesc = activity.activityTypeDesc
         )
-    
+
 
 
 class Mutation(graphene.ObjectType):

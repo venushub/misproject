@@ -10,6 +10,14 @@ class Bug(models.Model):
         return self.bugId
 
 
+class Project(models.Model):
+    projectName = models.CharField(max_length=30)
+    projectDesc = models.TextField()
+
+    def __str__(self):
+        return self.projectName
+
+
 class ActivityType(models.Model):
     activityTypeName =models.CharField(max_length=50)
     activityTypeDesc =models.TextField()
@@ -23,6 +31,12 @@ class Activity(models.Model):
         'ActivityType',
         related_name = 'activitytype',
         on_delete = models.CASCADE)
+    activityProject = models.ForeignKey(
+        'Project',
+        related_name = 'projectname',
+        on_delete = models.CASCADE)
+    activityUser = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    activityTypeIdentifier = models.CharField(max_length=50)
     activityDescription =models.TextField()
     activityStartTime = models.DateTimeField()
     activityEndTime = models.DateTimeField()

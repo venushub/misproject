@@ -12,8 +12,8 @@ class Query(object):
     all_bugs = graphene.List(BugType)
 
     def resolve_all_bugs(self, info, **kwargs):
-        print("the user currently logged in is", info.context.user)
         return Bug.objects.all()
+
 
 
 class CreateBug(graphene.Mutation):

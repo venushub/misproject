@@ -1,10 +1,11 @@
 import graphene
 from graphene_django import DjangoObjectType
 from miscore.models import Activity
+from miscore.models import Project
 from miscore.models import ActivityType as ActivityTypeModel
-
 from miscore.activitytype.schema import ActivityTypeType
-from miscore.users.schema import UserType
+from miscore.project.schema import ProjectType
+from users.schema import UserType
 
 class ActivityType(DjangoObjectType):
     class Meta:
@@ -28,7 +29,8 @@ class Query(object):
     all_activities = graphene.List(ActivityType)
 
     def resolve_all_activities(self, info, **kwargs):
-        return Activity.objects.all()
+        print("the user currently logged in is", info.context.user)
+        return Activity.objects.filter(activityUser = info.context.user.id)
 
 
 class CreateActivity(graphene.Mutation):
@@ -38,24 +40,33 @@ class CreateActivity(graphene.Mutation):
     activityDescription = graphene.String()
     activityStartTime = graphene.String()
     activityEndTime = graphene.String()
+    activityUser = graphene.Field(UserType)
+    activityTypeIdentifier = graphene.String()
+    activityProject = graphene.Field(ProjectType)
 
     class Arguments:
         activityTypeArg= graphene.String()
         activityDescriptionArg = graphene.String()
         activityStartTimeArg = graphene.String()
         activityEndTimeArg = graphene.String()
+        activityTypeIdentifierArg = graphene.String()
+        activityProjectArg = graphene.String()
 
-
-    def mutate(self, info,  activityTypeArg, activityDescriptionArg, activityStartTimeArg, activityEndTimeArg):
+    def mutate(self, info,  activityTypeArg, activityDescriptionArg, activityStartTimeArg, activityEndTimeArg, activityTypeIdentifierArg, activityProjectArg):
         print("activity type instance is ")
         print(ActivityTypeModel)
-        activityTypeInstance = ActivityTypeModel.objects.all().first()
+        activityTypeInstance = ActivityTypeModel.objects.get(activityTypeName = activityTypeArg)
+        activityProjectInstance = Project.objects.get(projectName = activityProjectArg)
+        activityUserInstance = info.context.user
         print("activity type instance is after ", activityTypeInstance)
         activity = Activity(
             activityType=  activityTypeInstance,
-            activityDescription = activityDescriptionArg,
+            activityUser= activityUserInstance,
+            activityDescription= activityDescriptionArg,
             activityStartTime = activityStartTimeArg,
-            activityEndTime = activityEndTimeArg
+            activityEndTime = activityEndTimeArg,
+            activityTypeIdentifier = activityTypeIdentifierArg,
+            activityProject = activityProjectArg
         )
 
         activity.save()
@@ -63,9 +74,12 @@ class CreateActivity(graphene.Mutation):
         return CreateActivity(
             id = activity.id,
             activityType=  activity.activityType,
+            activityUser= activity.activityUser,
             activityDescription = activity.activityDescription,
             activityStartTime = activity.activityStartTime,
             activityEndTime = activity.activityEndTime,
+            activityProject = activity.activityProject,
+            activityTypeIdentifier = activity.activityTypeIdentifier
         )
 
 

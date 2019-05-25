@@ -2,8 +2,10 @@ import graphene
 from graphene_django import DjangoObjectType
 from miscore.models import Activity
 from miscore.models import Project
+from miscore.models import ActivityTypeIdentifier
 from miscore.models import ActivityType as ActivityTypeModel
 from miscore.activitytype.schema import ActivityTypeType
+from miscore.activitytypeidentifier.schema import ActivityTypeIdentifierType
 from miscore.project.schema import ProjectType
 from users.schema import UserType
 
@@ -41,11 +43,11 @@ class CreateActivity(graphene.Mutation):
     activityStartTime = graphene.String()
     activityEndTime = graphene.String()
     activityUser = graphene.Field(UserType)
-    activityTypeIdentifier = graphene.String()
+    activityTypeIdentifier = graphene.Field(ActivityTypeIdentifierType)
     activityProject = graphene.Field(ProjectType)
 
     class Arguments:
-        activityTypeArg= graphene.String()
+        activityTypeArg = graphene.String()
         activityDescriptionArg = graphene.String()
         activityStartTimeArg = graphene.String()
         activityEndTimeArg = graphene.String()
@@ -55,8 +57,9 @@ class CreateActivity(graphene.Mutation):
     def mutate(self, info,  activityTypeArg, activityDescriptionArg, activityStartTimeArg, activityEndTimeArg, activityTypeIdentifierArg, activityProjectArg):
         print("activity type instance is ")
         print(ActivityTypeModel)
-        activityTypeInstance = ActivityTypeModel.objects.get(activityTypeName = activityTypeArg)
+        activityTypeInstance = ActivityTypeModel.objects.get(id = activityTypeArg)
         activityProjectInstance = Project.objects.get(projectName = activityProjectArg)
+        activityTypeIdentifierInstance = ActivityTypeIdentifier.objects.get(activityTypeIdentifierName = activityTypeIdentifierArg)
         activityUserInstance = info.context.user
         print("activity type instance is after ", activityTypeInstance)
         activity = Activity(
@@ -65,8 +68,8 @@ class CreateActivity(graphene.Mutation):
             activityDescription= activityDescriptionArg,
             activityStartTime = activityStartTimeArg,
             activityEndTime = activityEndTimeArg,
-            activityTypeIdentifier = activityTypeIdentifierArg,
-            activityProject = activityProjectArg
+            activityTypeIdentifier = activityTypeIdentifierInstance,
+            activityProject = activityProjectInstance
         )
 
         activity.save()

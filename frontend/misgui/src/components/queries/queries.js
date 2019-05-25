@@ -1,25 +1,59 @@
 import {gql} from 'apollo-boost'
 
 
-const getBugsQuery = gql`
-{
-  allBugs {
-    id
-    bugId
-  }
-}
-`
+// const getBugsQuery = gql`
+// {
+//   allBugs {
+//     id
+//     bugId
+//   }
+// }
+// `
+
+
+// const getProjectsQuery = gql`
+// {
+//   allProjects {
+//     id
+//     projectName
+//     projectDesc
+//   }
+// }
+// `
 
 
 const getProjectsQuery = gql`
 {
   allProjects {
     id
-    projectname
+    projectName
     projectDesc
   }
 }
 `
+
+
+
+const getActivityTypesQuery = gql`
+{
+  allActivityTypes {
+    id
+    activityTypeName
+  }
+}
+`
+
+
+const getActivityTypeIdentifiersQuery = gql`
+  query allActivityTypeIDentifiers($search : String){
+    allActivityTypeIdentifiers(search : $search){
+      activityTypeIdentifierName
+    }
+  }
+`
+
+
+
 
 const getActivitiesQuery = gql`
 {
@@ -30,7 +64,9 @@ const getActivitiesQuery = gql`
     activityType {
       activityTypeName
     }
-    activityTypeIdentifier
+    activityTypeIdentifier{
+      activityTypeIdentifierName
+    }
     activityDescription
     activityStartTime
     activityEndTime
@@ -50,7 +86,7 @@ const getTokenMutation = gql`
 const createActivityMutation = gql`
     mutation createActivity($activityProjectArg: String!, $activityTypeArg: String!, $activityTypeIdentifierArg: String!, $activityDescriptionArg: String!, $activityStartTimeArg: String!, $activityEndTimeArg: String!){
         createActivity(activityProjectArg: $activityProjectArg, activityTypeArg: $activityTypeArg, activityTypeIdentifierArg : $activityTypeIdentifierArg, activityDescriptionArg: $activityDescriptionArg, activityStartTimeArg : $activityStartTimeArg, activityEndTimeArg: $activityEndTimeArg){
-            activity
+            activityDescription
         }
     }
 `;
@@ -87,4 +123,4 @@ const createUserMutation = gql`
 //   }
 // `
 
-export {getBugsQuery, getTokenMutation, verifyTokenMutation, getActivitiesQuery, createUserMutation, createActivityMutation, getProjectsQuery};
+export {getTokenMutation, verifyTokenMutation, getActivitiesQuery, createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery};

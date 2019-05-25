@@ -26,17 +26,29 @@ class ActivityType(models.Model):
         return self.activityTypeName
 
 
+class ActivityTypeIdentifier(models.Model):
+    activityType = models.ForeignKey(
+        'ActivityType',
+        related_name = 'activityTypeNameFk',
+        on_delete = models.CASCADE)
+    activityTypeIdentifierName = models.CharField(max_length=100)
+
+
+
 class Activity(models.Model):
     activityType = models.ForeignKey(
         'ActivityType',
-        related_name = 'activitytype',
+        related_name = 'activityTypeFk',
         on_delete = models.CASCADE)
     activityProject = models.ForeignKey(
         'Project',
         related_name = 'projectname',
         on_delete = models.CASCADE)
     activityUser = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    activityTypeIdentifier = models.CharField(max_length=50)
+    activityTypeIdentifier = models.ForeignKey(
+        'ActivityTypeIdentifier',
+        related_name = 'activityTypeIdentifierNameFk',
+        on_delete = models.CASCADE)
     activityDescription =models.TextField()
     activityStartTime = models.DateTimeField()
     activityEndTime = models.DateTimeField()

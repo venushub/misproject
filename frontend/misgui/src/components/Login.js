@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { graphql, compose } from 'react-apollo';
 import {getTokenMutation} from './queries/queries'
+import { Link , NavLink} from 'react-router-dom'
 
 
 class Login extends Component {
@@ -10,6 +11,7 @@ class Login extends Component {
     this.state = {
       email : '',
       password : '',
+      error : ''
     }
   }
 
@@ -40,22 +42,37 @@ class Login extends Component {
     }).then(res => {
       console.log(res)
       localStorage.setItem('cool-jwt', res.data.tokenAuth.token)
+      this.props.history.push('/activities');
+    }).catch(err => {
+      this.setState({
+        error : 'Invalid Credentials'
+      })
+      console.log("error aya")
     });
   }
 
 
   render(){
+
+    let errorprone = ''
+
+    if(this.state.error === ''){
+      errorprone = <p></p>
+    } else {
+      errorprone = <p>{this.state.error}</p>
+    }
+
     return(
       <div className="mycontent">
           <form className="login-form" onSubmit={this.handleSubmit}>
-            <img className="loginimg" src={require('../Images/loginicon.png')}  />
-            <label className="form-input-label"  for= "email">E-mail</label>
-            <input className="form-input" type="text" id='email'onChange={this.handleChange} name ="email" value={this.state.email} />
-            <label className="form-input-label">Password</label>
-            <input className="form-input" type="password" id='password'   onChange={this.handleChange} value={this.state.password} />
-            <button className="login-button">Sign-in</button >
-            <button className="signup-button" onClick={this.handleSignupclick} >Sign-up</button >
-            <span class="psw">Forgot <a href="#">password?</a></span>
+            <img className="loginimg" src={require('../images/fruit_mango.png')}  />
+            <label className="form-input-label">email</label>
+            <input className="form-input" type="text" id='email' onChange={this.handleChange} value={this.state.email} />
+            <label className="form-input-label">password</label>
+            <input className="form-input" type="password" id='password' onChange={this.handleChange} value={this.state.password} />
+            <button className="login-button">Login</button >
+            <Link className="register-link" to="/register">New User Register Here</Link>
+            {errorprone}
         </form>
       </div>
     )

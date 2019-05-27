@@ -82,7 +82,8 @@ class ActivityForm extends Component {
             activityTypeIdentifierArg: this.state.activityTypeIdentifierArg,
             activityDescriptionArg: this.state.activityDescriptionArg,
             activityStartTimeArg: activityStartTimeArg,
-            activityEndTimeArg: activityEndTimeArg
+            activityEndTimeArg: activityEndTimeArg,
+            activityMutateOrUpdateArg : '8'
         }, refetchQueries : [{query : getActivitiesQuery}]
     }).then(res => {
       console.log(res)
@@ -192,4 +193,5 @@ export default compose(
     graphql(createActivityMutation, { name: "createActivityMutation" }),
     graphql(getProjectsQuery, { name: "getProjectsQuery" }),
     graphql(getActivityTypesQuery, {name : "getActivityTypesQuery"}),
+    graphql(getActivitiesQuery, {name : "getActivitiesQuery"})
 )(ActivityForm);

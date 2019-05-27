@@ -53,8 +53,9 @@ class CreateActivity(graphene.Mutation):
         activityEndTimeArg = graphene.String()
         activityTypeIdentifierArg = graphene.String()
         activityProjectArg = graphene.String()
+        activityMutateOrUpdateArg = graphene.String()
 
-    def mutate(self, info,  activityTypeArg, activityDescriptionArg, activityStartTimeArg, activityEndTimeArg, activityTypeIdentifierArg, activityProjectArg):
+    def mutate(self, info,  activityTypeArg, activityDescriptionArg, activityStartTimeArg, activityEndTimeArg, activityTypeIdentifierArg, activityProjectArg, activityMutateOrUpdateArg):
         print("activity type instance is ")
         print(ActivityTypeModel)
         activityTypeInstance = ActivityTypeModel.objects.get(id = activityTypeArg)
@@ -62,28 +63,60 @@ class CreateActivity(graphene.Mutation):
         activityTypeIdentifierInstance = ActivityTypeIdentifier.objects.get(activityTypeIdentifierName = activityTypeIdentifierArg)
         activityUserInstance = info.context.user
         print("activity type instance is after ", activityTypeInstance)
-        activity = Activity(
-            activityType=  activityTypeInstance,
-            activityUser= activityUserInstance,
-            activityDescription= activityDescriptionArg,
-            activityStartTime = activityStartTimeArg,
-            activityEndTime = activityEndTimeArg,
-            activityTypeIdentifier = activityTypeIdentifierInstance,
-            activityProject = activityProjectInstance
-        )
+        print("activityTypeArg", activityTypeArg)
 
-        activity.save()
+        if(activityMutateOrUpdateArg == '0'):
 
-        return CreateActivity(
-            id = activity.id,
-            activityType=  activity.activityType,
-            activityUser= activity.activityUser,
-            activityDescription = activity.activityDescription,
-            activityStartTime = activity.activityStartTime,
-            activityEndTime = activity.activityEndTime,
-            activityProject = activity.activityProject,
-            activityTypeIdentifier = activity.activityTypeIdentifier
-        )
+            activity = Activity(
+                activityType=  activityTypeInstance,
+                activityUser= activityUserInstance,
+                activityDescription= activityDescriptionArg,
+                activityStartTime = activityStartTimeArg,
+                activityEndTime = activityEndTimeArg,
+                activityTypeIdentifier = activityTypeIdentifierInstance,
+                activityProject = activityProjectInstance
+            )
+
+            activity.save()
+
+            return CreateActivity(
+                id = activity.id,
+                activityType=  activity.activityType,
+                activityUser= activity.activityUser,
+                activityDescription = activity.activityDescription,
+                activityStartTime = activity.activityStartTime,
+                activityEndTime = activity.activityEndTime,
+                activityProject = activity.activityProject,
+                activityTypeIdentifier = activity.activityTypeIdentifier
+            )
+
+        else:
+            activityObject = Activity.objects.get(id = int(activityMutateOrUpdateArg))
+            print("erer", activityObject)
+            print("reere", type(activityObject.activityType))
+            print("dar ke aage jeet hei", activityTypeInstance, type(activityTypeInstance))
+            activityObject.activityType=  activityTypeInstance.id,
+            activityObject.activityUser= activityUserInstance,
+            activityObject.activityDescription= activityDescriptionArg,
+            activityObject.activityStartTime = activityStartTimeArg,
+            activityObject.activityEndTime = activityEndTimeArg,
+            activityObject.activityTypeIdentifier = activityTypeIdentifierInstance,
+            activityObject.activityProject = activityProjectInstance
+            activityObject.save()
+
+            return CreateActivity(
+                id = activity.id,
+                activityType=  Object.activityType,
+                activityUser= activityObject.activityUser,
+                activityDescription = activityObject.activityDescription,
+                activityStartTime = activityObject.activityStartTime,
+                activityEndTime = activityObject.activityEndTime,
+                activityProject = activityObject.activityProject,
+                activityTypeIdentifier = activityObject.activityTypeIdentifier
+            )
+
+
+
 
 
 class Mutation(graphene.ObjectType):

@@ -59,61 +59,39 @@ class CreateActivity(graphene.Mutation):
         print("activity type instance is ")
         print(ActivityTypeModel)
         activityTypeInstance = ActivityTypeModel.objects.get(id = activityTypeArg)
+        print("activityTypeInstance is...", activityTypeInstance)
+
         activityProjectInstance = Project.objects.get(projectName = activityProjectArg)
         activityTypeIdentifierInstance = ActivityTypeIdentifier.objects.get(activityTypeIdentifierName = activityTypeIdentifierArg)
         activityUserInstance = info.context.user
         print("activity type instance is after ", activityTypeInstance)
         print("activityTypeArg", activityTypeArg)
 
-        if(activityMutateOrUpdateArg == '0'):
 
-            activity = Activity(
-                activityType=  activityTypeInstance,
-                activityUser= activityUserInstance,
-                activityDescription= activityDescriptionArg,
-                activityStartTime = activityStartTimeArg,
-                activityEndTime = activityEndTimeArg,
-                activityTypeIdentifier = activityTypeIdentifierInstance,
-                activityProject = activityProjectInstance
-            )
 
-            activity.save()
+        activity = Activity(
+            activityType=  activityTypeInstance,
+            activityUser= activityUserInstance,
+            activityDescription= activityDescriptionArg,
+            activityStartTime = activityStartTimeArg,
+            activityEndTime = activityEndTimeArg,
+            activityTypeIdentifier = activityTypeIdentifierInstance,
+            activityProject = activityProjectInstance
+        )
 
-            return CreateActivity(
-                id = activity.id,
-                activityType=  activity.activityType,
-                activityUser= activity.activityUser,
-                activityDescription = activity.activityDescription,
-                activityStartTime = activity.activityStartTime,
-                activityEndTime = activity.activityEndTime,
-                activityProject = activity.activityProject,
-                activityTypeIdentifier = activity.activityTypeIdentifier
-            )
+        activity.save()
 
-        else:
-            activityObject = Activity.objects.get(id = int(activityMutateOrUpdateArg))
-            print("erer", activityObject)
-            print("reere", type(activityObject.activityType))
-            print("dar ke aage jeet hei", activityTypeInstance, type(activityTypeInstance))
-            activityObject.activityType=  activityTypeInstance.id,
-            activityObject.activityUser= activityUserInstance,
-            activityObject.activityDescription= activityDescriptionArg,
-            activityObject.activityStartTime = activityStartTimeArg,
-            activityObject.activityEndTime = activityEndTimeArg,
-            activityObject.activityTypeIdentifier = activityTypeIdentifierInstance,
-            activityObject.activityProject = activityProjectInstance
-            activityObject.save()
+        return CreateActivity(
+            id = activity.id,
+            activityType=  activity.activityType,
+            activityUser= activity.activityUser,
+            activityDescription = activity.activityDescription,
+            activityStartTime = activity.activityStartTime,
+            activityEndTime = activity.activityEndTime,
+            activityProject = activity.activityProject,
+            activityTypeIdentifier = activity.activityTypeIdentifier
+        )
 
-            return CreateActivity(
-                id = activity.id,
-                activityType=  Object.activityType,
-                activityUser= activityObject.activityUser,
-                activityDescription = activityObject.activityDescription,
-                activityStartTime = activityObject.activityStartTime,
-                activityEndTime = activityObject.activityEndTime,
-                activityProject = activityObject.activityProject,
-                activityTypeIdentifier = activityObject.activityTypeIdentifier
-            )
 
 
 

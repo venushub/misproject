@@ -83,7 +83,7 @@ class ActivityForm extends Component {
             activityDescriptionArg: this.state.activityDescriptionArg,
             activityStartTimeArg: activityStartTimeArg,
             activityEndTimeArg: activityEndTimeArg,
-            activityMutateOrUpdateArg : '8'
+            activityMutateOrUpdateArg : '1'
         }, refetchQueries : [{query : getActivitiesQuery}]
     }).then(res => {
       console.log(res)

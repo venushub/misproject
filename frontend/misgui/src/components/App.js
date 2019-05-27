@@ -5,6 +5,7 @@ import Login from './Login'
 import AuthenticatedComponent from './AuthenticatedComponent'
 import Activities from './Activities'
 import Register from './Register'
+import Logout from './Logout'
 
 class App extends Component {
   render(){
@@ -17,6 +18,7 @@ class App extends Component {
           <AuthenticatedComponent>
 
             <Route path="/activities" exact component={Activities} />
+            <Route path="/logout" exact component={Logout} />
 
           </AuthenticatedComponent>
         </Switch>

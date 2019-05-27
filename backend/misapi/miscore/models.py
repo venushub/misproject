@@ -2,12 +2,7 @@ from django.db import models
 from django.conf import settings
 
 # Create your models here.
-class Bug(models.Model):
-    bugId = models.CharField(max_length=30)
-    bugDesc = models.TextField()
 
-    def __str__(self):
-        return self.bugId
 
 
 class Project(models.Model):

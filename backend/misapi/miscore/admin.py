@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from .models import Bug, ActivityType, Activity, Project, ActivityTypeIdentifier
+from .models import  ActivityType, Activity, Project, ActivityTypeIdentifier
 # Register your models here.
-admin.site.register(Bug)
+
 
 admin.site.register(ActivityType)
 

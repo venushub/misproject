@@ -58,7 +58,7 @@ class Login extends Component {
     return(
       <div className="mycontent">
           <form className="login-form" onSubmit={this.handleSubmit}>
-            <img className="loginimg" src={require('../images/loginicon.png')}  />
+            <img className="loginimg" src={require('../images/fruit_mango.png')}  />
             <label className="form-input-label">email</label>
             <input className="form-input" type="text" id='email' onChange={this.handleChange} value={this.state.email} />
             <label className="form-input-label">password</label>

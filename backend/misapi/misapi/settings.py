@@ -272,9 +272,9 @@ WSGI_APPLICATION = 'misapi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'venudb', #put your database name here
+        'NAME': 'misdb', #put your database name here
         'USER' : 'postgres',
-        'PASSWORD' : 'postgres',
+        'PASSWORD' : 'nsdl',
         'HOST' : '127.0.0.1',
         'PORT' : '5432'
     }

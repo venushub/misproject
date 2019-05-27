@@ -103,11 +103,29 @@
 }
 
 .header-icon {
-  object-fit : cover;
-  height : 80px;
-  width: 80px;
+  height : 100px;
+  width: 60px;
   padding-bottom: 20px;
   padding-top: 20px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    border : none;
+    /* border-style:solid;
+	border-right-width : 0px;
+    border-top-width: 0px;
+    border-bottom-width : 0px;
+    border-color : #620000; */
+
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d3d1d1;
+    border : none;
+    width: 80%;
+    border-radius: 20%;
+
 }
 
 

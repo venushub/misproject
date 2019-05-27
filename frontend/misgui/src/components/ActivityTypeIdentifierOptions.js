@@ -32,7 +32,7 @@ class ActivityTypeIdentifierOptions extends Component {
 
     let activityTypeIdentifiersOptions = activityTypeIdentifiers.map((activityTypeIdentifier, index) => {
       return (
-        <option key={index} value={activityTypeIdentifier.activityTypeIdentifierName}>{activityTypeIdentifier.activityTypeIdentifierName}</option>
+        <option key={index} value={activityTypeIdentifier.id}>{activityTypeIdentifier.activityTypeIdentifierName}</option>
       )
     })
 

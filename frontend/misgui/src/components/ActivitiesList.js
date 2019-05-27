@@ -19,8 +19,9 @@ class ActivitiesList extends Component {
 
     console.log("lol", this.props.activitiesvp)
 
-    let activities = this.props.getActivitiesQuery.allActivities  &&  this.props.getActivitiesQuery.allActivities != undefined ? this.props.getActivitiesQuery.allActivities : []
+    //let activities = this.props.getActivitiesQuery.allActivities  &&  this.props.getActivitiesQuery.allActivities != undefined ? this.props.getActivitiesQuery.allActivities : []
     // let activities =  this.props.activitiesvp.reverse()
+    let activities = this.props.activitiesvp  &&  this.props.activitiesvp != undefined ? this.props.activitiesvp : []
 
 
    const activities_render = activities.slice(0).reverse().map((activity, index) => {return(
@@ -46,4 +47,5 @@ class ActivitiesList extends Component {
 
 export default compose(
     graphql(getActivitiesQuery, { name: "getActivitiesQuery" }),
+
 )(ActivitiesList);

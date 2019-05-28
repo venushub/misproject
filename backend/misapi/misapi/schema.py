@@ -7,7 +7,7 @@ import miscore.activity.schema
 import graphql_jwt
 
 
-class Mutation(miscore.activity.schema.Mutation, miscore.project.schema.Mutation , users.schema.Mutation, miscore.activitytype.schema.Mutation, graphene.ObjectType):
+class Mutation(miscore.activity.schema.Mutation, miscore.project.schema.Mutation , miscore.activitytypeidentifier.schema.Mutation , users.schema.Mutation, miscore.activitytype.schema.Mutation, graphene.ObjectType):
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
     verify_token = graphql_jwt.Verify.Field()
     refresh_token = graphql_jwt.Refresh.Field()

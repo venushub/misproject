@@ -256,3 +256,17 @@
   outline: none;
   border-color: #f49b42;
 }
+
+
+.activiy-type-iden-options {
+  border : 2px solid grey;
+}
+
+.drop-item {
+  border-style: solid;
+  border-top-width:  0;
+  border-right-width:  0;
+  border-bottom-width:  2;
+  border-left-width:  0;
+  border-color: #ffd472
+}

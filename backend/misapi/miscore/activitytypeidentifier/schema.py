@@ -1,6 +1,9 @@
 import graphene
 from graphene_django import DjangoObjectType
 from miscore.models import ActivityTypeIdentifier
+from miscore.activitytype.schema import ActivityTypeType
+from miscore.models import ActivityType as ActivityTypeModel
+
 
 class ActivityTypeIdentifierType(DjangoObjectType):
     class Meta:
@@ -19,32 +22,38 @@ class Query(object):
         return ActivityTypeIdentifier.objects.filter(activityType = int(search))
 
 
-# class CreateActivityType(graphene.Mutation):
-#     id = graphene.Int()
-#     activityTypeName= graphene.String()
-#     activityTypeDesc = graphene.String()
-#
-#     class Arguments:
-#         activityTypeName = graphene.String(required= True)
-#         activityTypeDesc=graphene.String(required=True)
-#
-#
-#     def mutate(self, info,  activityTypeName, activityTypeDesc):
-#         print(info)
-#         activity = ActivityType(
-#             activityTypeName=  activityTypeName,
-#             activityTypeDesc =  activityTypeDesc,
-#         )
-#         activity.save()
-#
-#
-#         return CreateActivityType(
-#             id = activity.id,
-#             activityTypeName=  activity.activityTypeName,
-#             activityTypeDesc = activity.activityTypeDesc
-#         )
 
 
 
-# class Mutation(graphene.ObjectType):
-#     create_activity_type = CreateActivityType.Field()
+class CreateActivityTypeIdentifier(graphene.Mutation):
+    id = graphene.Int()
+    activityTypeIdentifierName= graphene.String()
+    activityType= graphene.Field(ActivityTypeType)
+
+    print("flow idhar aya")
+
+    class Arguments:
+        activityType = graphene.String(required= True)
+        activityTypeIdentifierName=graphene.String(required=True)
+
+    print("type", activityType, "name", activityTypeIdentifierName)
+
+    def mutate(self, info,  activityType, activityTypeIdentifierName):
+        print(info)
+        activityTypeInstance = ActivityTypeModel.objects.get(id = int(activityType))
+        activitytypeidentifier = ActivityTypeIdentifier(
+            activityType=  activityTypeInstance,
+            activityTypeIdentifierName =  activityTypeIdentifierName,
+        )
+        activitytypeidentifier.save()
+
+
+        return CreateActivityTypeIdentifier(
+            id = activitytypeidentifier.id,
+            activityType=  activitytypeidentifier.activityType,
+            activityTypeIdentifierName = activitytypeidentifier.activityTypeIdentifierName
+        )
+
+
+class Mutation(graphene.ObjectType):
+    create_activity_type_identifier = CreateActivityTypeIdentifier.Field()

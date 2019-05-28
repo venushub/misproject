@@ -13,15 +13,9 @@ class ActivityForm extends Component {
     this.state = {
       display_form : false,
       button_content : 'Add Activity +',
-<<<<<<< HEAD
-      activityProjectArg : 'vidyasaarathi',
-      activityTypeArg : '1',
-      activityTypeIdentifierArg : '1234',
-=======
       activityProjectArg : '--select--',
       activityTypeArg : '--select--',
       activityTypeIdentifierArg : '--select--',
->>>>>>> venutest
       activityDescriptionArg : '',
       activityDate : '',
       activityStartTime : '',
@@ -70,14 +64,11 @@ class ActivityForm extends Component {
 
     console.log(this.state)
 
-<<<<<<< HEAD
-=======
 
     if(this.state.activityProjectArg === '--select--' || this.state.activityTypeArg === '--select--' || this.state.activityTypeIdentifierArg === '--select--'){
       alert('please select all necessary fields')
     } else {
 
->>>>>>> venutest
     e.preventDefault()
 
     let yyyy = this.state.activityDate.substring(0,4)

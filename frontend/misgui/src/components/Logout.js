@@ -19,6 +19,7 @@ class Logout extends Component {
     e.preventDefault();
     localStorage.removeItem('cool-jwt')
     this.props.history.push('/login');
+    window.location.reload();
   }
 
 

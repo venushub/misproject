@@ -44,7 +44,6 @@ class Home extends Component {
     return(
       <div className = "registration_content" >
         <form className ="registration-form  thicker "  onSubmit={this.handleSubmit}>
-         < img  className="img"src={require('../Images/signup.png')}/>
       
           <label className="form-input-label">Name</label>
           <input className="form-input" type ="text" id='name'  onChange={this.handleChange} value={this.state.name} />

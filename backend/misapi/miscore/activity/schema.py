@@ -58,11 +58,11 @@ class CreateActivity(graphene.Mutation):
     def mutate(self, info,  activityTypeArg, activityDescriptionArg, activityStartTimeArg, activityEndTimeArg, activityTypeIdentifierArg, activityProjectArg, activityMutateOrUpdateArg):
         print("activity type instance is ")
         print(ActivityTypeModel)
-        activityTypeInstance = ActivityTypeModel.objects.get(id = activityTypeArg)
+        activityTypeInstance = ActivityTypeModel.objects.get(id = int(activityTypeArg))
         print("activityTypeInstance is...", activityTypeInstance)
 
         activityProjectInstance = Project.objects.get(projectName = activityProjectArg)
-        activityTypeIdentifierInstance = ActivityTypeIdentifier.objects.get(activityTypeIdentifierName = activityTypeIdentifierArg)
+        activityTypeIdentifierInstance = ActivityTypeIdentifier.objects.get(activityTypeIdentifierName = int(activityTypeIdentifierArg))
         activityUserInstance = info.context.user
         print("activity type instance is after ", activityTypeInstance)
         print("activityTypeArg", activityTypeArg)

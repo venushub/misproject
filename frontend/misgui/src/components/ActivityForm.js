@@ -14,7 +14,7 @@ class ActivityForm extends Component {
       button_content : 'Add Activity +',
       activityProjectArg : 'vidyasaarathi',
       activityTypeArg : '1',
-      activityTypeIdentifierArg : '8051',
+      activityTypeIdentifierArg : '1234',
       activityDescriptionArg : '',
       activityDate : '',
       activityStartTime : '',
@@ -60,6 +60,8 @@ class ActivityForm extends Component {
 
   handleActivityFormSubmit = (e) => {
 
+    console.log(this.state)
+
     e.preventDefault()
 
     let yyyy = this.state.activityDate.substring(0,4)
@@ -83,7 +85,7 @@ class ActivityForm extends Component {
             activityDescriptionArg: this.state.activityDescriptionArg,
             activityStartTimeArg: activityStartTimeArg,
             activityEndTimeArg: activityEndTimeArg,
-            activityMutateOrUpdateArg : '1'
+            activityMutateOrUpdateArg : '0'
         }, refetchQueries : [{query : getActivitiesQuery}]
     }).then(res => {
       console.log(res)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
-import {getActivitiesQuery, createActivityMutation, getProjectsQuery} from './queries/queries'
+import {getActivitiesQuery, createActivityMutation, getProjectsQuery, getActivitiesForWeekQuery} from './queries/queries'
 import Header from './Header'
 import ActivityForm from './ActivityForm'
 import ActivitiesList from './ActivitiesList'
@@ -40,7 +40,7 @@ class Activities extends Component {
 
     let my_form = null
     if(this.state.display_form){
-      my_form = <ActivityForm />
+      my_form = <ActivityForm handleSubmitButton={this.handleDisplayForm}/>
     }
 
     let button_class = ''
@@ -88,7 +88,8 @@ class Activities extends Component {
           <div className="add-activity"><button onClick={this.handleDisplayForm} className={button_class}>{this.state.button_content}</button></div>
         </div>
         {my_form}
-        <ActivitiesList activitiesvp={this.props.getActivitiesQuery.allActivities}/>
+        <form><label>This Week<input name="isGoing" type="checkbox"checked={this.state.isGoing} onChange={this.handleWeekBoxChange}/></label></form>
+        <ActivitiesList activitiesvp={this.props.getActivitiesQuery.allActivities} />
       </div>
     );
   }
@@ -110,5 +111,6 @@ class Activities extends Component {
 export default compose(
     graphql(getActivitiesQuery, { name: "getActivitiesQuery" }),
     graphql(createActivityMutation, { name: "createActivityMutation" }),
+    graphql(getActivitiesForWeekQuery, {name : "getActivitiesForWeekQuery"})
     //graphql(getProjectsQuery, { name: "getProjectsQuery" })
 )(Activities);

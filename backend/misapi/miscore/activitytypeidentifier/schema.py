@@ -16,7 +16,7 @@ class Query(object):
         #     return Link.objects.filter(ActivityType = search)
         #
         # return Link.objects.all()
-        return ActivityTypeIdentifier.objects.filter(activityType = search)
+        return ActivityTypeIdentifier.objects.filter(activityType = int(search))
 
 
 # class CreateActivityType(graphene.Mutation):

@@ -29,10 +29,15 @@ class ActivityType(DjangoObjectType):
 
 class Query(object):
     all_activities = graphene.List(ActivityType)
+    all_activities_for_week = graphene.List(ActivityType, search=graphene.String())
 
     def resolve_all_activities(self, info, **kwargs):
         print("the user currently logged in is", info.context.user)
         return Activity.objects.filter(activityUser = info.context.user.id)
+
+    def resolve_all_activities_for_week(self, info, search,  **kwargs):
+        return Activity.objects.filter(activityUser = info.context.user.id, activityStartTime__week = 22)
+
 
 
 class CreateActivity(graphene.Mutation):
@@ -61,8 +66,8 @@ class CreateActivity(graphene.Mutation):
         activityTypeInstance = ActivityTypeModel.objects.get(id = int(activityTypeArg))
         print("activityTypeInstance is...", activityTypeInstance)
 
-        activityProjectInstance = Project.objects.get(projectName = activityProjectArg)
-        activityTypeIdentifierInstance = ActivityTypeIdentifier.objects.get(activityTypeIdentifierName = int(activityTypeIdentifierArg))
+        activityProjectInstance = Project.objects.get(id = int(activityProjectArg))
+        activityTypeIdentifierInstance = ActivityTypeIdentifier.objects.get(id = int(activityTypeIdentifierArg))
         activityUserInstance = info.context.user
         print("activity type instance is after ", activityTypeInstance)
         print("activityTypeArg", activityTypeArg)

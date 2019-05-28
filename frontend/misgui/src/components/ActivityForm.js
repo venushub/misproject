@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import {getActivitiesQuery, createActivityMutation, getProjectsQuery, getActivityTypesQuery} from './queries/queries'
 import ActivityTypeIdentifierOptions from './ActivityTypeIdentifierOptions'
+import {withRouter} from 'react-router'
 
 
 class ActivityForm extends Component {
@@ -12,9 +13,15 @@ class ActivityForm extends Component {
     this.state = {
       display_form : false,
       button_content : 'Add Activity +',
+<<<<<<< HEAD
       activityProjectArg : 'vidyasaarathi',
       activityTypeArg : '1',
       activityTypeIdentifierArg : '1234',
+=======
+      activityProjectArg : '--select--',
+      activityTypeArg : '--select--',
+      activityTypeIdentifierArg : '--select--',
+>>>>>>> venutest
       activityDescriptionArg : '',
       activityDate : '',
       activityStartTime : '',
@@ -51,8 +58,9 @@ class ActivityForm extends Component {
       activityDate : todaydate,
       activityStartTime : nowtime,
       activityEndTime : nowtime,
-      activityProjectArg : 'vidyasaarathi',
-      activityTypeArg : '1',
+      activityProjectArg : '--select--',
+      activityTypeArg : '--select--',
+      activityTypeIdentifierArg : '--select--',
     })
   }
 
@@ -62,6 +70,14 @@ class ActivityForm extends Component {
 
     console.log(this.state)
 
+<<<<<<< HEAD
+=======
+
+    if(this.state.activityProjectArg === '--select--' || this.state.activityTypeArg === '--select--' || this.state.activityTypeIdentifierArg === '--select--'){
+      alert('please select all necessary fields')
+    } else {
+
+>>>>>>> venutest
     e.preventDefault()
 
     let yyyy = this.state.activityDate.substring(0,4)
@@ -85,16 +101,19 @@ class ActivityForm extends Component {
             activityDescriptionArg: this.state.activityDescriptionArg,
             activityStartTimeArg: activityStartTimeArg,
             activityEndTimeArg: activityEndTimeArg,
-            activityMutateOrUpdateArg : '0'
-        }, refetchQueries : [{query : getActivitiesQuery}]
+            activityMutateOrUpdateArg : '1'
+        }
     }).then(res => {
       console.log(res)
+      window.location.reload()
       //localStorage.setItem('cool-jwt', res.data.tokenAuth.token)
       //this.props.history.push('/activities');
 
     }).catch(err => {
       console.log("error aya")
     });
+
+    }
   }
 
 
@@ -114,7 +133,7 @@ class ActivityForm extends Component {
     let projects_options_render = projects_options.map((project, index) => {
 
       return(
-        <option key={index} value={project.projectName}>{project.projectName}</option>
+        <option key={index} value={project.id}>{project.projectName}</option>
       )
 
     })
@@ -144,6 +163,7 @@ class ActivityForm extends Component {
 
           <label className="activity-form-input-label">Project</label>
           <select name="activityProjectArg" value={this.state.activityProjectArg} onChange={this.handleChange} className="activity-form-input">
+             <option value="select">--select--</option>
              {projects_options_render}
           </select>
 
@@ -151,6 +171,7 @@ class ActivityForm extends Component {
 
           <label className="activity-form-input-label">Activity Type</label>
           <select name="activityTypeArg" value={this.state.activityTypeArg} onChange={this.handleChange} className="activity-form-input">
+              <option value="select">--select--</option>
               {activity_types_options_render}
           </select>
 
@@ -158,6 +179,7 @@ class ActivityForm extends Component {
 
           <label className="activity-form-input-label">TypeIden</label>
           <select name="activityTypeIdentifierArg" value={this.state.activityTypeIdentifierArg} onChange={this.handleChange} className="activity-form-input">
+          <option value="select">--select--</option>
           <ActivityTypeIdentifierOptions activityTypeId = {this.state.activityTypeArg} />
           </select>
 
@@ -196,4 +218,4 @@ export default compose(
     graphql(getProjectsQuery, { name: "getProjectsQuery" }),
     graphql(getActivityTypesQuery, {name : "getActivityTypesQuery"}),
     graphql(getActivitiesQuery, {name : "getActivitiesQuery"})
-)(ActivityForm);
+)(withRouter(ActivityForm));

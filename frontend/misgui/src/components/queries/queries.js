@@ -47,7 +47,28 @@ const getActivityTypesQuery = gql`
 const getActivityTypeIdentifiersQuery = gql`
   query allActivityTypeIDentifiers($search : String){
     allActivityTypeIdentifiers(search : $search){
+      id
       activityTypeIdentifierName
+    }
+  }
+`
+
+const getActivitiesForWeekQuery = gql`
+  query allActivitiesForWeek($search : String){
+    allActivitiesForWeek(search : $search){
+      id
+      activityProject {
+        projectName
+      }
+      activityType {
+        activityTypeName
+      }
+      activityTypeIdentifier{
+        activityTypeIdentifierName
+      }
+      activityDescription
+      activityStartTime
+      activityEndTime
     }
   }
 `
@@ -124,4 +145,4 @@ const createUserMutation = gql`
 //   }
 // `
 
-export {getTokenMutation, verifyTokenMutation, getActivitiesQuery, createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery};
+export {getTokenMutation, verifyTokenMutation, getActivitiesQuery, createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery};

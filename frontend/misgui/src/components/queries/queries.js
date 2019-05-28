@@ -114,6 +114,16 @@ const createActivityMutation = gql`
 `;
 
 
+const createActivityTypeIdentifierMutation = gql`
+      mutation createActivityTypeIdentifier($activityType: String!, $activityTypeIdentifierName: String!){
+         createActivityTypeIdentifier(activityType: $activityType, activityTypeIdentifierName: $activityTypeIdentifierName){
+            id
+            activityTypeIdentifierName
+        }
+    }
+`;
+
+
 const verifyTokenMutation = gql`
     mutation verifyToken($token: String!){
         verifyToken(token: $token){
@@ -145,4 +155,4 @@ const createUserMutation = gql`
 //   }
 // `
 
-export {getTokenMutation, verifyTokenMutation, getActivitiesQuery, createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery};
+export {getTokenMutation, verifyTokenMutation, getActivitiesQuery, createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation};

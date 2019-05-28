@@ -3,6 +3,7 @@ import { graphql, compose } from 'react-apollo';
 import {getActivitiesQuery, createActivityMutation, getProjectsQuery, getActivityTypesQuery} from './queries/queries'
 import ActivityTypeIdentifierOptions from './ActivityTypeIdentifierOptions'
 import {withRouter} from 'react-router'
+import CustomOptions from './CustomOptions'
 
 
 class ActivityForm extends Component {
@@ -20,6 +21,7 @@ class ActivityForm extends Component {
       activityDate : '',
       activityStartTime : '',
       activityEndTime : '',
+      datid : true
     }
   }
 
@@ -27,10 +29,21 @@ class ActivityForm extends Component {
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
-    }, () =>   console.log("ware", this.state.activityTypeArg)
+    }, () =>   {
+      console.log("ware", this.state.activityTypeArg)
+    }
   )
   }
 
+  handleChange2 = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+      datid : true
+    }, () =>   {
+      console.log("ware", this.state.activityTypeArg)
+    }
+  )
+  }
 
   componentDidMount(){
 
@@ -55,6 +68,18 @@ class ActivityForm extends Component {
       activityProjectArg : '--select--',
       activityTypeArg : '--select--',
       activityTypeIdentifierArg : '--select--',
+      filter_attrib : ''
+    })
+  }
+
+  handleDropDown = (myid, myname) => {
+    console.log(myid)
+    this.setState({
+      activityTypeIdentifierArg : myid,
+      filter_attrib : myname,
+      datid : false
+    }, () => {
+      console.log("ok")
     })
   }
 
@@ -64,12 +89,14 @@ class ActivityForm extends Component {
 
     console.log(this.state)
 
+    e.preventDefault()
+
 
     if(this.state.activityProjectArg === '--select--' || this.state.activityTypeArg === '--select--' || this.state.activityTypeIdentifierArg === '--select--'){
       alert('please select all necessary fields')
     } else {
 
-    e.preventDefault()
+
 
     let yyyy = this.state.activityDate.substring(0,4)
     let mm = this.state.activityDate.substring(5,7)
@@ -96,10 +123,9 @@ class ActivityForm extends Component {
         }
     }).then(res => {
       console.log(res)
-      window.location.reload()
+      //window.location.reload()
       //localStorage.setItem('cool-jwt', res.data.tokenAuth.token)
-      //this.props.history.push('/activities');
-
+      this.props.handleReturnSubmit()
     }).catch(err => {
       console.log("error aya")
     });
@@ -112,6 +138,8 @@ class ActivityForm extends Component {
 
 
   render(){
+
+    console.log("propssssssssss", this.props)
 
 
 
@@ -145,6 +173,12 @@ class ActivityForm extends Component {
 
     console.log(this.state.activityTypeArg)
 
+    let myelem = <div></div>
+    if(this.state.datid){
+      myelem = <CustomOptions handleDropDown={this.handleDropDown} activityTypeId={this.state.activityTypeArg} filter_attrib={this.state.filter_attrib} />
+    }
+
+
     ////////////////////////////////////////
 
 
@@ -166,17 +200,9 @@ class ActivityForm extends Component {
               {activity_types_options_render}
           </select>
 
-
-
-          <label className="activity-form-input-label">TypeIden</label>
-          <select name="activityTypeIdentifierArg" value={this.state.activityTypeIdentifierArg} onChange={this.handleChange} className="activity-form-input">
-          <option value="select">--select--</option>
-          <ActivityTypeIdentifierOptions activityTypeId = {this.state.activityTypeArg} />
-          </select>
-
-
-
-
+          <label className="activity-form-input-label">Activity type Id</label>
+          <input className="activity-form-input" type="text" onChange={this.handleChange2} name ="filter_attrib" value={this.state.filter_attrib}/>
+          {myelem}
 
 
           <label  className="activity-form-input-label">Description</label>

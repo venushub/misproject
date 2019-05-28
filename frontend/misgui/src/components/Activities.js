@@ -13,7 +13,7 @@ class Activities extends Component {
     this.state = {
       display_form : false,
       button_content : 'Add Activity +',
-      activities : this.props.getActivitiesQuery.allActivities
+      //activities : this.props.getActivitiesQuery.allActivities
     }
   }
 
@@ -32,15 +32,33 @@ class Activities extends Component {
   }
 
 
+  handleReturnSubmit = () => {
+    console.log("yaha aya kya??")
+    alert('hey')
+    this.props.getActivitiesQuery.refetch()
+    if(!this.state.display_form){
+    this.setState({
+      display_form : true,
+      button_content : 'Cancel'
+    })
+  } else {
+    this.setState({
+      display_form : false,
+      button_content : 'Add Activity +'
+    })
+  }
+  }
+
+
 
   render() {
 
     console.log("mmmmmmmmm", this.props.getActivitiesQuery.allActivities)
-    console.log("ye kya hei", this.state.activities)
+    //console.log("ye kya hei", this.state.activities)
 
     let my_form = null
     if(this.state.display_form){
-      my_form = <ActivityForm handleSubmitButton={this.handleDisplayForm}/>
+      my_form = <ActivityForm handleReturnSubmit={this.handleReturnSubmit} handleSubmitButton={this.handleDisplayForm} />
     }
 
     let button_class = ''

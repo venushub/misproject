@@ -3,6 +3,7 @@ import { graphql, compose } from 'react-apollo';
 import {getActivitiesQuery, createActivityMutation, getProjectsQuery} from './queries/queries'
 import Header from './Header'
 import ActivityForm from './ActivityForm'
+import Moment from 'react-moment';
 
 class ActivitiesList extends Component {
 
@@ -32,6 +33,7 @@ class ActivitiesList extends Component {
         <div className="activity-sub-item-div-5">{activity.activityDescription}</div>
         <div className="activity-sub-item-div-6">{activity.activityStartTime.toString().substring(0,19)}</div>
         <div className="activity-sub-item-div-7">{activity.activityEndTime.toString().substring(0,19)}</div>
+        <div className="activity-sub-item-div-7"><Moment diff={activity.activityStartTime.toString().substring(0,19)} unit="hours" decimal>{activity.activityEndTime.toString().substring(0,19)}</Moment></div>
     </div>)})
 
 

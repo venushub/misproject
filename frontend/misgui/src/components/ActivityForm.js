@@ -3,6 +3,9 @@ import { graphql, compose } from 'react-apollo';
 import {getActivitiesQuery, createActivityMutation, getProjectsQuery, getActivityTypesQuery} from './queries/queries'
 import ActivityTypeIdentifierOptions from './ActivityTypeIdentifierOptions'
 import {withRouter} from 'react-router'
+import Moment from 'react-moment';
+import 'moment-timezone';
+
 
 
 class ActivityForm extends Component {
@@ -45,6 +48,7 @@ class ActivityForm extends Component {
     let todaydate = yyyy + '-' + mm + '-' + dd;
     let nowtime = hh+':'+minmin
 
+    
 
 
 
@@ -56,6 +60,8 @@ class ActivityForm extends Component {
       activityTypeArg : '--select--',
       activityTypeIdentifierArg : '--select--',
     })
+
+    
   }
 
 
@@ -81,6 +87,11 @@ class ActivityForm extends Component {
 
     let activityStartTimeArg = yyyy+'-'+mm+'-'+dd+'T'+starttimestring
     let activityEndTimeArg = yyyy+'-'+mm+'-'+dd+'T'+endtimestring
+
+    //  starttimestring = moment.duration(activityStartTime,'h')
+    //  endtimestring =moment.duration(activityEndTime,'h')
+    //  starttimestring.subtract(endtimestring).asHours();
+    //  console.log('apna time aayega')
 
     //console.log(activityStartTimeArg, activityStartTimeArg)
 
@@ -145,7 +156,7 @@ class ActivityForm extends Component {
 
     console.log(this.state.activityTypeArg)
 
-    ////////////////////////////////////////
+    
 
 
     return(

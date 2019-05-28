@@ -3,6 +3,7 @@ import { graphql, compose } from 'react-apollo';
 import {getActivitiesQuery} from './queries/queries'
 import Header from './Header'
 import ActivityForm from './ActivityForm'
+import Moment from 'react-moment';
 
 
 
@@ -75,6 +76,11 @@ class ActivitiesN extends Component {
                <div className="activity-sub-item-div-5">{activity.activityDescription}</div>
                <div className="activity-sub-item-div-6">{activity.activityStartTime.toString().substring(0,19)}</div>
                <div className="activity-sub-item-div-7">{activity.activityEndTime.toString().substring(0,19)}</div>
+               <div>
+               <Moment diff="activity-sub-item-div-6"> {activity.activityStartTime.toString.substring(0.19)}</Moment>
+               <Moment diff="activity-sub-item-div-7">{activity.activityEndTime.toString().substring(0,19)}</Moment>
+               console.log('apna time aayega')
+               </div>
            </div>)})
         }
       </div>

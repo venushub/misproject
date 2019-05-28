@@ -12,8 +12,11 @@ class Logout extends Component {
 
     }
   }
+handlecancel =(e) =>{
+e.preventDefault();
+this.props.history.push('/activities')
 
-
+}
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -29,6 +32,7 @@ class Logout extends Component {
           <form className="login-form" onSubmit={this.handleSubmit}>
             <h2>Are you sure you want to logout</h2>
             <button className="login-button">Logout ♥</button >
+            <button className="login-button" onClick={this.handlecancel}>Cancel</button >
         </form>
       </div>
     )

@@ -36,7 +36,9 @@ class ActivityFormN extends Component {
 
 
   handleChange = (e) => {
-    console.log("qqqqqqqqqqqq", typeof(e.target.name), e.target.name , typeof(e.target.value) , e.target.value)
+    // console.log("qqqqqqqqqqqq", typeof(e.target.name), e.target.name , typeof(e.target.value) , e.target.value)
+
+    console.log(this.state);
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -116,8 +118,21 @@ class ActivityFormN extends Component {
         // let mm = this.state.activityDate.substring(5,7)
         // let dd = this.state.activityDate.substring(8,10)
 
-        let convDate = dd + '-' + mm + '-' + yyyy
-        convDate =convDate.toString()
+        let convDate = yyyy + '-' + mm + '-' + dd
+        console.log(typeof(convDate))
+
+        this.setState({
+          activityid :  this.props.editOption.id,
+          activityProjectArg :  this.props.editOption.activityProject.id.toString(),
+          activityTypeArg : this.props.editOption.activityType.id.toString(),
+          filter_attrib : this.props.editOption.activityTypeIdentifier.activityTypeIdentifierName.toString(),
+          activityTypeIdentifierArg : this.props.editOption.activityTypeIdentifier.id.toString(),
+          activityDescriptionArg : this.props.editOption.activityDescription,
+          datid : false,
+          activityDate :  convDate
+        })
+
+
         console.log("date isssssssss", convDate)
         console.log("eeeeeee", this.props.editOption)
         if(!this.state.display_form){
@@ -125,13 +140,6 @@ class ActivityFormN extends Component {
           display_form : true,
           button_content : 'Cancel',
           submit_button_content : "Update Activity ↑",
-          activityid :  this.props.editOption.id,
-          activityProjectArg :  this.props.editOption.activityProject.id.toString(),
-          activityTypeArg : this.props.editOption.activityType.id.toString(),
-          filter_attrib : this.props.editOption.activityTypeIdentifier.activityTypeIdentifierName.toString(),
-          activityDescriptionArg : this.props.editOption.activityDescription,
-          datid : false,
-          //activityDate :  convDate
           // activityStartTime : '',
           // activityEndTime : '',
 
@@ -164,13 +172,6 @@ class ActivityFormN extends Component {
     let todaydate = yyyy + '-' + mm + '-' + dd;
     let nowtime = hh+':'+minmin
 
-
-
-
-
-
-
-
     this.setState({
       activityDate : todaydate,
       activityStartTime : nowtime,
@@ -181,7 +182,7 @@ class ActivityFormN extends Component {
 
   handleActivityFormSubmit = (e) => {
 
-    console.log(this.state)
+    console.log("vvvvvvvvvvvvvvvvvvvvvvvvvvv", this.state)
 
     e.preventDefault()
 

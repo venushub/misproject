@@ -28,7 +28,11 @@ class Login extends Component {
     console.log("OK")
     this.props.history.push("/")
   }
-
+handlerefresh =(e)=>
+{
+  e.preventDefault();
+  window.location.reload();
+}
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -46,6 +50,7 @@ class Login extends Component {
     }).catch(err => {
       this.setState({
         error : 'Invalid Credentials'
+      
       })
       console.log("error aya")
     });
@@ -71,7 +76,9 @@ class Login extends Component {
             <label className="form-input-label">password</label>
             <input className="form-input" type="password" id='password' onChange={this.handleChange} value={this.state.password} />
             <button className="login-button">Login</button >
+            <button st className="login-button"onClick={this.handlerefresh}>Refresh</button >
             <Link className="register-link" to="/register">New User Register Here</Link>
+          
             {errorprone}
         </form>
       </div>

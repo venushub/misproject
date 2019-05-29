@@ -23,7 +23,11 @@ class Register extends Component {
       [e.target.id]: e.target.value
     })
   }
-
+handleback =(e)=>
+{
+  
+  this.props.history.push('/login');
+}
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -55,7 +59,7 @@ class Register extends Component {
     }
 
   }
-
+   
 
   render(){
 
@@ -71,6 +75,7 @@ class Register extends Component {
             <label className="form-input-label">Confirm Password</label>
             <input className="form-input" type="password" id='confirm_password' onChange={this.handleChange} value={this.state.confirm_password} />
             <button className="login-button">Register</button >
+            <button className="login-button" onClick={this.handleback}>back</button >
             {this.state.error}
           </form>
 

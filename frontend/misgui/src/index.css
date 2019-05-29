@@ -210,9 +210,10 @@
 }
 
 .activity-item-div {
+
   margin-top : 1em;
   background-color: #fcf7f8;
-  width : 95%;
+  width : 99%;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -225,12 +226,14 @@
 }
 
 .activity-item-div > div {
+  
 
   word-wrap: break-word;
 }
 
 .activity-sub-item-div-1{
   width : 5%;
+ 
 }
 
 .activity-sub-item-div-2{

@@ -4,6 +4,8 @@ import {getActivitiesQuery, createActivityMutation, getProjectsQuery, getActivit
 import Header from './Header'
 import ActivityForm from './ActivityForm'
 import ActivitiesList from './ActivitiesList'
+import {CSVLink, CSVDownload } from "react-csv";
+import Moment from 'react-moment';
 
 class Activities extends Component {
 
@@ -31,7 +33,7 @@ class Activities extends Component {
   }
   }
 
-
+ 
 
   render() {
 
@@ -49,8 +51,32 @@ class Activities extends Component {
     } else {
       button_class = "login-button"
     }
+   
 
 
+    let excelactivities  = this.props.getActivitiesQuery.allActivities  &&  this.props.getActivitiesQuery.allActivities != undefined ? this.props.getActivitiesQuery.allActivities : []
+
+
+    const excelarray = excelactivities.map((activity) => {
+
+    const  time = React.renderToStaticMarkup(<Moment diff={activity.activityStartTime.toString().substring(0,19)} unit="hours" decimal>{activity.activityEndTime.toString().substring(0,19)}</Moment>);
+    console.log("timeeeeeeeeee",time)  
+    return (
+        { 
+        
+          id : activity.id,
+          activityProject : activity.activityProject.projectName,
+          activityType:activity.activityType.activityTypeName,
+          activityTypeIdentifier:activity.activityTypeIdentifier.activityTypeIdentifierName,
+          activityDescription:activity.activityDescription,
+          activityStartTime:activity.activityStartTime,
+          activityEndTime:activity.activityEndTime,
+          activityHrs : time
+        }
+      )
+    })
+
+    console.log("my excel array", excelarray)
 
     console.log("activi", this.props);
     //console.log("all activities", this.props.data.allActivities)
@@ -78,6 +104,7 @@ class Activities extends Component {
      //      <div className="activity-sub-item-div-7">{activity.activityEndTime.toString().substring(0,19)}</div>
      //  </div>)})
 
+  
 
 
     return (
@@ -88,8 +115,9 @@ class Activities extends Component {
           <div className="add-activity"><button onClick={this.handleDisplayForm} className={button_class}>{this.state.button_content}</button></div>
         </div>
         {my_form}
-        <form><label>This Week<input name="isGoing" type="checkbox"checked={this.state.isGoing} onChange={this.handleWeekBoxChange}/></label></form>
+    
         <ActivitiesList activitiesvp={this.props.getActivitiesQuery.allActivities} />
+        <div><CSVLink  filename={"MIS.csv"} data={excelarray} className="login-button">Download</CSVLink></div>
       </div>
     );
   }

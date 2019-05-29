@@ -82,12 +82,15 @@ const getActivitiesQuery = gql`
     id
     activityProject {
       projectName
+      id
     }
     activityType {
       activityTypeName
+      id
     }
     activityTypeIdentifier{
       activityTypeIdentifierName
+      id
     }
     activityDescription
     activityStartTime
@@ -114,6 +117,16 @@ const createActivityMutation = gql`
 `;
 
 
+const updateActivityMutation = gql`
+      mutation updateActivity($activityProjectArg: String!, $activityTypeArg: String!, $activityTypeIdentifierArg: String!, $activityDescriptionArg: String!, $activityStartTimeArg: String!, $activityEndTimeArg: String!, $activityMutateOrUpdateArg : String!){
+         updateActivity(activityProjectArg: $activityProjectArg, activityTypeArg: $activityTypeArg, activityTypeIdentifierArg : $activityTypeIdentifierArg, activityDescriptionArg: $activityDescriptionArg, activityStartTimeArg : $activityStartTimeArg, activityEndTimeArg: $activityEndTimeArg, activityMutateOrUpdateArg : $activityMutateOrUpdateArg){
+            activityDescription
+        }
+    }
+`;
+
+
+
 const createActivityTypeIdentifierMutation = gql`
       mutation createActivityTypeIdentifier($activityType: String!, $activityTypeIdentifierName: String!){
          createActivityTypeIdentifier(activityType: $activityType, activityTypeIdentifierName: $activityTypeIdentifierName){
@@ -122,6 +135,7 @@ const createActivityTypeIdentifierMutation = gql`
         }
     }
 `;
+
 
 
 const verifyTokenMutation = gql`
@@ -155,4 +169,4 @@ const createUserMutation = gql`
 //   }
 // `
 
-export {getTokenMutation, verifyTokenMutation, getActivitiesQuery, createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation};
+export {getTokenMutation, verifyTokenMutation, getActivitiesQuery, createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};

@@ -21,6 +21,7 @@ class CustomOptions extends Component {
   )
   }
 
+
   handleActivityFormSubmit = (e) => {
 
     e.preventDefault()
@@ -76,6 +77,8 @@ class CustomOptions extends Component {
     let myclassname = ""
     let droptions_render = <div>Loading..</div>
 
+    console.log("lllllllllllpppppppppppp", droptions.length )
+
     if(droptions.length != 0){
       myclassname = "activiy-type-iden-options"
       droptions_render = droptions.map((droption, index) => {
@@ -89,7 +92,7 @@ class CustomOptions extends Component {
 
         <label  className="activity-form-input-label">Bug id not registered, Please register now</label>
         <input className="activity-form-input" disabled type="text" onChange={this.handleChange} name ="activityTypeIdentifierName" value={this.props.filter_attrib} />
-        <button onClick={this.handleActivityFormSubmit}>submit</button>
+        <button className="register-button" onClick={this.handleActivityFormSubmit}>Register</button>
       </div>
       myclassname = "activiy-type-iden-options"
     }
@@ -116,7 +119,5 @@ graphql(getActivityTypeIdentifiersQuery, {
   }
 }),
 graphql(createActivityTypeIdentifierMutation, { name: "createActivityTypeIdentifierMutation" }),
-
-
 
 )(CustomOptions)

@@ -71,32 +71,6 @@ class Activities extends Component {
 
 
     console.log("activi", this.props);
-    //console.log("all activities", this.props.data.allActivities)
-
-    // let activities = []
-    // let activities_render = ''
-    // if(this.props.getActivitiesQuery.loading){
-    //   activities = []
-    //   activities_render = <h1>Loading..</h1>
-    // } else {
-    //   activities = this.props.getActivitiesQuery.allActivities  &&  this.props.getActivitiesQuery.allActivities != undefined ? this.props.getActivitiesQuery.allActivities : []
-    //   activities = activities.reverse()
-    //   }
-
-
-
-
-     // activities_render = activities.map((activity, index) => {return(
-     //  <div className="activity-item-div" key={index}>
-     //      <div className="activity-sub-item-div-2">{activity.activityProject.projectName}</div>
-     //      <div className="activity-sub-item-div-3">{activity.activityType.activityTypeName}</div>
-     //      <div className="activity-sub-item-div-4">{activity.activityTypeIdentifier.activityTypeIdentifierName}</div>
-     //      <div className="activity-sub-item-div-5">{activity.activityDescription}</div>
-     //      <div className="activity-sub-item-div-6">{activity.activityStartTime.toString().substring(0,19)}</div>
-     //      <div className="activity-sub-item-div-7">{activity.activityEndTime.toString().substring(0,19)}</div>
-     //  </div>)})
-
-
 
     return (
       <div className="activities-container">
@@ -106,7 +80,6 @@ class Activities extends Component {
           <div className="add-activity"><button onClick={this.handleDisplayForm} className={button_class}>{this.state.button_content}</button></div>
         </div>
         {my_form}
-        <form><label>This Week<input name="isGoing" type="checkbox"checked={this.state.isGoing} onChange={this.handleWeekBoxChange}/></label></form>
         <ActivitiesList activitiesvp={this.props.getActivitiesQuery.allActivities} />
       </div>
     );

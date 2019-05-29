@@ -147,14 +147,10 @@ class ActivityForm extends Component {
 
 
     let projects_options  = this.props.getProjectsQuery.allProjects  &&  this.props.getProjectsQuery.allProjects != undefined ? this.props.getProjectsQuery.allProjects : []
-
-
     let projects_options_render = projects_options.map((project, index) => {
-
       return(
         <option key={index} value={project.id}>{project.projectName}</option>
       )
-
     })
 
     //////////////////////////////////////////
@@ -193,7 +189,6 @@ class ActivityForm extends Component {
           </select>
 
 
-
           <label className="activity-form-input-label">Activity Type</label>
           <select name="activityTypeArg" value={this.state.activityTypeArg} onChange={this.handleChange} className="activity-form-input">
               <option value="select">--select--</option>
@@ -201,32 +196,28 @@ class ActivityForm extends Component {
           </select>
 
           <label className="activity-form-input-label">Activity type Id</label>
-          <input className="activity-form-input" type="text" onChange={this.handleChange2} name ="filter_attrib" value={this.state.filter_attrib}/>
+          <input className="activity-form-input" type="text" onChange={this.handleChange2} name="filter_attrib" value={this.state.filter_attrib}/>
           {myelem}
 
 
           <label  className="activity-form-input-label">Description</label>
-          <input className="activity-form-input" type="text" onChange={this.handleChange} name ="activityDescriptionArg" value={this.state.activityDescriptionArg} />
+          <input className="activity-form-input" type="text" onChange={this.handleChange} name="activityDescriptionArg" value={this.state.activityDescriptionArg} />
 
 
           <label className="activity-form-input-label">Date</label>
-          <input className="activity-form-input"  type="date" onChange={this.handleChange} name ="activityDate" value={this.state.activityDate} />
+          <input className="activity-form-input"  type="date" onChange={this.handleChange} name="activityDate" value={this.state.activityDate} />
 
           <label className="activity-form-input-label">Start Time</label>
-          <input type="time" className="activity-form-input" onChange={this.handleChange} name ="activityStartTime" value={this.state.activityStartTime} />
+          <input type="time" className="activity-form-input" onChange={this.handleChange} name="activityStartTime" value={this.state.activityStartTime} />
 
           <label className="activity-form-input-label">End Time</label>
-          <input type="time" className="activity-form-input" onChange={this.handleChange} name ="activityEndTime" value={this.state.activityEndTime} />
+          <input type="time" className="activity-form-input" onChange={this.handleChange} name="activityEndTime" value={this.state.activityEndTime} />
 
           <button className="login-button">Submit</button>
         </form>
 
-
-
     )
   }
-
-
 }
 
 

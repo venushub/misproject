@@ -37,7 +37,7 @@ class ActivitiesList extends Component {
 
     return(
       <div className="activities-div">
-      {activities_render}
+        {activities_render}
       </div>
     )
   }

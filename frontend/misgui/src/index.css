@@ -134,9 +134,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height : 100vh;
   width : 100%;
-
+  height : 100vh;
 }
 
 .activities-header{
@@ -259,7 +258,10 @@
 
 
 .activiy-type-iden-options {
-  border : 2px solid grey;
+  border : 2px solid #f49b42;
+  padding : 1em;
+  margin : 1em;
+
 }
 
 .drop-item {
@@ -268,5 +270,30 @@
   border-right-width:  0;
   border-bottom-width:  2;
   border-left-width:  0;
-  border-color: #ffd472
+  border-color: #ffd472;
+}
+
+
+.form-wrap-none {
+  display : none;
+}
+
+
+.my-wrap {
+  display : flex;
+  align-items:center;
+  justify-content: center;
+}
+
+
+.register-button {
+  margin : 20px;
+  background-color: #f49b42;
+  border : none;
+  padding : 5px 10px 5px 10px;
+  font-weight: bold;
+  border-radius: 5px;
+  font-family:sans-serif;
+  color: white;
+  font-size: 1em
 }

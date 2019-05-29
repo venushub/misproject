@@ -98,9 +98,85 @@ class CreateActivity(graphene.Mutation):
         )
 
 
+##########################################################
+##############UPDATE ACTIVITY MUTATION START##############
+
+
+class UpdateActivity(graphene.Mutation):
+
+    activityType= graphene.Field(ActivityTypeType)
+    activityDescription = graphene.String()
+    activityStartTime = graphene.String()
+    activityEndTime = graphene.String()
+    activityTypeIdentifier = graphene.Field(ActivityTypeIdentifierType)
+    activityProject = graphene.Field(ProjectType)
+    activityMutateOrUpdateArg =graphene.String()
+
+
+    class Arguments:
+        activityTypeArg = graphene.String()
+        activityDescriptionArg = graphene.String()
+        activityStartTimeArg = graphene.String()
+        activityEndTimeArg = graphene.String()
+        activityTypeIdentifierArg = graphene.String()
+        activityProjectArg = graphene.String()
+        activityMutateOrUpdateArg = graphene.String()
+
+
+    # ,  activityTypeArg, activityDescriptionArg, activityStartTimeArg, activityEndTimeArg, activityTypeIdentifierArg, activityProjectArg,
+
+    def mutate(self, info, activityTypeArg, activityDescriptionArg, activityMutateOrUpdateArg, activityTypeIdentifierArg, activityStartTimeArg, activityEndTimeArg,activityProjectArg):
+        # print("activity type instance is ")
+        # print(ActivityTypeModel)
+        activityTypeInstance = ActivityTypeModel.objects.get(id = int(activityTypeArg))
+        # print("activityTypeInstance is...", activityTypeInstance)
+        #
+        activityProjectInstance = Project.objects.get(id = int(activityProjectArg))
+        activityTypeIdentifierInstance = ActivityTypeIdentifier.objects.get(id = int(activityTypeIdentifierArg))
+        # activityUserInstance = info.context.user
+        # print("activity type instance is after ", activityTypeInstance)
+        # print("activityTypeArg", activityTypeArg)
+        print("hello")
+        activityObject = Activity.objects.get(id=int(activityMutateOrUpdateArg))
+        activityObject.activityType  = activityTypeInstance
+        activityObject.activityDescription = activityDescriptionArg
+        activityObject.activityTypeIdentifier = activityTypeIdentifierInstance
+        activityObject.activityProject = activityProjectInstance
+        activityObject.activityStartTime = activityStartTimeArg
+        activityObject.activityEndTime = activityEndTimeArg
+        print(activityObject)
+        activityObject.save()
+        # activity = Activity(
+        #     activityType=  activityTypeInstance,
+        #     activityUser= activityUserInstance,
+        #     activityDescription= activityDescriptionArg,
+        #     activityStartTime = activityStartTimeArg,
+        #     activityEndTime = activityEndTimeArg,
+        #     activityTypeIdentifier = activityTypeIdentifierInstance,
+        #     activityProject = activityProjectInstance
+        # )
+        #
+        # activity.save()
+
+        return UpdateActivity(
+
+            activityType=  activityObject.activityType,
+            activityDescription = activityObject.activityDescription,
+            activityStartTime = activityObject.activityStartTime,
+            activityEndTime = activityObject.activityEndTime,
+            activityProject = activityObject.activityProject,
+            activityTypeIdentifier = activityObject.activityTypeIdentifier
+        )
+
+
+
+##############UPDATE ACTIVITY MUTATION ENDS###############
+##########################################################
+
 
 
 
 
 class Mutation(graphene.ObjectType):
     create_activity = CreateActivity.Field()
+    update_activity = UpdateActivity.Field()

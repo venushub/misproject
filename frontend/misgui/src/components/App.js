@@ -3,7 +3,7 @@ import {Switch, Route} from 'react-router-dom'
 import Home from './Home'
 import Login from './Login'
 import AuthenticatedComponent from './AuthenticatedComponent'
-import Activities from './Activities'
+import ActivitiesN from './ActivitiesN'
 import Register from './Register'
 import Logout from './Logout'
 
@@ -16,10 +16,8 @@ class App extends Component {
           <Route path="/" exact component={Home} />
 
           <AuthenticatedComponent>
-
-            <Route path="/activities" exact component={Activities} />
+            <Route path="/activities" exact component={ActivitiesN} />
             <Route path="/logout" exact component={Logout} />
-
           </AuthenticatedComponent>
         </Switch>
     )

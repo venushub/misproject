@@ -235,4 +235,4 @@ export default compose(
     graphql(getProjectsQuery, { name: "getProjectsQuery" }),
     graphql(getActivityTypesQuery, {name : "getActivityTypesQuery"}),
     graphql(getActivitiesQuery, {name : "getActivitiesQuery"})
-)(withRouter(ActivityForm));
+)(ActivityForm);

@@ -106,7 +106,7 @@ class Activities extends Component {
           <div className="add-activity"><button onClick={this.handleDisplayForm} className={button_class}>{this.state.button_content}</button></div>
         </div>
         {my_form}
-        <form><label>This Week<input name="isGoing" type="checkbox"checked={this.state.isGoing} onChange={this.handleWeekBoxChange}/></label></form>
+        <form><label>This Week<input name="isGoing" type="checkbox" checked={this.state.isGoing} onChange={this.handleWeekBoxChange}/></label></form>
         <ActivitiesList activitiesvp={this.props.getActivitiesQuery.allActivities} />
       </div>
     );

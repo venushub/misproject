@@ -6,6 +6,7 @@ import ActivityForm from './ActivityForm'
 import ActivitiesList from './ActivitiesList'
 import {CSVLink, CSVDownload } from "react-csv";
 import Moment from 'react-moment';
+import jsxToString from 'jsx-to-string';
 
 class Activities extends Component {
 
@@ -59,8 +60,6 @@ class Activities extends Component {
 
     const excelarray = excelactivities.map((activity) => {
 
-    const  time = React.renderToStaticMarkup(<Moment diff={activity.activityStartTime.toString().substring(0,19)} unit="hours" decimal>{activity.activityEndTime.toString().substring(0,19)}</Moment>);
-    console.log("timeeeeeeeeee",time)  
     return (
         { 
         
@@ -71,7 +70,7 @@ class Activities extends Component {
           activityDescription:activity.activityDescription,
           activityStartTime:activity.activityStartTime,
           activityEndTime:activity.activityEndTime,
-          activityHrs : time
+         
         }
       )
     })
@@ -79,30 +78,6 @@ class Activities extends Component {
     console.log("my excel array", excelarray)
 
     console.log("activi", this.props);
-    //console.log("all activities", this.props.data.allActivities)
-
-    // let activities = []
-    // let activities_render = ''
-    // if(this.props.getActivitiesQuery.loading){
-    //   activities = []
-    //   activities_render = <h1>Loading..</h1>
-    // } else {
-    //   activities = this.props.getActivitiesQuery.allActivities  &&  this.props.getActivitiesQuery.allActivities != undefined ? this.props.getActivitiesQuery.allActivities : []
-    //   activities = activities.reverse()
-    //   }
-
-
-
-
-     // activities_render = activities.map((activity, index) => {return(
-     //  <div className="activity-item-div" key={index}>
-     //      <div className="activity-sub-item-div-2">{activity.activityProject.projectName}</div>
-     //      <div className="activity-sub-item-div-3">{activity.activityType.activityTypeName}</div>
-     //      <div className="activity-sub-item-div-4">{activity.activityTypeIdentifier.activityTypeIdentifierName}</div>
-     //      <div className="activity-sub-item-div-5">{activity.activityDescription}</div>
-     //      <div className="activity-sub-item-div-6">{activity.activityStartTime.toString().substring(0,19)}</div>
-     //      <div className="activity-sub-item-div-7">{activity.activityEndTime.toString().substring(0,19)}</div>
-     //  </div>)})
 
   
 

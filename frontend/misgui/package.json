@@ -8,6 +8,7 @@
     "apollo-link-http": "^1.5.14",
     "axios": "^0.18.0",
     "graphql": "^14.3.0",
+    "jsx-to-string": "^1.4.0",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.25",
     "react": "^16.8.6",

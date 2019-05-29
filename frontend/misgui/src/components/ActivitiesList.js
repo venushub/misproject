@@ -35,6 +35,7 @@ class ActivitiesList extends Component {
         <div className="activity-sub-item-div-6">{activity.activityStartTime.toString().substring(0,19)}</div>
         <div className="activity-sub-item-div-7">{activity.activityEndTime.toString().substring(0,19)}</div>
         <div className="activity-sub-item-div-7"><Moment diff={activity.activityStartTime.toString().substring(0,19)} unit="hours" decimal>{activity.activityEndTime.toString().substring(0,19)}</Moment>Hrs</div>
+       
     </div>)})
 
 
@@ -49,6 +50,7 @@ class ActivitiesList extends Component {
         <div className="activity-sub-item-div-6">Start At</div>
         <div className="activity-sub-item-div-7">End At</div>
         <div className="activity-sub-item-div-7">Hrs</div>
+        
     </div>
       {activities_render}
       </div>

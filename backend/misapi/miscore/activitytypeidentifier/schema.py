@@ -29,21 +29,24 @@ class CreateActivityTypeIdentifier(graphene.Mutation):
     id = graphene.Int()
     activityTypeIdentifierName= graphene.String()
     activityType= graphene.Field(ActivityTypeType)
+    activityTypeIdentifierSubCat = graphene.String()
 
     print("flow idhar aya")
 
     class Arguments:
         activityType = graphene.String(required= True)
         activityTypeIdentifierName=graphene.String(required=True)
+        activityTypeIdentifierSubCat = graphene.String(required=True)
 
     print("type", activityType, "name", activityTypeIdentifierName)
 
-    def mutate(self, info,  activityType, activityTypeIdentifierName):
+    def mutate(self, info,  activityType, activityTypeIdentifierName, activityTypeIdentifierSubCat):
         print(info)
         activityTypeInstance = ActivityTypeModel.objects.get(id = int(activityType))
         activitytypeidentifier = ActivityTypeIdentifier(
             activityType=  activityTypeInstance,
             activityTypeIdentifierName =  activityTypeIdentifierName,
+            activityTypeIdentifierSubCat = activityTypeIdentifierSubCat
         )
         activitytypeidentifier.save()
 
@@ -51,7 +54,8 @@ class CreateActivityTypeIdentifier(graphene.Mutation):
         return CreateActivityTypeIdentifier(
             id = activitytypeidentifier.id,
             activityType=  activitytypeidentifier.activityType,
-            activityTypeIdentifierName = activitytypeidentifier.activityTypeIdentifierName
+            activityTypeIdentifierName = activitytypeidentifier.activityTypeIdentifierName,
+            activityTypeIdentifierSubCat = activitytypeidentifier.activityTypeIdentifierSubCat
         )
 
 

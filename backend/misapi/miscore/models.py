@@ -27,6 +27,7 @@ class ActivityTypeIdentifier(models.Model):
         related_name = 'activityTypeNameFk',
         on_delete = models.CASCADE)
     activityTypeIdentifierName = models.CharField(max_length=100)
+    activityTypeIdentifierSubCat = models.CharField(max_length=100)
 
 
 
@@ -47,3 +48,4 @@ class Activity(models.Model):
     activityDescription =models.TextField()
     activityStartTime = models.DateTimeField()
     activityEndTime = models.DateTimeField()
+    # activityHours = models.CharField(max_length=50)

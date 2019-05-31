@@ -59,12 +59,16 @@ const getActivitiesForWeekQuery = gql`
       id
       activityProject {
         projectName
+        id
       }
       activityType {
         activityTypeName
+        id
       }
       activityTypeIdentifier{
         activityTypeIdentifierName
+        id
+        activityTypeIdentifierSubCat
       }
       activityDescription
       activityStartTime
@@ -91,6 +95,7 @@ const getActivitiesQuery = gql`
     activityTypeIdentifier{
       activityTypeIdentifierName
       id
+      activityTypeIdentifierSubCat
     }
     activityDescription
     activityStartTime
@@ -128,10 +133,11 @@ const updateActivityMutation = gql`
 
 
 const createActivityTypeIdentifierMutation = gql`
-      mutation createActivityTypeIdentifier($activityType: String!, $activityTypeIdentifierName: String!){
-         createActivityTypeIdentifier(activityType: $activityType, activityTypeIdentifierName: $activityTypeIdentifierName){
+      mutation createActivityTypeIdentifier($activityType: String!, $activityTypeIdentifierName: String!, $activityTypeIdentifierSubCat: String!){
+         createActivityTypeIdentifier(activityType: $activityType, activityTypeIdentifierName: $activityTypeIdentifierName, activityTypeIdentifierSubCat: $activityTypeIdentifierSubCat){
             id
             activityTypeIdentifierName
+            activityTypeIdentifierSubCat
         }
     }
 `;

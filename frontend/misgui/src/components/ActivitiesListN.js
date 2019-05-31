@@ -1,4 +1,5 @@
 import React , {Component} from 'react'
+import moment from 'moment'
 
 
 class ActivitiesListN extends Component {
@@ -36,9 +37,14 @@ class ActivitiesListN extends Component {
            <div className="activity-sub-item-div-2">{activity.activityProject.projectName}</div>
            <div className="activity-sub-item-div-3">{activity.activityType.activityTypeName}</div>
            <div className="activity-sub-item-div-4">{activity.activityTypeIdentifier.activityTypeIdentifierName}</div>
+           <div className="activity-sub-item-div-7">{activity.activityTypeIdentifier.activityTypeIdentifierSubCat}</div>
            <div className="activity-sub-item-div-5">{activity.activityDescription}</div>
            <div className="activity-sub-item-div-6">{activity.activityStartTime.toString().substring(0,19)}</div>
            <div className="activity-sub-item-div-7">{activity.activityEndTime.toString().substring(0,19)}</div>
+           <div className="activity-sub-item-div-7">{moment
+            .duration(moment(activity.activityEndTime, 'YYYY-MM-DDTHH:mm')
+            .diff(moment(activity.activityStartTime, 'YYYY-MM-DDTHH:mm'))
+          ).asHours()} Hrs</div>
        </div>)})
     } else {
       activities_render = <div className="activity-item-div">No Activities to Display</div>
@@ -50,7 +56,6 @@ class ActivitiesListN extends Component {
       </div>
     )
   }
-
 
 }
 

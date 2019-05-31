@@ -35,6 +35,7 @@ class Login extends Component {
     }).then(res => {
       console.log(res)
       localStorage.setItem('cool-jwt', res.data.tokenAuth.token)
+      localStorage.setItem('username', this.state.email)
       this.props.history.push('/activities');
     }).catch(err => {
       this.setState({

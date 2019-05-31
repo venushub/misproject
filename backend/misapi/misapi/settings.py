@@ -265,16 +265,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'misapi.wsgi.application'
 
-
+#
+# db_name = os.environ.get('db_name')
+# print("db name is", db_name)
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'venudb', #put your database name here
+        'NAME': 'misdb', #put your database name here
         'USER' : 'postgres',
-        'PASSWORD' : 'postgres',
+        'PASSWORD' : 'nsdl',
         'HOST' : '127.0.0.1',
         'PORT' : '5432'
     }

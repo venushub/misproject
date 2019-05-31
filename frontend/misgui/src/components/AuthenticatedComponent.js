@@ -21,11 +21,13 @@ componentDidMount(){
       token : token
     }
   }).then(res => {
+    console.log("auth isssssss", res)
     this.setState({
       user: res.data
     })
   }).catch(err => {
     localStorage.removeItem('cool-jwt')
+    localStorage.removeItem('username')
      this.props.history.push('/login');
   })
 }

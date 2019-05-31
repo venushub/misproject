@@ -10,14 +10,15 @@ class CustomOptions extends Component {
     super(props)
 
     this.state = {
-
+      activityTypeIdentifierSubCat : 'CR'
     }
   }
 
   handleChange = (e) => {
+    console.log("broooooo")
     this.setState({
       [e.target.name]: e.target.value
-    }, () =>   console.log("ware", this.state.activityTypeArg)
+    }, () => {console.log(this.state)}
   )
   }
 
@@ -29,6 +30,7 @@ class CustomOptions extends Component {
     console.log("ati is", this.props.activityTypeId)
     console.log("activityTypeIdentifierName is", this.props.filter_attrib)
 
+
     console.log(this.state)
 
 
@@ -36,7 +38,8 @@ class CustomOptions extends Component {
     this.props.createActivityTypeIdentifierMutation({
         variables: {
             activityType: this.props.activityTypeId,
-            activityTypeIdentifierName: this.props.filter_attrib
+            activityTypeIdentifierName: this.props.filter_attrib,
+            activityTypeIdentifierSubCat : this.state.activityTypeIdentifierSubCat
         },
 
         refetchQueries: [{
@@ -91,7 +94,9 @@ class CustomOptions extends Component {
       droptions_render = <div>
 
         <label  className="activity-form-input-label">Bug id not registered, Please register now</label>
-        <input className="activity-form-input" disabled type="text" onChange={this.handleChange} name ="activityTypeIdentifierName" value={this.props.filter_attrib} />
+        <input className="activity-form-input" disabled type="text" name ="activityTypeIdentifierName" value={this.props.filter_attrib} />
+        <label  className="activity-form-input-label">Sub type</label>
+        <select className="activity-form-input" name="activityTypeIdentifierSubCat" value={this.state.activityTypeIdentifierSubCat} onChange={this.handleChange}><option value="CR">CR</option><option value="FTR">FTR</option><option value="Other">Other</option></select>
         <button className="register-button" onClick={this.handleActivityFormSubmit}>Register</button>
       </div>
       myclassname = "activiy-type-iden-options"

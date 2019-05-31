@@ -18,6 +18,7 @@ class Logout extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     localStorage.removeItem('cool-jwt')
+    localStorage.removeItem('username')
     this.props.history.push('/login');
   }
 

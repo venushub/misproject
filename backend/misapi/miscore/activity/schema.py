@@ -36,7 +36,7 @@ class Query(object):
         return Activity.objects.filter(activityUser = info.context.user.id)
 
     def resolve_all_activities_for_week(self, info, search,  **kwargs):
-        return Activity.objects.filter(activityUser = info.context.user.id, activityStartTime__week = 22)
+        return Activity.objects.filter(activityUser = info.context.user.id, activityStartTime__week = int(search))
 
 
 

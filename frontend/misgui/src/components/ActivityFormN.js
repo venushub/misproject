@@ -8,7 +8,7 @@ import { getActivityTypesQuery,
          getActivityTypeIdentifiersQuery,
          updateActivityMutation} from './queries/queries'
 
-
+let moment = require('moment');
 
 class ActivityFormN extends Component {
 
@@ -114,6 +114,25 @@ class ActivityFormN extends Component {
         let yyyy =  this.props.editOption.activityStartTime.substring(0,4)
         let mm =  this.props.editOption.activityStartTime.substring(5,7)
         let dd =  this.props.editOption.activityStartTime.substring(8,10)
+
+        console.log(this.props.editOption.activityStartTime)
+
+        let sh = this.props.editOption.activityStartTime.substring(11,13)
+        let sm = this.props.editOption.activityStartTime.substring(14,16)
+
+        let st = sh + ':' + sm
+
+        console.log(st)
+
+        let eh = this.props.editOption.activityEndTime.substring(11,13)
+        let em = this.props.editOption.activityEndTime.substring(14,16)
+
+
+
+        let et = eh + ':' + em
+
+          console.log(et)
+
         console.log("bhbhbhbbhb",mm )
         // let mm = this.state.activityDate.substring(5,7)
         // let dd = this.state.activityDate.substring(8,10)
@@ -129,7 +148,9 @@ class ActivityFormN extends Component {
           activityTypeIdentifierArg : this.props.editOption.activityTypeIdentifier.id.toString(),
           activityDescriptionArg : this.props.editOption.activityDescription,
           datid : false,
-          activityDate :  convDate
+          activityDate :  convDate,
+          activityStartTime : st,
+          activityEndTime : et,
         })
 
 
@@ -139,7 +160,7 @@ class ActivityFormN extends Component {
         this.setState({
           display_form : true,
           button_content : 'Cancel',
-          submit_button_content : "Update Activity ↑",
+          submit_button_content : "Update Activity ⇧",
           // activityStartTime : '',
           // activityEndTime : '',
 
@@ -148,7 +169,7 @@ class ActivityFormN extends Component {
 
       if(this.state.display_form){
       this.setState({
-        submit_button_content : "Update Activity ↑",
+        submit_button_content : "Update Activity ⇧",
       })
       }
 
@@ -160,6 +181,8 @@ class ActivityFormN extends Component {
 
 
   componentDidMount(){
+
+    console.log("mooooooooooo", moment.duration('23:59:59'))
 
     let today = new Date();
     let dd = String(today.getDate())
@@ -238,7 +261,7 @@ class ActivityFormN extends Component {
       }
 
 
-      if(this.state.submit_button_content === "Update Activity ↑"){
+      if(this.state.submit_button_content === "Update Activity ⇧"){
 
 
         this.props.updateActivityMutation({

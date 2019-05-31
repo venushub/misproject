@@ -4,6 +4,8 @@ import {getActivitiesQuery, createActivityMutation, getProjectsQuery, getActivit
 import Header from './Header'
 import ActivityForm from './ActivityForm'
 import ActivitiesList from './ActivitiesList'
+import {CSVLink, CSVDownload } from "react-csv";
+import Switch from "react-switch";
 
 class Activities extends Component {
 
@@ -69,6 +71,30 @@ class Activities extends Component {
     }
 
 
+    let excelactivities  = this.props.getActivitiesQuery.allActivities  &&  this.props.getActivitiesQuery.allActivities != undefined ? this.props.getActivitiesQuery.allActivities : []
+
+
+    const excelarray = excelactivities.map((activity) => {
+
+    const time= moment.duration(moment(activity.activityEndTime, 'YYYY-MM-DDTHH:mm').diff(moment(activity.activityStartTime, 'YYYY-MM-DDTHH:mm'))).asHours()
+
+    return (
+        {
+
+          id : activity.id,
+          activityProject : activity.activityProject.projectName,
+          activityType:activity.activityType.activityTypeName,
+          activityTypeIdentifier:activity.activityTypeIdentifier.activityTypeIdentifierName,
+          activityDescription:activity.activityDescription,
+          activityStartTime:activity.activityStartTime,
+          activityEndTime:activity.activityEndTime,
+          activityHours: time
+        }
+      )
+      })
+
+
+
 
     console.log("activi", this.props);
 
@@ -81,6 +107,7 @@ class Activities extends Component {
         </div>
         {my_form}
         <ActivitiesList activitiesvp={this.props.getActivitiesQuery.allActivities} />
+         <div><CSVLink  filename={"MIS.csv"} data={excelarray} className="login-button">Download</CSVLink></div>
       </div>
     );
   }

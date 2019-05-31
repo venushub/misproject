@@ -5,7 +5,6 @@ import ActivityTypeIdentifierOptions from './ActivityTypeIdentifierOptions'
 import {withRouter} from 'react-router'
 import CustomOptions from './CustomOptions'
 
-
 class ActivityForm extends Component {
 
   constructor(props){
@@ -21,7 +20,8 @@ class ActivityForm extends Component {
       activityDate : '',
       activityStartTime : '',
       activityEndTime : '',
-      datid : true
+      datid : true,
+      activityHoursArg : ''
     }
   }
 

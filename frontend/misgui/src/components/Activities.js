@@ -5,7 +5,7 @@ import Header from './Header'
 import ActivityForm from './ActivityForm'
 import ActivitiesList from './ActivitiesList'
 import {CSVLink, CSVDownload } from "react-csv";
-import Switch from "react-switch";
+
 
 class Activities extends Component {
 
@@ -50,7 +50,6 @@ class Activities extends Component {
     })
   }
   }
-
 
 
   render() {

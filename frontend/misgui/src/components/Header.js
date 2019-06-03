@@ -26,7 +26,7 @@ class Header extends Component{
       <div className="Header-div">
       <div className="bundle">
 
-        <h1>   ⌛ {this.state.username}</h1>
+        <h1 className="header-adjust">⌛ {this.state.username}</h1>
         </div>
         <div>
 

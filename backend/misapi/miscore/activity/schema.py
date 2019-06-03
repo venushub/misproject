@@ -33,11 +33,16 @@ class Query(object):
 
     def resolve_all_activities(self, info, **kwargs):
         print("the user currently logged in is", info.context.user)
-        return Activity.objects.filter(activityUser = info.context.user.id)
+        if(info.context.user.is_superuser):
+            return Activity.objects.all()
+        else:
+            return Activity.objects.filter(activityUser = info.context.user.id)
 
     def resolve_all_activities_for_week(self, info, search,  **kwargs):
-        return Activity.objects.filter(activityUser = info.context.user.id, activityStartTime__week = int(search))
-
+        if(info.context.user.is_superuser):
+            return Activity.objects.filter(activityStartTime__week = int(search))
+        else:
+            return Activity.objects.filter(activityUser = info.context.user.id, activityStartTime__week = int(search))
 
 
 class CreateActivity(graphene.Mutation):

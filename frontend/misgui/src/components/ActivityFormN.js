@@ -30,7 +30,8 @@ class ActivityFormN extends Component {
       title : 'Activities',
       submit_button_content : "Add Activity +",
       activityMutateOrUpdateArg : '',
-      activityid : ''
+      activityid : '',
+      activityHours : 0
     }
   }
 
@@ -41,7 +42,16 @@ class ActivityFormN extends Component {
     console.log(this.state);
     this.setState({
       [e.target.name]: e.target.value
+    }, () => {
+      this.setState({
+        activityHours : moment
+         .duration(moment(this.state.activityEndTime, 'HH:mm')
+         .diff(moment(this.state.activityStartTime, 'HH:mm'))
+       ).asHours()
+      })
     })
+
+
   }
 
   handleChange2 = (e) => {
@@ -62,11 +72,13 @@ class ActivityFormN extends Component {
       button_content : 'Cancel',
       submit_button_content : "Add Activity +"
     })
+    this.clearForm()
   } else {
     this.setState({
       display_form : false,
       button_content : 'Add Activity +'
     })
+    this.clearForm()
   }
   }
 
@@ -83,13 +95,15 @@ class ActivityFormN extends Component {
 
 
   clearForm = () => {
+
+
     let today = new Date();
-    let dd = String(today.getDate())
+    let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     let yyyy = today.getFullYear();
-    let hh = today.getHours();
-    let minmin = today.getMinutes();
-    let ss = today.getSeconds();
+    let hh = String(today.getHours()).padStart(2, '0');
+    let minmin = String(today.getMinutes()).padStart(2, '0');
+    let ss = String(today.getSeconds()).padStart(2, '0');
 
     let todaydate = yyyy + '-' + mm + '-' + dd;
     let nowtime = hh+':'+minmin
@@ -151,6 +165,10 @@ class ActivityFormN extends Component {
           activityDate :  convDate,
           activityStartTime : st,
           activityEndTime : et,
+          activityHours : moment
+           .duration(moment(this.props.editOption.activityEndTime, 'YYYY-MM-DDTHH:mm')
+           .diff(moment(this.props.editOption.activityStartTime, 'YYYY-MM-DDTHH:mm'))
+         ).asHours()
         })
 
 
@@ -185,15 +203,17 @@ class ActivityFormN extends Component {
     console.log("mooooooooooo", moment.duration('23:59:59'))
 
     let today = new Date();
-    let dd = String(today.getDate())
+    let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     let yyyy = today.getFullYear();
-    let hh = today.getHours();
+    let hh = String(today.getHours()).padStart(2, '0');
     let minmin = today.getMinutes();
     let ss = today.getSeconds();
 
     let todaydate = yyyy + '-' + mm + '-' + dd;
     let nowtime = hh+':'+minmin
+
+    console.log("timeeeeeeeeeeeee", nowtime)
 
     this.setState({
       activityDate : todaydate,
@@ -212,7 +232,13 @@ class ActivityFormN extends Component {
 
     if(this.state.activityProjectArg === '--select--' || this.state.activityTypeArg === '--select--' || this.state.activityTypeIdentifierArg === '--select--'){
       alert('please select all necessary fields')
-    } else {
+    } else if(this.state.activityHours <= 0){
+
+      alert('Hours cannot be less than or equal to zero')
+
+    }
+
+    else {
 
 
 
@@ -335,11 +361,11 @@ class ActivityFormN extends Component {
               </select>
 
               <label className="activity-form-input-label">Activity type Id</label>
-              <input className="activity-form-input" type="text" onChange={this.handleChange2} name="filter_attrib" value={this.state.filter_attrib}/>
+              <input className="activity-form-input"  type="text" onChange={this.handleChange2} name="filter_attrib" value={this.state.filter_attrib}/>
               {myelem}
 
-              <label  className="activity-form-input-label">Description</label>
-              <input className="activity-form-input" type="text" onChange={this.handleChange} name="activityDescriptionArg" value={this.state.activityDescriptionArg} />
+              <label  className="activity-form-input-label" for="activityDescriptionArg">Description</label>
+              <input className="activity-form-input" size="30" type="text" onChange={this.handleChange} id="activityDescriptionArg" name="activityDescriptionArg" value={this.state.activityDescriptionArg} />
 
               <label className="activity-form-input-label">Date</label>
               <input className="activity-form-input"  type="date" onChange={this.handleChange} name="activityDate" value={this.state.activityDate} />
@@ -349,6 +375,10 @@ class ActivityFormN extends Component {
 
               <label className="activity-form-input-label">End Time</label>
               <input type="time" className="activity-form-input" onChange={this.handleChange} name="activityEndTime" value={this.state.activityEndTime} />
+
+              <label className="activity-form-input-label">Hours</label>
+              <input type="text" size="4" className="activity-form-input" disabled value={this.state.activityHours} />
+
 
               <button className="login-button">{this.state.submit_button_content}</button>
             </form>

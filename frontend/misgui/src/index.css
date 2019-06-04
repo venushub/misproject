@@ -11,7 +11,7 @@
   padding: 0;
 }
 
-.login-form {
+/* .login-form {
   font-family: fantasy;
   display : flex;
   flex-direction: column;
@@ -20,7 +20,7 @@
   padding: 10px 40px 40px 40px;
   box-shadow: 0px 0px 10px 5px #f49b42;
   border-radius: 1em;
-}
+} */
 
 .loginimg {
 
@@ -44,7 +44,7 @@
   padding-top: 15px;
 }
 
-.login-button {
+/* .login-button {
   margin : 20px;
   background-color: #f49b42;
   border : none;
@@ -54,7 +54,7 @@
   font-family:sans-serif;
   color: white;
   font-size: 1em
-}
+} */
 
 .cancel-button {
   margin : 20px;
@@ -345,3 +345,222 @@
 .header-adjust{
   margin-left : 1em;
 }
+
+
+
+
+
+
+/* ---------------------home page start---------------------------------*/
+
+.home-main-container {
+  height : 100vh;
+  display : flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.home-header {
+  height : 50vh;
+  width : 100vw;
+  background-color: rgb(214, 0, 107);
+  display : flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding : 1em 1.5em 0 1.5em;
+}
+
+.home-header-title{
+  font-family: verdana;
+  font-size: 3em;
+  font-weight: bolder;
+  color: rgb(242,242,242);
+  font-style: italic;
+}
+
+.home-info {
+  position: absolute;
+  display : flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height : 75vh;
+  width : 80vw;
+  background-color: rgb(242,242,242);
+  z-index: 2;
+  bottom : 0;
+  border-radius : 0.8em 0.8em 0 0;
+  box-shadow: 0px 0px 7px 3px rgb(190,190,190);
+}
+
+.home-info-content-top {
+  width: 100%;
+  display : flex;
+  align-items:  center;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+.home-info-li {
+    list-style-type: none;
+    font-family: verdana;
+    font-size: 1.8em;
+    font-weight: bolder;
+    color:rgb(214, 0, 107);
+    padding : 1em;
+}
+
+.home-info-pac {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(214, 0, 107);
+  padding-right: 1em;
+}
+
+.home-footer {
+  height : 15vh;
+  background-color: rgb(208,206,206);
+  width : 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: verdana;
+  font-size: 3em;
+  font-weight: 600;
+  font-stretch: expanded;
+  color : rgb(217,217,217);
+}
+
+.nav-link{
+  text-decoration: none;
+  font-size: 1.3em;
+  font-weight: bolder;
+  color: rgb(242,242,242);
+  font-family: verdana;
+  padding-left : 1.5em
+}
+
+.nav-link:hover {
+    color: pink
+}
+
+.coffee{
+  height : 100px;
+  width: 60px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  padding-left : 0.1em;
+}
+/* ---------------------home page End---------------------------------*/
+
+
+
+/* ---------------------login page Start---------------------------------*/
+
+.login-container {
+  height : 100vh;
+  width :100%;
+  display : flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.login-form-div {
+  height: 100%;
+  width : 50%;
+  background-color: rgb(214, 0, 107);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width : 80%;
+  height : 80%;
+}
+
+.login-form-label {
+  font-size: 1.5em;
+  font-family: verdana;
+  font-weight: bold;
+  color : rgb(242, 242, 242);
+  padding-top : 2em;
+}
+
+.login-input {
+  background-color : rgb(214, 0, 107);
+  border-width: 0 0 2px 0;
+  border-color: rgb(242, 242, 242);
+  padding-top : 2.5em;
+}
+
+.login-button {
+  align-self: flex-end;
+  background-color: rgb(242, 242, 242);
+  border : none;
+  font-family: verdana;
+  font-weight: bold;
+  font-size: 1.2em;
+  padding : 0.5em 1em 0.5em 1em;
+  color : rgb(214, 0, 107);
+  border-radius: 0.5em;
+  margin-top : 2em;
+}
+
+.login-input:focus{
+  outline: none;
+  border-color: #f49b42;
+}
+
+/* .login-input:focus + .login-form-label {
+  color : red;
+} */
+
+.register-here-text {
+  height : 10%;
+  font-family: verdana;
+  font-weight: bold;
+  font-size: 1.5em;
+  color : rgb(242, 242, 242);
+}
+
+.register-here-text:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.error {
+  height : 10%;
+  font-family: verdana;
+  font-weight: bold;
+  font-size: 1.5em;
+  color : rgb(242, 242, 242);
+  animation-name: errorAnimation;
+  animation-duration: 5s;
+  opacity : 0;
+  padding-top : 1em;
+}
+
+
+@keyframes errorAnimation {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+
+/* ---------------------login page End---------------------------------*/

@@ -61,6 +61,9 @@ const getActivitiesForWeekQuery = gql`
         projectName
         id
       }
+      activityUser {
+        username
+      }
       activityType {
         activityTypeName
         id
@@ -87,6 +90,9 @@ const getActivitiesQuery = gql`
     activityProject {
       projectName
       id
+    }
+    activityUser {
+      username
     }
     activityType {
       activityTypeName

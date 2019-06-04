@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { graphql, compose } from 'react-apollo';
 import {getTokenMutation} from './queries/queries'
 import { Link , NavLink} from 'react-router-dom'
+import client from '../index.js'
 
 
 class Logout extends Component {
@@ -19,6 +20,7 @@ class Logout extends Component {
     e.preventDefault();
     localStorage.removeItem('cool-jwt')
     localStorage.removeItem('username')
+    client.clearStore()
     this.props.history.push('/login');
   }
 

@@ -80,6 +80,7 @@ class ActivitiesN extends Component {
 
           id : activity.id,
           activityProject : activity.activityProject.projectName,
+          activityUser : activity.activityUser.username,
           activityType:activity.activityType.activityTypeName,
           activityTypeIdentifier:activity.activityTypeIdentifier.activityTypeIdentifierName,
           activityTypeIdentifierSubCat : activity.activityTypeIdentifier.activityTypeIdentifierSubCat,

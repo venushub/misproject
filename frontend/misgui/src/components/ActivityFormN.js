@@ -364,7 +364,7 @@ class ActivityFormN extends Component {
               <input className="activity-form-input"  type="text" onChange={this.handleChange2} name="filter_attrib" value={this.state.filter_attrib}/>
               {myelem}
 
-              <label  className="activity-form-input-label" for="activityDescriptionArg">Description</label>
+              <label  className="activity-form-input-label" htmlFor="activityDescriptionArg">Description</label>
               <input className="activity-form-input" size="30" type="text" onChange={this.handleChange} id="activityDescriptionArg" name="activityDescriptionArg" value={this.state.activityDescriptionArg} />
 
               <label className="activity-form-input-label">Date</label>

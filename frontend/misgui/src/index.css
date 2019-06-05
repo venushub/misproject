@@ -497,7 +497,9 @@
   background-color : rgb(214, 0, 107);
   border-width: 0 0 2px 0;
   border-color: rgb(242, 242, 242);
-  padding-top : 2.5em;
+  padding-top : 1.5em;
+  font-size: 1.5em;
+  color:  rgb(242, 242, 242);
 }
 
 .login-button {
@@ -535,18 +537,17 @@
   cursor: pointer;
 }
 
-.error {
+.error-show {
   height : 10%;
   font-family: verdana;
   font-weight: bold;
   font-size: 1.5em;
   color : rgb(242, 242, 242);
   animation-name: errorAnimation;
-  animation-duration: 5s;
+  animation-duration: 2s;
   opacity : 0;
   padding-top : 1em;
 }
-
 
 @keyframes errorAnimation {
   0% {
@@ -562,5 +563,40 @@
   }
 }
 
+
+.error-hide {
+  opacity : 0;
+  height : 10%;
+}
+
+
+.login-header-title {
+  font-family: verdana;
+  font-size: 3em;
+  font-weight: bolder;
+  color: rgb(214, 0, 107);
+  font-style: italic;
+  padding-top : 0.5em;
+  padding-left: 0.5em;
+
+}
+
+.login-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 100%;
+}
+
+
+.login-title {
+  font-family: verdana;
+  font-size: 7em;
+  font-weight: bolder;
+  padding-bottom: 0.1em;
+  padding-left: 0.1em;
+  color: #d3d1d1;
+}
 
 /* ---------------------login page End---------------------------------*/

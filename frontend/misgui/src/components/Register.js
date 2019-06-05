@@ -13,7 +13,8 @@ class Register extends Component {
       password : '',
       confirm_password : '',
       error : '',
-      success : false
+      success : false,
+      errorClassName : 'error-hide'
     }
   }
 
@@ -27,32 +28,49 @@ class Register extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state)
-    console.log(this.props)
+    if(this.state.email !== '' && this.state.password !== '' && this.state.confirm_password !== ''){
 
-    if(this.state.password === this.state.confirm_password) {
-
-      this.props.createUserMutation({
-          variables: {
-              username: this.state.email,
-              password: this.state.password,
-          }
-      }).then(res => {
-        console.log(res)
+      console.log(this.state)
+      console.log(this.props)
+  
+      if(this.state.password === this.state.confirm_password) {
+  
+        this.props.createUserMutation({
+            variables: {
+                username: this.state.email,
+                password: this.state.password,
+            }
+        }).then(res => {
+          console.log(res)
+          this.setState({
+            success : true
+          })
+        }).catch(err => {
+          this.setState({
+            error : 'sorry that email is already taken'
+          }, () => {
+            setTimeout(() => this.setState({errorClassName : 'error-hide'}), 2000)
+          })
+        });
+      } else {
         this.setState({
-          success : true
+          error : 'Sorry your passwords havent matched'
+        }, () => {
+          setTimeout(() => this.setState({errorClassName : 'error-hide'}), 2000)
         })
-      }).catch(err => {
-        this.setState({
-          error : 'sorry that email is already taken'
-        })
-      });
-
+      }
     } else {
+
       this.setState({
-        error : 'Sorry your passwords havent matched'
+        error : 'Some fields are left Empty 🚫',
+        errorClassName : 'error-show'
+      }, () => {
+        setTimeout(() => this.setState({errorClassName : 'error-hide'}), 2000)
       })
+
     }
+    
+
 
   }
 
@@ -83,9 +101,24 @@ class Register extends Component {
 
 
     return(
-      <div className="mycontent">
-        {content}
+      <div className="login-container">
+      <div className="login-info">
+      <div  className="login-header-title">MAPI</div>
+      <div className="login-title">Register</div>
       </div>
+      <div className="login-form-div">
+        <div className={this.state.errorClassName}>{this.state.error}</div>
+        <div className="login-form">
+          <label htmlFor="email" className="login-form-label">Email</label>
+          <input className="login-input" type="text" id='email' name="loginEmail" onChange={this.handleChange} value={this.state.email} />
+          <label  htmlFor="password" className="login-form-label">Password</label>
+          <input className="login-input" type="password" id='password' name="loginPassword" onChange={this.handleChange} value={this.state.password} />
+          <label  htmlFor="confirm_password" className="login-form-label">Confirm Password</label>
+          <input className="login-input" type="password" id='confirm_password' name="loginPassword" onChange={this.handleChange} value={this.state.confirm_password} />
+          <button onClick={this.handleSubmit} className="login-button">Register</button>
+        </div>
+      </div>
+    </div>
     )
   }
 

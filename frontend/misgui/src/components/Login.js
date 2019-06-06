@@ -39,7 +39,7 @@ class Login extends Component {
       }).then(res => {
         console.log(res)
         localStorage.setItem('cool-jwt', res.data.tokenAuth.token)
-        localStorage.setItem('username', this.state.email)
+        localStorage.setItem('username', this.state.loginEmail)
         this.props.history.push('/activities');
 
       }).catch(err => {
@@ -62,7 +62,6 @@ class Login extends Component {
   }
 
 
-
   render(){
     return(
       <div className="login-container">
@@ -74,7 +73,7 @@ class Login extends Component {
           <div className={this.state.errorClassName}>{this.state.error}</div>
           <div className="login-form">
             <label htmlFor="loginEmail" className="login-form-label">Email</label>
-            <input className="login-input" type="text" id='loginEmail' name="loginEmail" onChange={this.handleChange} value={this.state.email} />
+            <input className="login-input" type="text" id='loginEmail' name="loginEmail" onChange={this.handleChange} value={this.state.loginEmail} />
             <label  htmlFor="loginPassword" className="login-form-label">Password</label>
             <input className="login-input" type="password" id='loginPassword' name="loginPassword" onChange={this.handleChange} value={this.state.loginPassword} />
             <button onClick={this.handleSubmit} className="login-button">Login</button>
@@ -86,9 +85,6 @@ class Login extends Component {
   }
 
 }
-
-
-
 
 
 export default compose(

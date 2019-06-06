@@ -81,9 +81,7 @@
   cursor: pointer;
 }
 
-.register-link{
-  color : red
-}
+
 
 .Header-div {
   display : flex;
@@ -481,7 +479,7 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  width : 80%;
+  width : 25em;
   height : 80%;
 }
 
@@ -490,7 +488,7 @@
   font-family: verdana;
   font-weight: bold;
   color : rgb(242, 242, 242);
-  padding-top : 2em;
+  padding-top : 1em;
 }
 
 .login-input {
@@ -597,6 +595,25 @@
   padding-bottom: 0.1em;
   padding-left: 0.1em;
   color: #d3d1d1;
+}
+
+
+.registration-success-container {
+  display : flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background-color:  rgb(214, 0, 107);
+  font-family: verdana;
+  font-size: 3em;
+  font-weight: bolder;
+  color : rgb(242,242,242);
+}
+
+.register-link{
+  color : rgb(242,242,242);
 }
 
 /* ---------------------login page End---------------------------------*/

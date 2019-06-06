@@ -47,7 +47,7 @@ class ActivityFormN extends Component {
         activityHours : moment
          .duration(moment(this.state.activityEndTime, 'HH:mm')
          .diff(moment(this.state.activityStartTime, 'HH:mm'))
-       ).asHours()
+       ).asHours().toFixed(2)
       })
     })
 
@@ -168,7 +168,7 @@ class ActivityFormN extends Component {
           activityHours : moment
            .duration(moment(this.props.editOption.activityEndTime, 'YYYY-MM-DDTHH:mm')
            .diff(moment(this.props.editOption.activityStartTime, 'YYYY-MM-DDTHH:mm'))
-         ).asHours()
+         ).asHours().toFixed(2)
         })
 
 
@@ -345,7 +345,7 @@ class ActivityFormN extends Component {
 
 
     const my_form =
-            <form className ="registration-form"  onSubmit={this.handleActivityFormSubmit}>
+            <form className ="activity-form"  onSubmit={this.handleActivityFormSubmit}>
 
               <label className="activity-form-input-label">Project</label>
               <select name="activityProjectArg" value={this.state.activityProjectArg} onChange={this.handleChange} className="activity-form-input">
@@ -380,7 +380,7 @@ class ActivityFormN extends Component {
               <input type="text" size="4" className="activity-form-input" disabled value={this.state.activityHours} />
 
 
-              <button className="login-button">{this.state.submit_button_content}</button>
+              <button className="activity-form-submit-button">{this.state.submit_button_content}</button>
             </form>
 
 
@@ -388,7 +388,7 @@ class ActivityFormN extends Component {
     if(this.state.display_form){
       button_class = "cancel-button"
     } else {
-      button_class = "login-button"
+      button_class = "add-activity-button"
     }
 
     let formWrap = 'my-wrap'
@@ -401,8 +401,8 @@ class ActivityFormN extends Component {
     return(
       <React.Fragment>
       <div className="activities-header">
-        <div>{this.state.title}</div>
-        <div className="add-activity"><button onClick={this.handleDisplayForm} className={button_class}>{this.state.button_content}</button></div>
+        <div className="activities-title">{this.state.title}</div>
+        <button onClick={this.handleDisplayForm} className={button_class}>{this.state.button_content}</button>
       </div>
       <div className={formWrap}>{my_form}</div>
       </React.Fragment>

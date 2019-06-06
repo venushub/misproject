@@ -9,7 +9,6 @@ class ActivitiesListN extends Component {
 
   }
 
-
    handleButtonPress = (activity) => {
      this.buttonPressTimer = setTimeout(() => {
        console.log("long press activated")
@@ -33,26 +32,47 @@ class ActivitiesListN extends Component {
 
     if(activities.length != 0){
        activities_render = activities.slice(0).reverse().map((activity) => {return(
-       <div className="activity-item-div" key={activity.id} onMouseDown={() => this.handleButtonPress(activity)} onMouseUp={this.handleButtonRelease} onMouseLeave={this.handleButtonRelease} >
-           <div className="activity-sub-item-div-2">{activity.activityProject.projectName}</div>
-           <div className="activity-sub-item-div-3">{activity.activityType.activityTypeName}</div>
-           <div className="activity-sub-item-div-4">{activity.activityTypeIdentifier.activityTypeIdentifierName}</div>
-           <div className="activity-sub-item-div-7">{activity.activityTypeIdentifier.activityTypeIdentifierSubCat}</div>
-           <div className="activity-sub-item-div-5">{activity.activityDescription}</div>
-           <div className="activity-sub-item-div-6">{activity.activityStartTime.toString().substring(0,19)}</div>
-           <div className="activity-sub-item-div-7">{activity.activityEndTime.toString().substring(0,19)}</div>
-           <div className="activity-sub-item-div-7">{moment
+       // <div className="activity-item-div" key={activity.id} onMouseDown={() => this.handleButtonPress(activity)} onMouseUp={this.handleButtonRelease} onMouseLeave={this.handleButtonRelease} >
+       //     <div className="activity-sub-item-div-2">{activity.activityProject.projectName}</div>
+       //     <div className="activity-sub-item-div-3">{activity.activityType.activityTypeName}</div>
+       //     <div className="activity-sub-item-div-4">{activity.activityTypeIdentifier.activityTypeIdentifierName}</div>
+       //     <div className="activity-sub-item-div-7">{activity.activityTypeIdentifier.activityTypeIdentifierSubCat}</div>
+       //     <div className="activity-sub-item-div-5">{activity.activityDescription}</div>
+       //     <div className="activity-sub-item-div-6">{activity.activityStartTime.toString().substring(0,19)}</div>
+       //     <div className="activity-sub-item-div-7">{activity.activityEndTime.toString().substring(0,19)}</div>
+       //     <div className="activity-sub-item-div-7">{moment
+       //      .duration(moment(activity.activityEndTime, 'YYYY-MM-DDTHH:mm')
+       //      .diff(moment(activity.activityStartTime, 'YYYY-MM-DDTHH:mm'))
+       //    ).asHours()} Hrs</div>
+       // </div>
+
+       <tr className="activity-item-div" key={activity.id} onMouseDown={() => this.handleButtonPress(activity)} onMouseUp={this.handleButtonRelease} onMouseLeave={this.handleButtonRelease} >
+           <td className="activity-sub-item-div-2">{activity.activityProject.projectName}</td>
+           <td className="activity-sub-item-div-3">{activity.activityType.activityTypeName}</td>
+           <td className="activity-sub-item-div-4">{activity.activityTypeIdentifier.activityTypeIdentifierName}</td>
+           <td className="activity-sub-item-div-7">{activity.activityTypeIdentifier.activityTypeIdentifierSubCat}</td>
+           <td className="activity-sub-item-div-5">{activity.activityDescription}</td>
+           <td className="activity-sub-item-div-6">{activity.activityStartTime.toString().substring(0,19)}</td>
+           <td className="activity-sub-item-div-7">{activity.activityEndTime.toString().substring(0,19)}</td>
+           <td className="activity-sub-item-div-7">{moment
             .duration(moment(activity.activityEndTime, 'YYYY-MM-DDTHH:mm')
             .diff(moment(activity.activityStartTime, 'YYYY-MM-DDTHH:mm'))
-          ).asHours()} Hrs</div>
-       </div>)})
+          ).asHours().toFixed(2)} Hrs</td>
+       </tr>
+
+
+     )})
     } else {
-      activities_render = <div className="activity-item-div">No Activities to Display</div>
+      activities_render = <tr className="activity-item-div"><td className="activity-sub-item-div-2">No Activities to Display</td></tr>
     }
 
     return(
       <div className="activities-div">
+        <table>
+        <tbody>
         {activities_render}
+        </tbody>
+        </table>
       </div>
     )
   }

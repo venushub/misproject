@@ -25,11 +25,10 @@ class Header extends Component{
     return(
       <div className="Header-div">
       <div className="bundle">
-
-        <h1 className="header-adjust">⌛ {this.state.username}</h1>
+        <h1 className="header-title">MAPI</h1>
+        <h1 className="header-username"> ({this.state.username})</h1>
         </div>
         <div>
-
         <NavLink className="Header-nav-item" to="/activities" activeStyle={{  fontWeight: "bold",  color: "#f7a0a0"}} >Activities</NavLink>
         <NavLink className="Header-nav-item" to="/logout" activeStyle={{  fontWeight: "bold",  color:"#f7a0a0"}} >Logout</NavLink>
         </div>

@@ -27,7 +27,8 @@ class ActivitiesN extends Component {
 
 
   handleReturnSubmit = () => {
-    this.props.getActivitiesQuery.refetch()
+    // this.props.getActivitiesQuery.refetch()
+    this.props.getActivitiesForWeekQuery.refetch()
   }
 
   handleLP = (activity) => {
@@ -61,11 +62,22 @@ class ActivitiesN extends Component {
 
     let activities = []
 
-    if(this.state.checked){
-      activities = this.props.getActivitiesForWeekQuery.allActivitiesForWeek
-    } else {
-      activities = this.props.getActivitiesQuery.allActivities
-    }
+    // if(this.state.checked){
+    //   activities = this.props.getActivitiesForWeekQuery.allActivitiesForWeek
+    // } else {
+    //   activities = this.props.getActivitiesQuery.allActivities
+    // }
+
+    //-------------put this code in render to use toggle-------------
+    // <label  className="week-toggle-div">
+    // <span className="week-toggle-div-name">This Week</span>
+    // <Switch onChange={this.handleChange} checked={this.state.checked} />
+    // </label>
+
+    //-------------put this code in render to excel download-------------
+    //<div className="csv-link"><CSVLink  filename={"MIS.csv"} data={excelarray} className="csv-button">⇩</CSVLink></div>
+
+    activities = this.props.getActivitiesForWeekQuery.allActivitiesForWeek
 
 
     let excelactivities  = activities  &&  activities != undefined ? activities : []
@@ -92,17 +104,11 @@ class ActivitiesN extends Component {
       )
       })
 
-
     return(
       <div className="activities-container">
         <Header />
         <ActivityFormN handleReturnSubmit={this.handleReturnSubmit} editOption={this.state.editId} />
-          <label  className="week-toggle-div">
-          <span className="week-toggle-div-name">This Week</span>
-          <Switch onChange={this.handleChange} checked={this.state.checked} />
-          </label>
         <ActivitiesListN activities={activities} weekHandle={weekHandle} handleLP={this.handleLP} />
-        <div className="csv-link"><CSVLink  filename={"MIS.csv"} data={excelarray} className="csv-button">⇩</CSVLink></div>
       </div>
     )
   }
@@ -110,7 +116,7 @@ class ActivitiesN extends Component {
 
 
 export default compose(
-    graphql(getActivitiesQuery, { name: "getActivitiesQuery" }),
+    // graphql(getActivitiesQuery, { name: "getActivitiesQuery" }),
 
     graphql(getActivitiesForWeekQuery, {
       name : "getActivitiesForWeekQuery",
@@ -122,7 +128,5 @@ export default compose(
         }
       }
     }),
-
-
 
 )(ActivitiesN);

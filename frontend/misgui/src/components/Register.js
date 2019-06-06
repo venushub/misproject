@@ -55,7 +55,7 @@ class Register extends Component {
         });
       } else {
         this.setState({
-          error : 'Sorry your passwords havent matched',
+          error : 'passwords  mismatch 🚫',
           errorClassName : 'error-show'
         }, () => {
           setTimeout(() => this.setState({errorClassName : 'error-hide'}), 2000)
@@ -70,9 +70,6 @@ class Register extends Component {
       })
 
     }
-
-
-
   }
 
 

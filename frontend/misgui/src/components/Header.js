@@ -30,6 +30,7 @@ class Header extends Component{
         </div>
         <div>
         <NavLink className="Header-nav-item" to="/activities" activeStyle={{  fontWeight: "bold",  color: "#f7a0a0"}} >Activities</NavLink>
+        <NavLink className="Header-nav-item" to="/dashboard" activeStyle={{  fontWeight: "bold",  color: "#f7a0a0"}} >Dashboard</NavLink>
         <NavLink className="Header-nav-item" to="/logout" activeStyle={{  fontWeight: "bold",  color:"#f7a0a0"}} >Logout</NavLink>
         </div>
       </div>

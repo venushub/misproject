@@ -86,8 +86,7 @@
     background: #d3d1d1;
     border : none;
     width: 80%;
-    border-radius: 20%;
-
+    /* border-radius: 10%; */
 }
 
 
@@ -158,7 +157,7 @@ td {
 }
 
 .activity-sub-item-div-5{
-  word-break: break-all;
+  word-break: normal;
 }
 
 /* .activity-item-div {
@@ -746,3 +745,42 @@ td {
 }
 
 /* ---------------------Activivity form End---------------------------------*/
+
+
+
+/* ---------------------Filter Start---------------------------------*/
+
+
+.filter-container {
+
+  background-color: rgb(242, 242, 242);
+
+}
+
+.filter-bar{
+  height : 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.filter-button {
+  background-color: rgb(242, 242, 242);
+  border : 0.1em dotted rgb(134,0,67);
+  margin-left : 1em;
+  font-size: 1em;
+  color: rgb(134,0,67);
+  font-weight: bold;
+  font-family: verdana;
+  padding : 0.3em 0.5em 0.3em 0.5em;
+}
+
+.filter-button:focus {
+  outline : none;
+}
+
+.filter-details {
+  height : 35vh;
+}
+
+/* ---------------------Filter End---------------------------------*/

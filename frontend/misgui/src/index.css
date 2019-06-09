@@ -759,7 +759,24 @@ td {
   height : 10vh;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
+}
+
+.filter-things {
+  background-color: rgb(242, 242, 242);
+  border : 0.1em solid rgb(134,0,67);
+  margin-left : 1em;
+  margin-right: 1em;
+  font-size: 1em;
+  color: rgb(134,0,67);
+  font-weight: bold;
+  font-family: verdana;
+  padding : 0.3em 0.8em 0.3em 0.8em;
+  border-radius: 0.2em;
+}
+
+.filter-things:hover {
+  cursor : pointer
 }
 
 .filter-button {
@@ -890,5 +907,19 @@ td {
 .close-filter-drop:focus {
   outline : none;
 }
+
+
+.filter-date {
+  background-color: rgb(255, 219, 222);
+  border : none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 5em;
+  color: #ff7272; 
+}
+
+.filter-date:focus {
+  outline: none
+}
+
 
 /* ---------------------Filter End--------------------------------*/

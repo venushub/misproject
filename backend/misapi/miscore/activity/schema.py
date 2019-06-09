@@ -30,6 +30,7 @@ class ActivityType(DjangoObjectType):
 class Query(object):
     all_activities = graphene.List(ActivityType)
     all_activities_for_week = graphene.List(ActivityType, search=graphene.String())
+    all_activities_for_filter = graphene.List(ActivityType, search=graphene.String())
 
     def resolve_all_activities(self, info, **kwargs):
         print("the user currently logged in is", info.context.user)
@@ -37,6 +38,10 @@ class Query(object):
             return Activity.objects.all()
         else:
             return Activity.objects.filter(activityUser = info.context.user.id)
+
+    # def resolve_all_activities_for_filter(self, info, search, **kwargs):
+
+
 
     def resolve_all_activities_for_week(self, info, search,  **kwargs):
         if(info.context.user.is_superuser):

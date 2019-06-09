@@ -1,6 +1,7 @@
 import React , {Component} from 'react'
-import {getProjectsQuery, getActivityTypesQuery, getUsersQuery} from './queries/queries'
+import {getProjectsQuery, getActivityTypesQuery, getUsersQuery, getActivityTypeIdentifiersQuery} from './queries/queries'
 import { graphql, compose } from 'react-apollo';
+let moment = require('moment');
 
 
 
@@ -12,13 +13,21 @@ class Filter extends Component {
       buttons : [
         {id : 1 , name : 'projects', value : 'all', active : false},
         {id : 2 , name : 'types', value : 'all', active : false},
-        {id : 3 , name : 'users', value : 'all', active : false}
+        {id : 3 , name : 'users', value : 'all', active : false},
+        {id : 4 , name : 'typeidens', value : 'all', active : false},
+        {id : 5 , name : 'typesubidens', value : 'all', active : false},
+        {id : 6 , name : 'SD', value : '', active : false},
+        {id : 7 , name : 'ED', value : '', active : false},
       ],
       which_filter : '',
       display_filter_details : false,
       projects : [],
       types : [],
-      users : []
+      users : [],
+      typeidens : [],
+      typesubidens : [],
+      SD : '',
+      ED : ''
     }
   }
 
@@ -44,27 +53,63 @@ class Filter extends Component {
 
   componentDidMount(){
 
-    if(this.props.getProjectsQuery.allProjects != undefined){
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+
+    let todaydate = mm + '-' + dd + '-' + yyyy;
+
+    if(this.props.getProjectsQuery.allProjects != undefined && this.props.getActivityTypesQuery.allActivityTypes !=undefined && this.props.getUsersQuery.users !=undefined && this.props.getActivityTypeIdentifiersQuery.allActivityTypeIdentifiers  ){
       this.setState({
         projects : this.props.getProjectsQuery.allProjects.map((project) => { return({name : project.projectName, status : true})}),
         types : this.props.getActivityTypesQuery.allActivityTypes.map((activity_type) => { return({name : activity_type.activityTypeName, status : true})}),
-        users : this.props.getUsersQuery.users.map((user) => { return({name : user.username, status : true})})
+        users : this.props.getUsersQuery.users.map((user) => { return({name : user.username, status : true})}),
+        typeidens : this.props.getActivityTypeIdentifiersQuery.allActivityTypeIdentifiers.map((typeiden) => { return({name : typeiden.activityTypeIdentifierName, type : typeiden.activityType.activityTypeName ,status : true})}),
+        typesubidens : [{name : "CR", status : true},{name : "FTR", status : true},{name : "Other", status : true}],
+        SD : todaydate,
+        buttons : [
+          {id : 1 , name : 'projects', value : 'all' , active : false},
+          {id : 2 , name : 'types', value : 'all', active : false},
+          {id : 3 , name : 'users', value : 'all', active : false},
+          {id : 4 , name : 'typeidens', value : 'all', active : false},
+          {id : 5 , name : 'typesubidens', value : 'all', active : false},
+          {id : 6 , name : 'SD', value : todaydate, active : false},
+          {id : 7 , name : 'ED', value : todaydate, active : false},
+        ]
       })
     }
   }
 
   componentDidUpdate(prevProps){
+
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+
+    let todaydate = yyyy + '-' + dd + '-' + mm;
+
+
       if (this.props !== prevProps) {
         console.log("updated props", this.props)
-            if(this.props.getProjectsQuery.allProjects != undefined && this.props.getActivityTypesQuery.allActivityTypes !=undefined){
+            if(this.props.getProjectsQuery.allProjects != undefined && this.props.getActivityTypesQuery.allActivityTypes !=undefined && this.props.getUsersQuery.users !=undefined && this.props.getActivityTypeIdentifiersQuery.allActivityTypeIdentifiers ){
             this.setState({
               projects : this.props.getProjectsQuery.allProjects.map((project) => { return({name : project.projectName, status : true})}),
               types : this.props.getActivityTypesQuery.allActivityTypes.map((activity_type) => { return({name : activity_type.activityTypeName, status : true})}),
               users : this.props.getUsersQuery.users.map((user) => { return({name : user.username, status : true})}),
+              typeidens : this.props.getActivityTypeIdentifiersQuery.allActivityTypeIdentifiers.map((typeiden) => { return({name : typeiden.activityTypeIdentifierName, type : typeiden.activityType.activityTypeName ,status : true})}),
+              typesubidens : [{name : "CR", status : true},{name : "FTR", status : true},{name : "Other", status : true}],
+              SD : todaydate,
+              ED : todaydate,
               buttons : [
                 {id : 1 , name : 'projects', value : 'all' , active : false},
                 {id : 2 , name : 'types', value : 'all', active : false},
-                {id : 3 , name : 'users', value : 'all', active : false}
+                {id : 3 , name : 'users', value : 'all', active : false},
+                {id : 4 , name : 'typeidens', value : 'all', active : false},
+                {id : 5 , name : 'typesubidens', value : 'all', active : false},
+                {id : 6 , name : 'SD', value : todaydate, active : false},
+                {id : 7 , name : 'ED', value : todaydate, active : false},
               ]
             })
       }
@@ -86,8 +131,9 @@ class Filter extends Component {
 
   deleteItem = (which, id) => {
     // // console.log(prevState)
-    // console.log(which)
+    console.log("which bitchhhhhhhhhhhhh",which)
     // console.log(id)
+
     if(which === "projects"){
       this.setState((state, props) => {
       return {
@@ -118,6 +164,10 @@ class Filter extends Component {
             {id : 1 , name : 'projects', value : n , active : state.buttons[0].active},
             {id : 2 , name : 'types', value : state.buttons[1].value, active : state.buttons[1].active},
             {id : 3 , name : 'users', value : state.buttons[2].value, active : state.buttons[2].active},
+            {id : 4 , name : 'typeidens', value : state.buttons[3].value, active : state.buttons[3].active},
+            {id : 5 , name : 'typesubidens', value : state.buttons[4].value, active : state.buttons[4].active},
+            {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
+            {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
           ]
         })
         
@@ -151,10 +201,14 @@ class Filter extends Component {
               {id : 1 , name : 'projects', value : state.buttons[0].value, active : state.buttons[0].active},
               {id : 2 , name : 'types', value : n , active : state.buttons[1].active},
               {id : 3 , name : 'users', value : state.buttons[2].value, active : state.buttons[2].active},
+              {id : 4 , name : 'typeidens', value : state.buttons[3].value, active : state.buttons[3].active},
+              {id : 5 , name : 'typesubidens', value : state.buttons[4].value, active : state.buttons[4].active},
+              {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
+              {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
             ]
           })
           
-        })
+        }, () => this.handleTypeChange())
       });
     } else if (which === "users") {
       
@@ -186,11 +240,174 @@ class Filter extends Component {
               {id : 1 , name : 'projects', value : state.buttons[0].value, active : state.buttons[0].active},
               {id : 2 , name : 'types', value : state.buttons[1].value, active : state.buttons[1].active},
               {id : 3 , name : 'users', value : n , active : state.buttons[2].active},
+              {id : 4 , name : 'typeidens', value : state.buttons[3].value, active : state.buttons[3].active},
+              {id : 5 , name : 'typesubidens', value : state.buttons[4].value, active : state.buttons[4].active},
+              {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
+              {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
             ]
           })
         })
       });
+    } else if(which === "typeidens") {
+      console.log("eject eject")
+      this.setState((state, props) => {
+        return {
+          [which] : state.typeidens.map((typeiden,index) => {
+            if(index === id ){
+              return {
+                name : typeiden.name, status : !typeiden.status
+              }
+            } else {
+              return typeiden
+            }
+        })};
+      }, () =>{
+        console.log(this.state)
+        let n = 0;
+        for(let i=0; i<this.state.typeidens.length;i++){
+          if(this.state.typeidens[i].status){
+            n = n+1
+          }
+        }
+        this.setState((state) => {
+          if (n === this.props.getActivityTypeIdentifiersQuery.allActivityTypeIdentifiers.length){
+            n = "all"
+          }
+          return({
+            buttons : [
+              {id : 1 , name : 'projects', value : state.buttons[0].value, active : state.buttons[0].active},
+              {id : 2 , name : 'types', value : state.buttons[1].value, active : state.buttons[1].active},
+              {id : 3 , name : 'users', value : state.buttons[2].value , active : state.buttons[2].active},
+              {id : 4 , name : 'typeidens', value : n, active : state.buttons[3].active},
+              {id : 5 , name : 'typesubidens', value : state.buttons[4].value, active : state.buttons[4].active},
+              {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
+              {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
+            ]
+          })
+        })
+      });
+    } else if(which === "typesubidens") {
+      console.log("we cme to right place")
+      this.setState((state, props) => {
+        return {
+          [which] : state.typesubidens.map((typesubiden,index) => {
+            if(index === id ){
+              return {
+                name : typesubiden.name, status : !typesubiden.status
+              }
+            } else {
+              return typesubiden
+            }
+        })};
+      }, () =>{
+        console.log(this.state)
+        let n = 0;
+        for(let i=0; i<this.state.typesubidens.length;i++){
+          if(this.state.typesubidens[i].status){
+            n = n+1
+          }
+        }
+        this.setState((state) => {
+          if (n === this.state.typesubidens.length){
+            n = "all"
+          }
+          return({
+            buttons : [
+              {id : 1 , name : 'projects', value : state.buttons[0].value, active : state.buttons[0].active},
+              {id : 2 , name : 'types', value : state.buttons[1].value, active : state.buttons[1].active},
+              {id : 3 , name : 'users', value : state.buttons[2].value , active : state.buttons[2].active},
+              {id : 4 , name : 'typeidens', value : state.buttons[3].value, active : state.buttons[3].active},
+              {id : 5 , name : 'typesubidens', value : n, active : state.buttons[4].active},
+              {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
+              {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
+            ]
+          })
+        })
+      });
+    
+    } else {
+   
     }
+  }
+
+  handleDate = (e) => {
+    this.setState({
+      [e.target.name] : e.target.value
+    }, () => {
+     
+      this.setState((state) => {
+        console.log("updateeeee", state.SD)
+        return({
+          buttons : [
+            {id : 1 , name : 'projects', value : state.buttons[0].value, active : state.buttons[0].active},
+            {id : 2 , name : 'types', value : state.buttons[1].value, active : state.buttons[1].active},
+            {id : 3 , name : 'users', value : state.buttons[2].value , active : state.buttons[2].active},
+            {id : 4 , name : 'typeidens', value : state.buttons[3].value, active : state.buttons[3].active},
+            {id : 5 , name : 'typesubidens', value : state.buttons[4].value, active : state.buttons[4].active},
+            {id : 6 , name : 'SD', value : state.SD, active : state.buttons[5].active},
+            {id : 7 , name : 'ED', value : state.ED, active : state.buttons[6].active},
+          ]
+        })
+      })
+    })
+  }
+
+
+  handleTypeChange = () => {
+    let req = []
+    this.state.types.map((type) => {
+      if(type.status){
+        req.push(type.name)
+      }
+      return null;
+    })
+    console.log(req)
+    let reqtis = []
+
+    reqtis = this.props.getActivityTypeIdentifiersQuery.allActivityTypeIdentifiers.filter((typeiden) => {
+      return (
+        req.includes(typeiden.activityType.activityTypeName)
+      )
+    })
+    console.log("reqqqq", reqtis)
+    let finmat = []
+    reqtis.map((tf, index) => {
+    
+        finmat.push({
+          name : reqtis[index].activityTypeIdentifierName, 
+          type : reqtis[index].activityType.activityTypeName ,
+          status : true})
+     
+      return null;
+    })
+    console.log("finmattt", finmat)
+    this.setState({
+      typeidens : finmat
+    }, () =>{
+      console.log(this.state)
+      let n = 0;
+      for(let i=0; i<this.state.typeidens.length;i++){
+        if(this.state.typeidens[i].status){
+          n = n+1
+        }
+      }
+      this.setState((state) => {
+        if (n === this.props.getActivityTypeIdentifiersQuery.allActivityTypeIdentifiers.length){
+          n = "all"
+        }
+        return({
+          buttons : [
+            {id : 1 , name : 'projects', value : state.buttons[0].value, active : state.buttons[0].active},
+            {id : 2 , name : 'types', value : state.buttons[1].value, active : state.buttons[1].active},
+            {id : 3 , name : 'users', value : state.buttons[2].value , active : state.buttons[2].active},
+            {id : 4 , name : 'typeidens', value : n, active : state.buttons[3].active},
+            {id : 5 , name : 'typesubidens', value : state.buttons[4].value, active : state.buttons[4].active},
+            {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
+            {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
+          ]
+        })
+      })
+    })
   }
 
 
@@ -246,6 +463,39 @@ class Filter extends Component {
             }
             return(<button key={index} className={button_here_class} onClick={() => this.deleteItem("users", index)}>{item.name}</button>)})
      
+      } else if(this.state.which_filter === 'typeidens') {
+        
+        display_filter_details_render = this.state.typeidens.map((item, index) => {
+          let button_here_class = "filter-sub-item-selected"
+            if(item.status){
+              button_here_class  = "filter-sub-item-selected"
+            } else {
+              button_here_class = "filter-sub-item-deselected"
+            }
+            return(<button key={index} className={button_here_class} onClick={() => this.deleteItem("typeidens", index)}>{item.name}</button>)})
+     
+      } else if(this.state.which_filter === 'typesubidens') {
+        display_filter_details_render = this.state.typesubidens.map((item, index) => {
+          let button_here_class = "filter-sub-item-selected"
+            if(item.status){
+              button_here_class  = "filter-sub-item-selected"
+            } else {
+              button_here_class = "filter-sub-item-deselected"
+            }
+            return(<button key={index} className={button_here_class} onClick={() => this.deleteItem("typesubidens", index)}>{item.name}</button>)})     
+      } else if(this.state.which_filter === 'SD') {
+        
+        display_filter_details_render = <input type="date" name="SD" className="filter-date" onChange={this.handleDate} value={this.state.SD}/>
+          // let button_here_class = "filter-sub-item-selected"
+          //   if(item.status){
+          //     button_here_class  = "filter-sub-item-selected"
+          //   } else {
+          //     button_here_class = "filter-sub-item-deselected"
+          //   }    
+     
+      } else if(this.state.which_filter === 'ED') {
+        display_filter_details_render = <input type="date" name="ED" className="filter-date" onChange={this.handleDate} value={this.state.ED}/>
+
       } else {
         filter_details_class = "filter-details-none"
       }
@@ -256,18 +506,30 @@ class Filter extends Component {
     return(
       <div className="filter-container">
         <div className="filter-bar">
-          {buttons_render}
+          <div>{buttons_render}</div>
+          <button className="filter-things">Filter</button>
         </div>
         <div className={filter_details_class}><div>{display_filter_details_render}</div><div>{closebutton}</div></div>
         
       </div>
     )
   }
-
 }
+
+
 
 export default compose(
     graphql(getProjectsQuery, { name: "getProjectsQuery" }),
     graphql(getActivityTypesQuery, {name : "getActivityTypesQuery"}),
     graphql(getUsersQuery, {name : "getUsersQuery"}),
+    graphql(getActivityTypeIdentifiersQuery, {
+      name: "getActivityTypeIdentifiersQuery",
+      options : (props) => {
+        return {
+          variables : {
+            search : "0"
+          }
+        }
+      }
+    }),
   )(Filter)

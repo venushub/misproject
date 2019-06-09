@@ -53,14 +53,20 @@ const getActivityTypesQuery = gql`
 `
 
 
+
 const getActivityTypeIdentifiersQuery = gql`
-  query allActivityTypeIDentifiers($search : String){
+  query allActivityTypeIdentifiers($search : String){
     allActivityTypeIdentifiers(search : $search){
       id
       activityTypeIdentifierName
+      activityType{
+        activityTypeName
+      }
     }
   }
 `
+
+
 
 const getActivitiesForWeekQuery = gql`
   query allActivitiesForWeek($search : String){
@@ -89,7 +95,32 @@ const getActivitiesForWeekQuery = gql`
   }
 `
 
-
+const getActivitiesForFilterQuery = gql`
+  query getActivitiesForFilterQuery($search : String){
+    allActivitiesForWeek(search : $search){
+      id
+      activityProject {
+        projectName
+        id
+      }
+      activityUser {
+        username
+      }
+      activityType {
+        activityTypeName
+        id
+      }
+      activityTypeIdentifier{
+        activityTypeIdentifierName
+        id
+        activityTypeIdentifierSubCat
+      }
+      activityDescription
+      activityStartTime
+      activityEndTime
+    }
+  }
+`
 
 
 const getActivitiesQuery = gql`
@@ -118,6 +149,7 @@ const getActivitiesQuery = gql`
   }
 }
 `
+
 
 const getTokenMutation = gql`
     mutation tokenAuth($username: String!, $password: String!){
@@ -190,4 +222,4 @@ const createUserMutation = gql`
 //   }
 // `
 
-export {getTokenMutation, verifyTokenMutation, getActivitiesQuery, getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};
+export {getTokenMutation, verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};

@@ -15,13 +15,16 @@ class Query(object):
 
     def resolve_all_activity_type_identifiers(self, info, search=None , **kwargs):
 
+        if(int(search) == 0):
+            return ActivityTypeIdentifier.objects.all()
+        else:
+            return ActivityTypeIdentifier.objects.filter(activityType = int(search))
+
         # if search:
         #     return Link.objects.filter(ActivityType = search)
         #
         # return Link.objects.all()
-        return ActivityTypeIdentifier.objects.filter(activityType = int(search))
-
-
+        # return ActivityTypeIdentifier.objects.filter(activityType = int(search))
 
 
 

@@ -752,9 +752,7 @@ td {
 
 
 .filter-container {
-
   background-color: rgb(242, 242, 242);
-
 }
 
 .filter-bar{
@@ -772,15 +770,125 @@ td {
   color: rgb(134,0,67);
   font-weight: bold;
   font-family: verdana;
-  padding : 0.3em 0.5em 0.3em 0.5em;
+  padding : 0.3em 0.8em 0.3em 0.8em;
+  border-radius: 1em;
 }
 
 .filter-button:focus {
   outline : none;
 }
 
-.filter-details {
-  height : 35vh;
+.filter-button:hover{
+  cursor: pointer;
 }
 
-/* ---------------------Filter End---------------------------------*/
+.filter-button-active{
+  background-color: rgb(134,0,67);
+  color : rgb(242, 242, 242);
+  border : 0.1em dotted rgb(134,0,67);
+  margin-left : 1em;
+  font-size: 1em;
+  font-weight: bold;
+  font-family: verdana;
+  padding : 0.3em 0.8em 0.3em 0.8em;
+  border-radius: 1em;
+  position : relative
+}
+
+.filter-button-active::after{
+  content : "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 20px solid rgb(255, 219, 222);
+  top : 35px;
+  right : 30px;
+}
+
+.filter-button-active:focus {
+  outline: none;
+}
+
+
+.filter-button-active:hover {
+  cursor : pointer
+}
+
+
+.filter-details {
+  padding : 2em;
+  height : 35vh;
+  background-color: rgb(255, 219, 222);
+  border-radius: 0px 0px 15px 15px;
+  display : flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.filter-details-none {
+  display : none
+}
+
+.filter-sub-item-selected {
+  background-color: rgb(134,0,67);
+  color : rgb(242, 242, 242);
+  border : 0.1em solid rgb(134,0,67);
+  margin-left : 1em;
+  font-size: 1em;
+  font-weight: bold;
+  font-family: verdana;
+  padding : 0.3em 0.8em 0.3em 0.8em;
+  border-radius: 1em;
+  position : relative;
+}
+
+.filter-sub-item-selected:focus{
+  outline:none
+}
+
+.filter-sub-item-deselected {
+  background-color: rgb(242, 242, 242);
+  color : rgb(134,0,67);
+  border : 0.1em solid rgb(134,0,67);
+  margin-left : 1em;
+  font-size: 1em;
+  font-weight: bold;
+  font-family: verdana;
+  padding : 0.3em 0.8em 0.3em 0.8em;
+  border-radius: 1em;
+  position : relative
+}
+
+.filter-sub-item-deselected:focus {
+  outline:none
+}
+
+.filter-sub-item-selected:hover {
+  cursor : pointer
+}
+
+.filter-sub-item-deselected:hover{
+  cursor : pointer
+}
+
+.close-filter-drop {
+  background-color: rgb(242, 242, 242);
+  color : #8a0000;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bolder;
+  padding : 0.5em;
+  border : 0.15em solid #8a0000;
+  border-radius : 10%;
+}
+
+.close-filter-drop:hover{
+  cursor : pointer
+}
+
+.close-filter-drop:focus {
+  outline : none;
+}
+
+/* ---------------------Filter End--------------------------------*/

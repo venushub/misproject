@@ -32,6 +32,15 @@ const getProjectsQuery = gql`
 }
 `
 
+const getUsersQuery = gql`
+{
+  users {
+    id
+    username
+  }
+}
+`
+
 
 
 const getActivityTypesQuery = gql`
@@ -181,4 +190,4 @@ const createUserMutation = gql`
 //   }
 // `
 
-export {getTokenMutation, verifyTokenMutation, getActivitiesQuery, createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};
+export {getTokenMutation, verifyTokenMutation, getActivitiesQuery, getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};

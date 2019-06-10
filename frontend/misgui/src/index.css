@@ -782,7 +782,7 @@ td {
 .filter-button {
   background-color: rgb(242, 242, 242);
   border : 0.1em dotted rgb(134,0,67);
-  margin-left : 1em;
+  margin-left : 0.5em;
   font-size: 1em;
   color: rgb(134,0,67);
   font-weight: bold;
@@ -803,7 +803,7 @@ td {
   background-color: rgb(134,0,67);
   color : rgb(242, 242, 242);
   border : 0.1em dotted rgb(134,0,67);
-  margin-left : 1em;
+  margin-left : 0.5em;
   font-size: 1em;
   font-weight: bold;
   font-family: verdana;
@@ -853,6 +853,7 @@ td {
   color : rgb(242, 242, 242);
   border : 0.1em solid rgb(134,0,67);
   margin-left : 1em;
+  margin-top : 1em;
   font-size: 1em;
   font-weight: bold;
   font-family: verdana;
@@ -870,6 +871,7 @@ td {
   color : rgb(134,0,67);
   border : 0.1em solid rgb(134,0,67);
   margin-left : 1em;
+  margin-top : 1em;
   font-size: 1em;
   font-weight: bold;
   font-family: verdana;
@@ -914,7 +916,7 @@ td {
   border : none;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 5em;
-  color: #ff7272; 
+  color: #ff7272;
 }
 
 .filter-date:focus {

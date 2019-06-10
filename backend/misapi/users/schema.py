@@ -38,7 +38,7 @@ class Query(graphene.ObjectType):
         if(info.context.user.is_superuser):
             return get_user_model().objects.all()
         else:
-            return get_user_model().objects.filter(activityUser = info.context.user.id)
+            return get_user_model().objects.filter(id = info.context.user.id)
 
     def resolve_me(self, info):
         user = info.context.user

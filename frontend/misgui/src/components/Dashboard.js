@@ -13,7 +13,7 @@ class Dashboard extends Component {
 
 
     return(
-      <div>
+      <div className="dashboard-container">
       <Header />
       <Filter />
       </div>

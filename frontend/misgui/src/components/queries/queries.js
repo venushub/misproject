@@ -96,8 +96,8 @@ const getActivitiesForWeekQuery = gql`
 `
 
 const getActivitiesForFilterQuery = gql`
-  query getActivitiesForFilterQuery($search : String){
-    allActivitiesForWeek(search : $search){
+  query allActivitiesForFilter($search : String){
+    allActivitiesForFilter(search : $search){
       id
       activityProject {
         projectName

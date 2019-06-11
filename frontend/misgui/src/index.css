@@ -157,7 +157,8 @@ td {
 }
 
 .activity-sub-item-div-5{
-  word-break: normal;
+  width: 50%;
+  word-break: break-all;
 }
 
 /* .activity-item-div {
@@ -643,7 +644,9 @@ td {
   justify-content: space-between;
   width : 100%;
   background-color: rgb(134,0,67);
-  height : 5vw;
+  height : 10vh;
+  margin : 0;
+  padding : 0;
 }
 
 .Header-nav-item {
@@ -753,13 +756,22 @@ td {
 
 .filter-container {
   background-color: rgb(242, 242, 242);
+  display : flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width : 100%;
+  height : 90vh;
+  margin : 0;
+  padding : 0;
 }
 
 .filter-bar{
-  height : 10vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width : 100%;
+  padding : 1em 0 1em 0;
 }
 
 .filter-things {
@@ -836,12 +848,14 @@ td {
 
 .filter-details {
   padding : 2em;
-  height : 35vh;
   background-color: rgb(255, 219, 222);
   border-radius: 0px 0px 15px 15px;
   display : flex;
   align-items: flex-start;
   justify-content: space-between;
+  width : 100%;
+
+
 }
 
 .filter-details-none {
@@ -921,6 +935,50 @@ td {
 
 .filter-date:focus {
   outline: none
+}
+
+
+.activities-dashboard-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width : 90%;
+  overflow-Y: scroll;
+  background-color : #ffdde7;
+  height : 50vh;
+}
+
+
+.dashboard-condown {
+  display : flex;
+  flex-direction: column;
+  align-items:  center;
+  justify-content: flex-start;
+
+  width : 100%;
+  justify-content: center;
+  border-radius: 15px 15px 15px 15px;
+  margin-bottom : 5em;
+  margin-top : 1em;
+}
+
+.total-div {
+  position: absolute;
+  width : 100vw;
+  height : 10vh;
+  background-color: rgb(255, 219, 222);
+  bottom : 0;
+  right : 0;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-flex-start;
+  align-items: center;
+  width : 100%;
+  height : 100vh;
 }
 
 

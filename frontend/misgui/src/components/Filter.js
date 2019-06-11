@@ -167,6 +167,7 @@ class Filter extends Component {
       }
   }
 
+
   handleCloseFilterDrop = () => {
     this.setState((state) => {
       return({
@@ -557,12 +558,13 @@ class Filter extends Component {
     return(
       <div className="filter-container">
         <div className="filter-bar">
-          <div>{buttons_render}</div>
-          <button className="filter-things" onClick={this.handleFilterSubmit}>Filter</button>
+          <div>
+            <div>{buttons_render}</div>
+            <button className="filter-things" onClick={this.handleFilterSubmit}>Filter</button>
+          </div>
+          <div className={filter_details_class}><div>{display_filter_details_render}</div><div>{closebutton}</div></div>
         </div>
-        <div className={filter_details_class}><div>{display_filter_details_render}</div><div>{closebutton}</div></div>
-        <ActivitiesListF />
-
+        <ActivitiesListF filter_criteria={this.state.filter_string}/>
       </div>
     )
   }

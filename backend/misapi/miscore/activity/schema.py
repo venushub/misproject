@@ -8,6 +8,9 @@ from miscore.activitytype.schema import ActivityTypeType
 from miscore.activitytypeidentifier.schema import ActivityTypeIdentifierType
 from miscore.project.schema import ProjectType
 from users.schema import UserType
+import json
+from django.contrib.auth import get_user_model
+
 
 class ActivityType(DjangoObjectType):
     class Meta:
@@ -39,15 +42,22 @@ class Query(object):
         else:
             return Activity.objects.filter(activityUser = info.context.user.id)
 
-    # def resolve_all_activities_for_filter(self, info, search, **kwargs):
-
-
+    def resolve_all_activities_for_filter(self, info, search, **kwargs):
+        print("kidar gaya re")
+        filter_criteria = json.loads(search)
+        print(filter_criteria["projects"])
+        activityProjectInstance = Project.objects.filter(projectName__in = filter_criteria["projects"])
+        activityTypeInstance = ActivityTypeModel.objects.filter(activityTypeName__in = filter_criteria["types"])
+        activityUserInstance = get_user_model().objects.filter(username__in = filter_criteria["users"])
+        activityTypeIdentifierInstance = ActivityTypeIdentifier.objects.filter(activityTypeIdentifierName__in = filter_criteria["typeidens"])
+        return Activity.objects.filter(activityProject__in = activityProjectInstance, activityUser__in = activityUserInstance, activityType__in = activityTypeInstance, activityTypeIdentifier__in = activityTypeIdentifierInstance)
 
     def resolve_all_activities_for_week(self, info, search,  **kwargs):
         if(info.context.user.is_superuser):
             return Activity.objects.filter(activityStartTime__week = int(search))
         else:
             return Activity.objects.filter(activityUser = info.context.user.id, activityStartTime__week = int(search))
+
 
 
 class CreateActivity(graphene.Mutation):

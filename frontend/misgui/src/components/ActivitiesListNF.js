@@ -81,13 +81,13 @@ class ActivitiesListN extends Component {
     }
 
     return(
-      <div className="activities-dashboard-div">
+
         <table className="my-table">
         <tbody>
         {activities_render}
         </tbody>
         </table>
-      </div>
+
     )
   }
 

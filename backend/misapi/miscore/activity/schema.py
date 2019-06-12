@@ -29,7 +29,6 @@ class ActivityType(DjangoObjectType):
     # activityEndTime = models.DateTimeField()
 
 
-
 class Query(object):
     all_activities = graphene.List(ActivityType)
     all_activities_for_week = graphene.List(ActivityType, search=graphene.String())
@@ -46,11 +45,14 @@ class Query(object):
         print("kidar gaya re")
         filter_criteria = json.loads(search)
         print(filter_criteria["projects"])
+        SD = filter_criteria["SD"]
+        ED = filter_criteria["ED"]
+        print(SD, ED)
         activityProjectInstance = Project.objects.filter(projectName__in = filter_criteria["projects"])
         activityTypeInstance = ActivityTypeModel.objects.filter(activityTypeName__in = filter_criteria["types"])
         activityUserInstance = get_user_model().objects.filter(username__in = filter_criteria["users"])
         activityTypeIdentifierInstance = ActivityTypeIdentifier.objects.filter(activityTypeIdentifierName__in = filter_criteria["typeidens"])
-        return Activity.objects.filter(activityProject__in = activityProjectInstance, activityUser__in = activityUserInstance, activityType__in = activityTypeInstance, activityTypeIdentifier__in = activityTypeIdentifierInstance)
+        return Activity.objects.filter(activityProject__in = activityProjectInstance, activityUser__in = activityUserInstance, activityType__in = activityTypeInstance, activityTypeIdentifier__in = activityTypeIdentifierInstance, activityStartTime__range=[SD, ED])
 
     def resolve_all_activities_for_week(self, info, search,  **kwargs):
         if(info.context.user.is_superuser):

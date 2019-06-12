@@ -209,7 +209,7 @@ SECRET_KEY = 't89gcj$-hy(ra23f_y-!l-gp%!33sjs_a+k0a)s#ro^yj%n3ad'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -330,6 +330,10 @@ GRAPHENE = {
 }
 
 
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000"
-]
+CORS_ORIGIN_ALLOW_ALL = True
+
+
+# CORS_ORIGIN_WHITELIST = [
+#     "http://localhost:3000",
+#     "http://172.19.69.221:3000"
+# ]

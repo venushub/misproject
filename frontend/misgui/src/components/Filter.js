@@ -18,6 +18,7 @@ class Filter extends Component {
         {id : 5 , name : 'typesubidens', value : 'all', active : false},
         {id : 6 , name : 'SD', value : '', active : false},
         {id : 7 , name : 'ED', value : '', active : false},
+        {id : 8 , name : 'GB', value : 'all', active : false},
       ],
       which_filter : '',
       display_filter_details : false,
@@ -29,7 +30,8 @@ class Filter extends Component {
       SD : '',
       ED : '',
       filter_string : '',
-      filterInput : ''
+      filterInput : '',
+      GB : []
     }
   }
 
@@ -90,6 +92,14 @@ class Filter extends Component {
         typesubidens.push(typesubiden.name)
       }
     })
+
+    let GB = []
+    this.state.GB.map((gb) => {
+      if(gb.status){
+        GB.push(gb.name)
+      }
+    })
+
     let SDRD = this.state.SD.substring(8,10)
     let SDRM = this.state.SD.substring(5,7)
     let SDRY = this.state.SD.substring(0,4)
@@ -110,7 +120,8 @@ class Filter extends Component {
       typeidens : typeidens,
       typesubidens : typesubidens,
       SD : SDR,
-      ED : EDR
+      ED : EDR,
+      GB : GB
     }
     console.log(filter)
     const filter_string = JSON.stringify(filter);
@@ -136,6 +147,7 @@ class Filter extends Component {
       users : this.props.getUsersQuery.users.map((user) => { return({name : user.username, status : true})}),
       typeidens : this.props.getActivityTypeIdentifiersQuery.allActivityTypeIdentifiers.map((typeiden) => { return({name : typeiden.activityTypeIdentifierName, type : typeiden.activityType.activityTypeName ,status : true})}),
       typesubidens : [{name : "CR", status : true},{name : "FTR", status : true},{name : "Other", status : true}],
+      GB : [{name : "activityProject__projectName", status : false},{name : "activityUser__username", status : true},{name : "activityType__activityTypeName", status : false},{name : "activityTypeIdentifier__activityTypeIdentifierName", status : true}],
       SD : todaydate,
       ED : todaydate,
       buttons : [
@@ -146,10 +158,12 @@ class Filter extends Component {
         {id : 5 , name : 'typesubidens', value : 'all', active : false},
         {id : 6 , name : 'SD', value : todaydate, active : false},
         {id : 7 , name : 'ED', value : todaydate, active : false},
+        {id : 8 , name : 'GB', value : 'all', active : false}
       ]
     })
   }
   }
+
 
   componentDidUpdate(prevProps){
 
@@ -169,6 +183,7 @@ class Filter extends Component {
               users : this.props.getUsersQuery.users.map((user) => { return({name : user.username, status : true})}),
               typeidens : this.props.getActivityTypeIdentifiersQuery.allActivityTypeIdentifiers.map((typeiden) => { return({name : typeiden.activityTypeIdentifierName, type : typeiden.activityType.activityTypeName ,status : true})}),
               typesubidens : [{name : "CR", status : true},{name : "FTR", status : true},{name : "Other", status : true}],
+              GB : [{name : "activityProject__projectName", status : false},{name : "activityUser__username", status : true},{name : "activityType__activityTypeName", status : false},{name : "activityTypeIdentifier__activityTypeIdentifierName", status : true}],
               SD : todaydate,
               ED : todaydate,
               buttons : [
@@ -179,6 +194,7 @@ class Filter extends Component {
                 {id : 5 , name : 'typesubidens', value : 'all', active : false},
                 {id : 6 , name : 'SD', value : todaydate, active : false},
                 {id : 7 , name : 'ED', value : todaydate, active : false},
+                {id : 8 , name : 'GB', value : 'all', active : false}
               ]
             })
       }
@@ -238,6 +254,7 @@ class Filter extends Component {
             {id : 5 , name : 'typesubidens', value : state.buttons[4].value, active : state.buttons[4].active},
             {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
             {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
+            {id : 8 , name : 'GB', value : state.buttons[7].value, active : state.buttons[7].active},
           ]
         })
 
@@ -275,6 +292,7 @@ class Filter extends Component {
               {id : 5 , name : 'typesubidens', value : state.buttons[4].value, active : state.buttons[4].active},
               {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
               {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
+              {id : 8 , name : 'GB', value : state.buttons[7].value, active : state.buttons[7].active},
             ]
           })
 
@@ -314,6 +332,7 @@ class Filter extends Component {
               {id : 5 , name : 'typesubidens', value : state.buttons[4].value, active : state.buttons[4].active},
               {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
               {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
+              {id : 8 , name : 'GB', value : state.buttons[7].value, active : state.buttons[7].active},
             ]
           })
         })
@@ -352,6 +371,7 @@ class Filter extends Component {
               {id : 5 , name : 'typesubidens', value : state.buttons[4].value, active : state.buttons[4].active},
               {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
               {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
+              {id : 8 , name : 'GB', value : state.buttons[7].value, active : state.buttons[7].active},
             ]
           })
         })
@@ -390,15 +410,56 @@ class Filter extends Component {
               {id : 5 , name : 'typesubidens', value : n, active : state.buttons[4].active},
               {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
               {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
+              {id : 8 , name : 'GB', value : state.buttons[7].value, active : state.buttons[7].active},
             ]
           })
         })
       });
 
-    } else {
+    } else if (which === "GB") {
 
+
+        console.log("we cme to right place")
+        this.setState((state, props) => {
+          return {
+            [which] : state.GB.map((gb,index) => {
+              if(index === id ){
+                return {
+                  name : gb.name, status : !gb.status
+                }
+              } else {
+                return gb
+              }
+          })};
+        }, () =>{
+          console.log(this.state)
+          let n = 0;
+          for(let i=0; i<this.state.GB.length;i++){
+            if(this.state.GB[i].status){
+              n = n+1
+            }
+          }
+          this.setState((state) => {
+            if (n === this.state.GB.length){
+              n = "all"
+            }
+            return({
+              buttons : [
+                {id : 1 , name : 'projects', value : state.buttons[0].value, active : state.buttons[0].active},
+                {id : 2 , name : 'types', value : state.buttons[1].value, active : state.buttons[1].active},
+                {id : 3 , name : 'users', value : state.buttons[2].value , active : state.buttons[2].active},
+                {id : 4 , name : 'typeidens', value : state.buttons[3].value, active : state.buttons[3].active},
+                {id : 5 , name : 'typesubidens', value :  state.buttons[4].value, active : state.buttons[4].active},
+                {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
+                {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
+                {id : 8 , name : 'GB', value : n, active : state.buttons[7].active},
+              ]
+            })
+          })
+        });
     }
   }
+
 
   handleDate = (e) => {
     this.setState({
@@ -415,6 +476,7 @@ class Filter extends Component {
             {id : 5 , name : 'typesubidens', value : state.buttons[4].value, active : state.buttons[4].active},
             {id : 6 , name : 'SD', value : state.SD, active : state.buttons[5].active},
             {id : 7 , name : 'ED', value : state.ED, active : state.buttons[6].active},
+            {id : 8 , name : 'GB', value : state.buttons[7].value, active : state.buttons[7].active},
           ]
         })
       })
@@ -473,6 +535,7 @@ class Filter extends Component {
             {id : 5 , name : 'typesubidens', value : state.buttons[4].value, active : state.buttons[4].active},
             {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
             {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
+            {id : 8 , name : 'GB', value : state.buttons[7].value, active : state.buttons[7].active},
           ]
         })
       })
@@ -519,6 +582,7 @@ class Filter extends Component {
                   {id : 5 , name : 'typesubidens', value : state.buttons[4].value, active : state.buttons[4].active},
                   {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
                   {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
+                  {id : 8 , name : 'GB', value : state.buttons[7].value, active : state.buttons[7].active},
                 ]
               })
             })
@@ -558,6 +622,7 @@ class Filter extends Component {
                 {id : 5 , name : 'typesubidens', value : state.buttons[4].value, active : state.buttons[4].active},
                 {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
                 {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
+                {id : 8 , name : 'GB', value : state.buttons[7].value, active : state.buttons[7].active},
               ]
             })
 
@@ -597,6 +662,7 @@ class Filter extends Component {
                   {id : 5 , name : 'typesubidens', value : state.buttons[4].value, active : state.buttons[4].active},
                   {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
                   {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
+                  {id : 8 , name : 'GB', value : state.buttons[7].value, active : state.buttons[7].active},
                 ]
               })
 
@@ -638,10 +704,57 @@ class Filter extends Component {
                   {id : 5 , name : 'typesubidens', value : state.buttons[4].value, active : state.buttons[4].active},
                   {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
                   {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
+                  {id : 8 , name : 'GB', value : state.buttons[7].value, active : state.buttons[7].active},
                 ]
               })
             })
           });
+
+
+      } else if (bv === "GB") {
+
+
+                console.log("we cme to right place")
+                this.setState((state, props) => {
+                  return {
+                    [bv] : state.GB.map((gb,index) => {
+
+                        return {
+                          name : gb.name, status : !gb.status
+                        }
+
+                  })};
+                }, () =>{
+                  console.log(this.state)
+                  let n = 0;
+                  for(let i=0; i<this.state.GB.length;i++){
+                    if(this.state.GB[i].status){
+                      n = n+1
+                    }
+                  }
+                  this.setState((state) => {
+                    if (n === this.state.GB.length){
+                      n = "all"
+                    }
+                    return({
+                      buttons : [
+                        {id : 1 , name : 'projects', value : state.buttons[0].value, active : state.buttons[0].active},
+                        {id : 2 , name : 'types', value : state.buttons[1].value, active : state.buttons[1].active},
+                        {id : 3 , name : 'users', value : state.buttons[2].value , active : state.buttons[2].active},
+                        {id : 4 , name : 'typeidens', value : state.buttons[3].value, active : state.buttons[3].active},
+                        {id : 5 , name : 'typesubidens', value :  state.buttons[4].value, active : state.buttons[4].active},
+                        {id : 6 , name : 'SD', value : state.buttons[5].value, active : state.buttons[5].active},
+                        {id : 7 , name : 'ED', value : state.buttons[6].value, active : state.buttons[6].active},
+                        {id : 8 , name : 'GB', value : n, active : state.buttons[7].active},
+                      ]
+                    })
+                  })
+                });
+
+
+
+
+
 
 
       }
@@ -782,6 +895,19 @@ class Filter extends Component {
       } else if(this.state.which_filter === 'ED') {
         display_filter_details_render = <input type="date" name="ED" className="filter-date" onChange={this.handleDate} value={this.state.ED}/>
 
+      } else if (this.state.which_filter === 'GB') {
+
+
+          display_filter_details_render = this.state.GB.map((item, index) => {
+            let button_here_class = "filter-sub-item-selected"
+              if(item.status){
+                button_here_class  = "filter-sub-item-selected"
+              } else {
+                button_here_class = "filter-sub-item-deselected"
+              }
+              return(<button key={index} className={button_here_class} onClick={() => this.deleteItem("GB", index)}>{item.name}</button>)})
+
+
       } else {
         filter_details_class = "filter-details-none"
       }
@@ -796,9 +922,16 @@ class Filter extends Component {
             <div>{buttons_render}</div>
             <button className="filter-things" onClick={this.handleFilterSubmit}>Filter</button>
             </div>
-          <div className={filter_details_class}>  <input name="filterInput" className="filter-items-filter" type="text" onChange={this.handleFilterInputChange} value={this.state.filterInput} /><div className = "filter-ud"><div>{display_filter_details_render}</div><div>{closebutton}</div></div></div>
+          <div className={filter_details_class}>  <input placeholder="Search Items Here" name="filterInput" className="filter-items-filter" type="text" onChange={this.handleFilterInputChange} value={this.state.filterInput} /><div className = "filter-ud"><div>{display_filter_details_render}</div><div>{closebutton}</div></div></div>
         </div>
-        <ActivitiesListF filter_criteria={this.state.filter_string}/>
+
+
+
+
+        <ActivitiesListF
+                         filter_criteria={this.state.filter_string}
+
+        />
       </div>
     )
   }

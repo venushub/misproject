@@ -46,6 +46,11 @@ class ActivitiesListN extends Component {
        //    ).asHours()} Hrs</div>
        // </div>
 
+       //  <td className="activity-sub-item-div-7">{moment
+       //   .duration(moment(activity.activityEndTime, 'YYYY-MM-DDTHH:mm')
+       //   .diff(moment(activity.activityStartTime, 'YYYY-MM-DDTHH:mm'))
+       // ).asHours().toFixed(2)} Hrs</td>
+
        <tr className="activity-item-div" key={activity.id} onMouseDown={() => this.handleButtonPress(activity)} onMouseUp={this.handleButtonRelease} onMouseLeave={this.handleButtonRelease} >
            <td className="activity-sub-item-div-2">{activity.activityProject.projectName}</td>
            <td className="activity-sub-item-div-3">{activity.activityType.activityTypeName}</td>
@@ -54,10 +59,7 @@ class ActivitiesListN extends Component {
            <td className="activity-sub-item-div-5">{activity.activityDescription}</td>
            <td className="activity-sub-item-div-6">{activity.activityStartTime.toString().substring(0,19)}</td>
            <td className="activity-sub-item-div-7">{activity.activityEndTime.toString().substring(0,19)}</td>
-           <td className="activity-sub-item-div-7">{moment
-            .duration(moment(activity.activityEndTime, 'YYYY-MM-DDTHH:mm')
-            .diff(moment(activity.activityStartTime, 'YYYY-MM-DDTHH:mm'))
-          ).asHours().toFixed(2)} Hrs</td>
+          <td className="activity-sub-item-div-7">{activity.activityHours}</td>
        </tr>
 
 

@@ -10,6 +10,7 @@ from miscore.project.schema import ProjectType
 from users.schema import UserType
 import json
 from django.contrib.auth import get_user_model
+from django.db.models import Sum
 
 
 class ActivityType(DjangoObjectType):
@@ -47,12 +48,19 @@ class Query(object):
         print(filter_criteria["projects"])
         SD = filter_criteria["SD"]
         ED = filter_criteria["ED"]
-        print(SD, ED)
+        GB = filter_criteria["GB"]
+        print(SD, ED, GB)
+
         activityProjectInstance = Project.objects.filter(projectName__in = filter_criteria["projects"])
         activityTypeInstance = ActivityTypeModel.objects.filter(activityTypeName__in = filter_criteria["types"])
         activityUserInstance = get_user_model().objects.filter(username__in = filter_criteria["users"])
         activityTypeIdentifierInstance = ActivityTypeIdentifier.objects.filter(activityTypeIdentifierName__in = filter_criteria["typeidens"])
-        return Activity.objects.filter(activityProject__in = activityProjectInstance, activityUser__in = activityUserInstance, activityType__in = activityTypeInstance, activityTypeIdentifier__in = activityTypeIdentifierInstance, activityStartTime__range=[SD, ED])
+        # Activity.objects.values(*GB).annotate(Sum('activityHours'))
+        # return Activity.objects.values(*GB).annotate(Sum('activityHours')).filter(activityProject__in = activityProjectInstance, activityUser__in = activityUserInstance, activityType__in = activityTypeInstance, activityTypeIdentifier__in = activityTypeIdentifierInstance, activityStartTime__range=[SD, ED])
+        # return Activity.objects.values(*GB).annotate(Sum('activityHours')).filter(activityProject__projectName__in = filter_criteria["projects"], activityUser__username__in = filter_criteria["users"], activityType__activityTypeName__in = filter_criteria["types"], activityTypeIdentifier__activityTypeIdentifierName__in = filter_criteria["typeidens"], activityStartTime__range=[SD, ED])
+        return Activity.objects.filter(activityProject__projectName__in = filter_criteria["projects"], activityUser__username__in = filter_criteria["users"], activityType__activityTypeName__in = filter_criteria["types"], activityTypeIdentifier__activityTypeIdentifierName__in = filter_criteria["typeidens"], activityStartTime__range=[SD, ED]).values(*GB).annotate(Sum('activityHours'))
+
+
 
     def resolve_all_activities_for_week(self, info, search,  **kwargs):
         if(info.context.user.is_superuser):
@@ -72,6 +80,7 @@ class CreateActivity(graphene.Mutation):
     activityUser = graphene.Field(UserType)
     activityTypeIdentifier = graphene.Field(ActivityTypeIdentifierType)
     activityProject = graphene.Field(ProjectType)
+    activityHours = graphene.Float()
 
     class Arguments:
         activityTypeArg = graphene.String()
@@ -81,8 +90,9 @@ class CreateActivity(graphene.Mutation):
         activityTypeIdentifierArg = graphene.String()
         activityProjectArg = graphene.String()
         activityMutateOrUpdateArg = graphene.String()
+        activityHoursArg = graphene.String()
 
-    def mutate(self, info,  activityTypeArg, activityDescriptionArg, activityStartTimeArg, activityEndTimeArg, activityTypeIdentifierArg, activityProjectArg, activityMutateOrUpdateArg):
+    def mutate(self, info,  activityTypeArg, activityDescriptionArg, activityStartTimeArg, activityEndTimeArg, activityTypeIdentifierArg, activityProjectArg, activityMutateOrUpdateArg, activityHoursArg):
         print("activity type instance is ")
         print(ActivityTypeModel)
         activityTypeInstance = ActivityTypeModel.objects.get(id = int(activityTypeArg))
@@ -93,7 +103,7 @@ class CreateActivity(graphene.Mutation):
         activityUserInstance = info.context.user
         print("activity type instance is after ", activityTypeInstance)
         print("activityTypeArg", activityTypeArg)
-
+        activityHoursIns = float(activityHoursArg)
 
 
         activity = Activity(
@@ -103,7 +113,8 @@ class CreateActivity(graphene.Mutation):
             activityStartTime = activityStartTimeArg,
             activityEndTime = activityEndTimeArg,
             activityTypeIdentifier = activityTypeIdentifierInstance,
-            activityProject = activityProjectInstance
+            activityProject = activityProjectInstance,
+            activityHours = activityHoursIns
         )
 
         activity.save()
@@ -116,7 +127,8 @@ class CreateActivity(graphene.Mutation):
             activityStartTime = activity.activityStartTime,
             activityEndTime = activity.activityEndTime,
             activityProject = activity.activityProject,
-            activityTypeIdentifier = activity.activityTypeIdentifier
+            activityTypeIdentifier = activity.activityTypeIdentifier,
+            activityHours = activity.activityHours
         )
 
 
@@ -133,6 +145,7 @@ class UpdateActivity(graphene.Mutation):
     activityTypeIdentifier = graphene.Field(ActivityTypeIdentifierType)
     activityProject = graphene.Field(ProjectType)
     activityMutateOrUpdateArg =graphene.String()
+    activityHours = graphene.Float()
 
 
     class Arguments:
@@ -143,11 +156,12 @@ class UpdateActivity(graphene.Mutation):
         activityTypeIdentifierArg = graphene.String()
         activityProjectArg = graphene.String()
         activityMutateOrUpdateArg = graphene.String()
+        activityHoursArg = graphene.String()
 
 
     # ,  activityTypeArg, activityDescriptionArg, activityStartTimeArg, activityEndTimeArg, activityTypeIdentifierArg, activityProjectArg,
 
-    def mutate(self, info, activityTypeArg, activityDescriptionArg, activityMutateOrUpdateArg, activityTypeIdentifierArg, activityStartTimeArg, activityEndTimeArg,activityProjectArg):
+    def mutate(self, info, activityTypeArg, activityDescriptionArg, activityMutateOrUpdateArg, activityTypeIdentifierArg, activityStartTimeArg, activityEndTimeArg,activityProjectArg, activityHoursArg):
         # print("activity type instance is ")
         # print(ActivityTypeModel)
         activityTypeInstance = ActivityTypeModel.objects.get(id = int(activityTypeArg))
@@ -166,6 +180,7 @@ class UpdateActivity(graphene.Mutation):
         activityObject.activityProject = activityProjectInstance
         activityObject.activityStartTime = activityStartTimeArg
         activityObject.activityEndTime = activityEndTimeArg
+        activityObject.activityHours = float(activityHoursArg)
         print(activityObject)
         activityObject.save()
         # activity = Activity(
@@ -187,7 +202,8 @@ class UpdateActivity(graphene.Mutation):
             activityStartTime = activityObject.activityStartTime,
             activityEndTime = activityObject.activityEndTime,
             activityProject = activityObject.activityProject,
-            activityTypeIdentifier = activityObject.activityTypeIdentifier
+            activityTypeIdentifier = activityObject.activityTypeIdentifier,
+            activityHours = activityObject.activityHours
         )
 
 

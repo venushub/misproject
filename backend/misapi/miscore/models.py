@@ -30,7 +30,6 @@ class ActivityTypeIdentifier(models.Model):
     activityTypeIdentifierSubCat = models.CharField(max_length=100)
 
 
-
 class Activity(models.Model):
     activityType = models.ForeignKey(
         'ActivityType',
@@ -48,4 +47,4 @@ class Activity(models.Model):
     activityDescription =models.TextField()
     activityStartTime = models.DateTimeField()
     activityEndTime = models.DateTimeField()
-    # activityHours = models.CharField(max_length=50)
+    activityHours = models.FloatField()

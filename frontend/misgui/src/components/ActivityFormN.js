@@ -268,7 +268,8 @@ class ActivityFormN extends Component {
             activityDescriptionArg: this.state.activityDescriptionArg,
             activityStartTimeArg: activityStartTimeArg,
             activityEndTimeArg: activityEndTimeArg,
-            activityMutateOrUpdateArg : '1'
+            activityMutateOrUpdateArg : '1',
+            activityHoursArg : this.state.activityHours
         }
     }).then(res => {
       console.log(res)
@@ -298,7 +299,8 @@ class ActivityFormN extends Component {
               activityDescriptionArg: this.state.activityDescriptionArg,
               activityStartTimeArg: activityStartTimeArg,
               activityEndTimeArg: activityEndTimeArg,
-              activityMutateOrUpdateArg : this.state.activityid
+              activityMutateOrUpdateArg : this.state.activityid,
+              activityHoursArg : this.state.activityHours
             }
         }).then(res => {
           console.log(res)

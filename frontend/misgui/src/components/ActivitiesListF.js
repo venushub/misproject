@@ -15,11 +15,17 @@ class ActivitiesListF extends Component {
 
         let sumoftime = 0
         activities.map((activity) => {
-          sumoftime = sumoftime + parseFloat(moment
-           .duration(moment(activity.activityEndTime, 'YYYY-MM-DDTHH:mm')
-           .diff(moment(activity.activityStartTime, 'YYYY-MM-DDTHH:mm'))
-         ).asHours().toFixed(2))
-        })
+
+        //   sumoftime = sumoftime + parseFloat(moment
+        //    .duration(moment(activity.activityEndTime, 'YYYY-MM-DDTHH:mm')
+        //    .diff(moment(activity.activityStartTime, 'YYYY-MM-DDTHH:mm'))
+        //  ).asHours().toFixed(2))
+        // }
+
+        sumoftime = sumoftime + parseFloat(activity.activityHours)
+      }
+
+      )
 
 
         let crtime = 0
@@ -28,24 +34,35 @@ class ActivitiesListF extends Component {
 
           if(activity.activityTypeIdentifier.activityTypeIdentifierSubCat === "CR"){
             crtime = crtime +
-            parseFloat(moment
-             .duration(moment(activity.activityEndTime, 'YYYY-MM-DDTHH:mm')
-             .diff(moment(activity.activityStartTime, 'YYYY-MM-DDTHH:mm'))
-           ).asHours().toFixed(2))
+            parseFloat(
+           //    moment
+           //   .duration(moment(activity.activityEndTime, 'YYYY-MM-DDTHH:mm')
+           //   .diff(moment(activity.activityStartTime, 'YYYY-MM-DDTHH:mm'))
+           // ).asHours().toFixed(2)
+           activity.activityHours
+         )
          } else if (activity.activityTypeIdentifier.activityTypeIdentifierSubCat === "FTR") {
            ftrtime = ftrtime +
-           parseFloat(moment
-            .duration(moment(activity.activityEndTime, 'YYYY-MM-DDTHH:mm')
-            .diff(moment(activity.activityStartTime, 'YYYY-MM-DDTHH:mm'))
-          ).asHours().toFixed(2))
+           parseFloat(
+          //    moment
+          //   .duration(moment(activity.activityEndTime, 'YYYY-MM-DDTHH:mm')
+          //   .diff(moment(activity.activityStartTime, 'YYYY-MM-DDTHH:mm'))
+          // ).asHours().toFixed(2)
+          activity.activityHours
+
+        )
          }
-        })
+        }
+      )
 
 
 
     return(
       <div className="dashboard-condown">
-      <ActivitiesListNF activities={activities} />
+      <ActivitiesListNF
+            activities={activities}
+
+      />
       <div className="total-div"><i>CR Time:</i>&nbsp;&nbsp;{crtime} Hrs   &nbsp;&nbsp;&nbsp;&nbsp;   <i>FTR Time:</i>&nbsp;&nbsp;{ftrtime} Hrs   &nbsp;&nbsp;&nbsp;&nbsp;       <i>Total Time:</i>&nbsp;&nbsp;{sumoftime} Hrs</div>
       </div>
 

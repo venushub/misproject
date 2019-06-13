@@ -869,7 +869,10 @@ td {
 
 .filter-ud {
   display : flex;
-
+  align-items: flex-start;
+  justify-content: space-between;
+  width : 100%;
+  margin-top : 1em;
 }
 
 .filter-details-none {
@@ -928,6 +931,7 @@ td {
   padding : 0.5em;
   border : 0.15em solid #8a0000;
   border-radius : 10%;
+  margin-top : 1em;
 }
 
 .close-filter-drop:hover{
@@ -1003,6 +1007,16 @@ td {
 
 .filter-items-filter {
   width : 100%;
+  background-color: rgb(255, 219, 222);
+  border-width: 0 0 2px 0;
+  border-color : #9e9c9a;
+  font-size: 1.2em;
+}
+
+
+.filter-items-filter:focus{
+  outline: none;
+  border-color: #f49b42;
 }
 
 /* ---------------------Filter End--------------------------------*/

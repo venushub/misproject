@@ -59,10 +59,8 @@ class ActivitiesListF extends Component {
 
     return(
       <div className="dashboard-condown">
-      <ActivitiesListNF
-            activities={activities}
+      <ActivitiesListNF activities={activities} filter_group_criteria={this.props.filter_group_criteria} />
 
-      />
       <div className="total-div"><i>CR Time:</i>&nbsp;&nbsp;{crtime} Hrs   &nbsp;&nbsp;&nbsp;&nbsp;   <i>FTR Time:</i>&nbsp;&nbsp;{ftrtime} Hrs   &nbsp;&nbsp;&nbsp;&nbsp;       <i>Total Time:</i>&nbsp;&nbsp;{sumoftime} Hrs</div>
       </div>
 

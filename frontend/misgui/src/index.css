@@ -1019,4 +1019,32 @@ td {
   border-color: #f49b42;
 }
 
+.activity-block {
+  background-color: #fffcf4;
+  margin : 1em;
+  width : 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border : 0.2em solid #ffd6c1
+}
+
+.activities-holder {
+  width : 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.total-td {
+  background-color: #ffd6c1;
+  width : 100%;
+  padding : 1em 3em 1em 1em;
+  text-align: right;
+  font-weight: bold;
+  font-family: Verdana;
+}
+
 /* ---------------------Filter End--------------------------------*/

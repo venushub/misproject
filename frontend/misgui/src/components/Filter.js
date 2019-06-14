@@ -147,7 +147,7 @@ class Filter extends Component {
       users : this.props.getUsersQuery.users.map((user) => { return({name : user.username, status : true})}),
       typeidens : this.props.getActivityTypeIdentifiersQuery.allActivityTypeIdentifiers.map((typeiden) => { return({name : typeiden.activityTypeIdentifierName, type : typeiden.activityType.activityTypeName ,status : true})}),
       typesubidens : [{name : "CR", status : true},{name : "FTR", status : true},{name : "Other", status : true}],
-      GB : [{name : "activityProject__projectName", status : false},{name : "activityUser__username", status : true},{name : "activityType__activityTypeName", status : false},{name : "activityTypeIdentifier__activityTypeIdentifierName", status : true}],
+      GB : [{name : "activityProject.projectName", status : false},{name : "activityUser.username", status : true},{name : "activityType.activityTypeName", status : false},{name : "activityTypeIdentifier.activityTypeIdentifierName", status : true}],
       SD : todaydate,
       ED : todaydate,
       buttons : [
@@ -183,7 +183,7 @@ class Filter extends Component {
               users : this.props.getUsersQuery.users.map((user) => { return({name : user.username, status : true})}),
               typeidens : this.props.getActivityTypeIdentifiersQuery.allActivityTypeIdentifiers.map((typeiden) => { return({name : typeiden.activityTypeIdentifierName, type : typeiden.activityType.activityTypeName ,status : true})}),
               typesubidens : [{name : "CR", status : true},{name : "FTR", status : true},{name : "Other", status : true}],
-              GB : [{name : "activityProject__projectName", status : false},{name : "activityUser__username", status : true},{name : "activityType__activityTypeName", status : false},{name : "activityTypeIdentifier__activityTypeIdentifierName", status : true}],
+              GB : [{name : "activityProject.projectName", status : false},{name : "activityUser.username", status : true},{name : "activityType.activityTypeName", status : false},{name : "activityTypeIdentifier.activityTypeIdentifierName", status : true}],
               SD : todaydate,
               ED : todaydate,
               buttons : [
@@ -930,6 +930,7 @@ class Filter extends Component {
 
         <ActivitiesListF
                          filter_criteria={this.state.filter_string}
+                         filter_group_criteria = {this.state.GB}
 
         />
       </div>

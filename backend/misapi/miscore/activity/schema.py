@@ -56,9 +56,9 @@ class Query(object):
         activityUserInstance = get_user_model().objects.filter(username__in = filter_criteria["users"])
         activityTypeIdentifierInstance = ActivityTypeIdentifier.objects.filter(activityTypeIdentifierName__in = filter_criteria["typeidens"])
         # Activity.objects.values(*GB).annotate(Sum('activityHours'))
-        # return Activity.objects.values(*GB).annotate(Sum('activityHours')).filter(activityProject__in = activityProjectInstance, activityUser__in = activityUserInstance, activityType__in = activityTypeInstance, activityTypeIdentifier__in = activityTypeIdentifierInstance, activityStartTime__range=[SD, ED])
+        return Activity.objects.filter(activityProject__in = activityProjectInstance, activityUser__in = activityUserInstance, activityType__in = activityTypeInstance, activityTypeIdentifier__in = activityTypeIdentifierInstance, activityStartTime__range=[SD, ED])
         # return Activity.objects.values(*GB).annotate(Sum('activityHours')).filter(activityProject__projectName__in = filter_criteria["projects"], activityUser__username__in = filter_criteria["users"], activityType__activityTypeName__in = filter_criteria["types"], activityTypeIdentifier__activityTypeIdentifierName__in = filter_criteria["typeidens"], activityStartTime__range=[SD, ED])
-        return Activity.objects.filter(activityProject__projectName__in = filter_criteria["projects"], activityUser__username__in = filter_criteria["users"], activityType__activityTypeName__in = filter_criteria["types"], activityTypeIdentifier__activityTypeIdentifierName__in = filter_criteria["typeidens"], activityStartTime__range=[SD, ED]).values(*GB).annotate(Sum('activityHours'))
+        # return Activity.objects.filter(activityProject__projectName__in = filter_criteria["projects"], activityUser__username__in = filter_criteria["users"], activityType__activityTypeName__in = filter_criteria["types"], activityTypeIdentifier__activityTypeIdentifierName__in = filter_criteria["typeidens"], activityStartTime__range=[SD, ED]).values(*GB).annotate(Sum('activityHours'))
 
 
 

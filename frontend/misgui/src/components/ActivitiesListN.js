@@ -1,11 +1,15 @@
 import React , {Component} from 'react'
 import moment from 'moment'
+import ActivitiesGUI from './ActivitiesGUI'
 
 
 class ActivitiesListN extends Component {
   constructor(props){
     super(props)
 
+    this.state = {
+      aid : 0
+    }
 
   }
 
@@ -28,56 +32,190 @@ class ActivitiesListN extends Component {
 
     const activities = this.props.activities  &&  this.props.activities != undefined ? this.props.activities : []
 
+    let mondayActivities = []
+    let monac = []
+    let tuesdayActivities = []
+    let tueac = []
+    let wednesdayActivities = []
+    let wedac = []
+    let thursdayActivities = []
+    let thuac = []
+    let fridayActivities = []
+    let friac = []
+    let saturdayActivities = []
+    let satac = []
+    let sundayActivities = []
+    let sunac = []
+    
+
+
     let activities_render = <div></div>
 
     if(activities.length != 0){
-       activities_render = activities.slice(0).reverse().map((activity) => {return(
-       // <div className="activity-item-div" key={activity.id} onMouseDown={() => this.handleButtonPress(activity)} onMouseUp={this.handleButtonRelease} onMouseLeave={this.handleButtonRelease} >
-       //     <div className="activity-sub-item-div-2">{activity.activityProject.projectName}</div>
-       //     <div className="activity-sub-item-div-3">{activity.activityType.activityTypeName}</div>
-       //     <div className="activity-sub-item-div-4">{activity.activityTypeIdentifier.activityTypeIdentifierName}</div>
-       //     <div className="activity-sub-item-div-7">{activity.activityTypeIdentifier.activityTypeIdentifierSubCat}</div>
-       //     <div className="activity-sub-item-div-5">{activity.activityDescription}</div>
-       //     <div className="activity-sub-item-div-6">{activity.activityStartTime.toString().substring(0,19)}</div>
-       //     <div className="activity-sub-item-div-7">{activity.activityEndTime.toString().substring(0,19)}</div>
-       //     <div className="activity-sub-item-div-7">{moment
-       //      .duration(moment(activity.activityEndTime, 'YYYY-MM-DDTHH:mm')
-       //      .diff(moment(activity.activityStartTime, 'YYYY-MM-DDTHH:mm'))
-       //    ).asHours()} Hrs</div>
-       // </div>
+        activities.slice(0).reverse().map((activity) => {
+          
 
-       //  <td className="activity-sub-item-div-7">{moment
-       //   .duration(moment(activity.activityEndTime, 'YYYY-MM-DDTHH:mm')
-       //   .diff(moment(activity.activityStartTime, 'YYYY-MM-DDTHH:mm'))
-       // ).asHours().toFixed(2)} Hrs</td>
+          // <td className="activity-sub-item-div-5">{moment(activity.activityStartTime.toString().substring(0,19), "YYYY-MM-DDTHH:mm:ss").format('dddd')}</td>
 
-       <tr className="activity-item-div" key={activity.id} onMouseDown={() => this.handleButtonPress(activity)} onMouseUp={this.handleButtonRelease} onMouseLeave={this.handleButtonRelease} >
+        
+       let myitem = <tr className="activity-item-div" key={activity.id} onMouseDown={() => this.handleButtonPress(activity)} onMouseOver ={() => {console.log(activity.id); this.setState({aid : activity.id} , () => console.log("maaaaaamaaaaa", this.state.aid));    }} onMouseUp={this.handleButtonRelease} onMouseLeave={this.handleButtonRelease} >
            <td className="activity-sub-item-div-2">{activity.activityProject.projectName}</td>
            <td className="activity-sub-item-div-3">{activity.activityType.activityTypeName}</td>
            <td className="activity-sub-item-div-4">{activity.activityTypeIdentifier.activityTypeIdentifierName}</td>
            <td className="activity-sub-item-div-7">{activity.activityTypeIdentifier.activityTypeIdentifierSubCat}</td>
            <td className="activity-sub-item-div-5">{activity.activityDescription}</td>
-           <td className="activity-sub-item-div-6">{activity.activityStartTime.toString().substring(0,19)}</td>
-           <td className="activity-sub-item-div-7">{activity.activityEndTime.toString().substring(0,19)}</td>
-          <td className="activity-sub-item-div-7">{activity.activityHours}</td>
+           <td className="activity-sub-item-div-6">{activity.activityStartTime.toString().substring(11,16)}</td>
+           <td className="activity-sub-item-div-7">{activity.activityEndTime.toString().substring(11,16)}</td>
+          <td className="activity-sub-item-div-7">{activity.activityHours} Hrs</td>
        </tr>
 
+       if(moment(activity.activityStartTime.toString().substring(0,19), "YYYY-MM-DDTHH:mm:ss").format('dddd') === "Monday"){
+        mondayActivities.push(myitem)
+        monac.push(activity)
+       } else if(moment(activity.activityStartTime.toString().substring(0,19), "YYYY-MM-DDTHH:mm:ss").format('dddd') === "Tuesday"){
+        tuesdayActivities.push(myitem)
+        tueac.push(activity)
+       } else if(moment(activity.activityStartTime.toString().substring(0,19), "YYYY-MM-DDTHH:mm:ss").format('dddd') === "Wednesday"){
+        wednesdayActivities.push(myitem)
+        wedac.push(activity)
+       } else if(moment(activity.activityStartTime.toString().substring(0,19), "YYYY-MM-DDTHH:mm:ss").format('dddd') === "Thursday"){
+        thursdayActivities.push(myitem)
+        thuac.push(activity)
+       } else if(moment(activity.activityStartTime.toString().substring(0,19), "YYYY-MM-DDTHH:mm:ss").format('dddd') === "Friday"){
+        fridayActivities.push(myitem)
+        friac.push(activity)
+       } else if(moment(activity.activityStartTime.toString().substring(0,19), "YYYY-MM-DDTHH:mm:ss").format('dddd') === "Saturday"){
+        saturdayActivities.push(myitem)
+        satac.push(activity)
+       } else if(moment(activity.activityStartTime.toString().substring(0,19), "YYYY-MM-DDTHH:mm:ss").format('dddd') === "Sunday"){
+        sundayActivities.push(myitem)
+        sunac.push(activity)
+       }
 
-     )})
+          return null;
+     
+    }
+    
+    )
+
+
+
     } else {
       activities_render = <tr className="activity-item-div"><td className="activity-sub-item-div-2">No Activities to Display</td></tr>
     }
 
+
+    let monday_activities_render = <div></div>
+    if(mondayActivities.length !== 0){
+
+      monday_activities_render = <div className="day-activities">
+      <div className="day-title">Monday</div><ActivitiesGUI activities_gui={monac} aid={this.state.aid}/><table>
+                                  <tbody>
+                                  {mondayActivities}
+                                  </tbody>
+                                 </table></div>
+    }
+
+
+    let tuesday_activities_render = <div></div>
+    if(tuesdayActivities.length !== 0){
+
+    tuesday_activities_render = <div className="day-activities">
+      <div className="day-title">Tuesday</div><ActivitiesGUI activities_gui={tueac} /><table>
+                                  <tbody>
+                                  {tuesdayActivities}
+                                  </tbody>
+                                 </table></div>
+    }
+
+
+    let wednesday_activities_render = <div></div>
+    if(wednesdayActivities.length !== 0){
+
+      wednesday_activities_render = <div className="day-activities">
+      <div className="day-title">Wednesday</div><ActivitiesGUI activities_gui={wedac} /><table>
+                                  <tbody>
+                                  {wednesdayActivities}
+                                  </tbody>
+                                 </table></div>
+    }
+
+
+    let thursday_activities_render = <div></div>
+    if(thursdayActivities.length !== 0){
+
+      thursday_activities_render = <div className="day-activities">
+      <div className="day-title">Thursday</div><ActivitiesGUI activities_gui={thuac} /><table>
+                                  <tbody>
+                                  {thursdayActivities}
+                                  </tbody>
+                                 </table></div>
+    }
+
+
+    let friday_activities_render = <div></div>
+    if(fridayActivities.length !== 0){
+
+      friday_activities_render = <div className="day-activities">
+      <div className="day-title">Friday</div><ActivitiesGUI activities_gui={friac} /><table>
+                                  <tbody>
+                                  {fridayActivities}
+                                  </tbody>
+                                 </table></div>
+    }
+
+
+    let saturday_activities_render = <div></div>
+    if(saturdayActivities.length !== 0){
+
+      saturday_activities_render = <div className="day-activities">
+      <div className="day-title">Saturday</div><ActivitiesGUI activities_gui={satac} /><table>
+                                  <tbody>
+                                  {saturdayActivities}
+                                  </tbody>
+                                 </table></div>
+    }
+
+
+    let sunday_activities_render;
+    if(sundayActivities.length !== 0){
+
+      sunday_activities_render = <div className="day-activities">
+      <div className="day-title">sunday</div><ActivitiesGUI activities_gui={sunac} /><table>
+                                  <tbody>
+                                  {sundayActivities}
+                                  </tbody>
+                                 </table></div>
+    }
+
+
+    let b;
+
+
+    
+
+
     return(
+
+      
+
+
+
       <div className="activities-div">
-        <table>
-        <tbody>
-        {activities_render}
-        </tbody>
-        </table>
+        {monday_activities_render}
+        {tuesday_activities_render}
+        {wednesday_activities_render}
+        {thursday_activities_render}
+        {friday_activities_render}
+        {saturday_activities_render}
+        {sunday_activities_render}
       </div>
+
+
+
     )
   }
+
 
 }
 

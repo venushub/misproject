@@ -82,7 +82,6 @@ class ActivitiesListN extends Component {
         // <td className="activity-sub-item-div-6">{activity.activityStartTime.toString().substring(0,19)}</td>
         // <td className="activity-sub-item-div-7">{activity.activityEndTime.toString().substring(0,19)}</td>
         return(
-
           <tr key={index} className="activity-item-div" key={activity.id} >
               <td className="activity-sub-item-div-2">{activity.activityProject.projectName}</td>
               <td className="activity-sub-item-div-2">{activity.activityUser.username}</td>
@@ -93,7 +92,6 @@ class ActivitiesListN extends Component {
 
              <td className="activity-sub-item-div-7">{activity.activityHours} Hrs</td>
           </tr>
-
         )
       })
 

@@ -114,14 +114,35 @@
 .activities-div {
   margin-top: 1em;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   background-color : #ffdde7;
   width : 90%;
   height : 100%;
-  align-items: flex-start;
-  justify-content: center;
+  align-items: center;
+  justify-content: flex-start;
   border-radius: 15px 15px 0px 0px;
   overflow-Y: scroll;
+  padding : 1em 1em 1em 1em;
+}
+
+.day-activities {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width : 100%;
+  margin-top : 1em;
+}
+
+.day-title{
+  align-self: flex-start;
+  margin : 1em 1em 1em 2em;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bolder;
+  font-size: 1.2em;
+  padding : 0.2em;
+  color : #3d0000;
 }
 
 table {

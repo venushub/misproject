@@ -119,6 +119,7 @@ class ActivityFormN extends Component {
     })
   }
 
+  
   componentDidUpdate(prevProps){
     if(this.props.editOption !== 0) {
       console.log("bruh")

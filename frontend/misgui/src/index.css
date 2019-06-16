@@ -122,7 +122,26 @@
   justify-content: flex-start;
   border-radius: 15px 15px 0px 0px;
   overflow-Y: scroll;
-  padding : 1em 1em 1em 1em;
+}
+
+.canvas-div{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffdde7;
+  margin-right: 2.5em;
+}
+
+.activities-sub-div {
+  display :flex;
+  align-items: center;
+  justify-content: space-between;
+  width : 100%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #ffdde7;
 }
 
 .day-activities {
@@ -789,12 +808,18 @@ td {
   padding-bottom: 10em;
 }
 
+
+
 .filter-bar{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   width : 100%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: rgb(242, 242, 242);
 }
 
 .filter-holder {
@@ -803,6 +828,7 @@ td {
   justify-content: space-between;
   padding : 1em 0 1em 0;
   width : 100%;
+
 }
 
 .filter-things {

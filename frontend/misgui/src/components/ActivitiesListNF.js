@@ -95,6 +95,7 @@ class ActivitiesListN extends Component {
         )
       })
 
+      
 
       return(
         <div  key={index} className="activity-block">  <table className="my-table">

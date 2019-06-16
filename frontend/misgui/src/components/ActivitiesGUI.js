@@ -43,6 +43,7 @@ class ActivitiesGUI extends Component {
             console.log("length", length)
 
 
+
             ctx.fillStyle = col;
             ctx.fillRect(startTime, h, length , 30 );
 
@@ -145,7 +146,7 @@ class ActivitiesGUI extends Component {
 
     render(){
         return(
-            <div>
+            <div className="canvas-div">
                 <canvas ref="canvas" width={730} height={50} />
             </div>
         )

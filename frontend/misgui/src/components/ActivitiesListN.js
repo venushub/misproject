@@ -57,7 +57,7 @@ class ActivitiesListN extends Component {
 
           // <td className="activity-sub-item-div-5">{moment(activity.activityStartTime.toString().substring(0,19), "YYYY-MM-DDTHH:mm:ss").format('dddd')}</td>
 
-        
+      
        let myitem = <tr className="activity-item-div" key={activity.id} onMouseDown={() => this.handleButtonPress(activity)} onMouseOver ={() => {console.log(activity.id); this.setState({aid : activity.id} , () => console.log("maaaaaamaaaaa", this.state.aid));    }} onMouseUp={this.handleButtonRelease} onMouseLeave={this.handleButtonRelease} >
            <td className="activity-sub-item-div-2">{activity.activityProject.projectName}</td>
            <td className="activity-sub-item-div-3">{activity.activityType.activityTypeName}</td>
@@ -109,7 +109,7 @@ class ActivitiesListN extends Component {
     if(mondayActivities.length !== 0){
 
       monday_activities_render = <div className="day-activities">
-      <div className="day-title">Monday</div><ActivitiesGUI activities_gui={monac} aid={this.state.aid}/><table>
+      <div className="activities-sub-div"><div className="day-title">Monday</div><ActivitiesGUI activities_gui={monac} aid={this.state.aid}/></div><table>
                                   <tbody>
                                   {mondayActivities}
                                   </tbody>
@@ -121,7 +121,7 @@ class ActivitiesListN extends Component {
     if(tuesdayActivities.length !== 0){
 
     tuesday_activities_render = <div className="day-activities">
-      <div className="day-title">Tuesday</div><ActivitiesGUI activities_gui={tueac} /><table>
+      <div className="activities-sub-div"><div className="day-title">Tuesday</div><ActivitiesGUI activities_gui={tueac} aid={this.state.aid}/></div><table>
                                   <tbody>
                                   {tuesdayActivities}
                                   </tbody>
@@ -133,7 +133,7 @@ class ActivitiesListN extends Component {
     if(wednesdayActivities.length !== 0){
 
       wednesday_activities_render = <div className="day-activities">
-      <div className="day-title">Wednesday</div><ActivitiesGUI activities_gui={wedac} /><table>
+      <div className="activities-sub-div"><div className="day-title">Wednesday</div><ActivitiesGUI activities_gui={wedac} aid={this.state.aid}/></div><table>
                                   <tbody>
                                   {wednesdayActivities}
                                   </tbody>
@@ -145,7 +145,7 @@ class ActivitiesListN extends Component {
     if(thursdayActivities.length !== 0){
 
       thursday_activities_render = <div className="day-activities">
-      <div className="day-title">Thursday</div><ActivitiesGUI activities_gui={thuac} /><table>
+      <div className="activities-sub-div"><div className="day-title">Thursday</div><ActivitiesGUI activities_gui={thuac} aid={this.state.aid}/></div><table>
                                   <tbody>
                                   {thursdayActivities}
                                   </tbody>
@@ -157,7 +157,7 @@ class ActivitiesListN extends Component {
     if(fridayActivities.length !== 0){
 
       friday_activities_render = <div className="day-activities">
-      <div className="day-title">Friday</div><ActivitiesGUI activities_gui={friac} /><table>
+      <div className="activities-sub-div"><div className="day-title">Friday</div><ActivitiesGUI activities_gui={friac} aid={this.state.aid}/></div><table>
                                   <tbody>
                                   {fridayActivities}
                                   </tbody>
@@ -169,7 +169,7 @@ class ActivitiesListN extends Component {
     if(saturdayActivities.length !== 0){
 
       saturday_activities_render = <div className="day-activities">
-      <div className="day-title">Saturday</div><ActivitiesGUI activities_gui={satac} /><table>
+      <div className="activities-sub-div"><div className="day-title">Saturday</div><ActivitiesGUI activities_gui={satac} aid={this.state.aid}/></div><table>
                                   <tbody>
                                   {saturdayActivities}
                                   </tbody>
@@ -181,7 +181,7 @@ class ActivitiesListN extends Component {
     if(sundayActivities.length !== 0){
 
       sunday_activities_render = <div className="day-activities">
-      <div className="day-title">sunday</div><ActivitiesGUI activities_gui={sunac} /><table>
+      <div className="activities-sub-div"><div className="day-title">Sunday</div><ActivitiesGUI activities_gui={sunac} aid={this.state.aid}/></div><table>
                                   <tbody>
                                   {sundayActivities}
                                   </tbody>
@@ -189,17 +189,16 @@ class ActivitiesListN extends Component {
     }
 
 
-    let b;
+    if(moment().day("Monday")){
+      console.log("sundayyyyyyyyyyyyyyyyyyyyyy")
+        // {monday_activities_render}
+    }
+
+
 
 
     
-
-
     return(
-
-      
-
-
 
       <div className="activities-div">
         {monday_activities_render}
@@ -211,11 +210,8 @@ class ActivitiesListN extends Component {
         {sunday_activities_render}
       </div>
 
-
-
     )
   }
-
 
 }
 

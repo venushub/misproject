@@ -89,7 +89,6 @@ class ActivitiesN extends Component {
 
     return (
         {
-
           id : activity.id,
           activityProject : activity.activityProject.projectName,
           activityUser : activity.activityUser.username,

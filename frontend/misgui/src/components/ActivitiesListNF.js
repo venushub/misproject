@@ -40,7 +40,7 @@ class ActivitiesListN extends Component {
 
   render(){
 
-    console.log(this.props)
+    // console.log(this.props)
 
     const activities = this.props.activities  &&  this.props.activities != undefined ? this.props.activities : []
 
@@ -95,7 +95,7 @@ class ActivitiesListN extends Component {
         )
       })
 
-      
+
 
       return(
         <div  key={index} className="activity-block">  <table className="my-table">
@@ -207,7 +207,7 @@ class ActivitiesListN extends Component {
 
 
 
-      console.log("result" , result)
+      // console.log("result" , result)
 
 
     return(

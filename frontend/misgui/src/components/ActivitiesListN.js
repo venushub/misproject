@@ -15,8 +15,8 @@ class ActivitiesListN extends Component {
 
    handleButtonPress = (activity) => {
      this.buttonPressTimer = setTimeout(() => {
-       console.log("long press activated")
-       console.log(activity)
+       // console.log("long press activated")
+       // console.log(activity)
        this.props.handleLP(activity);
      }, 500);
    }
@@ -28,37 +28,44 @@ class ActivitiesListN extends Component {
 
   render(){
 
-    console.log(this.props)
+    // console.log(this.props)
 
     const activities = this.props.activities  &&  this.props.activities != undefined ? this.props.activities : []
 
     let mondayActivities = []
     let monac = []
+    let monactotal = 0;
     let tuesdayActivities = []
     let tueac = []
+    let tueactotal = 0;
     let wednesdayActivities = []
     let wedac = []
+    let wedactotal = 0;
     let thursdayActivities = []
     let thuac = []
+    let thuactotal = 0;
     let fridayActivities = []
     let friac = []
+    let friactotal = 0;
     let saturdayActivities = []
     let satac = []
+    let satactotal = 0;
     let sundayActivities = []
     let sunac = []
-    
+    let sunactotal = 0;
+
 
 
     let activities_render = <div></div>
 
     if(activities.length != 0){
         activities.slice(0).reverse().map((activity) => {
-          
+
 
           // <td className="activity-sub-item-div-5">{moment(activity.activityStartTime.toString().substring(0,19), "YYYY-MM-DDTHH:mm:ss").format('dddd')}</td>
 
-      
-       let myitem = <tr className="activity-item-div" key={activity.id} onMouseDown={() => this.handleButtonPress(activity)} onMouseOver ={() => {console.log(activity.id); this.setState({aid : activity.id} , () => console.log("maaaaaamaaaaa", this.state.aid));    }} onMouseUp={this.handleButtonRelease} onMouseLeave={this.handleButtonRelease} >
+
+       let myitem = <tr className="activity-item-div" key={activity.id} onMouseDown={() => this.handleButtonPress(activity)} onMouseOver ={() => { this.setState({aid : activity.id} );    }} onMouseUp={this.handleButtonRelease} onMouseLeave={this.handleButtonRelease} >
            <td className="activity-sub-item-div-2">{activity.activityProject.projectName}</td>
            <td className="activity-sub-item-div-3">{activity.activityType.activityTypeName}</td>
            <td className="activity-sub-item-div-4">{activity.activityTypeIdentifier.activityTypeIdentifierName}</td>
@@ -72,9 +79,12 @@ class ActivitiesListN extends Component {
        if(moment(activity.activityStartTime.toString().substring(0,19), "YYYY-MM-DDTHH:mm:ss").format('dddd') === "Monday"){
         mondayActivities.push(myitem)
         monac.push(activity)
+        monactotal = monactotal + activity.activityHours
+        console.log(monactotal)
        } else if(moment(activity.activityStartTime.toString().substring(0,19), "YYYY-MM-DDTHH:mm:ss").format('dddd') === "Tuesday"){
         tuesdayActivities.push(myitem)
         tueac.push(activity)
+        tueactotal = tueactotal + activity.activityHours
        } else if(moment(activity.activityStartTime.toString().substring(0,19), "YYYY-MM-DDTHH:mm:ss").format('dddd') === "Wednesday"){
         wednesdayActivities.push(myitem)
         wedac.push(activity)
@@ -93,9 +103,9 @@ class ActivitiesListN extends Component {
        }
 
           return null;
-     
+
     }
-    
+
     )
 
 
@@ -113,7 +123,9 @@ class ActivitiesListN extends Component {
                                   <tbody>
                                   {mondayActivities}
                                   </tbody>
-                                 </table></div>
+                                 </table>
+
+                                 </div>
     }
 
 
@@ -190,14 +202,14 @@ class ActivitiesListN extends Component {
 
 
     if(moment().day("Monday")){
-      console.log("sundayyyyyyyyyyyyyyyyyyyyyy")
+      // console.log("sundayyyyyyyyyyyyyyyyyyyyyy")
         // {monday_activities_render}
     }
 
 
 
 
-    
+
     return(
 
       <div className="activities-div">

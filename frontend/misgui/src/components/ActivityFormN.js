@@ -39,7 +39,7 @@ class ActivityFormN extends Component {
   handleChange = (e) => {
     // console.log("qqqqqqqqqqqq", typeof(e.target.name), e.target.name , typeof(e.target.value) , e.target.value)
 
-    console.log(this.state);
+    // console.log(this.state);
     this.setState({
       [e.target.name]: e.target.value
     }, () => {
@@ -83,13 +83,13 @@ class ActivityFormN extends Component {
   }
 
   handleDropDown = (myid, myname) => {
-    console.log(myid)
+    // console.log(myid)
     this.setState({
       activityTypeIdentifierArg : myid,
       filter_attrib : myname,
       datid : false
     }, () => {
-      console.log("ok")
+      // console.log("ok")
     })
   }
 
@@ -119,10 +119,10 @@ class ActivityFormN extends Component {
     })
   }
 
-  
+
   componentDidUpdate(prevProps){
     if(this.props.editOption !== 0) {
-      console.log("bruh")
+      // console.log("bruh")
       if (this.props.editOption !== prevProps.editOption) {
 
 
@@ -130,14 +130,14 @@ class ActivityFormN extends Component {
         let mm =  this.props.editOption.activityStartTime.substring(5,7)
         let dd =  this.props.editOption.activityStartTime.substring(8,10)
 
-        console.log(this.props.editOption.activityStartTime)
+        // console.log(this.props.editOption.activityStartTime)
 
         let sh = this.props.editOption.activityStartTime.substring(11,13)
         let sm = this.props.editOption.activityStartTime.substring(14,16)
 
         let st = sh + ':' + sm
 
-        console.log(st)
+        // console.log(st)
 
         let eh = this.props.editOption.activityEndTime.substring(11,13)
         let em = this.props.editOption.activityEndTime.substring(14,16)
@@ -146,14 +146,14 @@ class ActivityFormN extends Component {
 
         let et = eh + ':' + em
 
-          console.log(et)
+          // console.log(et)
 
-        console.log("bhbhbhbbhb",mm )
+        // console.log("bhbhbhbbhb",mm )
         // let mm = this.state.activityDate.substring(5,7)
         // let dd = this.state.activityDate.substring(8,10)
 
         let convDate = yyyy + '-' + mm + '-' + dd
-        console.log(typeof(convDate))
+        // console.log(typeof(convDate))
 
         this.setState({
           activityid :  this.props.editOption.id,
@@ -173,8 +173,8 @@ class ActivityFormN extends Component {
         })
 
 
-        console.log("date isssssssss", convDate)
-        console.log("eeeeeee", this.props.editOption)
+        // console.log("date isssssssss", convDate)
+        // console.log("eeeeeee", this.props.editOption)
         if(!this.state.display_form){
         this.setState({
           display_form : true,
@@ -201,7 +201,7 @@ class ActivityFormN extends Component {
 
   componentDidMount(){
 
-    console.log("mooooooooooo", moment.duration('23:59:59'))
+    // console.log("mooooooooooo", moment.duration('23:59:59'))
 
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
@@ -214,7 +214,7 @@ class ActivityFormN extends Component {
     let todaydate = yyyy + '-' + mm + '-' + dd;
     let nowtime = hh+':'+minmin
 
-    console.log("timeeeeeeeeeeeee", nowtime)
+    // console.log("timeeeeeeeeeeeee", nowtime)
 
     this.setState({
       activityDate : todaydate,
@@ -226,7 +226,7 @@ class ActivityFormN extends Component {
 
   handleActivityFormSubmit = (e) => {
 
-    console.log("vvvvvvvvvvvvvvvvvvvvvvvvvvv", this.state)
+    // console.log("vvvvvvvvvvvvvvvvvvvvvvvvvvv", this.state)
 
     e.preventDefault()
 
@@ -273,7 +273,7 @@ class ActivityFormN extends Component {
             activityHoursArg : this.state.activityHours
         }
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       //window.location.reload()
       //localStorage.setItem('cool-jwt', res.data.tokenAuth.token)
       this.clearForm()
@@ -304,7 +304,7 @@ class ActivityFormN extends Component {
               activityHoursArg : this.state.activityHours
             }
         }).then(res => {
-          console.log(res)
+          // console.log(res)
           //window.location.reload()
           //localStorage.setItem('cool-jwt', res.data.tokenAuth.token)
           this.clearForm()
@@ -322,7 +322,7 @@ class ActivityFormN extends Component {
 
   render(){
 
-    console.log("ddddddddddddddd", this.props)
+    // console.log("ddddddddddddddd", this.props)
 
     const projects_options  = this.props.getProjectsQuery.allProjects  &&  this.props.getProjectsQuery.allProjects != undefined ? this.props.getProjectsQuery.allProjects : []
     const projects_options_render = projects_options.map((project) => {
@@ -368,7 +368,7 @@ class ActivityFormN extends Component {
               {myelem}
 
               <label  className="activity-form-input-label" htmlFor="activityDescriptionArg">Description</label>
-              <input className="activity-form-input" size="30" type="text" onChange={this.handleChange} id="activityDescriptionArg" name="activityDescriptionArg" value={this.state.activityDescriptionArg} />
+              <input className="activity-form-input" size="60" type="text" onChange={this.handleChange} id="activityDescriptionArg" name="activityDescriptionArg" value={this.state.activityDescriptionArg} />
 
               <label className="activity-form-input-label">Date</label>
               <input className="activity-form-input"  type="date" onChange={this.handleChange} name="activityDate" value={this.state.activityDate} />

@@ -30,8 +30,8 @@ class Register extends Component {
     e.preventDefault();
     if(this.state.email !== '' && this.state.password !== '' && this.state.confirm_password !== ''){
 
-      console.log(this.state)
-      console.log(this.props)
+      // console.log(this.state)
+      // console.log(this.props)
 
       if(this.state.password === this.state.confirm_password) {
 
@@ -41,7 +41,7 @@ class Register extends Component {
                 password: this.state.password,
             }
         }).then(res => {
-          console.log(res)
+          // console.log(res)
           this.setState({
             success : true
           })

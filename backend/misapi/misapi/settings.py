@@ -274,11 +274,11 @@ WSGI_APPLICATION = 'misapi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'misdb', #put your database name here
-        'USER' : 'postgres',
-        'PASSWORD' : 'nsdl@123',
-        'HOST' : '127.0.0.1',
-        'PORT' : '5432'
+        'NAME': 'mis_db', #put your database name here
+        'USER' : 'enterprisedb',
+        'PASSWORD' : 'nsdl1234',
+        'HOST' : '172.30.151.183',
+        'PORT' : '5444'
     }
 }
 

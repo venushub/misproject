@@ -32,7 +32,7 @@ class ActivitiesN extends Component {
   }
 
   handleLP = (activity) => {
-    console.log(activity)
+    // console.log(activity)
     this.setState({
       editId : activity
     })
@@ -48,7 +48,7 @@ class ActivitiesN extends Component {
 
 
 
-    console.log(this.state.editId)
+    // console.log(this.state.editId)
     let weekHandle = '0'
     if(this.state.checked){
       weekHandle = moment(moment(), "MMDDYYYY").isoWeek().toString()
@@ -56,9 +56,9 @@ class ActivitiesN extends Component {
       weekHandle = '0'
     }
 
-    console.log("week is .......", weekHandle)
-
-    console.log("whereeeeeeeeeeee", this.props)
+    // console.log("week is .......", weekHandle)
+    //
+    // console.log("whereeeeeeeeeeee", this.props)
 
     let activities = []
 

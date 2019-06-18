@@ -15,10 +15,10 @@ class CustomOptions extends Component {
   }
 
   handleChange = (e) => {
-    console.log("broooooo")
+    // console.log("broooooo")
     this.setState({
       [e.target.name]: e.target.value
-    }, () => {console.log(this.state)}
+    }
   )
   }
 
@@ -27,11 +27,11 @@ class CustomOptions extends Component {
 
     e.preventDefault()
 
-    console.log("ati is", this.props.activityTypeId)
-    console.log("activityTypeIdentifierName is", this.props.filter_attrib)
+    // console.log("ati is", this.props.activityTypeId)
+    // console.log("activityTypeIdentifierName is", this.props.filter_attrib)
 
 
-    console.log(this.state)
+    // console.log(this.state)
 
 
 
@@ -49,7 +49,7 @@ class CustomOptions extends Component {
 
 
     }).then(res => {
-      console.log(res)
+      // console.log(res)
       //window.location.reload()
       this.props.handleDropDown(res.data.createActivityTypeIdentifier.id, res.data.createActivityTypeIdentifier.activityTypeIdentifierName)
       //localStorage.setItem('cool-jwt', res.data.tokenAuth.token)
@@ -80,7 +80,7 @@ class CustomOptions extends Component {
     let myclassname = ""
     let droptions_render = <div>Loading..</div>
 
-    console.log("lllllllllllpppppppppppp", droptions.length )
+    // console.log("lllllllllllpppppppppppp", droptions.length )
 
     if(droptions.length != 0){
       myclassname = "activiy-type-iden-options"

@@ -24,14 +24,14 @@ class Header extends Component{
   render(){
     return(
       <div className="Header-div">
-      <div className="bundle">
-        <h1 className="header-title">MAPI</h1>
-        <h1 className="header-username"> ({this.state.username})</h1>
+        <div className="bundle">
+          <h1 className="header-title">MAPI</h1>
+          <h1 className="header-username"> ({this.state.username})</h1>
         </div>
         <div>
-        <NavLink className="Header-nav-item" to="/activities" activeStyle={{  fontWeight: "bold",  color: "#f7a0a0"}} >Activities</NavLink>
-        <NavLink className="Header-nav-item" to="/dashboard" activeStyle={{  fontWeight: "bold",  color: "#f7a0a0"}} >Dashboard</NavLink>
-        <NavLink className="Header-nav-item" to="/logout" activeStyle={{  fontWeight: "bold",  color:"#f7a0a0"}} >Logout</NavLink>
+          <NavLink className="Header-nav-item" to="/activities" activeStyle={{  fontWeight: "bold",  color: "#f7a0a0"}} >Activities</NavLink>
+          <NavLink className="Header-nav-item" to="/dashboard" activeStyle={{  fontWeight: "bold",  color: "#f7a0a0"}} >Dashboard</NavLink>
+          <NavLink className="Header-nav-item" to="/settings" activeStyle={{  fontWeight: "bold",  color:"#f7a0a0"}} >Settings</NavLink>
         </div>
       </div>
     )

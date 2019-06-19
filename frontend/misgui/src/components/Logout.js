@@ -3,6 +3,7 @@ import { graphql, compose } from 'react-apollo';
 import {getTokenMutation} from './queries/queries'
 import { Link , NavLink} from 'react-router-dom'
 import client from '../index.js'
+import Header from './Header'
 
 
 class Logout extends Component {
@@ -27,11 +28,11 @@ class Logout extends Component {
 
   render(){
     return(
-      <div className="mycontent">
-          <form className="login-form" onSubmit={this.handleSubmit}>
-            <h2>Are you sure you want to logout</h2>
-            <button className="login-button">Logout ♥</button >
-        </form>
+      <div className="logout-container">
+            <Header />
+            <div className="flex-this-row">
+            <h2>Are you sure you want to </h2>
+            <button onClick={this.handleSubmit} className="logout-button">Logout ♥</button ></div>
       </div>
     )
   }

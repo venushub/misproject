@@ -29,15 +29,15 @@ class Login extends Component {
   e.preventDefault();
 
     if(this.state.loginEmail !== '' && this.state.loginPassword !== ''){
-      console.log(this.state)
-      console.log(this.props)
+      // console.log(this.state)
+      // console.log(this.props)
       this.props.getTokenMutation({
           variables: {
               username: this.state.loginEmail,
               password: this.state.loginPassword,
           }
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         localStorage.setItem('cool-jwt', res.data.tokenAuth.token)
         localStorage.setItem('username', this.state.loginEmail)
         this.props.history.push('/activities');

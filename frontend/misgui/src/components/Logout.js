@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { graphql, compose } from 'react-apollo';
 import {getTokenMutation} from './queries/queries'
-import { Link , NavLink} from 'react-router-dom'
+import { Link , NavLink, withRouter} from 'react-router-dom'
 import client from '../index.js'
 import Header from './Header'
 
@@ -29,7 +29,7 @@ class Logout extends Component {
   render(){
     return(
       <div className="logout-container">
-            <Header />
+
             <div className="flex-this-row">
             <h2>Are you sure you want to </h2>
             <button onClick={this.handleSubmit} className="logout-button">Logout ♥</button ></div>
@@ -37,7 +37,6 @@ class Logout extends Component {
     )
   }
 
-
 }
 
-export default Logout
+export default withRouter(Logout)

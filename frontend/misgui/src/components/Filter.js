@@ -123,7 +123,7 @@ class Filter extends Component {
       ED : EDR,
       GB : GB
     }
-    console.log(filter)
+    // console.log(filter)
     const filter_string = JSON.stringify(filter);
     this.setState({
       filter_string : filter_string
@@ -175,7 +175,7 @@ class Filter extends Component {
     let todaydate = yyyy + '-' + mm + '-' + dd;
 
       if (this.props !== prevProps) {
-        console.log("updated props", this.props)
+        // console.log("updated props", this.props)
             if(this.props.getProjectsQuery.allProjects != undefined && this.props.getActivityTypesQuery.allActivityTypes !=undefined && this.props.getUsersQuery.users !=undefined && this.props.getActivityTypeIdentifiersQuery.allActivityTypeIdentifiers ){
             this.setState({
               projects : this.props.getProjectsQuery.allProjects.map((project) => { return({name : project.projectName, status : true})}),
@@ -217,7 +217,7 @@ class Filter extends Component {
 
   deleteItem = (which, id) => {
     // // console.log(prevState)
-    console.log("which bitchhhhhhhhhhhhh",which)
+    // console.log("which bitchhhhhhhhhhhhh",which)
     // console.log(id)
 
     if(which === "projects"){
@@ -234,7 +234,7 @@ class Filter extends Component {
           }
       })};
     }, () => {
-      console.log(this.state)
+      // console.log(this.state)
       let n = 0;
       for(let i=0; i<this.state.projects.length;i++){
         if(this.state.projects[i].status){
@@ -272,7 +272,7 @@ class Filter extends Component {
             }
         })};
       }, () =>{
-        console.log(this.state)
+        // console.log(this.state)
         let n = 0;
         for(let i=0; i<this.state.types.length;i++){
           if(this.state.types[i].status){
@@ -312,7 +312,7 @@ class Filter extends Component {
             }
         })};
       }, () =>{
-        console.log(this.state)
+        // console.log(this.state)
         let n = 0;
         for(let i=0; i<this.state.users.length;i++){
           if(this.state.users[i].status){
@@ -338,7 +338,7 @@ class Filter extends Component {
         })
       });
     } else if(which === "typeidens") {
-      console.log("eject eject")
+      // console.log("eject eject")
       this.setState((state, props) => {
         return {
           [which] : state.typeidens.map((typeiden,index) => {
@@ -351,7 +351,7 @@ class Filter extends Component {
             }
         })};
       }, () =>{
-        console.log(this.state)
+        // console.log(this.state)
         let n = 0;
         for(let i=0; i<this.state.typeidens.length;i++){
           if(this.state.typeidens[i].status){
@@ -377,7 +377,7 @@ class Filter extends Component {
         })
       });
     } else if(which === "typesubidens") {
-      console.log("we cme to right place")
+      // console.log("we cme to right place")
       this.setState((state, props) => {
         return {
           [which] : state.typesubidens.map((typesubiden,index) => {
@@ -390,7 +390,7 @@ class Filter extends Component {
             }
         })};
       }, () =>{
-        console.log(this.state)
+        // console.log(this.state)
         let n = 0;
         for(let i=0; i<this.state.typesubidens.length;i++){
           if(this.state.typesubidens[i].status){
@@ -419,7 +419,7 @@ class Filter extends Component {
     } else if (which === "GB") {
 
 
-        console.log("we cme to right place")
+        // console.log("we cme to right place")
         this.setState((state, props) => {
           return {
             [which] : state.GB.map((gb,index) => {
@@ -432,7 +432,7 @@ class Filter extends Component {
               }
           })};
         }, () =>{
-          console.log(this.state)
+          // console.log(this.state)
           let n = 0;
           for(let i=0; i<this.state.GB.length;i++){
             if(this.state.GB[i].status){
@@ -466,7 +466,7 @@ class Filter extends Component {
       [e.target.name] : e.target.value
     }, () => {
       this.setState((state) => {
-        console.log("updateeeee", state.SD)
+        // console.log("updateeeee", state.SD)
         return({
           buttons : [
             {id : 1 , name : 'projects', value : state.buttons[0].value, active : state.buttons[0].active},
@@ -492,7 +492,7 @@ class Filter extends Component {
       }
       return null;
     })
-    console.log(req)
+    // console.log(req)
     let reqtis = []
 
     reqtis = this.props.getActivityTypeIdentifiersQuery.allActivityTypeIdentifiers.filter((typeiden) => {
@@ -500,7 +500,7 @@ class Filter extends Component {
         req.includes(typeiden.activityType.activityTypeName)
       )
     })
-    console.log("reqqqq", reqtis)
+    // console.log("reqqqq", reqtis)
     let finmat = []
     reqtis.map((tf, index) => {
 
@@ -511,11 +511,11 @@ class Filter extends Component {
 
       return null;
     })
-    console.log("finmattt", finmat)
+    // console.log("finmattt", finmat)
     this.setState({
       typeidens : finmat
     }, () =>{
-      console.log(this.state)
+      // console.log(this.state)
       let n = 0;
       for(let i=0; i<this.state.typeidens.length;i++){
         if(this.state.typeidens[i].status){
@@ -546,8 +546,8 @@ class Filter extends Component {
 
   handleButtonPress = (bv) => {
     this.buttonPressTimer = setTimeout(() => {
-      console.log("long press activated")
-      console.log(bv)
+      // console.log("long press activated")
+      // console.log(bv)
 
       if(bv == "users"){
 
@@ -562,7 +562,7 @@ class Filter extends Component {
 
             })};
           }, () =>{
-            console.log(this.state)
+            // console.log(this.state)
             let n = 0;
             for(let i=0; i<this.state.users.length;i++){
               if(this.state.users[i].status){
@@ -602,7 +602,7 @@ class Filter extends Component {
 
           })};
         }, () => {
-          console.log(this.state)
+          // console.log(this.state)
           let n = 0;
           for(let i=0; i<this.state.projects.length;i++){
             if(this.state.projects[i].status){
@@ -642,7 +642,7 @@ class Filter extends Component {
 
             })};
           }, () =>{
-            console.log(this.state)
+            // console.log(this.state)
             let n = 0;
             for(let i=0; i<this.state.types.length;i++){
               if(this.state.types[i].status){
@@ -673,7 +673,7 @@ class Filter extends Component {
       }  else if (bv === "typeidens") {
 
 
-          console.log("eject eject")
+          // console.log("eject eject")
           this.setState((state, props) => {
             return {
               [bv] : state.typeidens.map((typeiden,index) => {
@@ -684,7 +684,7 @@ class Filter extends Component {
 
             })};
           }, () =>{
-            console.log(this.state)
+            // console.log(this.state)
             let n = 0;
             for(let i=0; i<this.state.typeidens.length;i++){
               if(this.state.typeidens[i].status){
@@ -714,7 +714,7 @@ class Filter extends Component {
       } else if (bv === "GB") {
 
 
-                console.log("we cme to right place")
+                // console.log("we cme to right place")
                 this.setState((state, props) => {
                   return {
                     [bv] : state.GB.map((gb,index) => {
@@ -725,7 +725,7 @@ class Filter extends Component {
 
                   })};
                 }, () =>{
-                  console.log(this.state)
+                  // console.log(this.state)
                   let n = 0;
                   for(let i=0; i<this.state.GB.length;i++){
                     if(this.state.GB[i].status){
@@ -771,8 +771,8 @@ class Filter extends Component {
 
   render(){
 
-    console.log("propsssssss", this.props)
-    console.log(this.state)
+    // console.log("propsssssss", this.props)
+    // console.log(this.state)
 
     const buttons_render = this.state.buttons.map((button, index) => {
         let mbcn = " fb-"+ (index).toString()
@@ -912,6 +912,7 @@ class Filter extends Component {
         filter_details_class = "filter-details-none"
       }
     }
+
 
     const closebutton  = <button className="close-filter-drop" onClick={this.handleCloseFilterDrop}>❌</button>
     // const closebutton = <img className="pacman" src={require('../images/close.svg')}  />

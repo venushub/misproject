@@ -1,6 +1,10 @@
 
 :root {
-  --main-bg-color: coral;
+  --extra-dark: rgb(40,55,71);
+  --dark : rgb(52,73,71);
+  --light : rgb(174,182,191);
+  --extralight : rgb(235,237,239);
+  --universal-white : rgb(253,254,254);
 }
 
 
@@ -8,6 +12,8 @@
 * {
   box-sizing: border-box;
 }
+
+
 
 .mycontent {
   display : flex;
@@ -104,6 +110,7 @@
   align-items: center;
   width : 100%;
   height : 100vh;
+  background-color : var(--universal-white)
 }
 
 
@@ -122,8 +129,7 @@
   margin-top: 1em;
   display: flex;
   flex-direction: column;
-  /* background-color : #ffdde7; */
-  background-color: var(--main-bg-color);
+  background-color: var(--extra-light);
   width : 90%;
   height : 100%;
   align-items: center;
@@ -149,7 +155,7 @@
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  background-color: #ffdde7;
+  background-color: var(--extra-light);
 }
 
 .day-activities {
@@ -169,7 +175,7 @@
   font-weight: bolder;
   font-size: 1.2em;
   padding : 0.2em;
-  color : #3d0000;
+  color : var(--extra-dark);
 }
 
 table {
@@ -304,7 +310,7 @@ td {
 
 .activity-form-input:focus {
   outline: none;
-  border-color: #f49b42;
+  border-color: var(--extra-dark);
 }
 
 
@@ -411,7 +417,7 @@ td {
 .home-header {
   height : 50vh;
   width : 100vw;
-  background-color: rgb(134, 0, 67);
+  background-color: var(--extra-dark);
   display : flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -422,7 +428,7 @@ td {
   font-family: verdana;
   font-size: 3em;
   font-weight: bolder;
-  color: rgb(242,242,242);
+  color: var(--extra-light);
   font-style: italic;
 }
 
@@ -454,7 +460,7 @@ td {
     font-family: verdana;
     font-size: 1.8em;
     font-weight: bolder;
-    color:rgb(134,0,67);
+    color: var(--dark);
     padding : 1em;
 }
 
@@ -468,7 +474,7 @@ td {
 
 .home-footer {
   height : 15vh;
-  background-color: rgb(208,206,206);
+  background-color: var(--extra-light);
   width : 100%;
   display: flex;
   align-items: center;
@@ -484,13 +490,13 @@ td {
   text-decoration: none;
   font-size: 1.3em;
   font-weight: bolder;
-  color: rgb(242,242,242);
+  color: var(--light);
   font-family: verdana;
   padding-left : 1.5em
 }
 
 .nav-link:hover {
-    color: pink
+    color: var(--extra-light)
 }
 
 .coffee{
@@ -512,12 +518,13 @@ td {
   display : flex;
   align-items: flex-start;
   justify-content: space-between;
+  background-color : var(--universal-white)
 }
 
 .login-form-div {
   height: 100%;
   width : 50%;
-  background-color: rgb(134,0,67);
+  background-color: var(--extra-dark);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -536,35 +543,39 @@ td {
   font-size: 1.5em;
   font-family: verdana;
   font-weight: bold;
-  color : rgb(242, 242, 242);
+  color : var(--extra-light);
   padding-top : 1em;
 }
 
 .login-input {
-  background-color : rgb(134,0,67);
+  background-color : var(--extra-dark);
   border-width: 0 0 2px 0;
-  border-color: rgb(242, 242, 242);
+  border-color: var(--light);
   padding-top : 1.5em;
   font-size: 1.5em;
-  color:  rgb(242, 242, 242);
+  color:  var(--extra-light);
 }
 
 .login-button {
   align-self: flex-end;
-  background-color: rgb(242, 242, 242);
+  background-color: var(--extra-light);
   border : none;
   font-family: verdana;
   font-weight: bold;
   font-size: 1.2em;
   padding : 0.5em 1em 0.5em 1em;
-  color : rgb(134,0,67);
+  color : var(--extra-dark);
   border-radius: 0.5em;
   margin-top : 2em;
 }
 
+.login-button:hover{
+  background-color: var(--light)
+}
+
 .login-input:focus{
   outline: none;
-  border-color: #f49b42;
+  border-color: var(--extra-light);
 }
 
 /* .login-input:focus + .login-form-label {
@@ -621,7 +632,7 @@ td {
   font-family: verdana;
   font-size: 3em;
   font-weight: bolder;
-  color: rgb(134,0,67);
+  color: var(--extra-dark);
   font-style: italic;
   padding-top : 0.5em;
   padding-left: 0.5em;
@@ -643,7 +654,7 @@ td {
   font-weight: bolder;
   padding-bottom: 0.1em;
   padding-left: 0.1em;
-  color: #d3d1d1;
+  color: var(--extra-light)
 }
 
 
@@ -681,7 +692,7 @@ td {
 
 .header-username {
   font-family: verdana;
-  color: rgb(255,159,207);
+  color: var(--light);
   font-style: italic;
   margin-right : 1em;
 }
@@ -691,7 +702,7 @@ td {
   align-items: center;
   justify-content: space-between;
   width : 100%;
-  background-color: rgb(134,0,67);
+  background-color: var(--extra-dark);
   height : 10vh;
   margin : 0;
   padding : 0;
@@ -700,7 +711,7 @@ td {
 .Header-nav-item {
   font-family: verdana;
   text-decoration: none;
-  color: white;
+  color: var(--light);
   margin : 1em;
   font-weight: bold;
   font-size : 1.2em;
@@ -725,13 +736,13 @@ td {
 
 .cancel-button {
   margin : 20px;
-  background-color: rgb(134,0,67);
+  background-color: var(--extra-dark);
   border : none;
   padding : 5px 10px 5px 10px;
   font-weight: bold;
   border-radius: 5px;
   font-family:sans-serif;
-  color: white;
+  color: var(--universal-white);
   font-size: 1em
 }
 
@@ -741,15 +752,15 @@ td {
 
 .add-activity-button {
   margin : 20px;
-  background-color: rgb(242,242,242);
+  background-color: var(--universal-white);
   border : none;
   padding : 5px 10px 5px 10px;
   font-weight: bold;
   border-radius: 5px;
   font-family:sans-serif;
-  color: rgb(134,0,67);
+  color: var(--extra-dark);
   font-size: 1em;
-  border : 0.1em solid rgb(134,0,67);
+  border : 0.1em solid var(--extra-dark) ;
 }
 
 .add-activity-button:focus{
@@ -762,7 +773,7 @@ td {
 
 .activity-form-submit-button{
   margin : 20px;
-  background-color: rgb(134,0,67);
+  background-color: var(--extra-dark);
   border : none;
   padding : 5px 10px 5px 10px;
   font-weight: bold;
@@ -776,7 +787,7 @@ td {
 .activities-title{
   font-family: verdana;
   font-weight: bold;
-  color : rgb(134,0,67);
+  color : var(--extra-dark);
 }
 
 .activity-form{
@@ -791,7 +802,7 @@ td {
   align-items: center;
   justify-content: flex-start;
   padding: 10px 40px 40px 40px;
-  box-shadow: 0px 0px 5px 2px rgb(134,0,67);
+  box-shadow: 0px 0px 5px 2px var(--extra-dark);
   border-radius: 1em;
 }
 
@@ -803,7 +814,7 @@ td {
 
 
 .filter-container {
-  background-color: rgb(242, 242, 242);
+  background-color: var(--universal-white);
   display : flex;
   flex-direction: column;
   align-items: center;
@@ -836,16 +847,17 @@ td {
   justify-content: space-between;
   padding : 1em 0 1em 0;
   width : 100%;
+  background-color : var(--universal-white)
 
 }
 
 .filter-things {
-  background-color: rgb(242, 242, 242);
-  border : 0.1em solid rgb(134,0,67);
+  background-color: var(--extra-light);
+  border : 0.1em solid var(--dark);
   margin-left : 1em;
   margin-right: 1em;
   font-size: 1em;
-  color: rgb(134,0,67);
+  color: var(--dark);
   font-weight: bold;
   font-family: verdana;
   padding : 0.3em 0.8em 0.3em 0.8em;
@@ -857,11 +869,11 @@ td {
 }
 
 .filter-button {
-  background-color: rgb(242, 242, 242);
-  border : 0.1em dotted rgb(134,0,67);
+  background-color: var(--universal-white);
+  border : 0.1em dotted var(--dark);
   margin-left : 0.5em;
   font-size: 1em;
-  color: rgb(134,0,67);
+  color: var(--dark);
   font-weight: bold;
   font-family: verdana;
   padding : 0.3em 0.8em 0.3em 0.8em;
@@ -877,9 +889,9 @@ td {
 }
 
 .filter-button-active{
-  background-color: rgb(134,0,67);
-  color : rgb(242, 242, 242);
-  border : 0.1em dotted rgb(134,0,67);
+  background-color: var(--dark);
+  color : var(--extra-light);
+  border : 0.1em dotted var(--dark);
   margin-left : 0.5em;
   font-size: 1em;
   font-weight: bold;
@@ -896,7 +908,7 @@ td {
   height: 0;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
-  border-bottom: 20px solid rgb(255, 219, 222);
+  border-bottom: 20px solid var(--extra-light);
   top : 35px;
   right : 30px;
 }
@@ -913,7 +925,7 @@ td {
 
 .filter-details {
   padding : 2em;
-  background-color: rgb(255, 219, 222);
+  background-color: var(--extra-light);
   border-radius: 0px 0px 15px 15px;
   display : flex;
   flex-direction: column;
@@ -935,9 +947,9 @@ td {
 }
 
 .filter-sub-item-selected {
-  background-color: rgb(134,0,67);
-  color : rgb(242, 242, 242);
-  border : 0.1em solid rgb(134,0,67);
+  background-color: var(--dark);
+  color : var(--extra-light);
+  border : 0.1em solid var(--dark);
   margin-left : 1em;
   margin-top : 1em;
   font-size: 1em;
@@ -953,9 +965,9 @@ td {
 }
 
 .filter-sub-item-deselected {
-  background-color: rgb(242, 242, 242);
-  color : rgb(134,0,67);
-  border : 0.1em solid rgb(134,0,67);
+  background-color: var(--extra-light);
+  color : var(--dark);
+  border : 0.1em solid var(--dark);
   margin-left : 1em;
   margin-top : 1em;
   font-size: 1em;
@@ -979,7 +991,7 @@ td {
 }
 
 .close-filter-drop {
-  background-color: rgb(242, 242, 242);
+  background-color: var(--extra-light);
   color : #8a0000;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bolder;
@@ -999,11 +1011,11 @@ td {
 
 
 .filter-date {
-  background-color: rgb(255, 219, 222);
+  background-color: var(--extra-light);
   border : none;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 5em;
-  color: #ff7272;
+  color: var(--dark);
 }
 
 .filter-date:focus {
@@ -1035,7 +1047,7 @@ td {
   position: absolute;
   width : 100vw;
   height : 10vh;
-  background-color: rgb(255, 219, 222);
+  background-color: var(--extra-light);
   bottom : 0;
   right : 0;
   display: flex;
@@ -1045,7 +1057,7 @@ td {
   font-family: verdana;
   font-weight: bolder;
   font-size: 1.5em;
-  color : #8a0000;
+  color : var(--dark);
 }
 
 .dashboard-container {
@@ -1054,6 +1066,7 @@ td {
   justify-content: flex-start;
   align-items: flex-start;
   width : 100%;
+  background-color : var(--universal-white)
 }
 
 .fb-4 {
@@ -1062,7 +1075,7 @@ td {
 
 .filter-items-filter {
   width : 100%;
-  background-color: rgb(255, 219, 222);
+  background-color: var(--extra-light);
   border-width: 0 0 2px 0;
   border-color : #9e9c9a;
   font-size: 1.2em;
@@ -1071,18 +1084,18 @@ td {
 
 .filter-items-filter:focus{
   outline: none;
-  border-color: #f49b42;
+  border-color: var(--dark);
 }
 
 .activity-block {
-  background-color: #fffcf4;
+  background-color: var(--extra-light);
   margin : 1em;
   width : 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border : 0.2em solid #ffd6c1
+  border : 0.2em solid var(--light)
 }
 
 .activities-holder {
@@ -1094,7 +1107,7 @@ td {
 }
 
 .total-td {
-  background-color: #ffd6c1;
+  background-color: var(--light);
   width : 100%;
   padding : 1em 3em 1em 1em;
   text-align: right;
@@ -1124,11 +1137,23 @@ td {
 .logout-button{
   font-family: verdana;
   margin : 20px;
-  background-color: #8a0000;
+  background-color: rgb(134,0,67);
   border : none;
   padding : 5px 10px 5px 10px;
   font-weight: bold;
   border-radius: 5px;
   color: white;
   font-size: 1em
+}
+
+
+.choose-theme {
+  font-family: verdana;
+  font-size : 1.5em;
+  font-weight: bold;
+  margin-right: 2em;
+}
+
+.margin-top-2em {
+    margin-top : 2em;
 }

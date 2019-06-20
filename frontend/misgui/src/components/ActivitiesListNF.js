@@ -95,7 +95,7 @@ class ActivitiesListN extends Component {
         )
       })
 
-
+      sub_activities_total = sub_activities_total.toFixed(2)
 
       return(
         <div  key={index} className="activity-block">  <table className="my-table">

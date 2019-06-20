@@ -3,6 +3,7 @@ import {Router, Switch, Route} from 'react-router-dom'
 import { Link , NavLink} from 'react-router-dom'
 import Logout from './Logout'
 import Theme from './Theme'
+import Header from './Header'
 
 
 class Settings extends Component {
@@ -21,8 +22,10 @@ class Settings extends Component {
 
     return(
       <div className="settings-container">
-      <Logout />
+      <Header />
       <Theme />
+      <Logout />
+
       </div>
     )
 

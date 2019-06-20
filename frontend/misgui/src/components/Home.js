@@ -22,10 +22,7 @@ const Home = () => {
             </ul>
           </div>
           <div className="home-info-pac">
-            <img className="pacman" src={require('../images/pacman.png')}  />
-            <img className="coffee" src={require('../images/coffee.png')}  />
-            <img className="coffee" src={require('../images/coffee.png')}  />
-            <img className="coffee" src={require('../images/coffee.png')}  />
+          
             <div></div>
           </div>
         </div>

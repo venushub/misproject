@@ -8,6 +8,7 @@ import Register from './Register'
 import Logout from './Logout'
 import Dashboard from './Dashboard'
 import Settings from './Settings'
+import Matcher from './Matcher'
 
 
 class App extends Component {
@@ -59,6 +60,7 @@ class App extends Component {
 
     return(
         <Switch>
+
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
           <Route path="/" exact component={Home} />
@@ -67,7 +69,9 @@ class App extends Component {
             <Route path="/activities" exact  render={(props) => <ActivitiesN {...props} handleTheme={this.handleTheme} />} />
             <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/settings" exact component={Settings} />
+            <Route path="/matcher" exact component={Matcher} />
           </AuthenticatedComponent>
+
         </Switch>
     )
   }

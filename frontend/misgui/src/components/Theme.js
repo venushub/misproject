@@ -70,9 +70,9 @@ class Theme extends Component {
     this.state.themes.map(
       (theme, index) => {
         if(theme.active) {
-           color_svgs.push(<circle onClick = {() => this.handleThemeChange(theme)} cx={(index*40)+(20*(index+2))} cy="25" r="20" fill={theme.color}  stroke="grey" stroke-width="3" />)
+           color_svgs.push(<circle key={index} onClick = {() => this.handleThemeChange(theme)} cx={(index*40)+(20*(index+2))} cy="25" r="20" fill={theme.color}  stroke="grey" strokeWidth="3" />)
         } else {
-          color_svgs.push(<circle onClick = {() => this.handleThemeChange(theme)}  cx={(index*40)+(20*(index+2))} cy="25" r="20" fill={theme.color}  />)
+          color_svgs.push(<circle key={index} onClick = {() => this.handleThemeChange(theme)}  cx={(index*40)+(20*(index+2))} cy="25" r="20" fill={theme.color}  />)
         }
         return null;
       }

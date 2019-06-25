@@ -33,8 +33,6 @@ class CustomOptions extends Component {
 
     // console.log(this.state)
 
-
-
     this.props.createActivityTypeIdentifierMutation({
         variables: {
             activityType: this.props.activityTypeId,
@@ -46,7 +44,6 @@ class CustomOptions extends Component {
                 query: getActivityTypeIdentifiersQuery,
                 variables : {search : this.props.activityTypeId}
         }]
-
 
     }).then(res => {
       // console.log(res)

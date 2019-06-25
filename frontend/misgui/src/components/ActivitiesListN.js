@@ -10,7 +10,6 @@ class ActivitiesListN extends Component {
     this.state = {
       aid : 0
     }
-
   }
 
    handleButtonPress = (activity) => {
@@ -80,7 +79,6 @@ class ActivitiesListN extends Component {
         mondayActivities.push(myitem)
         monac.push(activity)
         monactotal = monactotal + activity.activityHours
-        console.log(monactotal)
        } else if(moment(activity.activityStartTime.toString().substring(0,19), "YYYY-MM-DDTHH:mm:ss").format('dddd') === "Tuesday"){
         tuesdayActivities.push(myitem)
         tueac.push(activity)

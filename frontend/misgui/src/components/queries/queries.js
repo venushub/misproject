@@ -41,6 +41,16 @@ const getUsersQuery = gql`
 }
 `
 
+const getMe = gql`
+{
+  me {
+    id
+    username
+    isSuperuser
+  }
+}
+`
+
 
 
 const getActivityTypesQuery = gql`
@@ -215,6 +225,8 @@ const createUserMutation = gql`
 `;
 
 
+
+
 // const addBookMutation = gql`
 //
 //   mutation($username:String!, $password:String!) {
@@ -225,4 +237,4 @@ const createUserMutation = gql`
 //   }
 // `
 
-export {getTokenMutation, verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};
+export {getTokenMutation, getMe,  verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};

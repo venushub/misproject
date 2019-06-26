@@ -1,0 +1,6 @@
+[
+ {"cardno": "cardno", "Workgroup": "Workgroup", "Empcode": "Empcode", "Firstname": "Firstname", "Lastname": "Lastname", "FirstIn": "FirstIn", "LastOut": "LastOut", "TotalHours": "TotalHours", "CompanyNAme": "CompanyNAme"},
+ {"cardno": "4169", "Workgroup": "PS Staffing", "Empcode": "SQ13630", "Firstname": "Sirajuddin Abdul ", "Lastname": "Karin Qureshi", "FirstIn": "10-May-19 15:44:54", "LastOut": "10-May-19 18:02:21", "TotalHours": "2H:18M", "CompanyNAme": "Genie"},
+ {"cardno": "4169", "Workgroup": "PS Staffing", "Empcode": "SQ13630", "Firstname": "Sirajuddin Abdul ", "Lastname": "Karin Qureshi", "FirstIn": "11-May-19 09:28:49", "LastOut": "11-May-19 14:02:36", "TotalHours": "4H:34M", "CompanyNAme": "Genie"},
+ {"cardno": "4169", "Workgroup": "PS Staffing", "Empcode": "SQ13630", "Firstname": "Sirajuddin Abdul ", "Lastname": "Karin Qureshi", "FirstIn": "13-May-19 09:33:04", "LastOut": "13-May-19 18:04:17", "TotalHours": "8H:31M", "CompanyNAme": "Genie"}
+]

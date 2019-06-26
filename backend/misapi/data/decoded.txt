@@ -1,0 +1,4 @@
+cardno,Workgroup,Empcode,Firstname,Lastname,FirstIn,LastOut,TotalHours,CompanyNAme
+4169,PS Staffing,SQ13630,Sirajuddin Abdul ,Karin Qureshi,10-May-19 15:44:54,10-May-19 18:02:21,2H:18M,Genie
+4169,PS Staffing,SQ13630,Sirajuddin Abdul ,Karin Qureshi,11-May-19 09:28:49,11-May-19 14:02:36,4H:34M,Genie
+4169,PS Staffing,SQ13630,Sirajuddin Abdul ,Karin Qureshi,13-May-19 09:33:04,13-May-19 18:04:17,8H:31M,Genie

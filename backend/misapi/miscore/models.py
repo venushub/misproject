@@ -48,3 +48,15 @@ class Activity(models.Model):
     activityStartTime = models.DateTimeField()
     activityEndTime = models.DateTimeField()
     activityHours = models.FloatField()
+
+
+class Attendance(models.Model):
+    cardNo  = models.CharField(max_length=100)
+    workGroup  = models.CharField(max_length=100)
+    empCode  = models.CharField(max_length=100)
+    firstName  = models.CharField(max_length=100)
+    lastName  = models.CharField(max_length=100)
+    firstIn = models.DateTimeField()
+    lastOut = models.DateTimeField()
+    totalHours = models.CharField(max_length=100)
+    companyName = models.CharField(max_length=100)

@@ -32,6 +32,28 @@ const getProjectsQuery = gql`
 }
 `
 
+const getAttendanceFilesQuery = gql`
+{
+  allAttendanceFiles {
+    year
+    month
+  }
+}
+`
+
+// const getOneAttendanceFileQuery = gql`
+//   query allActivityTypeIdentifiers($search : String){
+//     allActivityTypeIdentifiers(search : $search){
+//       id
+//       activityTypeIdentifierName
+//       activityType{
+//         activityTypeName
+//       }
+//     }
+//   }
+// `
+
+
 const getUsersQuery = gql`
 {
   users {
@@ -237,4 +259,4 @@ const createUserMutation = gql`
 //   }
 // `
 
-export {getTokenMutation, getMe,  verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};
+export {getTokenMutation, getMe, getAttendanceFilesQuery , verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};

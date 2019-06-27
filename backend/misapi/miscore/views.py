@@ -7,6 +7,8 @@ import base64
 
 def SampleView(request):
     html = "<html><body>Hi</body></html>"
+
+
     base64.decode(open('data/encoded.txt', 'r'), open('data/decoded.csv', 'wb'))
 
     reader = csv.DictReader(open('data/decoded.csv', 'r'))

@@ -48,7 +48,7 @@ class Matcher extends Component {
     return(
       <div>
       <Header />
-      <div>{upload_excel}</div>
+      {upload_excel}
       </div>
     )
   }

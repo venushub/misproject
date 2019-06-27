@@ -1157,3 +1157,37 @@ td {
 .margin-top-2em {
     margin-top : 2em;
 }
+
+
+
+/* .attendance-file-input{
+  display : hidden
+} */
+/* input[type=file] {
+  opacity : 0;
+
+} */
+
+.attendance-file-input{
+    opacity : 0;
+}
+
+.attendance-file-label {
+
+}
+
+.attendance-form-div{
+  width : 100%;
+  background-color : var(--extra-light);
+  display : flex;
+  flex-direction : column;
+  align-items: center;
+  padding : 1em;
+}
+
+.file-upload-message {
+  font-family:  verdana;
+  width : 100%;
+  padding-left: 2em;
+  font-size : 1.2em;
+}

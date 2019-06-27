@@ -1,20 +1,20 @@
 import graphene
 from graphene_django import DjangoObjectType
-from miscore.models import Attendance
+from miscore.models import AttendanceFile
 
-class AttendanceType(DjangoObjectType):
+class AttendanceFileType(DjangoObjectType):
     class Meta:
-        model = Attendance
+        model = AttendanceFile
 
 
 class Query(object):
-    all_attendance = graphene.List(AttendanceType)
+    all_attendance_files = graphene.List(AttendanceFileType)
 
-    def resolve_all_attendance(self, info, **kwargs):
-        return Attendance.objects.all()
+    def resolve_all_attendance_files(self, info, **kwargs):
+        return AttendanceFile.objects.all()
 
 
-# class CreateAttendance(graphene.Mutation):
+# class CreateActivityType(graphene.Mutation):
 #     id = graphene.Int()
 #     activityTypeName= graphene.String()
 #     activityTypeDesc = graphene.String()

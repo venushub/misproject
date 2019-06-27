@@ -60,3 +60,11 @@ class Attendance(models.Model):
     lastOut = models.DateTimeField()
     totalHours = models.CharField(max_length=100)
     companyName = models.CharField(max_length=100)
+
+class AttendanceFile(models.Model):
+    year = models.CharField(max_length=100)
+    month = models.CharField(max_length=100)
+    fileName = models.CharField(max_length=100)
+    timeOfUpload = models.DateTimeField()
+    hashofFile = models.CharField(max_length=200)
+    fileBase64 = models.TextField()

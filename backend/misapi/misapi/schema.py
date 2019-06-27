@@ -4,6 +4,8 @@ import miscore.activitytype.schema
 import miscore.activitytypeidentifier.schema
 import miscore.project.schema
 import miscore.activity.schema
+import miscore.matcher.schema
+import miscore.AttendanceFile.schema
 import graphql_jwt
 
 
@@ -14,7 +16,7 @@ class Mutation(miscore.activity.schema.Mutation, miscore.project.schema.Mutation
 
 
 
-class Query(miscore.activity.schema.Query, miscore.activitytypeidentifier.schema.Query , miscore.project.schema.Query , miscore.activitytype.schema.Query ,  users.schema.Query ,graphene.ObjectType):
+class Query(miscore.activity.schema.Query, miscore.matcher.schema.Query, miscore.AttendanceFile.schema.Query , miscore.activitytypeidentifier.schema.Query , miscore.project.schema.Query , miscore.activitytype.schema.Query ,  users.schema.Query ,graphene.ObjectType):
     # This class will inherit from multiple Queries
     # as we begin to add more apps to our project
     pass

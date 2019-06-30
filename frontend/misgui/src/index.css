@@ -1170,10 +1170,20 @@ td {
 
 .attendance-file-input{
     opacity : 0;
+    position : absolute;
+    left : 0;
 }
 
 .attendance-file-label {
+  background-color: var(--light);
+  padding: 1em 5em 1em 5em;
+  border : 0.1em dotted var(--dark);
+  font-family : verdana;
+  font-size : 1.2em;
+}
 
+.attendance-file-label:hover {
+  cursor : pointer
 }
 
 .attendance-form-div{
@@ -1190,4 +1200,56 @@ td {
   width : 100%;
   padding-left: 2em;
   font-size : 1.2em;
+}
+
+.file-input-con {
+  display : flex;
+  align-items:  center;
+  justify-content: center;
+  width : 100%;
+  margin : 1em;
+  padding : 1em 1em 1em 5em;
+  height : 10em;
+}
+
+.attendance-file-input-label-div {
+  position : relative;
+}
+
+.file-name{
+  margin-left : 1em;
+  background-color: var(--extra-light);
+  padding: 1em 5em 1em 5em;
+  border : 0.1em dotted var(--dark);
+  font-family : verdana;
+  font-size : 1.2em;
+}
+
+.file-name-none {
+  display : none
+}
+
+
+.file-upload-button{
+  margin-left : 1em;
+  background-color: var(--extra-light);
+  padding: 1em 5em 1em 5em;
+  border : 0.1em solid var(--dark);
+  font-family : verdana;
+  font-size : 1.2em;
+  font-weight : bold;
+  color : var(--dark)
+}
+
+.file-upload-button:hover{
+  margin-left : 1em;
+  background-color: var(--dark);
+  padding: 1em 5em 1em 5em;
+  border : 0.1em solid var(--dark);
+  font-family : verdana;
+  font-size : 1.2em;
+  font-weight : bold;
+  color : var(--extra-light);
+  transition : 0.2s;
+  cursor : pointer;
 }

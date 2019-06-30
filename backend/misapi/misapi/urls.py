@@ -26,11 +26,11 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 from graphene_django.views import GraphQLView
-from miscore.views import SampleView
+from miscore.views import MatcherView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
-    path('test/', SampleView, name='index'),
+    path('matcher/', MatcherView, name='matcher'),
     # path('graphql/', GraphQLView.as_view(graphiql=True)),
 ]

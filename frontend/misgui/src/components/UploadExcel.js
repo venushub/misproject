@@ -3,6 +3,7 @@ import {getAttendanceFilesQuery} from './queries/queries'
 import { graphql, compose } from 'react-apollo';
 import moment from 'moment'
 const csv=require('csvtojson')
+const axios = require('axios');
 
 
 class UploadExcel extends Component {
@@ -26,7 +27,10 @@ class UploadExcel extends Component {
 
   getBase64 = (file) => {
    var reader = new FileReader();
-   reader.readAsDataURL(file);
+     reader.readAsDataURL(file);
+
+     console.log("file type is blobbb")
+
    reader.onload =  () => {
      console.log(reader.result);
      this.setState({
@@ -48,9 +52,42 @@ class UploadExcel extends Component {
     const selectedFile = this.refs.myfile.files[0];
     console.log(selectedFile)
 
-    this.getBase64(selectedFile)
+    if(e.target.value !== '' && e.target.value !== null){
+      if(selectedFile.size < 3000000){
+        this.getBase64(selectedFile)
+      } else {
+          alert('your file size is overwhelming 🙏')
+      }
+    }
+    else {
+      alert('You havent selected any file 🙏')
+    }
     };
 
+
+
+    handleFileUpload = () => {
+      if(this.state.file === '' || this.state.filebase64 === ''){
+        alert('MAPI : "I can see No Files here to upload 💁"')
+      } else if(this.state.file === null || this.state.filebase64 === null){
+        alert('MAPI : "I can see No Files here to upload 💁"')
+      } else if(this.state.file.split('.').pop() !== 'csv'){
+        alert('MAPI : "My owner said to upload only csv files, sorry I sound rude 🙏"')
+      } else if(this.refs.myfile.files[0].size > 3000000) {
+        alert('your file size is overwhelming 🙏')
+      } else {
+        axios.post('http://localhost:8000/matcher/', {
+          fileName: this.state.file,
+          filebase64: this.state.filebase64
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+    }
 
 
   render(){
@@ -113,11 +150,25 @@ class UploadExcel extends Component {
       }
     }
 
-    let fileuploadrender = <div></div>;
-    if(displayfileuploadform){
-      fileuploadrender = <div><label className="attendance-file-label" htmlFor="file">Please choose File</label>
-      <input className="attendance-file-input" type="file" id="file" ref="myfile" onChange={this.changedFile} /></div>
+    let fileNameClassName="file-name-none"
+    if(this.state.file !== '' && this.state.file !== null){
+      fileNameClassName = "file-name"
     }
+
+    let fileuploadrender;
+    if(displayfileuploadform){
+      fileuploadrender = <div className="file-input-con">
+        <div className="attendance-file-input-label-div">
+          <label className="attendance-file-label" htmlFor="file">Please choose File</label>
+          <input className="attendance-file-input" type="file" id="file" ref="myfile" onChange={this.changedFile} />
+        </div>
+        <div className={fileNameClassName}>{this.state.file.split(/.*[\/|\\]/)[1]}</div>
+        <button className="file-upload-button" onClick={this.handleFileUpload}>Upload</button>
+      </div>
+    }
+
+
+
 
 
     return(

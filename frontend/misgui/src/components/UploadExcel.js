@@ -49,22 +49,22 @@ class UploadExcel extends Component {
 
 
 
-  componentDidMount(){
-    let impyear = ''
-    if(moment().format('MMMM') === 'January'){
-      impyear = moment().subtract(1, 'years').format('YYYY')
-    } else {
-      impyear = moment().format('YYYY')
-    }
-
-    this.setState({
-      fileMonth : moment().subtract(1, 'months').format('MMMM'),
-      fileYear : impyear
-    })
-
-    console.log(moment().format('YYYY-MM-DD hh:mm:ss'))
-
-  }
+  // componentDidMount(){
+  //   let impyear = ''
+  //   if(moment().format('MMMM') === 'January'){
+  //     impyear = moment().subtract(1, 'years').format('YYYY')
+  //   } else {
+  //     impyear = moment().format('YYYY')
+  //   }
+  //
+  //   this.setState({
+  //     fileMonth : moment().subtract(1, 'months').format('MMMM'),
+  //     fileYear : impyear
+  //   })
+  //
+  //   console.log(moment().format('YYYY-MM-DD hh:mm:ss'))
+  //
+  // }
 
   changedFile = (e) => {
     console.log(this.files)
@@ -105,8 +105,9 @@ class UploadExcel extends Component {
           fileYear : this.state.fileYear,
           fileUploadTime : moment().format('YYYY-MM-DD hh:mm:ss')
         })
-        .then(function (response) {
+        .then( (response)  => {
           console.log(response);
+          this.props.getAttendanceFilesQuery.refetch()
         })
         .catch(function (error) {
           console.log(error);
@@ -128,11 +129,30 @@ class UploadExcel extends Component {
 
     componentDidMount(){
 
-      if(!this.props.getAttendanceFilesQuery.loading){
-        this.setState({
-          loading : false
-        })
+
+
+      let impyear = ''
+      if(moment().format('MMMM') === 'January'){
+        impyear = moment().subtract(1, 'years').format('YYYY')
+      } else {
+        impyear = moment().format('YYYY')
       }
+
+      this.setState({
+        fileMonth : moment().subtract(1, 'months').format('MMMM'),
+        fileYear : impyear
+      })
+
+      console.log(moment().format('YYYY-MM-DD hh:mm:ss'))
+
+
+        this.setState({
+          loading : this.props.getAttendanceFilesQuery.loading
+        })
+        console.log("lloadingggggggg")
+
+
+
 
       const allAttendanceFiles = this.props.getAttendanceFilesQuery.allAttendanceFiles  &&  this.props.getAttendanceFilesQuery.allAttendanceFiles != undefined ? this.props.getAttendanceFilesQuery.allAttendanceFiles : []
 
@@ -172,11 +192,13 @@ class UploadExcel extends Component {
     componentDidUpdate(prevProps){
       if (this.props.getAttendanceFilesQuery !== prevProps.getAttendanceFilesQuery) {
 
-      if(!this.props.getAttendanceFilesQuery.loading){
-        this.setState({
-          loading : false
-        })
-      }
+        console.log("refetched atlast")
+      console.log(this.props.getAttendanceFilesQuery.loading, "dddddddddddddddddd")
+
+      this.setState({
+        loading : this.props.getAttendanceFilesQuery.loading
+      })
+
       const allAttendanceFiles = this.props.getAttendanceFilesQuery.allAttendanceFiles  &&  this.props.getAttendanceFilesQuery.allAttendanceFiles != undefined ? this.props.getAttendanceFilesQuery.allAttendanceFiles : []
 
       console.log(moment().subtract(1, 'years').format('YYYY'))
@@ -304,20 +326,32 @@ class UploadExcel extends Component {
     //                         </div>
     // }
 
-
+    console.log(this.state.loading, "ding ding")
+    let finr = <div></div>
+    if(!this.state.loading){
 
     return(
 
       <div className="attendance-form-div">
-                                <div className="file-upload-message">
-                                    <div>{fileuploadmessage}</div>
-                                    <button className="files-view-button" onClick={this.handleFilesShow} >View Files</button>
-                                </div>
-                                <div className={filetableclassname}><button onClick={this.handleFilesClose} className="files-close-btn">close</button><table><tbody>{viewfilesrender}</tbody></table></div>
-                                {fileuploadrender}
-                            </div>
+          <div className="file-upload-message">
+              <div>{fileuploadmessage}</div>
+              <button className="files-view-button" onClick={this.handleFilesShow} >View Files</button>
+          </div>
+          <div className={filetableclassname}><button onClick={this.handleFilesClose} className="files-close-btn">close</button><table><tbody>{viewfilesrender}</tbody></table></div>
+          {fileuploadrender}
+      </div>
 
     )
+  }
+  else {
+    return(
+      <div></div>
+    )
+  }
+
+
+
+
   }
 }
 

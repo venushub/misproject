@@ -184,7 +184,7 @@ table {
   border-spacing:0 15px;
 }
 
-tr {
+.activity-item-div {
   box-sizing : border-box;
   margin : 1em;
   background-color: #fcf7f8;
@@ -1193,13 +1193,69 @@ td {
   flex-direction : column;
   align-items: center;
   padding : 1em;
+
+}
+
+.af-tr{
+  text-align: center;
+  margin : 0.5em;
+}
+
+.af-td {
+  text-align: center;
+}
+
+
+.files-table{
+  /* display : flex;
+  align-self: flex-start; */
+  font-family : verdana;
+  font-size : 1em;
+  padding : 1em;
+  width : 50%;
+  margin-top : 2em;
+  margin-bottom : 2em;
+  border : 0.1em dotted var(--dark);
+  text-align: center;
+  display : flex;
+  flex-direction: column;
+}
+
+.files-table-none{
+  display : none
+}
+
+.files-close-btn{
+  align-self: flex-end;
+  margin-left : 1em;
+  background-color: var(--extra-dark);
+  padding: 0.1em 0.4em 0.1em 0.4em;
+  border : 0.1em solid var(--extra-dark);
+  font-family : verdana;
+  font-size : 0.8em;
+  font-weight : bold;
+  color : var(--extra-light);
+  border-radius : 0.3em;
 }
 
 .file-upload-message {
+  display : flex;
   font-family:  verdana;
   width : 100%;
   padding-left: 2em;
   font-size : 1.2em;
+}
+
+.files-view-button{
+  margin-left : 1em;
+  background-color: var(--dark);
+  padding: 0.1em 0.4em 0.1em 0.4em;
+  border : 0.1em solid var(--dark);
+  font-family : verdana;
+  font-size : 0.5em;
+  font-weight : bold;
+  color : var(--extra-light);
+  border-radius : 0.3em;
 }
 
 .file-input-con {

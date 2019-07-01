@@ -37,6 +37,8 @@ const getAttendanceFilesQuery = gql`
   allAttendanceFiles {
     year
     month
+    fileName
+    timeOfUpload
   }
 }
 `

@@ -12,7 +12,12 @@ class UploadExcel extends Component {
 
     this.state = {
       file : '',
-      filebase64 : ''
+      filebase64 : '',
+      fileMonth : '',
+      fileYear : '',
+      viewFiles : false,
+      filepresent : true,
+      loading : true
     }
   }
 
@@ -43,6 +48,23 @@ class UploadExcel extends Component {
  }
 
 
+
+  componentDidMount(){
+    let impyear = ''
+    if(moment().format('MMMM') === 'January'){
+      impyear = moment().subtract(1, 'years').format('YYYY')
+    } else {
+      impyear = moment().format('YYYY')
+    }
+
+    this.setState({
+      fileMonth : moment().subtract(1, 'months').format('MMMM'),
+      fileYear : impyear
+    })
+
+    console.log(moment().format('YYYY-MM-DD hh:mm:ss'))
+
+  }
 
   changedFile = (e) => {
     console.log(this.files)
@@ -77,8 +99,11 @@ class UploadExcel extends Component {
         alert('your file size is overwhelming 🙏')
       } else {
         axios.post('http://localhost:8000/matcher/', {
-          fileName: this.state.file,
-          filebase64: this.state.filebase64
+          fileName: this.state.file.split(/.*[\/|\\]/)[1],
+          filebase64: this.state.filebase64,
+          fileMonth : this.state.fileMonth,
+          fileYear : this.state.fileYear,
+          fileUploadTime : moment().format('YYYY-MM-DD hh:mm:ss')
         })
         .then(function (response) {
           console.log(response);
@@ -89,43 +114,115 @@ class UploadExcel extends Component {
       }
     }
 
+    handleFilesClose = () => {
+      this.setState({
+        viewFiles : false
+      })
+    }
+
+    handleFilesShow = () => {
+      this.setState({
+        viewFiles : true
+      })
+    }
+
+    componentDidMount(){
+
+      if(!this.props.getAttendanceFilesQuery.loading){
+        this.setState({
+          loading : false
+        })
+      }
+
+      const allAttendanceFiles = this.props.getAttendanceFilesQuery.allAttendanceFiles  &&  this.props.getAttendanceFilesQuery.allAttendanceFiles != undefined ? this.props.getAttendanceFilesQuery.allAttendanceFiles : []
+
+      console.log(moment().subtract(1, 'years').format('YYYY'))
+      let filepresent = false;
+      if(moment().format('MMMM') === 'January'){
+        console.log("haaa jan hei")
+        allAttendanceFiles.map((af) => {
+          if(af.year === moment().subtract(1, 'years').format('YYYY')){
+            console.log('haaa year sahi hei hei')
+            if(af.month === moment().subtract(1, 'months').format('MMMM')){
+              console.log("haa ecember hei")
+              filepresent = true;
+            }
+          }
+          return null;
+        })
+      } else {
+        allAttendanceFiles.map((af) => {
+          if(af.year === moment().format('YYYY')){
+            console.log('haaa year sahi hei hei')
+            if(af.month === moment().subtract(1, 'months').format('MMMM')){
+              console.log("haa ecember hei")
+              filepresent = true;
+            }
+          }
+          return null;
+        })
+      }
+      this.setState({
+        filepresent : filepresent
+      })
+    }
+
+
+
+    componentDidUpdate(prevProps){
+      if (this.props.getAttendanceFilesQuery !== prevProps.getAttendanceFilesQuery) {
+
+      if(!this.props.getAttendanceFilesQuery.loading){
+        this.setState({
+          loading : false
+        })
+      }
+      const allAttendanceFiles = this.props.getAttendanceFilesQuery.allAttendanceFiles  &&  this.props.getAttendanceFilesQuery.allAttendanceFiles != undefined ? this.props.getAttendanceFilesQuery.allAttendanceFiles : []
+
+      console.log(moment().subtract(1, 'years').format('YYYY'))
+      let filepresent = false;
+      if(moment().format('MMMM') === 'January'){
+        console.log("haaa jan hei")
+        allAttendanceFiles.map((af) => {
+          if(af.year === moment().subtract(1, 'years').format('YYYY')){
+            console.log('haaa year sahi hei hei')
+            if(af.month === moment().subtract(1, 'months').format('MMMM')){
+              console.log("haa ecember hei")
+              filepresent = true;
+            }
+          }
+          return null;
+        })
+      } else {
+        allAttendanceFiles.map((af) => {
+          if(af.year === moment().format('YYYY')){
+            console.log('haaa year sahi hei hei')
+            if(af.month === moment().subtract(1, 'months').format('MMMM')){
+              console.log("haa ecember hei")
+              filepresent = true;
+            }
+          }
+          return null;
+        })
+      }
+      this.setState({
+        filepresent : filepresent
+      })
+    }
+    }
+
+    // componentDidUpdate(){}
+
 
   render(){
     console.log(this.state.file, this.state.filebase64)
     console.log(this.props)
 
+
+
     const allAttendanceFiles = this.props.getAttendanceFilesQuery.allAttendanceFiles  &&  this.props.getAttendanceFilesQuery.allAttendanceFiles != undefined ? this.props.getAttendanceFilesQuery.allAttendanceFiles : []
 
-    console.log(moment().subtract(1, 'years').format('YYYY'))
-    let filepresent = false;
-    if(moment().format('MMMM') === 'January'){
-      console.log("haaa jan hei")
-      allAttendanceFiles.map((af) => {
-        if(af.year === moment().subtract(1, 'years').format('YYYY')){
-          console.log('haaa year sahi hei hei')
-          if(af.month === moment().subtract(1, 'months').format('MMMM')){
-            console.log("haa ecember hei")
-            filepresent = true;
-          } else {
-            filepresent = false;
-          }
-        }
-        return null;
-      })
-    } else {
-      allAttendanceFiles.map((af) => {
-        if(af.year === moment().format('YYYY')){
-          console.log('haaa year sahi hei hei')
-          if(af.month === moment().format('MMMM')){
-            console.log("haa ecember hei")
-            filepresent = true;
-          } else {
-            filepresent = false;
-          }
-        }
-        return null;
-      })
-    }
+
 
     console.log(moment().subtract(1, 'years').format('YYYY'))
 
@@ -133,7 +230,7 @@ class UploadExcel extends Component {
     let displayfileuploadform = false
 
     if(moment().format('MMMM') === 'January'){
-      if(!filepresent){
+      if(!this.state.filepresent){
         fileuploadmessage = `⛔ Attendance file upload is pending for month ${moment().subtract(1, 'months').format('MMMM')} of year ${moment().subtract(1, 'years').format('YYYY')}`
         displayfileuploadform = true
       } else {
@@ -141,7 +238,7 @@ class UploadExcel extends Component {
         displayfileuploadform = false
       }
     } else {
-      if(!filepresent){
+      if(!this.state.filepresent){
         fileuploadmessage = `⛔ Attendance file upload is pending for month ${moment().subtract(1, 'months').format('MMMM')} of year ${moment().format('YYYY')}`
         displayfileuploadform = true
       } else {
@@ -155,9 +252,15 @@ class UploadExcel extends Component {
       fileNameClassName = "file-name"
     }
 
+
+
     let fileuploadrender;
-    if(displayfileuploadform){
-      fileuploadrender = <div className="file-input-con">
+    let fileinputclassname = "files-table-none"
+    if(!this.state.filepresent){
+      fileinputclassname = "file-input-con"
+    }
+    if(!this.state.filepresent){
+      fileuploadrender = <div className={fileinputclassname}>
         <div className="attendance-file-input-label-div">
           <label className="attendance-file-label" htmlFor="file">Please choose File</label>
           <input className="attendance-file-input" type="file" id="file" ref="myfile" onChange={this.changedFile} />
@@ -168,14 +271,52 @@ class UploadExcel extends Component {
     }
 
 
+    let viewfilesrender;
+
+      viewfilesrender = allAttendanceFiles.map(
+        (af, index) => {
+          return(
+            <tr key={index} className="af-tr">
+              <td className="af-td">{af.month}</td>
+              <td className="af-td">{af.year}</td>
+              <td className="af-td">{af.fileName}</td>
+              <td className="af-td">{af.timeOfUpload}</td>
+            </tr>
+          )
+        }
+      )
+      let filetableclassname = "files-table-none"
+      if(this.state.viewFiles){
+        filetableclassname = "files-table"
+      }
+
+    // let ultimaterender = <div>Loading..</div>;
+    // if(this.state.loading){
+    //   ultimaterender = <div>Loading..</div>
+    // } else {
+    //   ultimaterender =     <div className="attendance-form-div">
+    //                             <div className="file-upload-message">
+    //                                 <div>{fileuploadmessage}</div>
+    //                                 <button className="files-view-button" onClick={this.handleFilesShow} >View Files</button>
+    //                             </div>
+    //                             <div className={filetableclassname}><button onClick={this.handleFilesClose} className="files-close-btn">close</button><table><tbody>{viewfilesrender}</tbody></table></div>
+    //                             {fileuploadrender}
+    //                         </div>
+    // }
 
 
 
     return(
+
       <div className="attendance-form-div">
-        <div className="file-upload-message">{fileuploadmessage}</div>
-        {fileuploadrender}
-      </div>
+                                <div className="file-upload-message">
+                                    <div>{fileuploadmessage}</div>
+                                    <button className="files-view-button" onClick={this.handleFilesShow} >View Files</button>
+                                </div>
+                                <div className={filetableclassname}><button onClick={this.handleFilesClose} className="files-close-btn">close</button><table><tbody>{viewfilesrender}</tbody></table></div>
+                                {fileuploadrender}
+                            </div>
+
     )
   }
 }

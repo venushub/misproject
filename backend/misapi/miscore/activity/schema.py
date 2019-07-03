@@ -196,7 +196,6 @@ class UpdateActivity(graphene.Mutation):
         # activity.save()
 
         return UpdateActivity(
-
             activityType=  activityObject.activityType,
             activityDescription = activityObject.activityDescription,
             activityStartTime = activityObject.activityStartTime,

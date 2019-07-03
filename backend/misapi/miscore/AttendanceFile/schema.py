@@ -9,10 +9,12 @@ class AttendanceFileType(DjangoObjectType):
 
 class Query(object):
     all_attendance_files = graphene.List(AttendanceFileType)
+    # attendance_files_for_filter = graphene.List()
 
     def resolve_all_attendance_files(self, info, **kwargs):
         return AttendanceFile.objects.all()
 
+    # def
 
 # class CreateActivityType(graphene.Mutation):
 #     id = graphene.Int()

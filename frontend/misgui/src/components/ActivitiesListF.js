@@ -50,6 +50,8 @@ class ActivitiesListF extends Component {
           // ).asHours().toFixed(2)
           activity.activityHours
 
+
+
         )
          }
         }

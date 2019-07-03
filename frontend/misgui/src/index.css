@@ -1176,7 +1176,7 @@ td {
 
 .attendance-file-label {
   background-color: var(--light);
-  padding: 1em 5em 1em 5em;
+  padding: 1em 3em 1em 3em;
   border : 0.1em dotted var(--dark);
   font-family : verdana;
   font-size : 1.2em;
@@ -1275,10 +1275,11 @@ td {
 .file-name{
   margin-left : 1em;
   background-color: var(--extra-light);
-  padding: 1em 5em 1em 5em;
+  padding: 1em 1em 1em 1em;
   border : 0.1em dotted var(--dark);
   font-family : verdana;
   font-size : 1.2em;
+  z-index : 2
 }
 
 .file-name-none {
@@ -1289,7 +1290,7 @@ td {
 .file-upload-button{
   margin-left : 1em;
   background-color: var(--extra-light);
-  padding: 1em 5em 1em 5em;
+  padding: 1em 1em 1em 1em;
   border : 0.1em solid var(--dark);
   font-family : verdana;
   font-size : 1.2em;
@@ -1300,7 +1301,7 @@ td {
 .file-upload-button:hover{
   margin-left : 1em;
   background-color: var(--dark);
-  padding: 1em 5em 1em 5em;
+  padding: 1em 1em 1em 1em;
   border : 0.1em solid var(--dark);
   font-family : verdana;
   font-size : 1.2em;
@@ -1309,3 +1310,56 @@ td {
   transition : 0.2s;
   cursor : pointer;
 }
+
+
+
+
+.admin-all-div {
+  margin-top : 0.5em;
+  display : flex;
+}
+
+.admin-manage-card{
+  border : 0.2em solid var(--extra-light);
+  padding : 1em;
+  background-color: var(--extra-light);
+  font-family:  verdana;
+  font-size : 1em;
+  border-radius: 0.5em;
+  font-weight: bold;
+  color : var(--extra-dark);
+  margin : 1em;
+  box-shadow: 0px 0px 10px var(--light);
+}
+
+.admin-manage-card:hover{
+    box-shadow: 0px 0px 10px var(--light);
+    cursor : pointer
+}
+
+.admin-manage-card-selected{
+  border : 0.2em solid var(--extra-light);
+  padding : 1em;
+  background-color: var(--extra-light);
+  font-family:  verdana;
+  font-size : 1em;
+  border-radius: 0.5em;
+  font-weight: bold;
+  color : var(--extra-dark);
+  margin : 1em;
+  box-shadow: 0px 0px 10px var(--dark);
+}
+
+.admin-manage-card:focus{
+  outline : none
+}
+
+.admin-manage-card-selected:focus{
+  outline : none
+}
+
+/* .admin-comp-mat{
+  width : 90%;
+  height : 70vh;
+  background-color: green;
+} */

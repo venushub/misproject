@@ -1,6 +1,8 @@
 import React , {Component} from 'react'
 import { Link , NavLink} from 'react-router-dom'
 import { getUserName } from './helpers/getUserName';
+import {getMe} from './queries/queries'
+import { graphql, compose } from 'react-apollo';
 
 
 
@@ -15,10 +17,19 @@ class Header extends Component{
       dark : "rgb(52,73,71)",
       light : "rgb(174,182,191)",
       extralight : "rgb(235,237,239)",
+      showadminpanel : false
     }
   }
 
   componentDidMount(){
+
+    const me = this.props.getMe.me  &&  this.props.getMe.me != undefined ? this.props.getMe.me : false
+
+    if(me.isSuperuser){
+      this.setState({
+        showadminpanel : true
+      })
+    }
 
     let mytheme = localStorage.getItem('theme');
     if(mytheme === "green") {
@@ -66,11 +77,28 @@ class Header extends Component{
         username : username
       })
 
-
-
   }
 
+  componentDidUpdate(prevProps){
+      if (this.props.getMe !== prevProps.getMe) {
+          if(this.props.getMe.me.isSuperuser){
+            this.setState({
+              showadminpanel : true
+            })
+          }
+      }
+  }
+
+
   render(){
+
+
+    let adminpanelrender = null;
+    if(this.state.showadminpanel){
+      adminpanelrender = <NavLink className="Header-nav-item" to="/admintoolkit" activeStyle={{  fontWeight: "bold",  color: this.state.extralight}} >AdminSite</NavLink>
+
+    }
+
     return(
       <div className="Header-div">
         <div className="bundle">
@@ -81,6 +109,7 @@ class Header extends Component{
           <NavLink className="Header-nav-item" to="/activities" activeStyle={{  fontWeight: "bold",  color: this.state.extralight}}>Activities</NavLink>
           <NavLink className="Header-nav-item" to="/dashboard" activeStyle={{  fontWeight: "bold",  color: this.state.extralight}} >Dashboard</NavLink>
           <NavLink className="Header-nav-item" to="/matcher" activeStyle={{  fontWeight: "bold",  color: this.state.extralight}} >Matcher</NavLink>
+          {adminpanelrender}
           <NavLink className="Header-nav-item" to="/settings" activeStyle={{  fontWeight: "bold",  color: this.state.extralight}} >Settings</NavLink>
         </div>
       </div>
@@ -89,4 +118,6 @@ class Header extends Component{
 }
 
 
-export default Header
+export default compose(
+    graphql(getMe, {name : "getMe"}),
+  )(Header)

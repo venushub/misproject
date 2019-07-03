@@ -9,6 +9,9 @@ import Logout from './Logout'
 import Dashboard from './Dashboard'
 import Settings from './Settings'
 import Matcher from './Matcher'
+import {getMe} from './queries/queries'
+import { graphql, compose } from 'react-apollo';
+import AdminToolKit from './AdminToolKit'
 
 
 class App extends Component {
@@ -16,7 +19,8 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      color : "orange"
+      color : "orange",
+      showadminpanel : false
     }
   }
 
@@ -26,6 +30,17 @@ class App extends Component {
 
 
   componentDidMount(){
+
+    const me = this.props.getMe.me  &&  this.props.getMe.me != undefined ? this.props.getMe.me : false
+
+    if(me.isSuperuser){
+      this.setState({
+        showadminpanel : true
+      })
+    }
+
+
+
     let mytheme = localStorage.getItem('theme');
     console.log("heyyyy blueeeee")
     if(mytheme==="blue"){
@@ -56,7 +71,24 @@ class App extends Component {
   }
 
 
+  componentDidUpdate(prevProps){
+      if (this.props.getMe !== prevProps.getMe) {
+          if(this.props.getMe.me.isSuperuser){
+            this.setState({
+              showadminpanel : true
+            })
+          }
+      }
+  }
+
+
   render(){
+    let adminpanelrender = null;
+    if(this.state.showadminpanel){
+      adminpanelrender = <Route path="/admintoolkit" exact component={AdminToolKit} />
+    }
+
+
 
     return(
         <Switch>
@@ -70,6 +102,7 @@ class App extends Component {
             <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/settings" exact component={Settings} />
             <Route path="/matcher" exact component={Matcher} />
+            {adminpanelrender}
           </AuthenticatedComponent>
 
         </Switch>
@@ -78,4 +111,6 @@ class App extends Component {
 }
 
 
-export default App
+export default compose(
+    graphql(getMe, {name : "getMe"}),
+  )(App)

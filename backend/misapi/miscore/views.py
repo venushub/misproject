@@ -38,7 +38,7 @@ def MatcherView(request):
 
     html = "<html><body>Hi</body></html>"
 
-    jsonredata = json.loads(request.body)
+    jsonredata = json.loads(request.body.decode("utf-8"))
 
     text = jsonredata['filebase64']
 
@@ -58,20 +58,26 @@ def MatcherView(request):
     # print('done saving user')
 
     base64.decode(open('data/encoded.txt', 'r'), open('data/decoded.csv', 'wb'))
-    #
-    reader = csv.DictReader(open('data/decoded.csv', 'r'))
+
+    reader = csv.DictReader(open('data/decoded.csv', 'rt'))
     out=open('data/out.json','w');
     out.write(json.dumps([row for row in reader]))
 
 
-    json_data = open('data/out.json')
-    data1 = json.load(json_data)
+    # json_data = open('data/out.json', 'r')
+    # print(json_data)
+    # try:
+    with open("data/out.json") as read_file:
+        data1 = json.load(read_file)
+    # except:
+    #     print("nahi hopare")
+
+    # data1 = json.loads(json_data)
     print(data1[0]['cardno'])
 
 
 
     print("my month issssssssss", monthToNum('June'))
-
 
     # cardNo  = models.CharField(max_length=100)
     # workGroup  = models.CharField(max_length=100)
@@ -139,7 +145,7 @@ def MatcherView(request):
     print(myList)
 
     #print(datetime.datetime.strptime(data1[0]['FirstIn'], '%d-%B-%y %H:%M:%S'))
-    #Attendance.objects.bulk_create(myList)
+    Attendance.objects.bulk_create(myList)
 
 
     return HttpResponse(html)

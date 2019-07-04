@@ -32,6 +32,19 @@ const getProjectsQuery = gql`
 }
 `
 
+const getProfilesQuery = gql`
+{
+  allProfiles {
+    id
+    empCode
+    user{
+      id
+      username
+    }
+  }
+}
+`
+
 const getAttendanceFilesQuery = gql`
 {
   allAttendanceFiles {
@@ -261,4 +274,4 @@ const createUserMutation = gql`
 //   }
 // `
 
-export {getTokenMutation, getMe, getAttendanceFilesQuery , verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};
+export {getTokenMutation, getMe, getProfilesQuery , getAttendanceFilesQuery , verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};

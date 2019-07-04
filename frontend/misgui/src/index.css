@@ -1315,20 +1315,22 @@ td {
 
 
 .admin-all-div {
-  margin-top : 0.5em;
   display : flex;
+  height : 10vh;
+  padding : 0.5em;
+  align-items: center;
 }
 
 .admin-manage-card{
   border : 0.2em solid var(--extra-light);
-  padding : 1em;
+  padding : 0.3em;
   background-color: var(--extra-light);
   font-family:  verdana;
   font-size : 1em;
   border-radius: 0.5em;
   font-weight: bold;
   color : var(--extra-dark);
-  margin : 1em;
+  margin-left : 1em;
   box-shadow: 0px 0px 10px var(--light);
 }
 
@@ -1339,14 +1341,14 @@ td {
 
 .admin-manage-card-selected{
   border : 0.2em solid var(--extra-light);
-  padding : 1em;
+  padding : 0.3em;
   background-color: var(--extra-light);
   font-family:  verdana;
   font-size : 1em;
   border-radius: 0.5em;
   font-weight: bold;
   color : var(--extra-dark);
-  margin : 1em;
+  margin-left : 1em;
   box-shadow: 0px 0px 10px var(--dark);
 }
 
@@ -1358,8 +1360,91 @@ td {
   outline : none
 }
 
-/* .admin-comp-mat{
-  width : 90%;
-  height : 70vh;
-  background-color: green;
-} */
+.admin-comp-mat{
+  display : flex;
+  justify-content: center;
+  align-items: center;
+  width : 100%;
+  height : 80vh;
+  background-color: var(--extra-light);
+}
+
+.admin-sub-div{
+  display : flex;
+  flex-direction: column;
+  align-items: center;
+  width : 100%;
+  height : 75vh;
+  background-color : var(--extra-light);
+  /* margin : 1em; */
+}
+
+.profiles-table-div {
+  display: flex;
+  justify-content: center;
+  overflow-y: scroll;
+  width : 100%;
+}
+
+.update-profile-div {
+  align-self: flex-start;
+  padding : 1em
+}
+
+.update-profile-label{
+  font-family: verdana;
+  font-weight: bold;
+  /* border : 0.1em dotted var(--dark); */
+  background-color: var(--extra-light);
+  color : var(--dark);
+
+}
+
+.update-profile-input{
+  font-family: verdana;
+  font-weight: bold;
+  border : 0.1em dotted var(--dark);
+  background-color: var(--extra-light);
+  color : var(--dark);
+  padding : 0.5em 0.5em 0.5em 0.5em;
+}
+
+.update-profile-input:focus{
+  outline : none
+}
+
+.display-name-update{
+  font-family: verdana;
+  font-weight: bold;
+  border : 0.1em dotted var(--dark);
+  background-color: var(--extra-light);
+  color : var(--dark);
+  padding : 0.5em 0.5em 0.5em 0.5em;
+  margin-right : 1em;
+}
+
+.profile-update-button{
+  font-family: verdana;
+  font-weight: bold;
+  border : 0.1em solid var(--dark);
+  background-color: var(--extra-light);
+  color : var(--dark);
+  padding : 0.5em 0.5em 0.5em 0.5em;
+  margin-left : 1em;
+}
+
+.profile-update-button:hover{
+  font-family: verdana;
+  font-weight: bold;
+  border : 0.1em solid var(--dark);
+  background-color: var(--dark);
+  color : var(--extra-light);
+  padding : 0.5em 0.5em 0.5em 0.5em;
+  margin-left : 1em;
+  transition : 0.2s;
+  cursor: pointer;
+}
+
+.profile-update-button:focus{
+  outline : none
+}

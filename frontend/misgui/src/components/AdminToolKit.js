@@ -79,12 +79,12 @@ class AdminToolKit extends Component {
 
     let buttons_render = this.state.buttons.map(
       (button) => {
-        let btnclass = "admin-manage-card"
+        let btnclass = "filter-button"
         if(button.active){
-          btnclass = "admin-manage-card-selected"
+          btnclass = "filter-button-active"
         }
         return(
-          <button className={btnclass} onClick={() => this.handleComp(button)}>{button.name}</button>
+          <button key={button.id} className={btnclass} onClick={() => this.handleComp(button)}>{button.name}</button>
         )
       }
     )

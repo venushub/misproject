@@ -73,7 +73,9 @@ class App extends Component {
 
   componentDidUpdate(prevProps){
       if (this.props.getMe !== prevProps.getMe) {
-          if(this.props.getMe.me.isSuperuser){
+        const me = this.props.getMe.me  &&  this.props.getMe.me != undefined ? this.props.getMe.me : false
+
+          if(me.isSuperuser){
             this.setState({
               showadminpanel : true
             })

@@ -79,6 +79,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     empCode = models.TextField(max_length=30, blank=True)
     location = models.CharField(max_length=30, blank=True)
+    profilePic = models.TextField()
 
 
 @receiver(post_save, sender=User)

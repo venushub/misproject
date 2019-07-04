@@ -9,10 +9,10 @@ class Theme extends Component {
 
     this.state = {
       themes : [
-        {id : 1, color : "red", active : false},
-        {id : 2, color : "blue", active : false},
-        {id : 3, color : "green", active : false},
-        {id : 4, color : "yellow", active : false},
+        {id : 1, color : "red", active : false, displayColor : "rgb(146, 43, 33)"},
+        {id : 2, color : "blue", active : false, displayColor : "rgb(40,55,71)"},
+        {id : 3, color : "green", active : false, displayColor : "rgb(25,111,61)"},
+        {id : 4, color : "yellow", active : false, displayColor : "rgb(154, 125, 10)"},
       ],
     }
   }
@@ -25,10 +25,10 @@ class Theme extends Component {
     oldthemes.map(
       (theme) => {
         if(theme.color === mytheme){
-          newthemes.push({id : theme.id, color : theme.color, active : true})
+          newthemes.push({id : theme.id, color : theme.color, active : true, displayColor : theme.displayColor})
         }
      else {
-        newthemes.push({id : theme.id, color : theme.color, active : false})
+        newthemes.push({id : theme.id, color : theme.color, active : false,  displayColor : theme.displayColor})
       }
         }
     )
@@ -45,10 +45,10 @@ class Theme extends Component {
     oldthemes.map(
       (theme) => {
         if(theme.id === inTheme.id){
-          newthemes.push({id : theme.id, color : theme.color, active : true})
+          newthemes.push({id : theme.id, color : theme.color, active : true, displayColor : theme.displayColor})
         }
      else {
-        newthemes.push({id : theme.id, color : theme.color, active : false})
+        newthemes.push({id : theme.id, color : theme.color, active : false, displayColor : theme.displayColor})
       }
         }
     )
@@ -70,9 +70,9 @@ class Theme extends Component {
     this.state.themes.map(
       (theme, index) => {
         if(theme.active) {
-           color_svgs.push(<circle key={index} onClick = {() => this.handleThemeChange(theme)} cx={(index*40)+(20*(index+2))} cy="25" r="20" fill={theme.color}  stroke="grey" strokeWidth="3" />)
+           color_svgs.push(<circle key={index} onClick = {() => this.handleThemeChange(theme)} cx={(index*40)+(20*(index+2))} cy="25" r="20" fill={theme.displayColor} stroke="grey" strokeWidth="3" />)
         } else {
-          color_svgs.push(<circle key={index} onClick = {() => this.handleThemeChange(theme)}  cx={(index*40)+(20*(index+2))} cy="25" r="20" fill={theme.color}  />)
+          color_svgs.push(<circle key={index} onClick = {() => this.handleThemeChange(theme)}  cx={(index*40)+(20*(index+2))} cy="25" r="20" fill={theme.displayColor}  />)
         }
         return null;
       }

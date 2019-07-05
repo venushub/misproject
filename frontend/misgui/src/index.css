@@ -924,7 +924,7 @@ td {
 
 
 .filter-details {
-  padding : 2em;
+  padding : 1em;
   background-color: var(--extra-light);
   border-radius: 0px 0px 15px 15px;
   display : flex;
@@ -1388,7 +1388,7 @@ td {
 
 .update-profile-div {
   align-self: flex-start;
-  padding : 1em
+  padding : 2em
 }
 
 .update-profile-label{
@@ -1447,4 +1447,21 @@ td {
 
 .profile-update-button:focus{
   outline : none
+}
+
+
+.filter-details-admin-userm {
+  padding : 1em 1em 1em 2em;
+  background-color: var(--extra-light);
+  border-radius: 0px 0px 15px 15px;
+  display : flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width : 100%;
+}
+
+
+.none {
+  display : none
 }

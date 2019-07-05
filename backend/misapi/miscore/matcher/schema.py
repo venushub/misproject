@@ -11,7 +11,10 @@ class Query(object):
     all_attendance = graphene.List(AttendanceType)
 
     def resolve_all_attendance(self, info, **kwargs):
-        return Attendance.objects.all()
+        if(info.context.user.is_superuser):
+            return Attendance.objects.all()
+        else:
+            return Attendance.objects.filter(empCode = info.context.user.profile.empCode)
 
 
 # class CreateAttendance(graphene.Mutation):

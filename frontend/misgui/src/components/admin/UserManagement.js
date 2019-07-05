@@ -1,5 +1,5 @@
 import React , {Component} from 'react'
-import {getProfilesQuery} from '../queries/queries'
+import {getProfilesQuery, updateProfile} from '../queries/queries'
 import { graphql, compose } from 'react-apollo';
 
 
@@ -10,7 +10,9 @@ class UserManagement extends Component {
     this.state = {
       filterInput : '',
       displayName : '',
-      empCode : 'ZZZZ'
+      empCode : 'ZZZZ',
+      user : '',
+      displayForm : false
     }
 
   }
@@ -27,9 +29,10 @@ class UserManagement extends Component {
       // console.log(activity)
       this.setState({
         displayName : profile.user.username,
-        empCode : profile.empCode
-      })
-    }, 500);
+        empCode : profile.empCode,
+        user : profile.user.id,
+        displayForm : true
+      })}, 500);
   }
 
   handleButtonRelease = () => {
@@ -40,6 +43,28 @@ class UserManagement extends Component {
   handleUpdateProfile = (e) => {
     e.preventDefault()
     alert("bro")
+    this.props.updateProfile({
+        variables: {
+          user: this.state.user,
+          empCode: this.state.empCode,
+          location: 'default',
+          profilePic: 'default',
+        }
+    }).then(res => {
+      // console.log(res)
+      //window.location.reload()
+      //localStorage.setItem('cool-jwt', res.data.tokenAuth.token)
+      // this.clearForm()
+      // this.handleDisplayForm()
+      // this.props.handleReturnSubmit()
+      this.props.getProfilesQuery.refetch()
+      console.log(res)
+      this.setState({
+        displayForm : false
+      })
+    }).catch(err => {
+      console.log("error aya")
+    });
   }
 
 
@@ -74,7 +99,11 @@ class UserManagement extends Component {
 
     })
 
+    let updateformclassname = "none"
 
+    if(this.state.displayForm){
+      updateformclassname = "update-profile-div"
+    }
 
 
     console.log(this.props)
@@ -83,7 +112,7 @@ class UserManagement extends Component {
       <div className="filter-details">
         <input placeholder="Search Items Here" name="filterInput" className="filter-items-filter" type="text" onChange={this.handleFilterInputChange} value={this.state.filterInput} />
       </div>
-      <div className="update-profile-div">
+      <div className={updateformclassname}>
         <form className="profile-update-form" onSubmit={this.handleUpdateProfile}>
           <label  className="display-name-update">{this.state.displayName}</label>
           <label  className="update-profile-label" htmlFor="empCode">Emp Code</label>
@@ -108,4 +137,5 @@ class UserManagement extends Component {
 
 export default compose(
     graphql(getProfilesQuery, { name: "getProfilesQuery" }),
+    graphql(updateProfile, {name : "updateProfile"})
   )(UserManagement)

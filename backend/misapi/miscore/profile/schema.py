@@ -1,6 +1,8 @@
 import graphene
 from graphene_django import DjangoObjectType
 from miscore.models import Profile
+from django.contrib.auth import get_user_model
+from users.schema import UserType
 
 class ProfileType(DjangoObjectType):
     class Meta:
@@ -14,32 +16,46 @@ class Query(object):
         return Profile.objects.all()
 
 
-# class CreateAttendance(graphene.Mutation):
-#     id = graphene.Int()
-#     activityTypeName= graphene.String()
-#     activityTypeDesc = graphene.String()
-#
-#     class Arguments:
-#         activityTypeName = graphene.String(required= True)
-#         activityTypeDesc=graphene.String(required=True)
-#
-#
-#     def mutate(self, info,  activityTypeName, activityTypeDesc):
-#         print(info)
-#         activity = ActivityType(
-#             activityTypeName=  activityTypeName,
-#             activityTypeDesc =  activityTypeDesc,
-#         )
-#         activity.save()
-#
-#
-#         return CreateActivityType(
-#             id = activity.id,
-#             activityTypeName=  activity.activityTypeName,
-#             activityTypeDesc = activity.activityTypeDesc
-#         )
-#
-#
-#
-# class Mutation(graphene.ObjectType):
-#     create_activity_type = CreateActivityType.Field()
+class UpdateProfile(graphene.Mutation):
+    id = graphene.Int()
+    user= graphene.Field(UserType)
+    empCode = graphene.String()
+    location = graphene.String()
+    profilePic = graphene.String()
+
+    class Arguments:
+        user = graphene.String(required= True)
+        empCode=graphene.String(required=True)
+        location=graphene.String(required=True)
+        profilePic=graphene.String(required=True)
+
+
+    def mutate(self, info,  user, empCode,location ,  profilePic):
+        print(info)
+
+        if(user != 'default'):
+            userInstance = get_user_model().objects.get(id = int(user))
+        else:
+            userInstance = info.context.user
+        profile = Profile.objects.get(user = userInstance)
+        if(empCode != 'default'):
+            profile.empCode = empCode
+        if(location != 'default'):
+            profile.location = location
+        if(profilePic != 'default'):
+            profile.profilePic = profilePic
+
+        profile.save()
+
+        return UpdateProfile(
+            id = profile.id,
+            user=  profile.user,
+            empCode = profile.empCode,
+            location = profile.location,
+            profilePic = profile.profilePic
+        )
+
+
+
+class Mutation(graphene.ObjectType):
+    update_profile = UpdateProfile.Field()

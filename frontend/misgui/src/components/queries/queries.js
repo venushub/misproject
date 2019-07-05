@@ -45,6 +45,27 @@ const getProfilesQuery = gql`
 }
 `
 
+const updateProfile = gql`
+      mutation updateProfile($user: String!, $empCode: String!, $location: String!, $profilePic: String!){
+         updateProfile(user: $user, empCode: $empCode, location : $location, profilePic: $profilePic){
+            empCode
+        }
+    }
+`;
+
+
+const getAttendanceQuery = gql`
+  query allAttendance($month : String, $year : String){
+    allAttendance(month : $search, year : $year){
+      id
+    }
+  }
+`
+
+
+
+
+
 const getAttendanceFilesQuery = gql`
 {
   allAttendanceFiles {
@@ -274,4 +295,4 @@ const createUserMutation = gql`
 //   }
 // `
 
-export {getTokenMutation, getMe, getProfilesQuery , getAttendanceFilesQuery , verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};
+export {getTokenMutation, getMe, getProfilesQuery ,updateProfile, getAttendanceQuery ,getAttendanceFilesQuery , verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};

@@ -55,9 +55,10 @@ const updateProfile = gql`
 
 
 const getAttendanceQuery = gql`
-  query allAttendance($month : String, $year : String){
-    allAttendance(month : $search, year : $year){
+  query allAttendance($criteria : String){
+    allAttendance(criteria : $criteria){
       id
+      totalHours
     }
   }
 `
@@ -163,6 +164,42 @@ const getActivitiesForWeekQuery = gql`
     }
   }
 `
+
+
+const getActivitiesForMonthQuery = gql`
+  query allActivitiesForMonth($criteria : String){
+    allActivitiesForMonth(criteria : $criteria){
+      id
+      activityProject {
+        projectName
+        id
+      }
+      activityUser {
+        username
+      }
+      activityType {
+        activityTypeName
+        id
+      }
+      activityTypeIdentifier{
+        activityTypeIdentifierName
+        id
+        activityTypeIdentifierSubCat
+      }
+      activityDescription
+      activityStartTime
+      activityEndTime
+      activityHours
+    }
+  }
+`
+
+
+
+
+
+
+
 
 const getActivitiesForFilterQuery = gql`
   query allActivitiesForFilter($search : String){
@@ -295,4 +332,4 @@ const createUserMutation = gql`
 //   }
 // `
 
-export {getTokenMutation, getMe, getProfilesQuery ,updateProfile, getAttendanceQuery ,getAttendanceFilesQuery , verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};
+export {getTokenMutation, getMe, getProfilesQuery ,updateProfile, getAttendanceQuery ,getAttendanceFilesQuery , getActivitiesForMonthQuery  , verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};

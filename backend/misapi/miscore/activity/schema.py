@@ -34,6 +34,7 @@ class Query(object):
     all_activities = graphene.List(ActivityType)
     all_activities_for_week = graphene.List(ActivityType, search=graphene.String())
     all_activities_for_filter = graphene.List(ActivityType, search=graphene.String())
+    all_activities_for_month = graphene.List(ActivityType, criteria=graphene.String())
 
     def resolve_all_activities(self, info, **kwargs):
         print("the user currently logged in is", info.context.user)
@@ -68,6 +69,14 @@ class Query(object):
         else:
             return Activity.objects.filter(activityUser = info.context.user.id, activityStartTime__week = int(search))
 
+    def resolve_all_activities_for_month(self, info, criteria, **kwargs):
+        my_criteria = json.loads(criteria)
+        userInstance = get_user_model().objects.filter(username = my_criteria["user"])[0]
+        print("Kyaaaaaaaaa")
+        if(info.context.user.is_superuser):
+            return Activity.objects.filter(activityUser = userInstance.id, activityStartTime__month = int(my_criteria["month"]), activityStartTime__year = int(my_criteria["year"]))
+        else:
+            return Activity.objects.filter(activityUser = info.context.user.id , activityStartTime__month = int(my_criteria["month"]), activityStartTime__year = int(my_criteria["year"]))
 
 
 class CreateActivity(graphene.Mutation):

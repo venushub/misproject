@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import {getMe, getAttendanceQuery} from './queries/queries'
+import {getMe, getAttendanceQuery, getUsersQuery} from './queries/queries'
 import { graphql, compose } from 'react-apollo';
 import Header from './Header'
+import Matching from './Matching'
 import UploadExcel from './UploadExcel'
 import moment from 'moment'
 
@@ -28,12 +29,15 @@ class Matcher extends Component {
         {id : 11, name : 'November', active : false},
         {id : 12, name : 'December', active : false}
       ],
-        selected_month : moment().format('m'),
+        selected_month : moment().format('M'),
       years : [
         {id : 1, name : '2019', active : false},
         {id : 1, name : '2020', active : false}
       ],
       selected_year : moment().format('YYYY'),
+      usersView : false,
+      filterInput : '',
+      selected_user : 'select user'
     }
   }
 
@@ -66,11 +70,50 @@ class Matcher extends Component {
     })
   }
 
+  handleYearChange = (e) => {
+    this.setState({
+      [e.target.name] : e.target.value
+    })
+  }
+
+  handleFilterInputChange = (e) => {
+    this.setState({
+      [e.target.name] : e.target.value
+    })
+  }
+
+  handleUsersView = () => {
+    this.setState({
+      usersView : true
+    })
+  }
+
+  handleCloseFilterDrop = () => {
+    this.setState({
+      usersView : false
+    })
+  }
+
+  selectUser = (user) => {
+    this.setState({
+      selected_user : user.username
+    })
+  }
+
+  // componentDidMount(){
+  //   const users = this.props.getUsersQuery.users  &&  this.props.getUsersQuery.users != undefined ? this.props.getUsersQuery.users : []
+  //
+  //   this.setState({
+  //
+  //   })
+  // }
+
+
+
 
   render(){
-
     console.log("month isssss",moment().format('YYYY'))
-    console.log("ggggggg",this.state.selected_month)
+    console.log("uuuuuuuu",this.state.selected_month, this.props)
     let upload_excel;
     if(this.state.showuploadform){
       upload_excel  = <UploadExcel />
@@ -83,19 +126,53 @@ class Matcher extends Component {
 
     let year_options_render = [];
     this.state.years.map((year, index) => {
-      year_options_render.push(<option key={index} value={year.id}>{year.name}</option>)
+      year_options_render.push(<option key={index} value={year.name}>{year.name}</option>)
     })
+
+
+    let filter_details_class = "filter-details-none"
+    if(this.state.usersView){
+      filter_details_class = "filter-details"
+    }
+
+
+    let display_users = <div>users...</div>;
+
+    const closebutton  = <button className="close-filter-drop" onClick={this.handleCloseFilterDrop}>❌</button>
+
+    const users = this.props.getUsersQuery.users  &&  this.props.getUsersQuery.users != undefined ? this.props.getUsersQuery.users : []
+
+    display_users = users.map((user, index) => {
+      let button_here_class = "filter-sub-item-selected"
+        if(user.username === this.state.selected_user){
+          button_here_class  = "filter-sub-item-selected"
+        } else {
+          button_here_class = "filter-sub-item-deselected"
+        }
+        if(user.username.includes(this.state.filterInput)){
+       return(<button key={index} className={button_here_class} onClick={() => this.selectUser(user)}>{user.username}</button>)
+        }else {
+          return null
+        }
+      }
+    )
+
 
     return(
       <div>
-      <Header />
-      {upload_excel}
-      <div>
-        <select name="selected_month" onChange={this.handleMonthChange} value={this.state.selected_month}>{month_options_render}</select>
-      </div>
-      <div>
-        <select>{year_options_render}</select>
-      </div>
+        <Header />
+        {upload_excel}
+        <div className="selects-div">
+          <div>
+            <select className="select-drop" name="selected_month" onChange={this.handleMonthChange} value={this.state.selected_month}>{month_options_render}</select>
+          </div>
+          <div>
+            <select className="select-drop" name="selected_year" onChange={this.handleYearChange} value={this.state.selected_year}>{year_options_render}</select>
+          </div>
+          <button  className="select-drop" onClick={this.handleUsersView} >{this.state.selected_user}</button>
+        </div>
+        <div className={filter_details_class}>  <input placeholder="Search Items Here" name="filterInput" className="filter-items-filter" type="text" onChange={this.handleFilterInputChange} value={this.state.filterInput} /><div className = "filter-ud"><div>{display_users}</div><div>{closebutton}</div></div></div>
+        <Matching criteria={JSON.stringify({month : this.state.selected_month , year : this.state.selected_year, user : this.state.selected_user})} />
       </div>
     )
   }
@@ -104,5 +181,5 @@ class Matcher extends Component {
 
 export default compose(
     graphql(getMe, {name : "getMe"}),
-    graphql(getAttendanceQuery, {name : "getAttendanceQuery"}),
+    graphql(getUsersQuery, {name : "getUsersQuery"}),
   )(Matcher)

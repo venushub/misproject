@@ -3,6 +3,7 @@ from graphene_django import DjangoObjectType
 from miscore.models import Project
 
 
+
 class ProjectType(DjangoObjectType):
     class Meta:
         model = Project

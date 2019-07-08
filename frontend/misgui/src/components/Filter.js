@@ -925,15 +925,7 @@ class Filter extends Component {
             </div>
           <div className={filter_details_class}>  <input placeholder="Search Items Here" name="filterInput" className="filter-items-filter" type="text" onChange={this.handleFilterInputChange} value={this.state.filterInput} /><div className = "filter-ud"><div>{display_filter_details_render}</div><div>{closebutton}</div></div></div>
         </div>
-
-
-
-
-        <ActivitiesListF
-                         filter_criteria={this.state.filter_string}
-                         filter_group_criteria = {this.state.GB}
-
-        />
+        <ActivitiesListF filter_criteria={this.state.filter_string} filter_group_criteria = {this.state.GB} />
       </div>
     )
   }

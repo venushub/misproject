@@ -19,7 +19,6 @@ class AdminToolKit extends Component {
       buttons : [{id : 1, name:'User Management', active : true}, {id : 2, name:'Projects Management', active : false}],
       whichComp : 'user'
     }
-
   }
 
   componentDidMount(){
@@ -35,7 +34,8 @@ class AdminToolKit extends Component {
 
   componentDidUpdate(prevProps){
       if (this.props.getMe !== prevProps.getMe) {
-          if(this.props.getMe.me.isSuperuser){
+        const me = this.props.getMe.me  &&  this.props.getMe.me != undefined ? this.props.getMe.me : false
+          if(me.isSuperuser){
             this.setState({
               showuploadform : true
             })
@@ -60,7 +60,6 @@ class AdminToolKit extends Component {
       buttons : newbuttons
     })
   }
-
 
   render(){
     let upload_excel

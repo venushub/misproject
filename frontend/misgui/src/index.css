@@ -1465,3 +1465,79 @@ td {
 .none {
   display : none
 }
+
+.selects-div{
+  width : 100%;
+  display : flex;
+  justify-content: center;
+  height: 15vh;
+  align-items: center;
+}
+
+
+.select-drop{
+  font-family: verdana;
+  font-weight: bold;
+  border : 0.1em solid var(--dark);
+  background-color: var(--extra-light);
+  color : var(--dark);
+  padding : 0.5em 0.5em 0.5em 0.5em;
+  margin-left : 1em;
+}
+
+
+.filter-ym-button{
+  font-family: verdana;
+  font-weight: bold;
+  border : 0.1em solid var(--dark);
+  background-color: var(--extra-light);
+  color : var(--dark);
+  padding : 0.5em 0.5em 0.5em 0.5em;
+  margin-left : 1em;
+}
+
+
+.matcher-res-div{
+  width :100%;
+  display : flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top : 2em;
+}
+
+.total-card{
+  width : 15em;
+  height :15em;
+  background-color: var(--extra-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: verdana
+}
+
+
+.total-card-head{
+  background-color: var(--dark);
+  width : 100%;
+  text-align: center;
+  padding : 1em;
+  color: var(--extra-light);
+  font-weight: bolder;
+}
+
+.total-card-body{
+  background-color: var(--extra-light);
+  width : 100%;
+  text-align: center;
+  padding : 1em;
+  color: var(--dark);
+  font-weight: bolder;
+  font-size : 2em;
+}
+
+.pm-div{
+  font-weight: bold;
+  font-size: 5em;
+  color: var(--dark)
+}

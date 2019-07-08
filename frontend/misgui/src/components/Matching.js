@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-import {getAttendanceQuery} from './queries/queries'
+import {getAttendanceQuery, getActivitiesForMonthQuery} from './queries/queries'
 import { graphql, compose } from 'react-apollo';
+import FinMatch from './FinMatch'
 
 class Matching extends Component {
 
@@ -14,30 +15,34 @@ class Matching extends Component {
 
   }
 
-  componentDidMount(){
-
-    //const me = this.props.getMe.me  &&  this.props.getMe.me != undefined ? this.props.getMe.me : false
-
-
-  }
-
-  componentDidUpdate(prevProps){
-      if (this.props.getAttendanceQuery !== prevProps.getAttendanceQuery) {
-
-      }
-  }
+  // componentDidMount(){
+  //
+  //   //const me = this.props.getMe.me  &&  this.props.getMe.me != undefined ? this.props.getMe.me : false
+  //
+  //
+  // }
+  //
+  // componentDidUpdate(prevProps){
+  //     if (this.props.getAttendanceQuery !== prevProps.getAttendanceQuery) {
+  //
+  //     }
+  // }
 
 
   render(){
+
     console.log("ggggggg",this.props)
-    let upload_excel
-    if(this.state.showuploadform){
-      upload_excel  = <UploadExcel />
-    }
+    const activities = this.props.data.allActivitiesForMonth  &&  this.props.data.allActivitiesForMonth != undefined ? this.props.data.allActivitiesForMonth : []
+    let mapi_acts_total = 0;
+    activities.map((activity) => {
+      mapi_acts_total = mapi_acts_total + parseFloat(activity.activityHours)
+    })
+
+    mapi_acts_total= mapi_acts_total.toFixed(2)
 
     return(
-      <div>
-      Hey
+      <div className="matcher-res-div">
+        <FinMatch mapi_acts_total={mapi_acts_total} criteria={this.props.criteria}/>
       </div>
     )
   }
@@ -45,12 +50,12 @@ class Matching extends Component {
 
 
 export default compose(
-  graphql(getAttendanceQuery, {
+
+  graphql(getActivitiesForMonthQuery, {
     options : (props) => {
       return {
         variables : {
-          month : props.month,
-          year : props.year
+          criteria : props.criteria
         }
       }
     }

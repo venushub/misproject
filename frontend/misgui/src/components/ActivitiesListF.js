@@ -65,7 +65,6 @@ class ActivitiesListF extends Component {
 
       <div className="total-div"><i>CR Time:</i>&nbsp;&nbsp;{crtime} Hrs   &nbsp;&nbsp;&nbsp;&nbsp;   <i>FTR Time:</i>&nbsp;&nbsp;{ftrtime} Hrs   &nbsp;&nbsp;&nbsp;&nbsp;       <i>Total Time:</i>&nbsp;&nbsp;{sumoftime.toFixed(2)} Hrs</div>
       </div>
-
     )
   }
 }

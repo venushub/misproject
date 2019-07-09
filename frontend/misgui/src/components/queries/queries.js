@@ -45,6 +45,16 @@ const getProfilesQuery = gql`
 }
 `
 
+const getProfileQuery = gql`
+  query myProfile($user : String){
+    myProfile(user : $user){
+      empCode
+      location
+      profilePic
+    }
+  }
+`
+
 const updateProfile = gql`
       mutation updateProfile($user: String!, $empCode: String!, $location: String!, $profilePic: String!){
          updateProfile(user: $user, empCode: $empCode, location : $location, profilePic: $profilePic){
@@ -110,8 +120,6 @@ const getMe = gql`
 }
 `
 
-
-
 const getActivityTypesQuery = gql`
 {
   allActivityTypes {
@@ -120,8 +128,6 @@ const getActivityTypesQuery = gql`
   }
 }
 `
-
-
 
 const getActivityTypeIdentifiersQuery = gql`
   query allActivityTypeIdentifiers($search : String){
@@ -332,4 +338,4 @@ const createUserMutation = gql`
 //   }
 // `
 
-export {getTokenMutation, getMe, getProfilesQuery ,updateProfile, getAttendanceQuery ,getAttendanceFilesQuery , getActivitiesForMonthQuery  , verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};
+export {getTokenMutation, getMe, getProfilesQuery ,getProfileQuery,updateProfile, getAttendanceQuery ,getAttendanceFilesQuery , getActivitiesForMonthQuery  , verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};

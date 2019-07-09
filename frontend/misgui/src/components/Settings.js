@@ -4,6 +4,7 @@ import { Link , NavLink} from 'react-router-dom'
 import Logout from './Logout'
 import Theme from './Theme'
 import Header from './Header'
+import ProfilePic from './ProfilePic'
 
 
 class Settings extends Component {
@@ -17,21 +18,20 @@ class Settings extends Component {
 
 
 
-
   render(){
 
     return(
       <div className="settings-container">
-      <Header />
-      <Theme />
-      <Logout />
-
+        <Header />
+        <ProfilePic />
+        <Theme />
+        <Logout />
       </div>
     )
 
   }
-
-
 }
+
+
 
 export default Settings

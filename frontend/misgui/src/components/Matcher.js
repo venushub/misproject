@@ -100,6 +100,7 @@ class Matcher extends Component {
     })
   }
 
+
   // componentDidMount(){
   //   const users = this.props.getUsersQuery.users  &&  this.props.getUsersQuery.users != undefined ? this.props.getUsersQuery.users : []
   //
@@ -107,8 +108,6 @@ class Matcher extends Component {
   //
   //   })
   // }
-
-
 
 
   render(){

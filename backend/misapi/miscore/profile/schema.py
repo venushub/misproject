@@ -3,6 +3,7 @@ from graphene_django import DjangoObjectType
 from miscore.models import Profile
 from django.contrib.auth import get_user_model
 from users.schema import UserType
+from miscore.project.schema import ProjectType
 
 class ProfileType(DjangoObjectType):
     class Meta:
@@ -63,6 +64,68 @@ class UpdateProfile(graphene.Mutation):
             location = profile.location,
             profilePic = profile.profilePic
         )
+
+
+
+
+
+
+class UpdateUserProjectMapping(graphene.Mutation):
+    projectsInvolved = graphene.List(ProjectType)
+
+
+    class Arguments:
+        updateUserProjects = graphene.String(required= True)
+
+    def mutate(self, info, updateUserProjects):
+        print(info)
+        print("ooooooooooooooo")
+        if(user != 'default'):
+            userInstance = get_user_model().objects.get(id = int(user))
+        else:
+            userInstance = info.context.user
+        profile = Profile.objects.get(user = userInstance)
+        if(empCode != 'default'):
+            profile.empCode = empCode
+        if(location != 'default'):
+            profile.location = location
+        if(profilePic != 'default'):
+            profile.profilePic = profilePic
+            print("set kar diyaaaaaaaaaa")
+
+        profile.save()
+
+        return UpdateProfile(
+            id = profile.id,
+            user=  profile.user,
+            empCode = profile.empCode,
+            location = profile.location,
+            profilePic = profile.profilePic
+        )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

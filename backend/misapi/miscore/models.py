@@ -33,6 +33,9 @@ class ActivityTypeIdentifier(models.Model):
     activityTypeIdentifierName = models.CharField(max_length=100)
     activityTypeIdentifierSubCat = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.activityTypeIdentifierName
+
 
 class Activity(models.Model):
     activityType = models.ForeignKey(
@@ -80,6 +83,7 @@ class Profile(models.Model):
     empCode = models.TextField(max_length=30, blank=True)
     location = models.CharField(max_length=30, blank=True)
     profilePic = models.TextField()
+    projectsInvolved = models.ManyToManyField(Project)
 
 
 @receiver(post_save, sender=User)

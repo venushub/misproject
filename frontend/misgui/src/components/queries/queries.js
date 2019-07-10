@@ -41,6 +41,10 @@ const getProfilesQuery = gql`
       id
       username
     }
+    projectsInvolved{
+      id
+      projectName
+    }
   }
 }
 `

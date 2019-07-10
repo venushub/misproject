@@ -27,6 +27,8 @@ class UserManagement extends Component {
     this.buttonPressTimer = setTimeout(() => {
       // console.log("long press activated")
       // console.log(activity)
+      let projects_involved_array = []
+      // profile.projectsInvolved.map()
       this.setState({
         displayName : profile.user.username,
         empCode : profile.empCode,
@@ -42,7 +44,7 @@ class UserManagement extends Component {
 
   handleUpdateProfile = (e) => {
     e.preventDefault()
-    alert("bro")
+
     this.props.updateProfile({
         variables: {
           user: this.state.user,
@@ -91,12 +93,12 @@ class UserManagement extends Component {
       if(profile.user.username.includes(this.state.filterInput)){
         return(
           <tr key={profile.id} className="activity-item-div" onMouseDown={() => this.handleButtonPress(profile)} onMouseUp={this.handleButtonRelease} onMouseLeave={this.handleButtonRelease}>
-          <td className="activity-sub-item-div-2">{profile.user.username}</td>
-              <td className="activity-sub-item-div-2">{profile.empCode}</td>
+            <td className="activity-sub-item-div-2">{profile.user.username}</td>
+            <td className="activity-sub-item-div-2">{profile.empCode}</td>
+            <td className="activity-sub-item-div-2">{profile.projectsInvolved.length} Projects</td>
           </tr>
         )
       }
-
     })
 
     let updateformclassname = "none"
@@ -106,19 +108,35 @@ class UserManagement extends Component {
     }
 
 
+    let projects_involved_display
+    display_filter_details_render = this.state.GB.map((item, index) => {
+      let button_here_class = "filter-sub-item-selected"
+        if(item.status){
+          button_here_class  = "filter-sub-item-selected"
+        } else {
+          button_here_class = "filter-sub-item-deselected"
+        }
+        return(<button key={index} className={button_here_class} onClick={() => this.deleteItem("GB", index)}>{item.name}</button>)})
+
+
+
+
+
     console.log(this.props)
     return(
       <div className="admin-sub-div">
       <div className="filter-details">
-        <input placeholder="Search Items Here" name="filterInput" className="filter-items-filter" type="text" onChange={this.handleFilterInputChange} value={this.state.filterInput} />
+        <input placeholder="Search Users Here" name="filterInput" className="filter-items-filter" type="text" onChange={this.handleFilterInputChange} value={this.state.filterInput} />
       </div>
       <div className={updateformclassname}>
-        <form className="profile-update-form" onSubmit={this.handleUpdateProfile}>
+        <div className="profile-update-form">
           <label  className="display-name-update">{this.state.displayName}</label>
           <label  className="update-profile-label" htmlFor="empCode">Emp Code</label>
           <input className="update-profile-input" size="10" type="text" onChange={this.handleFilterInputChange} id="empCode" name="empCode" value={this.state.empCode} />
-          <button className="profile-update-button">Update</button>
-        </form>
+
+
+          <button  onClick={this.handleUpdateProfile} className="profile-update-button">Update</button>
+        </div>
       </div>
       <div className="profiles-table-div">
         <table>
@@ -130,7 +148,6 @@ class UserManagement extends Component {
       </div>
     )
   }
-
 }
 
 

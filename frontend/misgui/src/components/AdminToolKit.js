@@ -5,6 +5,7 @@ import Header from './Header'
 import UploadExcel from './UploadExcel'
 import UserManagement from './admin/UserManagement'
 import ProjectManagement from './admin/ProjectManagement'
+import UserProjectMapping from './admin/UserProjectMapping'
 
 
 
@@ -16,7 +17,7 @@ class AdminToolKit extends Component {
 
     this.state = {
       showuploadform : false,
-      buttons : [{id : 1, name:'User Management', active : true}, {id : 2, name:'Projects Management', active : false}],
+      buttons : [{id : 1, name:'User Management', active : true}, {id : 2, name:'Projects Management', active : false},  {id : 3, name:'User Project Mapping', active : false}],
       whichComp : 'user'
     }
   }
@@ -73,6 +74,8 @@ class AdminToolKit extends Component {
       rendercomp = <ProjectManagement />
     } else if(this.state.whichComp === 'User Management'){
         rendercomp = <UserManagement />
+    } else if(this.state.whichComp === 'User Project Mapping'){
+        rendercomp = <UserProjectMapping />
     }
 
 

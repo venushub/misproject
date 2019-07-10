@@ -1,7 +1,7 @@
 import React , {Component} from 'react'
 
 
-class ProjectManagement extends Component {
+class USerProjectMapping extends Component {
 
   constructor(props){
     super(props)
@@ -12,7 +12,7 @@ class ProjectManagement extends Component {
 
   render(){
     return(
-      <div>Coming Soon..</div>
+      <div>Coming Now..</div>
     )
   }
 
@@ -20,4 +20,4 @@ class ProjectManagement extends Component {
 
 
 
-export default ProjectManagement
+export default USerProjectMapping

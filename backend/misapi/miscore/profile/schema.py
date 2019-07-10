@@ -11,15 +11,17 @@ class ProfileType(DjangoObjectType):
 
 class Query(object):
     all_profiles = graphene.List(ProfileType)
-    my_profile = graphene.List(ProfileType, user=graphene.String())
+    my_profile = graphene.Field(ProfileType, user=graphene.String())
 
     def resolve_all_profiles(self, info, **kwargs):
         return Profile.objects.all()
 
     def resolve_my_profile(self, info, user, **kwargs):
         #my_criteria = json.loads(search)
-        userInstance = get_user_model().objects.filter(username = user)[0]
-        return Profile.objects.filter(user = userInstance.id)
+        print("error idhar heiiiiii")
+        print(user)
+        userInstance = get_user_model().objects.filter(id = user)[0]
+        return Profile.objects.get(user = userInstance.id)
 
 
 class UpdateProfile(graphene.Mutation):
@@ -38,7 +40,7 @@ class UpdateProfile(graphene.Mutation):
 
     def mutate(self, info,  user, empCode,location ,  profilePic):
         print(info)
-
+        print("ooooooooooooooo")
         if(user != 'default'):
             userInstance = get_user_model().objects.get(id = int(user))
         else:
@@ -50,6 +52,7 @@ class UpdateProfile(graphene.Mutation):
             profile.location = location
         if(profilePic != 'default'):
             profile.profilePic = profilePic
+            print("set kar diyaaaaaaaaaa")
 
         profile.save()
 

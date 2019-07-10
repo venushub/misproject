@@ -68,6 +68,8 @@ class App extends Component {
     document.documentElement.style.setProperty('--light', "rgb(249, 231, 159)");
     document.documentElement.style.setProperty('--extra-light', "rgb(254, 249, 231)");
   }
+
+
   }
 
 

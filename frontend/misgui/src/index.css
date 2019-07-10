@@ -1550,3 +1550,15 @@ td {
   align-items: center;
   padding :2em;
 }
+
+.edit-button {
+  background-color: var(--dark);
+  margin-top : 0.5em;
+  padding: 0.5em;
+  border : 0.1em solid var(--dark);
+  font-family : verdana;
+  font-size : 0.7em;
+  font-weight : bold;
+  color : var(--extra-light);
+  border-radius : 0.3em;
+}

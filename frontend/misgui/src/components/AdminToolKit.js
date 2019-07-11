@@ -81,9 +81,9 @@ class AdminToolKit extends Component {
 
     let buttons_render = this.state.buttons.map(
       (button) => {
-        let btnclass = "filter-button"
+        let btnclass = "choose-mod-button"
         if(button.active){
-          btnclass = "filter-button-active"
+          btnclass = "choose-mod-button-active"
         }
         return(
           <button key={button.id} className={btnclass} onClick={() => this.handleComp(button)}>{button.name}</button>

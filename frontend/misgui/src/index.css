@@ -1366,7 +1366,8 @@ td {
   align-items: center;
   width : 100%;
   height : 80vh;
-  background-color: var(--extra-light);
+  background-color: var(--universal-white);
+  overflow-y : scroll;
 }
 
 .admin-sub-div{
@@ -1375,38 +1376,49 @@ td {
   align-items: center;
   width : 100%;
   height : 75vh;
-  background-color : var(--extra-light);
+  background-color : var(--universal-white);
   /* margin : 1em; */
 }
 
 .profiles-table-div {
   display: flex;
   justify-content: center;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   width : 100%;
 }
 
 .update-profile-div {
   align-self: flex-start;
-  padding : 2em
+  padding : 2em;
+  width : 100%;
+
 }
 
 .update-profile-label{
   font-family: verdana;
-  font-weight: bold;
+  font-style: italic;
   /* border : 0.1em dotted var(--dark); */
-  background-color: var(--extra-light);
-  color : var(--dark);
-
+  background-color: var(--universal-white);
+  width : 20%;
+  padding-left : 0.5em;
+  display : flex;
+  align-items: center;
+  border : 0.1em dotted var(--dark);
+  border-top-width: 0;
+  border-right-width: 0;
+  border-left-width: 0;
 }
 
 .update-profile-input{
   font-family: verdana;
   font-weight: bold;
   border : 0.1em dotted var(--dark);
-  background-color: var(--extra-light);
+  background-color: var(--universal-white);
   color : var(--dark);
   padding : 0.5em 0.5em 0.5em 0.5em;
+  width  :80%;
+  border-top-width: 0;
+  border-right-width: 0;
 }
 
 .update-profile-input:focus{
@@ -1416,31 +1428,32 @@ td {
 .display-name-update{
   font-family: verdana;
   font-weight: bold;
-  border : 0.1em dotted var(--dark);
-  background-color: var(--extra-light);
+
+  border-top-width: 0;
+  border-bottom-width: 0;
+  border-right-width: 0;
+  display: flex;
+  align-items: center;
   color : var(--dark);
   padding : 0.5em 0.5em 0.5em 0.5em;
-  margin-right : 1em;
+  font-size : 3em;
 }
 
 .profile-update-button{
   font-family: verdana;
   font-weight: bold;
-  border : 0.1em solid var(--dark);
-  background-color: var(--extra-light);
-  color : var(--dark);
-  padding : 0.5em 0.5em 0.5em 0.5em;
-  margin-left : 1em;
-}
-
-.profile-update-button:hover{
-  font-family: verdana;
-  font-weight: bold;
-  border : 0.1em solid var(--dark);
+  border : 0.1em dotted var(--dark);
   background-color: var(--dark);
   color : var(--extra-light);
   padding : 0.5em 0.5em 0.5em 0.5em;
-  margin-left : 1em;
+  border-left-width : 0;
+  border-right-width : 0;
+  border-bottom-width : 0;
+}
+
+.profile-update-button:hover{
+  background-color: var(--dark);
+  color : var(--extra-light);
   transition : 0.2s;
   cursor: pointer;
 }
@@ -1460,6 +1473,7 @@ td {
   justify-content: space-between;
   width : 100%;
 }
+
 
 
 .none {
@@ -1561,4 +1575,194 @@ td {
   font-weight : bold;
   color : var(--extra-light);
   border-radius : 0.3em;
+}
+
+
+.profile-update-form{
+
+  width : 100%;
+  display : flex;
+  flex-direction: column;
+  border : 0.1em solid var(--dark);
+  box-shadow: 0px 0px 2px 0px var(--dark);
+}
+
+.flex-r-100pc{
+  display : flex;
+  width : 100%;
+
+}
+
+.around-dotted{
+  border : 0.1em dotted var(--dark);
+  border-top-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+  justify-content: space-between;
+}
+
+.projects-inv-div{
+  display : flex;
+  width  :100%;
+}
+
+.inv-heading{
+  width : 50%;
+  display : flex;
+  flex-direction : column;
+  align-items:  center;
+  justify-content: flex-start;
+  border : 0.1em dotted var(--dark);
+  border-top-width: 0;
+  border-bottom-width: 0;
+}
+
+
+.inv-heading-name{
+  width : 100%;
+  border : 0.1em dotted var(--dark);
+  border-top-width: 0;
+  border-right-width: 0;
+  border-left-width: 0;
+  text-align: center;
+  height : 2em;
+  display : flex;
+  align-items: center;
+  justify-content: center;
+  font-family: verdana;
+  font-style: italic;
+}
+
+.inv-heading-conts{
+  width : 100%;
+  padding : 1em;
+  text-align: center;
+  display : flex;
+  flex-wrap: wrap;
+}
+
+.br-0{
+  border-right-width: 0;
+}
+
+.bl-0{
+  border-left-width: 0;
+}
+
+.inv-projs-button{
+  background-color: var(--extra-light);
+  border : 0.1em dotted var(--dark);
+  margin-left : 0.5em;
+  margin-top : 0.5em;
+  font-size: 1em;
+  color: var(--dark);
+  font-weight: bold;
+  font-family: verdana;
+  padding : 0.3em 0.8em 0.3em 0.8em;
+  border-radius: 1em;
+}
+
+.inv-projs-button:hover{
+  cursor : pointer
+}
+
+.mycircleforfill{
+  fill : var(--light)
+}
+
+.mycircleforstroke{
+  stroke : var(--light)
+}
+
+
+.choose-mod-button {
+  background-color: var(--universal-white);
+  border : 0.1em dotted var(--dark);
+  margin-left : 0.5em;
+  font-size: 1em;
+  color: var(--dark);
+  font-weight: bold;
+  font-family: verdana;
+  padding : 0.3em 0.8em 0.3em 0.8em;
+  border-radius: 1em;
+}
+
+.choose-mod-button-active{
+  background-color: var(--dark);
+  color : var(--extra-light);
+  border : 0.1em dotted var(--dark);
+  margin-left : 0.5em;
+  font-size: 1em;
+  font-weight: bold;
+  font-family: verdana;
+  padding : 0.3em 0.8em 0.3em 0.8em;
+  border-radius: 1em;
+  position : relative
+}
+
+.choose-mod-button:focus {
+  outline:none
+}
+
+.choose-mod-button-active:focus{
+  outline:none
+}
+
+.choose-mod-button:hover {
+  cursor : pointer
+}
+
+.choose-mod-button-active:hover{
+  cursor : pointer
+}
+
+.filter-details-my {
+  padding : 1em;
+  background-color: var(--universal-white);
+  border-radius: 0px 0px 15px 15px;
+  display : flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width : 100%;
+}
+
+.filter-items-filter-my{
+  width : 100%;
+  background-color: var(--universal-white);
+  border-width: 0 0 2px 0;
+  border-color : #9e9c9a;
+  font-size: 1.2em;
+}
+
+.filter-items-filter-my:active{
+  border-color : var(--dark);
+}
+
+.filter-items-filter-my:focus{
+  outline : none;
+  border-color : var(--dark);
+}
+
+
+.profile-close-button{
+  justify-content: flex-end;
+  align-self: flex-start;
+  margin : 1em;
+
+  margin : 20px;
+  background-color: var(--dark);
+  border : none;
+  padding : 5px 10px 5px 10px;
+  font-weight: bold;
+  border-radius: 5px;
+  font-family:sans-serif;
+  color: var(--universal-white);
+  font-size: 1em
+
+}
+
+
+.d-f{
+  display : flex;
 }

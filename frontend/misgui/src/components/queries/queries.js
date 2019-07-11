@@ -45,6 +45,7 @@ const getProfilesQuery = gql`
       id
       projectName
     }
+    profilePic
   }
 }
 `
@@ -54,6 +55,10 @@ const getProfileQuery = gql`
     myProfile(user : $user){
       empCode
       location
+      projectsInvolved{
+        id
+        projectName
+      }
       profilePic
     }
   }

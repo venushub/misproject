@@ -11,10 +11,16 @@ class ProjectType(DjangoObjectType):
 
 class Query(object):
     all_projects = graphene.List(ProjectType)
+    # all_projects_for_user = graphene.List(ProjectType)
 
     def resolve_all_projects(self, info, **kwargs):
         print("the user currently logged in is", info.context.user)
         return Project.objects.all()
+
+    # def resolve_all_projects_for_user(self, info, **kwargs):
+    #     print("the user currently logged in is", info.context.user)
+    #     if(info.context.user.is_superuser):
+    #         return Activity.objects.all()
 
 
 class CreateProject(graphene.Mutation):

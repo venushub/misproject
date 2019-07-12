@@ -48,6 +48,7 @@ class ProfilePic extends Component {
              empCode: 'default',
              location: 'default',
              profilePic: this.state.filebase64,
+             invProjects : 'default'
            }
        }).then(res => {
          // console.log(res)

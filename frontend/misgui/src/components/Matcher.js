@@ -160,6 +160,7 @@ class Matcher extends Component {
     return(
       <div>
         <Header />
+        <div className="con-div">
         {upload_excel}
         <div className="selects-div">
           <div>
@@ -172,6 +173,7 @@ class Matcher extends Component {
         </div>
         <div className={filter_details_class}>  <input placeholder="Search Items Here" name="filterInput" className="filter-items-filter" type="text" onChange={this.handleFilterInputChange} value={this.state.filterInput} /><div className = "filter-ud"><div>{display_users}</div><div>{closebutton}</div></div></div>
         <Matching criteria={JSON.stringify({month : this.state.selected_month , year : this.state.selected_year, user : this.state.selected_user})} />
+        </div>
       </div>
     )
   }

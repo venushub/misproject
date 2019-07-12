@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import Header from './Header'
 import ActivitiesListN from './ActivitiesListN'
 import { graphql, compose } from 'react-apollo';
-import {getActivitiesQuery, getActivitiesForWeekQuery} from './queries/queries'
+import {getActivitiesQuery, getActivitiesForWeekQuery, getMe} from './queries/queries'
 import ActivityFormN from './ActivityFormN'
 import {CSVLink, CSVDownload } from "react-csv";
 import moment from 'moment'
@@ -15,6 +15,7 @@ class ActivitiesN extends Component {
     this.state = {
       editId : {},
       checked : true,
+      username : ''
     }
     this.handleChange = this.handleChange.bind(this);
   }
@@ -37,6 +38,36 @@ class ActivitiesN extends Component {
       editId : activity
     })
   }
+
+
+
+
+
+    componentDidMount(){
+
+      const me = this.props.getMe.me  &&  this.props.getMe.me != undefined ? this.props.getMe.me : false
+
+      if(me.isSuperuser){
+        this.setState({
+          username : me.id
+        })
+      }
+    }
+
+    componentDidUpdate(prevProps){
+        if (this.props.getMe !== prevProps.getMe) {
+          const me = this.props.getMe.me  &&  this.props.getMe.me != undefined ? this.props.getMe.me : false
+            if(me.isSuperuser){
+              this.setState({
+                username : me.id
+              })
+            }
+        }
+    }
+
+
+
+
 
 
 
@@ -106,7 +137,7 @@ class ActivitiesN extends Component {
     return(
       <div className="activities-container">
         <Header />
-        <ActivityFormN handleReturnSubmit={this.handleReturnSubmit} editOption={this.state.editId} />
+        <ActivityFormN handleReturnSubmit={this.handleReturnSubmit} editOption={this.state.editId} user={this.state.username}/>
         <ActivitiesListN activities={activities} weekHandle={weekHandle} handleLP={this.handleLP} />
       </div>
     )
@@ -127,5 +158,5 @@ export default compose(
         }
       }
     }),
-
+    graphql(getMe, {name : "getMe"}),
 )(ActivitiesN);

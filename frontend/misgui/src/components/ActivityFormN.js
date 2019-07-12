@@ -6,7 +6,7 @@ import { getActivityTypesQuery,
          createActivityMutation,
          createActivityTypeIdentifierMutation,
          getActivityTypeIdentifiersQuery,
-         updateActivityMutation} from './queries/queries'
+         updateActivityMutation, getProfileQuery} from './queries/queries'
 
 let moment = require('moment');
 
@@ -322,9 +322,11 @@ class ActivityFormN extends Component {
 
   render(){
 
+    const myprofile = this.props.data.myProfile  &&  this.props.data.myProfile != undefined ? this.props.data.myProfile : false
+
     // console.log("ddddddddddddddd", this.props)
 
-    const projects_options  = this.props.getProjectsQuery.allProjects  &&  this.props.getProjectsQuery.allProjects != undefined ? this.props.getProjectsQuery.allProjects : []
+    const projects_options  = myprofile.projectsInvolved  &&  myprofile.projectsInvolved != undefined ? myprofile.projectsInvolved : []
     const projects_options_render = projects_options.map((project) => {
       return(
         <option key={project.id} value={project.id}>{project.projectName}</option>
@@ -421,4 +423,13 @@ export default compose(
     graphql(updateActivityMutation, { name: "updateActivityMutation" }),
     graphql(getActivityTypesQuery, {name : "getActivityTypesQuery"}),
     graphql(createActivityTypeIdentifierMutation, { name: "createActivityTypeIdentifierMutation" }),
+    graphql(getProfileQuery, {
+      options : (props) => {
+        return {
+          variables : {
+            user : props.user
+          }
+        }
+      }
+    }),
 )(ActivityFormN);

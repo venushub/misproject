@@ -65,8 +65,8 @@ const getProfileQuery = gql`
 `
 
 const updateProfile = gql`
-      mutation updateProfile($user: String!, $empCode: String!, $location: String!, $profilePic: String!){
-         updateProfile(user: $user, empCode: $empCode, location : $location, profilePic: $profilePic){
+      mutation updateProfile($user: String!, $empCode: String!, $location: String!, $profilePic: String!, $invProjects: String!){
+         updateProfile(user: $user, empCode: $empCode, location : $location, profilePic: $profilePic, invProjects : $invProjects){
             empCode
         }
     }

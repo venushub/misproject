@@ -100,15 +100,26 @@ class UserManagement extends Component {
       //
       //   }
       // })
-      allprojects.map((proj) => {
-        profile.projectsInvolved.map((pi) => {
-          if(proj.id === pi.id){
+      if(profile.projectsInvolved.length === 0){
+          allprojects.map((proj) => {
+            not_involved_projects.push(proj)
+          })
+      } else {
+        allprojects.map((proj) => {
+          let matched = false
+          profile.projectsInvolved.map((pi) => {
+            if(proj.id === pi.id){
+              matched = true
+            }
+          })
+          if(matched){
             involved_projects.push(proj)
           } else {
             not_involved_projects.push(proj)
           }
         })
-      })
+      }
+
 
 
       this.setState({
@@ -131,12 +142,21 @@ class UserManagement extends Component {
   handleUpdateProfile = (e) => {
     e.preventDefault()
 
+    let buildInvProjs = []
+
+    this.state.involved_projects.map((ip) => {
+      buildInvProjs.push(ip.id)
+    })
+
+    let invProjsString = JSON.stringify({invProjects : buildInvProjs})
+
     this.props.updateProfile({
         variables: {
           user: this.state.user,
           empCode: this.state.empCode,
           location: 'default',
           profilePic: 'default',
+          invProjects : invProjsString
         }
     }).then(res => {
       // console.log(res)

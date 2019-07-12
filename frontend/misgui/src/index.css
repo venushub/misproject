@@ -1383,7 +1383,7 @@ td {
 .profiles-table-div {
   display: flex;
   justify-content: center;
-  /* overflow-y: scroll; */
+
   width : 100%;
 }
 
@@ -1518,6 +1518,7 @@ td {
   align-items: center;
   justify-content: space-around;
   margin-top : 2em;
+  margin-bottom: 2em;
 }
 
 .total-card{
@@ -1765,4 +1766,11 @@ td {
 
 .d-f{
   display : flex;
+}
+
+
+.con-div{
+  height : 90vh;
+  overflow-y : scroll;
+
 }

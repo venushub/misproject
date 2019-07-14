@@ -9,13 +9,7 @@ from django.dispatch import receiver
 
 
 
-class Project(models.Model):
-    projectName = models.CharField(max_length=30)
-    projectDesc = models.TextField()
-    activitiesInvolved = models.ManyToManyField(ActivityType)
 
-    def __str__(self):
-        return self.projectName
 
 
 class ActivityType(models.Model):
@@ -24,6 +18,15 @@ class ActivityType(models.Model):
 
     def __str__(self):
         return self.activityTypeName
+
+class Project(models.Model):
+    projectName = models.CharField(max_length=30)
+    projectDesc = models.TextField()
+    projectPic = models.TextField()
+    activitiesInvolved = models.ManyToManyField(ActivityType)
+
+    def __str__(self):
+        return self.projectName
 
 
 class ActivityTypeIdentifier(models.Model):

@@ -1718,22 +1718,30 @@ td {
 }
 
 .filter-details-my {
-  padding : 1em;
+  padding : 1em 0 1em 0;
   background-color: var(--universal-white);
   border-radius: 0px 0px 15px 15px;
   display : flex;
-  flex-direction: column;
-  align-items: flex-start;
+  /* flex-direction: column; */
+  align-items: center;
   justify-content: space-between;
-  width : 100%;
+  width : 95%;
+
+}
+
+.mtb0{
+  margin-top :0;
+  margin-bottom: 0;
 }
 
 .filter-items-filter-my{
-  width : 100%;
+  flex:1;
   background-color: var(--universal-white);
   border-width: 0 0 2px 0;
   border-color : #9e9c9a;
   font-size: 1.2em;
+  margin-top : 20px;
+  margin-bottom : 20px;
 }
 
 .filter-items-filter-my:active{
@@ -1773,4 +1781,9 @@ td {
   height : 90vh;
   overflow-y : scroll;
 
+}
+
+
+.ttc {
+  text-align: center;
 }

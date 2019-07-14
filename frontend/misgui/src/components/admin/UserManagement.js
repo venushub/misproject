@@ -247,9 +247,9 @@ class UserManagement extends Component {
       if(profile.user.username.includes(this.state.filterInput)){
         return(
           <tr key={profile.id} className="activity-item-div" onMouseDown={() => this.handleButtonPress(profile)} onMouseUp={this.handleButtonRelease} onMouseLeave={this.handleButtonRelease}>
-            <td className="activity-sub-item-div-2">{profile.user.username}</td>
-            <td className="activity-sub-item-div-2">{profile.empCode}</td>
-            <td className="activity-sub-item-div-2">{profile.projectsInvolved.length} Projects</td>
+            <td className="ttc">{profile.user.username}</td>
+            <td className="ttc">{profile.empCode}</td>
+            <td className="ttc">{profile.projectsInvolved.length} Projects</td>
           </tr>
         )
       }

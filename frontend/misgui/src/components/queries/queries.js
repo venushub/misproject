@@ -28,6 +28,11 @@ const getProjectsQuery = gql`
     id
     projectName
     projectDesc
+    projectPic
+    activitiesInvolved{
+      id
+      activityTypeName
+    }
   }
 }
 `

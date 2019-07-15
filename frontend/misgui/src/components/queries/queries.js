@@ -37,6 +37,15 @@ const getProjectsQuery = gql`
 }
 `
 
+const createProject = gql`
+      mutation createProject($projectName: String!, $projectDesc: String!, $projectPic: String!, $invActTypes: String!){
+         createProject(projectName: $projectName, projectDesc: $projectDesc, projectPic: $projectPic, invActTypes : $invActTypes){
+            projectDesc
+        }
+    }
+`;
+
+
 const getProfilesQuery = gql`
 {
   allProfiles {
@@ -73,6 +82,15 @@ const updateProfile = gql`
       mutation updateProfile($user: String!, $empCode: String!, $location: String!, $profilePic: String!, $invProjects: String!){
          updateProfile(user: $user, empCode: $empCode, location : $location, profilePic: $profilePic, invProjects : $invProjects){
             empCode
+        }
+    }
+`;
+
+
+const updateProject = gql`
+      mutation updateProject($project: String!, $projectDesc: String!, $projectPic: String!, $invActTypes: String!){
+         updateProject(project: $project, projectDesc: $projectDesc, projectPic: $projectPic, invActTypes : $invActTypes){
+            projectDesc
         }
     }
 `;
@@ -352,4 +370,4 @@ const createUserMutation = gql`
 //   }
 // `
 
-export {getTokenMutation, getMe, getProfilesQuery ,getProfileQuery,updateProfile, getAttendanceQuery ,getAttendanceFilesQuery , getActivitiesForMonthQuery  , verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};
+export {getTokenMutation, getMe, createProject , updateProject ,getProfilesQuery ,getProfileQuery,updateProfile, getAttendanceQuery ,getAttendanceFilesQuery , getActivitiesForMonthQuery  , verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};

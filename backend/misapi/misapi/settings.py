@@ -276,7 +276,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'misdb2', #put your database name here
         'USER' : 'postgres',
-        'PASSWORD' : 'postgres',
+        'PASSWORD' : 'nsdl',
         'HOST' : '127.0.0.1',
         'PORT' : '5432'
     }

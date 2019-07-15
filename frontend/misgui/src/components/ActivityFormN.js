@@ -51,7 +51,6 @@ class ActivityFormN extends Component {
       })
     })
 
-
   }
 
   handleChange2 = (e) => {
@@ -326,6 +325,8 @@ class ActivityFormN extends Component {
 
     // console.log("ddddddddddddddd", this.props)
 
+    const projects_list  = this.props.getProjectsQuery.allProjects  &&  this.props.getProjectsQuery.allProjects != undefined ? this.props.getProjectsQuery.allProjects : []
+
     const projects_options  = myprofile.projectsInvolved  &&  myprofile.projectsInvolved != undefined ? myprofile.projectsInvolved : []
     const projects_options_render = projects_options.map((project) => {
       return(
@@ -333,13 +334,28 @@ class ActivityFormN extends Component {
       )
     })
 
+    // const activity_types_options  = this.props.getActivityTypesQuery.allActivityTypes  &&  this.props.getActivityTypesQuery.allActivityTypes != undefined ? this.props.getActivityTypesQuery.allActivityTypes : []
+    // const activity_types_options_render = activity_types_options.map((activity_type) => {
+    //   return(
+    //     <option key={activity_type.id} value={activity_type.id}>{activity_type.activityTypeName}</option>
+    //   )
+    // })
 
-    const activity_types_options  = this.props.getActivityTypesQuery.allActivityTypes  &&  this.props.getActivityTypesQuery.allActivityTypes != undefined ? this.props.getActivityTypesQuery.allActivityTypes : []
-    const activity_types_options_render = activity_types_options.map((activity_type) => {
-      return(
-        <option key={activity_type.id} value={activity_type.id}>{activity_type.activityTypeName}</option>
-      )
+
+    let activity_types_options_render;
+    projects_list.map((pi) => {
+
+      if(pi.id === this.state.activityProjectArg){
+        console.log("piiiiiiiiiiiii", pi)
+        activity_types_options_render = pi.activitiesInvolved.map((ai) => {
+            return(
+              <option key={ai.id} value={ai.id}>{ai.activityTypeName}</option>
+            )
+        })
+      }
     })
+
+
 
 
     let myelem = <div></div>

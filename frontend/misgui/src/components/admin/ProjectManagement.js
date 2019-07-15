@@ -1,5 +1,5 @@
 import React , {Component} from 'react'
-import {getProfilesQuery, updateProfile, getProjectsQuery, getMe, getActivityTypesQuery} from '../queries/queries'
+import { updateProject ,getProjectsQuery, getMe, getActivityTypesQuery, createProject} from '../queries/queries'
 import { graphql, compose } from 'react-apollo';
 
 
@@ -11,13 +11,12 @@ class ProjectManagement extends Component {
       filterInput : '',
       displayName : '',
       projectDesc : 'ZZZZ',
-      user : '',
+      project : '',
       displayForm : false,
       involved_activity_types : [],
       not_involved_activity_types : [],
-
-
-
+      button_name : 'Update Project',
+      proPic : '',
 
       extradark : "rgb(40,55,71)",
       dark : "rgb(52,73,71)",
@@ -90,19 +89,7 @@ class ProjectManagement extends Component {
 
       let involved_activity_types = []
       let not_involved_activity_types = []
-      // allprofiles.map((prof) => {
-      //   if(me.id === prof.user.id){
-      //
-      //     allprojects.map((proj) => {
-      //
-      //
-      //
-      //
-      //     })
-      //
-      //
-      //   }
-      // })
+
       if(project.activitiesInvolved.length === 0){
           activity_types.map((at) => {
             not_involved_activity_types.push(at)
@@ -132,7 +119,9 @@ class ProjectManagement extends Component {
         displayForm : true,
         involved_activity_types : involved_activity_types,
         not_involved_activity_types : not_involved_activity_types,
-        proPic : project.projectPic
+        proPic : project.projectPic,
+        button_name : 'Update Project',
+
 
       })}, 500);
   }
@@ -142,24 +131,26 @@ class ProjectManagement extends Component {
   }
 
 
-  handleUpdateProfile = (e) => {
+  handleUpdateProject = (e) => {
     e.preventDefault()
 
-    let buildInvProjs = []
+    let buildInvActTypes = []
 
-    this.state.involved_projects.map((ip) => {
-      buildInvProjs.push(ip.id)
+    this.state.involved_activity_types.map((iat) => {
+      buildInvActTypes.push(iat.id)
     })
 
-    let invProjsString = JSON.stringify({invProjects : buildInvProjs})
+    let invActTypesString = JSON.stringify({invActTypes : buildInvActTypes})
 
-    this.props.updateProfile({
+
+    if(this.state.button_name === 'Update Project') {
+
+    this.props.updateProject({
         variables: {
-          user: this.state.user,
-          empCode: this.state.empCode,
-          location: 'default',
-          profilePic: 'default',
-          invProjects : invProjsString
+          project: this.state.project,
+          projectDesc: this.state.projectDesc,
+          projectPic: this.state.proPic,
+          invActTypes : invActTypesString
         }
     }).then(res => {
       // console.log(res)
@@ -168,7 +159,7 @@ class ProjectManagement extends Component {
       // this.clearForm()
       // this.handleDisplayForm()
       // this.props.handleReturnSubmit()
-      this.props.getProfilesQuery.refetch()
+      this.props.getProjectsQuery.refetch()
       console.log(res)
       this.setState({
         displayForm : false
@@ -176,6 +167,38 @@ class ProjectManagement extends Component {
     }).catch(err => {
       console.log("error aya")
     });
+
+  } else if(this.state.button_name === 'Create Project'){
+
+    this.props.createProject({
+        variables: {
+          projectName: this.state.displayName,
+          projectDesc: this.state.projectDesc,
+          projectPic: this.state.proPic,
+          invActTypes : invActTypesString
+        }
+    }).then(res => {
+      // console.log(res)
+      //window.location.reload()
+      //localStorage.setItem('cool-jwt', res.data.tokenAuth.token)
+      // this.clearForm()
+      // this.handleDisplayForm()
+      // this.props.handleReturnSubmit()
+      this.props.getProjectsQuery.refetch()
+      console.log(res)
+      this.setState({
+        displayForm : false
+      })
+    }).catch(err => {
+      console.log("error aya")
+    });
+
+
+  }
+
+
+
+
   }
 
 
@@ -226,26 +249,86 @@ class ProjectManagement extends Component {
   }
 
 
+  handlePicUpload = () => {
+    this.refs.myfile.click()
+  }
+
+
+  getBase64 = (file) => {
+   var reader = new FileReader();
+     reader.readAsDataURL(file);
+
+     console.log("file type is blobbb")
+
+   reader.onload =  () => {
+     console.log(reader.result);
+     this.setState({
+       proPic : reader.result
+     })
+   };
+   reader.onerror =  (error) => {
+     console.log('Error: ', error);
+   };
+ }
+
+
+ changedFile = (e) => {
+   console.log(this.files)
+   this.setState({
+     file : e.target.value
+   })
+   const selectedFile = this.refs.myfile.files[0];
+   console.log(selectedFile)
+
+   if(e.target.value !== '' && e.target.value !== null){
+     if(selectedFile.size > 3000000){
+
+       alert('your file size is overwhelming 🙏')
+     } else if(e.target.value.split('.').pop() !== 'jpg' && e.target.value.split('.').pop() !== 'png'  && e.target.value.split('.').pop() !== 'jpeg'){
+         alert('file type is not allowed')
+     } else {
+       this.getBase64(selectedFile)
+
+
+
+     }
+   }
+   else {
+     alert('You havent selected any file 🙏')
+   }
+   };
+
+
+   handleCreateProject = () => {
+     const activity_types  = this.props.getActivityTypesQuery.allActivityTypes  &&  this.props.getActivityTypesQuery.allActivityTypes != undefined ? this.props.getActivityTypesQuery.allActivityTypes : []
+     let involved_activity_types = []
+     let not_involved_activity_types = []
+
+     activity_types.map((at) => {
+       not_involved_activity_types.push(at)
+     })
+
+     this.setState({
+       displayName : '',
+       projectDesc : '',
+       displayForm : true,
+       involved_activity_types : involved_activity_types,
+       not_involved_activity_types : not_involved_activity_types,
+       proPic : '',
+       button_name : 'Create Project'
+     })
+   }
+
+
   render(){
 
     console.log("state....",this.state)
 
-    const profiles = this.props.getProfilesQuery.allProfiles  &&  this.props.getProfilesQuery.allProfiles != undefined ? this.props.getProfilesQuery.allProfiles : []
+    // const profiles = this.props.getProfilesQuery.allProfiles  &&  this.props.getProfilesQuery.allProfiles != undefined ? this.props.getProfilesQuery.allProfiles : []
 
     const allprojects = this.props.getProjectsQuery.allProjects  &&  this.props.getProjectsQuery.allProjects  != undefined ? this.props.getProjectsQuery.allProjects  : []
 
     const activity_types  = this.props.getActivityTypesQuery.allActivityTypes  &&  this.props.getActivityTypesQuery.allActivityTypes != undefined ? this.props.getActivityTypesQuery.allActivityTypes : []
-
-
-    // let filtered_profiles = []
-    // if(this.state.filterInput !== ''){
-    //   profiles.map(
-    //     (profile) => {
-    //
-    //     }
-    //   )
-    // }
-    // item.name.includes(this.state.filterInput)
 
     let projects_render;
 
@@ -270,18 +353,6 @@ class ProjectManagement extends Component {
     }
 
 
-
-
-    // let projects_involved_display
-    // display_filter_details_render = this.state.GB.map((item, index) => {
-    //   let button_here_class = "filter-sub-item-selected"
-    //     if(item.status){
-    //       button_here_class  = "filter-sub-item-selected"
-    //     } else {
-    //       button_here_class = "filter-sub-item-deselected"
-    //     }
-    //     return(<button key={index} className={button_here_class} onClick={() => this.deleteItem("GB", index)}>{item.name}</button>)})
-    //
     let involved_activity_types_render;
     involved_activity_types_render = this.state.involved_activity_types.map((iat, index) => {
       return(
@@ -296,19 +367,17 @@ class ProjectManagement extends Component {
       )
     })
 
-    // let not_involved_projects_render;
-    // not_involved_projects_render = this.state.not_involved_projects.map((nip, index) => {
-    //   return(
-    //     <div className="inv-projs-button" onClick={() => this.handleInvProjChange(nip, "add")} key={index}>{nip.projectName}</div>
-    //   )
-    // })
+
 
     console.log(this.props)
     return(
       <div className="admin-sub-div">
       <div className="filter-details-my">
         <input placeholder="Search Users Here" name="filterInput" className="filter-items-filter-my" type="text" onChange={this.handleFilterInputChange} value={this.state.filterInput} />
-        <button className="add-activity-button" >Create Project</button>
+        <div className="title-button-div">
+        <div className="activities-title">Projects List</div>
+        <button className="add-activity-button" onClick={this.handleCreateProject}>Create Project</button>
+        </div>
       </div>
       <div className={updateformclassname}>
         <div className="profile-update-form">
@@ -323,21 +392,26 @@ class ProjectManagement extends Component {
                 <image clipPath='url(#cut-off-bottom)' xlinkHref={this.state.proPic} height='200' width='200' />
                 <circle className="mycircleforfill" cx="105" cy="105" r="100" fillOpacity="0.7"/>
                 <circle className="mycircleforstroke" cx="105" cy="105" r="100" fill="none"  strokeWidth="3"/>
+                <g>
+                  <rect className="myrectforpic" onClick={this.handlePicUpload} x="82" y="150" width="40" height="30" />
+                  <text className="mytextsvg" onClick={this.handlePicUpload} x="92" y="173" fill="red">+</text>
+                </g>
             </svg>
-            <label  className="display-name-update">{this.state.displayName}</label>
+            <input  className="none" type="file" id="file" ref="myfile" onChange={this.changedFile} />
+            <input  className="display-name-update" placeHolder="enter project name" onChange={this.handleFilterInputChange} id="displayName" name="displayName" value={this.state.displayName}/>
             </div>
             <button onClick={this.handleCloseForm} className="profile-close-button">Close</button>
           </div>
           <div className="flex-r-100pc">
             <label  className="update-profile-label" htmlFor="projectDesc">Project Desc</label>
-            <input className="update-profile-input" type="text" onChange={this.handleFilterInputChange} id="projectDesc" name="projectDesc" value={this.state.projectDesc} />
+            <input className="update-profile-input" placeHolder="enter project description" type="text" onChange={this.handleFilterInputChange} id="projectDesc" name="projectDesc" value={this.state.projectDesc} />
           </div>
           <div className="projects-inv-div">
             <div className="inv-heading br-0 bl-0"><div className="inv-heading-name br-0">Not Involved Activity Types</div><div  className="inv-heading-conts br-0">{not_involved_activity_types_render}</div></div>
             <div className="inv-heading br-0"><div className="inv-heading-name">Involved Activity Types</div><div  className="inv-heading-conts">{involved_activity_types_render}</div></div>
           </div>
 
-          <button  onClick={this.handleUpdateProfile} className="profile-update-button">Update</button>
+          <button  onClick={this.handleUpdateProject} className="profile-update-button">{this.state.button_name}</button>
         </div>
       </div>
       <div className="profiles-table-div">
@@ -353,10 +427,9 @@ class ProjectManagement extends Component {
 }
 
 
-
 export default compose(
-    graphql(getProfilesQuery, { name: "getProfilesQuery" }),
-    graphql(updateProfile, {name : "updateProfile"}),
+    graphql(createProject, {name : "createProject"}),
+    graphql(updateProject, {name : "updateProject"}),
     graphql(getProjectsQuery, { name: "getProjectsQuery" }),
     graphql(getMe, {name : "getMe"}),
     graphql(getActivityTypesQuery, {name : "getActivityTypesQuery"}),

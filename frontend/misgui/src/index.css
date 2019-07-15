@@ -1432,6 +1432,7 @@ td {
   border-top-width: 0;
   border-bottom-width: 0;
   border-right-width: 0;
+  border-left-width: 0;
   display: flex;
   align-items: center;
   color : var(--dark);
@@ -1718,11 +1719,11 @@ td {
 }
 
 .filter-details-my {
-  padding : 1em 0 1em 0;
+  /* padding : 1em 0 1em 0; */
   background-color: var(--universal-white);
   border-radius: 0px 0px 15px 15px;
   display : flex;
-  /* flex-direction: column; */
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   width : 95%;
@@ -1735,13 +1736,21 @@ td {
 }
 
 .filter-items-filter-my{
-  flex:1;
+  /* flex:1; */
   background-color: var(--universal-white);
   border-width: 0 0 2px 0;
   border-color : #9e9c9a;
   font-size: 1.2em;
   margin-top : 20px;
   margin-bottom : 20px;
+  width : 100%;
+}
+
+.title-button-div{
+  display :flex;
+  align-items: center;
+  justify-content: space-between;
+  width : 100%;
 }
 
 .filter-items-filter-my:active{
@@ -1786,4 +1795,15 @@ td {
 
 .ttc {
   text-align: center;
+}
+
+
+.myrectforpic{
+  fill : var(--dark);
+  fill-opacity : 0.7;
+}
+
+.mytextsvg{
+  fill :  var(--extra-light);
+  font: bold 1.5em verdana;
 }

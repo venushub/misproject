@@ -1,7 +1,7 @@
 import graphene
 from graphene_django import DjangoObjectType
-from miscore.models import Project
-
+from miscore.models import Project, ActivityType
+import json
 
 
 class ProjectType(DjangoObjectType):
@@ -27,87 +27,92 @@ class CreateProject(graphene.Mutation):
     id = graphene.Int()
     projectName = graphene.String()
     projectDesc = graphene.String()
+    projectPic = graphene.String()
 
     class Arguments:
         projectName = graphene.String(required= True)
         projectDesc =graphene.String(required=True)
+        projectPic=graphene.String(required=True)
+        invActTypes=graphene.String(required=True)
 
 
-    def mutate(self, info, projectName, projectDesc):
+    def mutate(self, info, projectName, projectDesc,projectPic, invActTypes ):
         project = Project(
             projectName= projectName,
             projectDesc =projectDesc,
+            projectPic = projectPic
         )
+
         project.save()
+
+        projecth = Project.objects.get(projectName = projectName)
+
+        criteria = json.loads(invActTypes)
+        invATs = criteria["invActTypes"]
+
+        for x in invATs:
+            at = ActivityType.objects.get(id= int(x))
+            projecth.activitiesInvolved.add(at)
+
+        projecth.save()
 
         return CreateProject(
             id = project.id,
             projectName = project.projectName,
-            projectDesc = project.projectDesc
+            projectDesc = project.projectDesc,
+            projectPic = project.projectPic
         )
 
 
+class UpdateProject(graphene.Mutation):
+    id = graphene.Int()
+    projectName= graphene.String()
+    projectDesc = graphene.String()
+    projectPic = graphene.String()
 
-# 
-# class UpdateProject(graphene.Mutation):
-#     id = graphene.Int()
-#     projectName= graphene.Field(UserType)
-#     projectDesc = graphene.String()
-#     location = graphene.String()
-#     profilePic = graphene.String()
-#
-#     class Arguments:
-#         user = graphene.String(required= True)
-#         empCode=graphene.String(required=True)
-#         location=graphene.String(required=True)
-#         profilePic=graphene.String(required=True)
-#         invProjects=graphene.String(required=True)
-#
-#     def mutate(self, info,  user, empCode,location ,  profilePic, invProjects):
-#         print(info)
-#         print("ooooooooooooooo")
-#         if(user != 'default'):
-#             userInstance = get_user_model().objects.get(id = int(user))
-#         else:
-#             userInstance = info.context.user
-#         profile = Profile.objects.get(user = userInstance)
-#         if(empCode != 'default'):
-#             profile.empCode = empCode
-#         if(location != 'default'):
-#             profile.location = location
-#         if(profilePic != 'default'):
-#             profile.profilePic = profilePic
-#             print("set kar diyaaaaaaaaaa")
-#         if(invProjects != 'default'):
-#             print('see')
-#             criteria = json.loads(invProjects)
-#             inProjs = criteria["invProjects"]
-#             print(inProjs)
-#             print(len(inProjs))
-#             print(profile.projectsInvolved.all())
-#             piqs = profile.projectsInvolved.all()
-#             for y in piqs:
-#                 profile.projectsInvolved.remove(y)
-#                 # profile.save()
-#             for x in inProjs:
-#                 p = Project.objects.get(id= int(x))
-#                 profile.projectsInvolved.add(p)
-#                 # profile.save()
-#         profile.save()
-#
-#         return UpdateProfile(
-#             id = profile.id,
-#             user=  profile.user,
-#             empCode = profile.empCode,
-#             location = profile.location,
-#             profilePic = profile.profilePic
-#         )
-#
+    class Arguments:
+        project = graphene.String(required= True)
+        projectDesc=graphene.String(required=True)
+        projectPic=graphene.String(required=True)
+        invActTypes=graphene.String(required=True)
+
+    def mutate(self, info,  project, projectDesc, projectPic, invActTypes):
+        print(info)
+        print("ooooooooooooooo")
+        if(project != 'default'):
+            projectInstance = Project.objects.get(id = int(project))
 
 
+        if(projectDesc != 'default'):
+            projectInstance.projectDesc = projectDesc
+
+        if(projectPic != 'default'):
+            projectInstance.projectPic = projectPic
+            print("set kar diyaaaaaaaaaa")
+        if(invActTypes != 'default'):
+            print('see')
+            criteria = json.loads(invActTypes)
+            invATs = criteria["invActTypes"]
 
 
+            psi = projectInstance.activitiesInvolved.all()
+            for y in psi:
+                projectInstance.activitiesInvolved.remove(y)
+                # profile.save()
+            for x in invATs:
+                at = ActivityType.objects.get(id= int(x))
+                projectInstance.activitiesInvolved.add(at)
+                # profile.save()
+        projectInstance.save()
+
+        return UpdateProject(
+            id = projectInstance.id,
+            projectName=  projectInstance.projectName,
+            projectDesc = projectInstance.projectDesc,
+            projectPic = projectInstance.projectPic
+        )
 
 
 class Mutation(graphene.ObjectType):
     create_project = CreateProject.Field()
+    update_project = UpdateProject.Field()

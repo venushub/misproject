@@ -20,7 +20,7 @@ class ActivityType(models.Model):
         return self.activityTypeName
 
 class Project(models.Model):
-    projectName = models.CharField(max_length=30)
+    projectName = models.CharField(max_length=30, unique = True)
     projectDesc = models.TextField()
     projectPic = models.TextField()
     activitiesInvolved = models.ManyToManyField(ActivityType)

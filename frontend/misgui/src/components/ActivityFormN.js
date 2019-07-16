@@ -53,6 +53,32 @@ class ActivityFormN extends Component {
 
   }
 
+
+  handleATChange = (e) => {
+    // console.log("qqqqqqqqqqqq", typeof(e.target.name), e.target.name , typeof(e.target.value) , e.target.value)
+
+    // console.log(this.state);
+
+    this.setState({
+      [e.target.name]: e.target.value,
+    }, () => {
+      console.log("cccccccccc", this.state.activityTypeArg)
+
+    })
+    // console.log("cccccccccc", e.target.value.activityTypeName)
+    // if(e.target.value.activityTypeRequired === 'N'){
+    //   this.setState({
+    //     [e.target.name]: e.target.value,
+    //     activityTypeIdentifierArg : e.target.value.activityTypeName
+    //   })
+    // } else if(e.target.value.activityTypeRequired === 'Y'){
+    //   this.setState({
+    //     [e.target.name]: e.target.value,
+    //   })
+    // }
+
+  }
+
   handleChange2 = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
@@ -323,7 +349,7 @@ class ActivityFormN extends Component {
 
     const myprofile = this.props.data.myProfile  &&  this.props.data.myProfile != undefined ? this.props.data.myProfile : false
 
-    // console.log("ddddddddddddddd", this.props)
+    console.log("ddddddddddddddd", this.props)
 
     const projects_list  = this.props.getProjectsQuery.allProjects  &&  this.props.getProjectsQuery.allProjects != undefined ? this.props.getProjectsQuery.allProjects : []
 
@@ -356,13 +382,10 @@ class ActivityFormN extends Component {
     })
 
 
-
-
     let myelem = <div></div>
     if(this.state.datid){
-      myelem = <CustomOptions handleDropDown={this.handleDropDown} activityTypeId={this.state.activityTypeArg} filter_attrib={this.state.filter_attrib} />
+      myelem = <CustomOptions handleDropDown={this.handleDropDown} activityTypeId={this.state.activityTypeArg}  filter_attrib={this.state.filter_attrib} />
     }
-
 
 
     const my_form =
@@ -376,7 +399,7 @@ class ActivityFormN extends Component {
 
 
               <label className="activity-form-input-label">Activity Type</label>
-              <select name="activityTypeArg" value={this.state.activityTypeArg} onChange={this.handleChange} className="activity-form-input">
+              <select name="activityTypeArg" value={this.state.activityTypeArg} onChange={this.handleATChange} className="activity-form-input">
                   <option value="select">--select--</option>
                   {activity_types_options_render}
               </select>

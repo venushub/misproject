@@ -48,11 +48,12 @@ class Settings extends Component {
   render(){
 
     console.log("dddddddddddd", this.props)
+    const me = this.props.getMe.me  &&  this.props.getMe.me != undefined ? this.props.getMe.me : false
 
     return(
       <div className="settings-container">
         <Header />
-        <ProfilePic user={this.state.username}/>
+        <ProfilePic user={me.id}/>
         <Theme />
         <Logout />
       </div>

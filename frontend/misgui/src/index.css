@@ -345,7 +345,7 @@ td {
 
 .register-button {
   margin : 20px;
-  background-color: #f49b42;
+  background-color: var(--dark);
   border : none;
   padding : 5px 10px 5px 10px;
   font-weight: bold;
@@ -1806,4 +1806,57 @@ td {
 .mytextsvg{
   fill :  var(--extra-light);
   font: bold 1.5em verdana;
+}
+
+.input-in-admin-form{
+  font-family: verdana;
+  font-weight: bold;
+  border : 0.1em dotted var(--dark);
+  background-color: var(--extra-light);
+  border-top-width: 0;
+  border-right-width: 0;
+  color : var(--dark);
+  padding : 0.5em 0.5em 0.5em 0.5em;
+  width : 80%;
+}
+
+.bb0{
+  border-bottom-width: 0;
+}
+
+.register-id-div{
+  width : 100%;
+  display : flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.my-up-ip{
+  width : 50%;
+  border-width : 0 0 0.1em 0;
+  border-color: var(--dark);
+  margin-left : 1em;
+}
+
+
+
+.my-up-ip-lb{
+  font-family: verdana;
+  font-weight: bold;
+}
+
+.w-100p{
+  width : 100%;
+}
+
+.ai-c {
+  align-items: center;
+}
+
+.jc-c{
+  justify-content: center;
+}
+
+.p-1e{
+  padding : 1em;
 }

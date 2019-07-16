@@ -22,7 +22,7 @@ class Query(object):
         #my_criteria = json.loads(search)
         print("error idhar heiiiiii")
         print(user)
-        userInstance = get_user_model().objects.filter(id = user)[0]
+        userInstance = get_user_model().objects.filter(id = int(user))[0]
         return Profile.objects.get(user = userInstance.id)
 
 

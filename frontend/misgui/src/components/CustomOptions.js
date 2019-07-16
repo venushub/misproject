@@ -99,7 +99,7 @@ class CustomOptions extends Component {
       myclassname = "activiy-type-iden-options"
     }
 
-
+    
     return(
       <div className={myclassname}>
       {droptions_render}

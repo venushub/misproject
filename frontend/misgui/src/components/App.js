@@ -87,8 +87,10 @@ class App extends Component {
 
 
   render(){
-    let adminpanelrender = null;
-    if(this.state.showadminpanel){
+    const me = this.props.getMe.me  &&  this.props.getMe.me != undefined ? this.props.getMe.me : false
+
+    let adminpanelrender;
+    if(me.isSuperuser){
       adminpanelrender = <Route path="/admintoolkit" exact component={AdminToolKit} />
     }
 

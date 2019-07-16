@@ -15,6 +15,7 @@ from django.dispatch import receiver
 class ActivityType(models.Model):
     activityTypeName =models.CharField(max_length=50)
     activityTypeDesc =models.TextField()
+    activityTypeRequired = models.CharField(max_length=3)
 
     def __str__(self):
         return self.activityTypeName

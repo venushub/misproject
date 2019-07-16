@@ -398,13 +398,13 @@ class ProjectManagement extends Component {
                 </g>
             </svg>
             <input  className="none" type="file" id="file" ref="myfile" onChange={this.changedFile} />
-            <input  className="display-name-update" placeHolder="enter project name" onChange={this.handleFilterInputChange} id="displayName" name="displayName" value={this.state.displayName}/>
+            <input  className="display-name-update" placeholder="enter project name" onChange={this.handleFilterInputChange} id="displayName" name="displayName" value={this.state.displayName}/>
             </div>
             <button onClick={this.handleCloseForm} className="profile-close-button">Close</button>
           </div>
           <div className="flex-r-100pc">
             <label  className="update-profile-label" htmlFor="projectDesc">Project Desc</label>
-            <input className="update-profile-input" placeHolder="enter project description" type="text" onChange={this.handleFilterInputChange} id="projectDesc" name="projectDesc" value={this.state.projectDesc} />
+            <input className="update-profile-input" placeholder="enter project description" type="text" onChange={this.handleFilterInputChange} id="projectDesc" name="projectDesc" value={this.state.projectDesc} />
           </div>
           <div className="projects-inv-div">
             <div className="inv-heading br-0 bl-0"><div className="inv-heading-name br-0">Not Involved Activity Types</div><div  className="inv-heading-conts br-0">{not_involved_activity_types_render}</div></div>

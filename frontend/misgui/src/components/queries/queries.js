@@ -46,6 +46,23 @@ const createProject = gql`
 `;
 
 
+const createActivityType = gql`
+      mutation createActivityType($activityTypeName: String!, $activityTypeDesc: String!, $activityTypeRequired: String!){
+         createActivityType(activityTypeName: $activityTypeName, activityTypeDesc: $activityTypeDesc, activityTypeRequired: $activityTypeRequired){
+            activityTypeName
+        }
+    }
+`;
+
+const updateActivityType = gql`
+      mutation updateActivityType($activityType: String!, $activityTypeDesc: String!, $activityTypeRequired: String!){
+         updateActivityType(activityType: $activityType, activityTypeDesc: $activityTypeDesc, activityTypeRequired: $activityTypeRequired){
+            activityTypeName
+        }
+    }
+`;
+
+
 const getProfilesQuery = gql`
 {
   allProfiles {
@@ -157,6 +174,8 @@ const getActivityTypesQuery = gql`
   allActivityTypes {
     id
     activityTypeName
+    activityTypeDesc
+    activityTypeRequired
   }
 }
 `
@@ -370,4 +389,4 @@ const createUserMutation = gql`
 //   }
 // `
 
-export {getTokenMutation, getMe, createProject , updateProject ,getProfilesQuery ,getProfileQuery,updateProfile, getAttendanceQuery ,getAttendanceFilesQuery , getActivitiesForMonthQuery  , verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};
+export {getTokenMutation, getMe, createActivityType ,updateActivityType , createProject , updateProject ,getProfilesQuery ,getProfileQuery,updateProfile, getAttendanceQuery ,getAttendanceFilesQuery , getActivitiesForMonthQuery  , verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};

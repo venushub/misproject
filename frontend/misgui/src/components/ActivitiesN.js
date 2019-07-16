@@ -72,13 +72,6 @@ class ActivitiesN extends Component {
 
 
   render(){
-
-
-
-
-
-
-
     // console.log(this.state.editId)
     let weekHandle = '0'
     if(this.state.checked){
@@ -89,7 +82,7 @@ class ActivitiesN extends Component {
 
     // console.log("week is .......", weekHandle)
     //
-    // console.log("whereeeeeeeeeeee", this.props)
+    console.log("whereeeeeeeeeeee", this.props)
 
     let activities = []
 
@@ -134,10 +127,12 @@ class ActivitiesN extends Component {
       )
       })
 
+      const me = this.props.getMe.me  &&  this.props.getMe.me != undefined ? this.props.getMe.me : false
+
     return(
       <div className="activities-container">
         <Header />
-        <ActivityFormN handleReturnSubmit={this.handleReturnSubmit} editOption={this.state.editId} user={this.state.username}/>
+        <ActivityFormN handleReturnSubmit={this.handleReturnSubmit} editOption={this.state.editId} user={me.id}/>
         <ActivitiesListN activities={activities} weekHandle={weekHandle} handleLP={this.handleLP} />
       </div>
     )

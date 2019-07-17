@@ -32,6 +32,7 @@ const getProjectsQuery = gql`
     activitiesInvolved{
       id
       activityTypeName
+      activityTypeRequired
     }
   }
 }
@@ -188,6 +189,7 @@ const getActivityTypeIdentifiersQuery = gql`
       activityType{
         activityTypeName
       }
+
     }
   }
 `

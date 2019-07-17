@@ -58,13 +58,35 @@ class CustomOptions extends Component {
 
     }
 
+    componentDidUpdate(prevProps){
+        if (this.props.activityTypeId !== prevProps.activityTypeId) {
+          // let activityTypeIdentifiers = this.props.data.allActivityTypeIdentifiers  &&  this.props.data.allActivityTypeIdentifiers != undefined ? this.props.data.allActivityTypeIdentifiers : []
+          // activityTypeIdentifiers.map(
+          //   (ati) => {
+          //     if(ati.activityTypeIdentifierName === this.props.activityTypeName){
+          //
+          //     }
+          //   }
+          // )
+            this.props.data.refetch()
+          console.log("catchhhhhhh")
+        }
+    }
+
+    componentDidMount(){
+      this.props.data.refetch()
+    }
+
   render(){
+
+    console.log('nahi horeeeeeeeee')
 
     let activityTypeIdentifiers = this.props.data.allActivityTypeIdentifiers  &&  this.props.data.allActivityTypeIdentifiers != undefined ? this.props.data.allActivityTypeIdentifiers : []
 
     let filter_attrib = this.props.filter_attrib
 
     let droptions = []
+
 
     if(this.props.filter_attrib != ''){
       droptions = activityTypeIdentifiers.filter((activityTypeIdentifier, index) => {
@@ -74,32 +96,54 @@ class CustomOptions extends Component {
       droptions = []
     }
 
+    let exactmatch = false;
+
+    activityTypeIdentifiers.map((ati) => {
+      if(ati.activityTypeIdentifierName === filter_attrib){
+        exactmatch = true
+      }
+    })
+
     let myclassname = ""
     let droptions_render = <div>Loading..</div>
 
     // console.log("lllllllllllpppppppppppp", droptions.length )
 
-    if(droptions.length != 0){
+    if(droptions.length != 0 && exactmatch === true){
       myclassname = "activiy-type-iden-options"
       droptions_render = droptions.map((droption, index) => {
-        return <div className="drop-item" onClick={() => this.props.handleDropDown(droption.id, droption.activityTypeIdentifierName)} key={index}>{droption.activityTypeIdentifierName}</div>
+        let refn = "di" + droption.id.toString()
+        return <div className="drop-item" ref={refn} onClick={() => this.props.handleDropDown(droption.id, droption.activityTypeIdentifierName)} key={index}>{droption.activityTypeIdentifierName}</div>
       })
     } else if(this.props.filter_attrib === '') {
       droptions_render = <div></div>
       myclassname = "border-none"
+    } else if(droptions.length != 0 && exactmatch === false){
+
+      let droptions_render_1 = droptions.map((droption, index) => {
+        let refn = "di" + droption.id.toString()
+        return <div className="drop-item"  ref={refn} onClick={() => this.props.handleDropDown(droption.id, droption.activityTypeIdentifierName)} key={index}>{droption.activityTypeIdentifierName}</div>
+      })
+      let droptions_render_2 = <div>
+                              <label  className="activity-form-input-label">Bug id not registered, Please register now</label>
+                              <input className="activity-form-input" disabled type="text" name ="activityTypeIdentifierName" value={this.props.filter_attrib} />
+                              <label  className="activity-form-input-label">Sub type</label>
+                              <select className="activity-form-input" name="activityTypeIdentifierSubCat" value={this.state.activityTypeIdentifierSubCat} onChange={this.handleChange}><option value="CR">CR</option><option value="FTR">FTR</option><option value="Other">Other</option></select>
+                              <button className="register-button" onClick={this.handleActivityFormSubmit}>Register</button>
+                            </div>
+      droptions_render = <div className="dono-com">{droptions_render_1}{droptions_render_2}</div>
     } else {
       droptions_render = <div>
-
-        <label  className="activity-form-input-label">Bug id not registered, Please register now</label>
-        <input className="activity-form-input" disabled type="text" name ="activityTypeIdentifierName" value={this.props.filter_attrib} />
-        <label  className="activity-form-input-label">Sub type</label>
-        <select className="activity-form-input" name="activityTypeIdentifierSubCat" value={this.state.activityTypeIdentifierSubCat} onChange={this.handleChange}><option value="CR">CR</option><option value="FTR">FTR</option><option value="Other">Other</option></select>
-        <button className="register-button" onClick={this.handleActivityFormSubmit}>Register</button>
-      </div>
+                            <label  className="activity-form-input-label">Bug id not registered, Please register now</label>
+                            <input className="activity-form-input" disabled type="text" name ="activityTypeIdentifierName" value={this.props.filter_attrib} />
+                            <label  className="activity-form-input-label">Sub type</label>
+                            <select className="activity-form-input" name="activityTypeIdentifierSubCat" value={this.state.activityTypeIdentifierSubCat} onChange={this.handleChange}><option value="CR">CR</option><option value="FTR">FTR</option><option value="Other">Other</option></select>
+                            <button className="register-button" onClick={this.handleActivityFormSubmit}>Register</button>
+                          </div>
       myclassname = "activiy-type-iden-options"
     }
 
-    
+
     return(
       <div className={myclassname}>
       {droptions_render}

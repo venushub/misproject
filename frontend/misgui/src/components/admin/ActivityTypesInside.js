@@ -143,6 +143,7 @@ class ActivityTypesInside extends Component {
   componentDidUpdate(prevProps){
       if (this.props.activityType !== prevProps.activityType || this.props.button_name !== prevProps.button_name) {
         let at =  this.props.activityType  &&  this.props.activityType!= undefined ? this.props.activityType : {}
+        this.props.data.refetch()
         let atis =  this.props.data.allActivityTypeIdentifiers  && this.props.data.allActivityTypeIdentifiers != undefined ? this.props.data.allActivityTypeIdentifiers : []
 
         if(this.props.button_name === 'Create Activity Type'){
@@ -267,6 +268,7 @@ class ActivityTypesInside extends Component {
     })
   }
 
+
   render(){
 
     console.log("aaaaaaaaa", this.props)
@@ -281,7 +283,7 @@ class ActivityTypesInside extends Component {
 
 
     let atis =  this.props.data.allActivityTypeIdentifiers  && this.props.data.allActivityTypeIdentifiers != undefined ? this.props.data.allActivityTypeIdentifiers : []
-
+    console.log('attttttttttttiiiiiiisssssss', atis)
     let atis_render;
     atis_render = atis.map((ati, index) => {
       return(
@@ -339,7 +341,7 @@ class ActivityTypesInside extends Component {
               <button className="register-button" onClick={this.handleCreateATI}>Register</button>
             </div>
           </div></div>
-          <div className="inv-heading br-0"><div className="inv-heading-name">Involved Activity Types</div><div  className="inv-heading-conts">{atis_render}</div></div>
+          <div className="inv-heading br-0"><div className="inv-heading-name">Involved Activity Type Identifiers</div><div  className="inv-heading-conts">{atis_render}</div></div>
         </div>
 
         <button  onClick={this.handleUpdateActivitytype} className="profile-update-button">{this.props.button_name}</button>

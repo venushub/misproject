@@ -18,6 +18,7 @@ class ActivityFormN extends Component {
     this.state = {
       activityProjectArg : '--select-',
       activityTypeArg : '--select--',
+      activityTypeName : '',
       activityTypeIdentifierArg : '--select--',
       activityDescriptionArg : '',
       activityDate : '',
@@ -53,18 +54,54 @@ class ActivityFormN extends Component {
 
   }
 
+  handlePChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+      activityTypeArg : '--select--',
+      filter_attrib : ''
+    })
+  }
+
 
   handleATChange = (e) => {
     // console.log("qqqqqqqqqqqq", typeof(e.target.name), e.target.name , typeof(e.target.value) , e.target.value)
 
     // console.log(this.state);
 
-    this.setState({
-      [e.target.name]: e.target.value,
-    }, () => {
-      console.log("cccccccccc", this.state.activityTypeArg)
+    const projects_list  = this.props.getProjectsQuery.allProjects  &&  this.props.getProjectsQuery.allProjects != undefined ? this.props.getProjectsQuery.allProjects : []
 
+    projects_list.map((pi) => {
+
+      if(pi.id === this.state.activityProjectArg){
+        console.log("piiiiiiiiiiiii", pi)
+        pi.activitiesInvolved.map((ai) => {
+          if(ai.id === e.target.value) {
+              console.log('huaaaaaaaaa naaaaaaaaaa', ai)
+            if(ai.activityTypeRequired === 'N'){
+              console.log('huaaaaaaaaa')
+              this.setState({
+                activityTypeArg : e.target.value,
+                filter_attrib : ai.activityTypeName,
+                datid : true
+              }, () => {console.log("zzzzzzz", this.state.activityTypeArg)})
+            } else {
+              this.setState({
+                [e.target.name]: e.target.value,
+                datid : true,
+                filter_attrib : ''
+              })
+            }
+          }
+        })
+      }
     })
+    //
+    // this.setState({
+    //   [e.target.name]: e.target.value,
+    // }, () => {
+    //   console.log("cccccccccc", this.state.activityTypeArg)
+    //
+    // })
     // console.log("cccccccccc", e.target.value.activityTypeName)
     // if(e.target.value.activityTypeRequired === 'N'){
     //   this.setState({
@@ -121,7 +158,6 @@ class ActivityFormN extends Component {
 
   clearForm = () => {
 
-
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -150,7 +186,6 @@ class ActivityFormN extends Component {
       // console.log("bruh")
       if (this.props.editOption !== prevProps.editOption) {
 
-
         let yyyy =  this.props.editOption.activityStartTime.substring(0,4)
         let mm =  this.props.editOption.activityStartTime.substring(5,7)
         let dd =  this.props.editOption.activityStartTime.substring(8,10)
@@ -171,7 +206,7 @@ class ActivityFormN extends Component {
 
         let et = eh + ':' + em
 
-          // console.log(et)
+        // console.log(et)
 
         // console.log("bhbhbhbbhb",mm )
         // let mm = this.state.activityDate.substring(5,7)
@@ -349,7 +384,7 @@ class ActivityFormN extends Component {
 
     const myprofile = this.props.data.myProfile  &&  this.props.data.myProfile != undefined ? this.props.data.myProfile : false
 
-    console.log("ddddddddddddddd", this.props)
+    console.log("ddddddddddddddd", this.props, this.state.activityTypeArg)
 
     const projects_list  = this.props.getProjectsQuery.allProjects  &&  this.props.getProjectsQuery.allProjects != undefined ? this.props.getProjectsQuery.allProjects : []
 
@@ -359,6 +394,7 @@ class ActivityFormN extends Component {
         <option key={project.id} value={project.id}>{project.projectName}</option>
       )
     })
+
 
     // const activity_types_options  = this.props.getActivityTypesQuery.allActivityTypes  &&  this.props.getActivityTypesQuery.allActivityTypes != undefined ? this.props.getActivityTypesQuery.allActivityTypes : []
     // const activity_types_options_render = activity_types_options.map((activity_type) => {
@@ -384,7 +420,7 @@ class ActivityFormN extends Component {
 
     let myelem = <div></div>
     if(this.state.datid){
-      myelem = <CustomOptions handleDropDown={this.handleDropDown} activityTypeId={this.state.activityTypeArg}  filter_attrib={this.state.filter_attrib} />
+      myelem = <CustomOptions handleDropDown={this.handleDropDown} activityTypeId={this.state.activityTypeArg} activityTypeName={this.state.activityTypeName} filter_attrib={this.state.filter_attrib} />
     }
 
 
@@ -392,7 +428,7 @@ class ActivityFormN extends Component {
             <form className ="activity-form"  onSubmit={this.handleActivityFormSubmit}>
 
               <label className="activity-form-input-label">Project</label>
-              <select name="activityProjectArg" value={this.state.activityProjectArg} onChange={this.handleChange} className="activity-form-input">
+              <select name="activityProjectArg" value={this.state.activityProjectArg} onChange={this.handlePChange} className="activity-form-input">
                  <option value="select">--select--</option>
                  {projects_options_render}
               </select>

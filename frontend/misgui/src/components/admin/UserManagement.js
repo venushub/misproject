@@ -225,7 +225,7 @@ class UserManagement extends Component {
 
   render(){
 
-    console.log("state....",this.state)
+    // console.log("state....",this.state)
 
     const profiles = this.props.getProfilesQuery.allProfiles  &&  this.props.getProfilesQuery.allProfiles != undefined ? this.props.getProfilesQuery.allProfiles : []
 
@@ -288,7 +288,7 @@ class UserManagement extends Component {
       )
     })
 
-    console.log(this.props)
+    // console.log(this.props)
     return(
       <div className="admin-sub-div">
       <div className="filter-details-my">

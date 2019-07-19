@@ -111,8 +111,8 @@ class Matcher extends Component {
 
 
   render(){
-    console.log("month isssss",moment().format('YYYY'))
-    console.log("uuuuuuuu",this.state.selected_month, this.props)
+    // console.log("month isssss",moment().format('YYYY'))
+    // console.log("uuuuuuuu",this.state.selected_month, this.props)
     let upload_excel;
     if(this.state.showuploadform){
       upload_excel  = <UploadExcel />

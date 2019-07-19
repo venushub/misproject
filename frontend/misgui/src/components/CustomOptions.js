@@ -79,7 +79,7 @@ class CustomOptions extends Component {
 
   render(){
 
-    console.log('nahi horeeeeeeeee')
+    // console.log('nahi horeeeeeeeee')
 
     let activityTypeIdentifiers = this.props.data.allActivityTypeIdentifiers  &&  this.props.data.allActivityTypeIdentifiers != undefined ? this.props.data.allActivityTypeIdentifiers : []
 

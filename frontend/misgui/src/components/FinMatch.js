@@ -30,13 +30,13 @@ class FinMatch extends Component {
 
   render(){
     var str = "8H:26M"
-    console.log("waaaaaaaah", str.split(":"))
-    console.log("burrrrrrrrr", str.split(":")[0].split("H")[0])
-    console.log("burrrrrrrrr", str.split(":")[1].split("M")[0])
+    // console.log("waaaaaaaah", str.split(":"))
+    // console.log("burrrrrrrrr", str.split(":")[0].split("H")[0])
+    // console.log("burrrrrrrrr", str.split(":")[1].split("M")[0])
 
 
 
-    console.log("iiiiii",this.props)
+    // console.log("iiiiii",this.props)
 
     const attendances = this.props.data.allAttendance  &&  this.props.data.allAttendance != undefined ? this.props.data.allAttendance : []
     let mapi_attn_total = 0

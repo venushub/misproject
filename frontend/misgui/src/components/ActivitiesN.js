@@ -82,7 +82,7 @@ class ActivitiesN extends Component {
 
     // console.log("week is .......", weekHandle)
     //
-    console.log("whereeeeeeeeeeee", this.props)
+    // console.log("whereeeeeeeeeeee", this.props)
 
     let activities = []
 

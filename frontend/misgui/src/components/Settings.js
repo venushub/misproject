@@ -47,7 +47,7 @@ class Settings extends Component {
 
   render(){
 
-    console.log("dddddddddddd", this.props)
+    // console.log("dddddddddddd", this.props)
     const me = this.props.getMe.me  &&  this.props.getMe.me != undefined ? this.props.getMe.me : false
 
     return(

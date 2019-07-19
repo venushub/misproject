@@ -13,7 +13,7 @@ from django.dispatch import receiver
 
 
 class ActivityType(models.Model):
-    activityTypeName =models.CharField(max_length=50)
+    activityTypeName =models.CharField(max_length=50, unique = True)
     activityTypeDesc =models.TextField()
     activityTypeRequired = models.CharField(max_length=3)
 
@@ -35,7 +35,7 @@ class ActivityTypeIdentifier(models.Model):
         'ActivityType',
         related_name = 'activityTypeNameFk',
         on_delete = models.CASCADE)
-    activityTypeIdentifierName = models.CharField(max_length=100)
+    activityTypeIdentifierName = models.CharField(max_length=100, unique = True)
     activityTypeIdentifierSubCat = models.CharField(max_length=100)
 
     def __str__(self):
@@ -95,6 +95,7 @@ class Profile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):

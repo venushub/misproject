@@ -282,6 +282,17 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+# 		'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'mis_db', #put your database name here
+#         'USER' : 'enterprisedb',
+#         'PASSWORD' : 'nsdl1234',
+#         'HOST' : '172.30.151.183',
+#         'PORT' : '5444'
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

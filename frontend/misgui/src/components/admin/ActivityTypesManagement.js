@@ -144,7 +144,7 @@ class ActivityTypesManagement extends Component {
   }
 
   refetchData =() => {
-    console.log("gttttyyyyyyyyyyyy")
+    // console.log("gttttyyyyyyyyyyyy")
     this.props.getActivityTypesQuery.refetch()
   }
 
@@ -152,7 +152,7 @@ class ActivityTypesManagement extends Component {
 
   render(){
 
-    console.log("state....",this.state)
+    // console.log("state....",this.state)
 
     const activity_types  = this.props.getActivityTypesQuery.allActivityTypes  &&  this.props.getActivityTypesQuery.allActivityTypes != undefined ? this.props.getActivityTypesQuery.allActivityTypes : []
 
@@ -189,7 +189,7 @@ class ActivityTypesManagement extends Component {
 
 
 
-    console.log(this.props)
+    // console.log(this.props)
     return(
       <div className="admin-sub-div">
       <div className="filter-details-my">

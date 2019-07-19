@@ -73,12 +73,12 @@ class ActivityFormN extends Component {
     projects_list.map((pi) => {
 
       if(pi.id === this.state.activityProjectArg){
-        console.log("piiiiiiiiiiiii", pi)
+        // console.log("piiiiiiiiiiiii", pi)
         pi.activitiesInvolved.map((ai) => {
           if(ai.id === e.target.value) {
-              console.log('huaaaaaaaaa naaaaaaaaaa', ai)
+              // console.log('huaaaaaaaaa naaaaaaaaaa', ai)
             if(ai.activityTypeRequired === 'N'){
-              console.log('huaaaaaaaaa')
+              // console.log('huaaaaaaaaa')
               this.setState({
                 activityTypeArg : e.target.value,
                 filter_attrib : ai.activityTypeName,
@@ -284,19 +284,29 @@ class ActivityFormN extends Component {
   }
 
 
+
+
+
   handleActivityFormSubmit = (e) => {
 
     // console.log("vvvvvvvvvvvvvvvvvvvvvvvvvvv", this.state)
 
     e.preventDefault()
-
-
+    // console.log(this.state.activityDate)
+    // console.log("selecteddddddddd", moment(this.state.activityDate, "YYYY-MM-DD").week())
+    // console.log("deselecteddddd",  moment().week())
+    // let diffbtwweeks;
+    // diffbtwweeks =  moment(this.state.activityDate, "YYYY-MM-DD").week() -  moment().week()
+    // // console.log((moment(this.state.activityDate, "DD-MM-YYYY").week() - moment(moment(), "DD-MM-YYYY").week()) > 1 )
+    // console.log("difff", diffbtwweeks)
     if(this.state.activityProjectArg === '--select--' || this.state.activityTypeArg === '--select--' || this.state.activityTypeIdentifierArg === '--select--'){
       alert('please select all necessary fields')
     } else if(this.state.activityHours <= 0){
 
       alert('Hours cannot be less than or equal to zero')
 
+    } else if((moment(this.state.activityDate, "YYYY-MM-DD").week() - moment(moment(), "DD-MM-YYYY").week()) < -1 || (moment(this.state.activityDate, "DD-MM-YYYY").week() - moment(moment(), "DD-MM-YYYY").week()) > 1){
+        alert('date is not permitted')
     }
 
     else {
@@ -384,7 +394,7 @@ class ActivityFormN extends Component {
 
     const myprofile = this.props.data.myProfile  &&  this.props.data.myProfile != undefined ? this.props.data.myProfile : false
 
-    console.log("ddddddddddddddd", this.props, this.state.activityTypeArg)
+    // console.log("ddddddddddddddd", this.props, this.state.activityTypeArg)
 
     const projects_list  = this.props.getProjectsQuery.allProjects  &&  this.props.getProjectsQuery.allProjects != undefined ? this.props.getProjectsQuery.allProjects : []
 
@@ -408,7 +418,7 @@ class ActivityFormN extends Component {
     projects_list.map((pi) => {
 
       if(pi.id === this.state.activityProjectArg){
-        console.log("piiiiiiiiiiiii", pi)
+        // console.log("piiiiiiiiiiiii", pi)
         activity_types_options_render = pi.activitiesInvolved.map((ai) => {
             return(
               <option key={ai.id} value={ai.id}>{ai.activityTypeName}</option>

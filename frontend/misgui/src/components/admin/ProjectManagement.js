@@ -32,7 +32,7 @@ class ProjectManagement extends Component {
     let mytheme = localStorage.getItem('theme');
     if(mytheme === "green") {
 
-      console.log("greeeen")
+      // console.log("greeeen")
 
       this.setState({
         extradark : "rgb(25,111,61)",
@@ -160,7 +160,7 @@ class ProjectManagement extends Component {
       // this.handleDisplayForm()
       // this.props.handleReturnSubmit()
       this.props.getProjectsQuery.refetch()
-      console.log(res)
+      // console.log(res)
       this.setState({
         displayForm : false
       })
@@ -185,7 +185,7 @@ class ProjectManagement extends Component {
       // this.handleDisplayForm()
       // this.props.handleReturnSubmit()
       this.props.getProjectsQuery.refetch()
-      console.log(res)
+      // console.log(res)
       this.setState({
         displayForm : false
       })
@@ -209,7 +209,7 @@ class ProjectManagement extends Component {
 
     if(wf === 'add'){
 
-      console.log("addddd")
+      // console.log("addddd")
       this.state.not_involved_activity_types.map((sniat) => {
         if(sniat.id !== at.id){
           new_not_inv_activity_types.push(sniat)
@@ -258,10 +258,10 @@ class ProjectManagement extends Component {
    var reader = new FileReader();
      reader.readAsDataURL(file);
 
-     console.log("file type is blobbb")
+     // console.log("file type is blobbb")
 
    reader.onload =  () => {
-     console.log(reader.result);
+     // console.log(reader.result);
      this.setState({
        proPic : reader.result
      })
@@ -273,12 +273,12 @@ class ProjectManagement extends Component {
 
 
  changedFile = (e) => {
-   console.log(this.files)
+   // console.log(this.files)
    this.setState({
      file : e.target.value
    })
    const selectedFile = this.refs.myfile.files[0];
-   console.log(selectedFile)
+   // console.log(selectedFile)
 
    if(e.target.value !== '' && e.target.value !== null){
      if(selectedFile.size > 3000000){
@@ -322,7 +322,7 @@ class ProjectManagement extends Component {
 
   render(){
 
-    console.log("state....",this.state)
+    // console.log("state....",this.state)
 
     // const profiles = this.props.getProfilesQuery.allProfiles  &&  this.props.getProfilesQuery.allProfiles != undefined ? this.props.getProfilesQuery.allProfiles : []
 
@@ -369,7 +369,7 @@ class ProjectManagement extends Component {
 
 
 
-    console.log(this.props)
+    // console.log(this.props)
     return(
       <div className="admin-sub-div">
       <div className="filter-details-my">

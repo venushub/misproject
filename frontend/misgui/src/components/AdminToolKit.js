@@ -24,6 +24,8 @@ class AdminToolKit extends Component {
 
   componentDidMount(){
 
+    console.log("componet is mounting")
+
     const me = this.props.getMe.me  &&  this.props.getMe.me != undefined ? this.props.getMe.me : false
 
     if(me.isSuperuser){
@@ -45,7 +47,7 @@ class AdminToolKit extends Component {
   }
 
   handleComp = (inc) => {
-    console.log(inc)
+    // console.log(inc)
     let newbuttons = []
     this.state.buttons.map(
       (button) => {

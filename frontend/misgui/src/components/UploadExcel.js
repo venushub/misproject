@@ -34,16 +34,16 @@ class UploadExcel extends Component {
    var reader = new FileReader();
      reader.readAsDataURL(file);
 
-     console.log("file type is blobbb")
+     // console.log("file type is blobbb")
 
    reader.onload =  () => {
-     console.log(reader.result);
+     // console.log(reader.result);
      this.setState({
        filebase64 : reader.result
      })
    };
    reader.onerror =  (error) => {
-     console.log('Error: ', error);
+     // console.log('Error: ', error);
    };
  }
 
@@ -67,12 +67,12 @@ class UploadExcel extends Component {
   // }
 
   changedFile = (e) => {
-    console.log(this.files)
+    // console.log(this.files)
     this.setState({
       file : e.target.value
     })
     const selectedFile = this.refs.myfile.files[0];
-    console.log(selectedFile)
+    // console.log(selectedFile)
 
     if(e.target.value !== '' && e.target.value !== null){
       if(selectedFile.size < 3000000){
@@ -106,11 +106,11 @@ class UploadExcel extends Component {
           fileUploadTime : moment().format('YYYY-MM-DD hh:mm:ss')
         })
         .then( (response)  => {
-          console.log(response);
+          // console.log(response);
           this.props.getAttendanceFilesQuery.refetch()
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error);
         });
       }
     }
@@ -142,28 +142,28 @@ class UploadExcel extends Component {
         fileYear : impyear
       })
 
-      console.log(moment().format('YYYY-MM-DD hh:mm:ss'))
+      // console.log(moment().format('YYYY-MM-DD hh:mm:ss'))
 
 
         this.setState({
           loading : this.props.getAttendanceFilesQuery.loading
         })
-        console.log("lloadingggggggg")
+        // console.log("lloadingggggggg")
 
 
 
 
       const allAttendanceFiles = this.props.getAttendanceFilesQuery.allAttendanceFiles  &&  this.props.getAttendanceFilesQuery.allAttendanceFiles != undefined ? this.props.getAttendanceFilesQuery.allAttendanceFiles : []
 
-      console.log(moment().subtract(1, 'years').format('YYYY'))
+      // console.log(moment().subtract(1, 'years').format('YYYY'))
       let filepresent = false;
       if(moment().format('MMMM') === 'January'){
-        console.log("haaa jan hei")
+        // console.log("haaa jan hei")
         allAttendanceFiles.map((af) => {
           if(af.year === moment().subtract(1, 'years').format('YYYY')){
-            console.log('haaa year sahi hei hei')
+            // console.log('haaa year sahi hei hei')
             if(af.month === moment().subtract(1, 'months').format('MMMM')){
-              console.log("haa ecember hei")
+              // console.log("haa ecember hei")
               filepresent = true;
             }
           }
@@ -172,9 +172,9 @@ class UploadExcel extends Component {
       } else {
         allAttendanceFiles.map((af) => {
           if(af.year === moment().format('YYYY')){
-            console.log('haaa year sahi hei hei')
+            // console.log('haaa year sahi hei hei')
             if(af.month === moment().subtract(1, 'months').format('MMMM')){
-              console.log("haa ecember hei")
+              // console.log("haa ecember hei")
               filepresent = true;
             }
           }
@@ -191,8 +191,8 @@ class UploadExcel extends Component {
     componentDidUpdate(prevProps){
       if (this.props.getAttendanceFilesQuery !== prevProps.getAttendanceFilesQuery) {
 
-        console.log("refetched atlast")
-      console.log(this.props.getAttendanceFilesQuery.loading, "dddddddddddddddddd")
+        // console.log("refetched atlast")
+      // console.log(this.props.getAttendanceFilesQuery.loading, "dddddddddddddddddd")
 
       this.setState({
         loading : this.props.getAttendanceFilesQuery.loading
@@ -200,15 +200,15 @@ class UploadExcel extends Component {
 
       const allAttendanceFiles = this.props.getAttendanceFilesQuery.allAttendanceFiles  &&  this.props.getAttendanceFilesQuery.allAttendanceFiles != undefined ? this.props.getAttendanceFilesQuery.allAttendanceFiles : []
 
-      console.log(moment().subtract(1, 'years').format('YYYY'))
+      // console.log(moment().subtract(1, 'years').format('YYYY'))
       let filepresent = false;
       if(moment().format('MMMM') === 'January'){
-        console.log("haaa jan hei")
+        // console.log("haaa jan hei")
         allAttendanceFiles.map((af) => {
           if(af.year === moment().subtract(1, 'years').format('YYYY')){
-            console.log('haaa year sahi hei hei')
+            // console.log('haaa year sahi hei hei')
             if(af.month === moment().subtract(1, 'months').format('MMMM')){
-              console.log("haa ecember hei")
+              // console.log("haa ecember hei")
               filepresent = true;
             }
           }
@@ -217,9 +217,9 @@ class UploadExcel extends Component {
       } else {
         allAttendanceFiles.map((af) => {
           if(af.year === moment().format('YYYY')){
-            console.log('haaa year sahi hei hei')
+            // console.log('haaa year sahi hei hei')
             if(af.month === moment().subtract(1, 'months').format('MMMM')){
-              console.log("haa ecember hei")
+              // console.log("haa ecember hei")
               filepresent = true;
             }
           }
@@ -236,8 +236,8 @@ class UploadExcel extends Component {
 
 
   render(){
-    console.log(this.state.file, this.state.filebase64)
-    console.log(this.props)
+    // console.log(this.state.file, this.state.filebase64)
+    // console.log(this.props)
 
 
 
@@ -245,7 +245,7 @@ class UploadExcel extends Component {
 
 
 
-    console.log(moment().subtract(1, 'years').format('YYYY'))
+    // console.log(moment().subtract(1, 'years').format('YYYY'))
 
     let fileuploadmessage = '';
     let displayfileuploadform = false
@@ -325,7 +325,7 @@ class UploadExcel extends Component {
     //                         </div>
     // }
 
-    console.log(this.state.loading, "ding ding")
+    // console.log(this.state.loading, "ding ding")
     let finr = <div></div>
     if(!this.state.loading){
 

@@ -31,7 +31,7 @@ class Matching extends Component {
 
   render(){
 
-    console.log("ggggggg",this.props)
+    // console.log("ggggggg",this.props)
     const activities = this.props.data.allActivitiesForMonth  &&  this.props.data.allActivitiesForMonth != undefined ? this.props.data.allActivitiesForMonth : []
     let mapi_acts_total = 0;
     activities.map((activity) => {

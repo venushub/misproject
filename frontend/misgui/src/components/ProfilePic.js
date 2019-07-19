@@ -33,10 +33,10 @@ class ProfilePic extends Component {
    var reader = new FileReader();
      reader.readAsDataURL(file);
 
-     console.log("file type is blobbb")
+     // console.log("file type is blobbb")
 
    reader.onload =  () => {
-     console.log(reader.result);
+     // console.log(reader.result);
      this.setState({
        filebase64 : reader.result
      },
@@ -58,30 +58,30 @@ class ProfilePic extends Component {
          // this.handleDisplayForm()
          // this.props.handleReturnSubmit()
          this.props.data.refetch()
-         console.log(res)
+         // console.log(res)
          // this.setState({
          //   filebase64 :
          // })
        }).catch(err => {
-         console.log("error aya")
+         // console.log("error aya")
        });
      }
 
    )
    };
    reader.onerror =  (error) => {
-     console.log('Error: ', error);
+     // console.log('Error: ', error);
    };
  }
 
 
  changedFile = (e) => {
-   console.log(this.files)
+   // console.log(this.files)
    this.setState({
      file : e.target.value
    })
    const selectedFile = this.refs.myfile.files[0];
-   console.log(selectedFile)
+   // console.log(selectedFile)
 
    if(e.target.value !== '' && e.target.value !== null){
      if(selectedFile.size > 3000000){
@@ -106,7 +106,7 @@ class ProfilePic extends Component {
      let mytheme = localStorage.getItem('theme');
      if(mytheme === "green") {
 
-       console.log("greeeen")
+       // console.log("greeeen")
 
        this.setState({
          extradark : "rgb(25,111,61)",
@@ -157,7 +157,7 @@ class ProfilePic extends Component {
    } else {
      myimg = mypic
    }
-    console.log("hhhhh",this.props)
+    // console.log("hhhhh",this.props)
     return(
       <div className="profile-pic-div">
       <svg width='210' height='210' xmlns='http://www.w3.org/2000/svg'>
@@ -167,7 +167,7 @@ class ProfilePic extends Component {
               </clipPath>
           </defs>
           <image clipPath='url(#cut-off-bottom)' xlinkHref={myimg} height='200' width='200' />
-          <circle cx="105" cy="105" r="100" fill={this.state.extradark} fillOpacity="0.1"/>
+          <circle cx="105" cy="105" r="100" fill={this.state.dark} fillOpacity="0.3"/>
           <circle cx="105" cy="105" r="100" fill="none" stroke={this.state.extradark} strokeWidth="3"/>
       </svg>
       <button onClick={() => {this.refs.myfile.click()}} className="edit-button">Edit</button>

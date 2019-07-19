@@ -227,7 +227,7 @@ class ActivityTypesInside extends Component {
       // this.props.handleReturnSubmit()
       // this.props.getProjectsQuery.refetch()
       this.props.handleRefetch()
-      console.log(res)
+      // console.log(res)
       this.setState({
         displayForm : false
       })
@@ -271,7 +271,7 @@ class ActivityTypesInside extends Component {
 
   render(){
 
-    console.log("aaaaaaaaa", this.props)
+    // console.log("aaaaaaaaa", this.props)
 
     let updateformclassname = "none"
 
@@ -283,7 +283,7 @@ class ActivityTypesInside extends Component {
 
 
     let atis =  this.props.data.allActivityTypeIdentifiers  && this.props.data.allActivityTypeIdentifiers != undefined ? this.props.data.allActivityTypeIdentifiers : []
-    console.log('attttttttttttiiiiiiisssssss', atis)
+    // console.log('attttttttttttiiiiiiisssssss', atis)
     let atis_render;
     atis_render = atis.map((ati, index) => {
       return(

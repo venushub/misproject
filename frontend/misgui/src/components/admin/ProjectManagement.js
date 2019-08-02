@@ -121,9 +121,13 @@ class ProjectManagement extends Component {
         not_involved_activity_types : not_involved_activity_types,
         proPic : project.projectPic,
         button_name : 'Update Project',
+      })
 
+      // document.documentElement.scrollTop = 0;
+      // console.log("nnnnnnnnn", document.documentElement.scrollTop)
+      // window.scrollTo(0, 0)
 
-      })}, 500);
+    }, 500);
   }
 
   handleButtonRelease = () => {
@@ -192,12 +196,7 @@ class ProjectManagement extends Component {
     }).catch(err => {
       console.log("error aya")
     });
-
-
   }
-
-
-
 
   }
 
@@ -221,8 +220,6 @@ class ProjectManagement extends Component {
       new_inv_activity_types.push(at)
 
     } else if(wf === 'del'){
-
-
       this.state.involved_activity_types.map((siat) => {
         if(siat.id !== at.id){
           new_inv_activity_types.push(siat)

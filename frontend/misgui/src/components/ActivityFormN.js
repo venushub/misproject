@@ -32,7 +32,9 @@ class ActivityFormN extends Component {
       submit_button_content : "Add Activity +",
       activityMutateOrUpdateArg : '',
       activityid : '',
-      activityHours : 0
+      activityHours : 0.00,
+      displayUoR : false,
+      incActivity : null
     }
   }
 
@@ -181,76 +183,148 @@ class ActivityFormN extends Component {
   }
 
 
+  handleActivityUpdate = (e) => {
+
+
+        e.preventDefault()
+
+
+    let yyyy =  this.props.editOption.activityStartTime.substring(0,4)
+    let mm =  this.props.editOption.activityStartTime.substring(5,7)
+    let dd =  this.props.editOption.activityStartTime.substring(8,10)
+
+    // console.log(this.props.editOption.activityStartTime)
+
+    let sh = this.props.editOption.activityStartTime.substring(11,13)
+    let sm = this.props.editOption.activityStartTime.substring(14,16)
+
+    let st = sh + ':' + sm
+
+    // console.log(st)
+
+    let eh = this.props.editOption.activityEndTime.substring(11,13)
+    let em = this.props.editOption.activityEndTime.substring(14,16)
+
+
+
+    let et = eh + ':' + em
+
+    // console.log(et)
+
+    // console.log("bhbhbhbbhb",mm )
+    // let mm = this.state.activityDate.substring(5,7)
+    // let dd = this.state.activityDate.substring(8,10)
+
+    let convDate = yyyy + '-' + mm + '-' + dd
+    // console.log(typeof(convDate))
+
+    this.setState({
+      activityid :  this.props.editOption.id,
+      activityProjectArg :  this.props.editOption.activityProject.id.toString(),
+      activityTypeArg : this.props.editOption.activityType.id.toString(),
+      filter_attrib : this.props.editOption.activityTypeIdentifier.activityTypeIdentifierName.toString(),
+      activityTypeIdentifierArg : this.props.editOption.activityTypeIdentifier.id.toString(),
+      activityDescriptionArg : this.props.editOption.activityDescription,
+      datid : false,
+      activityDate :  convDate,
+      activityStartTime : st,
+      activityEndTime : et,
+      displayUoR : false,
+      activityHours : moment
+       .duration(moment(this.props.editOption.activityEndTime, 'YYYY-MM-DDTHH:mm')
+       .diff(moment(this.props.editOption.activityStartTime, 'YYYY-MM-DDTHH:mm'))
+     ).asHours().toFixed(2)
+    })
+
+
+    // console.log("date isssssssss", convDate)
+    // console.log("eeeeeee", this.props.editOption)
+    if(!this.state.display_form){
+    this.setState({
+      display_form : true,
+      button_content : 'Cancel',
+      submit_button_content : "Update Activity ⇧",
+      // activityStartTime : '',
+      // activityEndTime : '',
+
+      })
+  }
+
+  if(this.state.display_form){
+  this.setState({
+    submit_button_content : "Update Activity ⇧",
+  })
+  }
+  }
+
+  handleActivityReUse = (e) => {
+
+    e.preventDefault()
+
+    console.log("reusing......")
+
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+    let hh = String(today.getHours()).padStart(2, '0');
+    let minmin = String(today.getMinutes()).padStart(2, '0');
+    let ss = String(today.getSeconds()).padStart(2, '0');
+
+    let todaydate = yyyy + '-' + mm + '-' + dd;
+    let nowtime = hh+':'+minmin
+
+    this.setState({
+      activityid :  this.props.editOption.id,
+      activityProjectArg :  this.props.editOption.activityProject.id.toString(),
+      activityTypeArg : this.props.editOption.activityType.id.toString(),
+      filter_attrib : this.props.editOption.activityTypeIdentifier.activityTypeIdentifierName.toString(),
+      activityTypeIdentifierArg : this.props.editOption.activityTypeIdentifier.id.toString(),
+      activityDescriptionArg : this.props.editOption.activityDescription,
+      datid : false,
+      activityDate :  todaydate,
+      activityStartTime : nowtime,
+      activityEndTime : nowtime,
+      activityHours : 0.00,
+      displayUoR : false,
+      button_content : 'Cancel',
+      submit_button_content : "Add Activity +",
+    })
+
+
+    // console.log("date isssssssss", convDate)
+    // console.log("eeeeeee", this.props.editOption)
+  //   if(!this.state.display_form){
+  //   this.setState({
+  //     display_form : true,
+  //     button_content : 'Cancel',
+  //     submit_button_content : "Add Activity ⇧",
+  //     // activityStartTime : '',
+  //     // activityEndTime : '',
+  //
+  //     })
+  // }
+  //
+  // if(this.state.display_form){
+  // this.setState({
+  //   submit_button_content : "Add Activity ⇧",
+  // })
+  // }
+
+  }
+
+
   componentDidUpdate(prevProps){
     if(this.props.editOption !== 0) {
       // console.log("bruh")
       if (this.props.editOption !== prevProps.editOption) {
 
-        let yyyy =  this.props.editOption.activityStartTime.substring(0,4)
-        let mm =  this.props.editOption.activityStartTime.substring(5,7)
-        let dd =  this.props.editOption.activityStartTime.substring(8,10)
-
-        // console.log(this.props.editOption.activityStartTime)
-
-        let sh = this.props.editOption.activityStartTime.substring(11,13)
-        let sm = this.props.editOption.activityStartTime.substring(14,16)
-
-        let st = sh + ':' + sm
-
-        // console.log(st)
-
-        let eh = this.props.editOption.activityEndTime.substring(11,13)
-        let em = this.props.editOption.activityEndTime.substring(14,16)
-
-
-
-        let et = eh + ':' + em
-
-        // console.log(et)
-
-        // console.log("bhbhbhbbhb",mm )
-        // let mm = this.state.activityDate.substring(5,7)
-        // let dd = this.state.activityDate.substring(8,10)
-
-        let convDate = yyyy + '-' + mm + '-' + dd
-        // console.log(typeof(convDate))
 
         this.setState({
-          activityid :  this.props.editOption.id,
-          activityProjectArg :  this.props.editOption.activityProject.id.toString(),
-          activityTypeArg : this.props.editOption.activityType.id.toString(),
-          filter_attrib : this.props.editOption.activityTypeIdentifier.activityTypeIdentifierName.toString(),
-          activityTypeIdentifierArg : this.props.editOption.activityTypeIdentifier.id.toString(),
-          activityDescriptionArg : this.props.editOption.activityDescription,
-          datid : false,
-          activityDate :  convDate,
-          activityStartTime : st,
-          activityEndTime : et,
-          activityHours : moment
-           .duration(moment(this.props.editOption.activityEndTime, 'YYYY-MM-DDTHH:mm')
-           .diff(moment(this.props.editOption.activityStartTime, 'YYYY-MM-DDTHH:mm'))
-         ).asHours().toFixed(2)
-        })
-
-
-        // console.log("date isssssssss", convDate)
-        // console.log("eeeeeee", this.props.editOption)
-        if(!this.state.display_form){
-        this.setState({
+          displayUoR : true,
           display_form : true,
           button_content : 'Cancel',
-          submit_button_content : "Update Activity ⇧",
-          // activityStartTime : '',
-          // activityEndTime : '',
-
-          })
-      }
-
-      if(this.state.display_form){
-      this.setState({
-        submit_button_content : "Update Activity ⇧",
-      })
-      }
+        })
 
       }
 
@@ -305,7 +379,12 @@ class ActivityFormN extends Component {
 
       alert('Hours cannot be less than or equal to zero')
 
-    } else if((moment(this.state.activityDate, "YYYY-MM-DD").week() - moment(moment(), "DD-MM-YYYY").week()) < -1 || (moment(this.state.activityDate, "DD-MM-YYYY").week() - moment(moment(), "DD-MM-YYYY").week()) > 1){
+    } else if((moment(this.state.activityDate, "YYYY-MM-DD").week() - moment(moment(), "DD-MM-YYYY").week()) < -1 || (moment(this.state.activityDate, "YYYY-MM-DD").week() - moment(moment(), "DD-MM-YYYY").week()) > 1){
+
+      //console.log(moment(this.state.activityDate, "YYYY-MM-DD").week())
+      //console.log(moment(moment(), "YYYY-MM-DD").week())
+      //console.log((moment(this.state.activityDate, "YYYY-MM-DD").week() - moment(moment(), "DD-MM-YYYY").week()))
+      //console.log((moment(this.state.activityDate, "YYYY-MM-DD").week() - moment(moment(), "DD-MM-YYYY").week()))
         alert('date is not permitted')
     }
 
@@ -434,8 +513,19 @@ class ActivityFormN extends Component {
     }
 
 
+    let covercn = "none"
+    if(this.state.displayUoR){
+      covercn = "activity-form-cover"
+    }
+
+
     const my_form =
             <form className ="activity-form"  onSubmit={this.handleActivityFormSubmit}>
+
+              <div className={covercn}>
+                <button className="update-or-reuse-button" onClick={this.handleActivityUpdate}>Update</button>
+                <button className="update-or-reuse-button" onClick={this.handleActivityReUse}>Reuse</button>
+              </div>
 
               <label className="activity-form-input-label">Project</label>
               <select name="activityProjectArg" value={this.state.activityProjectArg} onChange={this.handlePChange} className="activity-form-input">

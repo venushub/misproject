@@ -38,6 +38,37 @@ const getProjectsQuery = gql`
 }
 `
 
+const getCostingsQuery = gql`
+{
+  allCostings {
+    id
+    user {
+      id
+      username
+    }
+    date
+    amount
+  }
+}
+`
+
+const createCosting = gql`
+      mutation createCostingPerHour($user: String!, $date: String!, $amount: String!){
+         createCostingPerHour(user: $user, date: $date, amount: $amount){
+            id
+        }
+    }
+`;
+
+const updateCosting = gql`
+      mutation updateCostingPerHour($costingId: String!, $date: String!, $amount: String!){
+         updateCostingPerHour(costingId: $costingId, date: $date, amount: $amount){
+            id
+        }
+    }
+`;
+
+
 const createProject = gql`
       mutation createProject($projectName: String!, $projectDesc: String!, $projectPic: String!, $invActTypes: String!){
          createProject(projectName: $projectName, projectDesc: $projectDesc, projectPic: $projectPic, invActTypes : $invActTypes){
@@ -391,4 +422,4 @@ const createUserMutation = gql`
 //   }
 // `
 
-export {getTokenMutation, getMe, createActivityType ,updateActivityType , createProject , updateProject ,getProfilesQuery ,getProfileQuery,updateProfile, getAttendanceQuery ,getAttendanceFilesQuery , getActivitiesForMonthQuery  , verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};
+export {getTokenMutation,getCostingsQuery,createCosting, updateCosting ,getMe, createActivityType ,updateActivityType , createProject , updateProject ,getProfilesQuery ,getProfileQuery,updateProfile, getAttendanceQuery ,getAttendanceFilesQuery , getActivitiesForMonthQuery  , verifyTokenMutation, getActivitiesQuery, getActivitiesForFilterQuery ,getUsersQuery ,createUserMutation, createActivityMutation, getProjectsQuery, getActivityTypesQuery, getActivityTypeIdentifiersQuery, getActivitiesForWeekQuery, createActivityTypeIdentifierMutation,updateActivityMutation};

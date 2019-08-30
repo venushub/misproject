@@ -7,11 +7,6 @@ from django.dispatch import receiver
 
 # Create your models here.
 
-
-
-
-
-
 class ActivityType(models.Model):
     activityTypeName =models.CharField(max_length=50, unique = True)
     activityTypeDesc =models.TextField()
@@ -89,6 +84,16 @@ class Profile(models.Model):
     location = models.CharField(max_length=30, blank=True)
     profilePic = models.TextField()
     projectsInvolved = models.ManyToManyField(Project)
+
+
+class CostingPerHour(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    date = models.DateField(auto_now=False, auto_now_add=False)
+    amount = models.FloatField(blank=False)
+
+# class Document(models.Model):
+#     documentName = models.TextField(blank=False)
+#     documentType = models.CharField(
 
 
 @receiver(post_save, sender=User)

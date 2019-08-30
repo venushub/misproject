@@ -6,6 +6,7 @@ import UploadExcel from './UploadExcel'
 import UserManagement from './admin/UserManagement'
 import ProjectManagement from './admin/ProjectManagement'
 import ActivityTypesManagement from './admin/ActivityTypesManagement'
+import CostingManagement from './admin/CostingManagement'
 
 
 
@@ -17,7 +18,12 @@ class AdminToolKit extends Component {
 
     this.state = {
       showuploadform : false,
-      buttons : [{id : 1, name:'User Management', active : true}, {id : 2, name:'Projects Management', active : false},  {id : 3, name:'Activity Types Management', active : false}],
+      buttons : [
+                 {id : 1, name:'User Management', active : true},
+                 {id : 2, name:'Projects Management', active : false},
+                 {id : 3, name:'Activity Types Management', active : false},
+                 {id : 4, name:'Costing Management', active : false}
+                ],
       whichComp : 'user'
     }
   }
@@ -78,6 +84,8 @@ class AdminToolKit extends Component {
         rendercomp = <UserManagement />
     } else if(this.state.whichComp === 'Activity Types Management'){
         rendercomp = <ActivityTypesManagement />
+    } else if(this.state.whichComp === 'Costing Management'){
+      rendercomp = <CostingManagement />
     }
 
 

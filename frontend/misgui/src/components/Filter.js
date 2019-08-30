@@ -753,8 +753,6 @@ class Filter extends Component {
 
       }
 
-
-
     }, 500);
   }
 
@@ -787,8 +785,6 @@ class Filter extends Component {
       filter_details_class = "filter-details"
 
       if(this.state.which_filter === 'projects'){
-
-
 
         display_filter_details_render = this.state.projects.map((item, index) => {
           let button_here_class = "filter-sub-item-selected"

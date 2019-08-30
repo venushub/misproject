@@ -15,8 +15,6 @@ import hashlib
 @csrf_exempt
 def MatcherView(request):
 
-
-
     def monthToNum(shortMonth):
 
         return{
@@ -33,8 +31,6 @@ def MatcherView(request):
                 'November' : 11,
                 'December' : 12
         }[shortMonth]
-
-
 
     html = "<html><body>Hi</body></html>"
 
@@ -89,33 +85,23 @@ def MatcherView(request):
     # totalHours = models.CharField(max_length=100)
     # companyName = models.CharField(max_length=100)
 
-
-
     print(jsonredata['fileYear'], jsonredata['fileMonth'])
 
     allSingle = False
     # mymonth = datetime.datetime.strptime(data1[0]['FirstIn'], '%d-%B-%y %H:%M:%S').month
     mymonth =  jsonredata['fileMonth']
     for item in data1:
-        # if(datetime.datetime.strptime(item['FirstIn'], '%d-%B-%y %H:%M:%S').month ==  monthToNum(jsonredata['fileMonth'])):
-        if(datetime.datetime.strptime(item['FirstIn'], '%d-%B-%y %H:%M:%S').month ==  5):
-
+        if(datetime.datetime.strptime(item['FirstIn'], '%d-%B-%y %H:%M:%S').month ==  monthToNum(jsonredata['fileMonth'])):
+        #if(datetime.datetime.strptime(item['FirstIn'], '%d-%B-%y %H:%M:%S').month ==  5):
             allSingle = True
+        else:
+            allSingle = False
 
-    print(type(datetime.datetime.strptime(data1[0]['FirstIn'], '%d-%B-%y %H:%M:%S').month) , type(monthToNum(jsonredata['fileMonth'])))
+    #print(type(datetime.datetime.strptime(data1[0]['FirstIn'], '%d-%B-%y %H:%M:%S').month) , type(monthToNum(jsonredata['fileMonth'])))
 
     if(allSingle == True):
         print("yes every thing is true")
-
-    # class AttendanceFile(models.Model):
-    #     year = models.CharField(max_length=100)
-    #     month = models.CharField(max_length=100)
-    #     fileName = models.CharField(max_length=100)
-    #     timeOfUpload = models.DateTimeField()
-    #     hashofFile = models.CharField(max_length=200)
-    #     fileBase64 = models.TextField()
-
-    print(hashlib.md5(jsonredata['filebase64'].encode()).hexdigest())
+        #print(hashlib.md5(jsonredata['filebase64'].encode()).hexdigest())
 
     af = AttendanceFile(year=jsonredata['fileYear'],
                         month=jsonredata['fileMonth'],

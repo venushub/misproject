@@ -14,11 +14,18 @@ class Query(object):
     def resolve_all_attendance_files(self, info, **kwargs):
         return AttendanceFile.objects.all()
 
-    # def
 
-# class CreateActivityType(graphene.Mutation):
+# year=jsonredata['fileYear'],
+#                     month=jsonredata['fileMonth'],
+#                     fileName=jsonredata['fileName'],
+#                     timeOfUpload=jsonredata['fileUploadTime'],
+#                     hashofFile=hashlib.md5(jsonredata['filebase64'].encode()).hexdigest(),
+#                     fileBase64 = jsonredata['filebase64']
+
+#
+# class CreateAttendanceFile(graphene.Mutation):
 #     id = graphene.Int()
-#     activityTypeName= graphene.String()
+#     month= graphene.String()
 #     activityTypeDesc = graphene.String()
 #
 #     class Arguments:

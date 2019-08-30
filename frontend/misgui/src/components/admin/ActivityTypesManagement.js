@@ -193,7 +193,7 @@ class ActivityTypesManagement extends Component {
     return(
       <div className="admin-sub-div">
       <div className="filter-details-my">
-        <input placeholder="Search Users Here" name="filterInput" className="filter-items-filter-my" type="text" onChange={this.handleFilterInputChange} value={this.state.filterInput} />
+        <input placeholder="Search Activity Types Here" name="filterInput" className="filter-items-filter-my" type="text" onChange={this.handleFilterInputChange} value={this.state.filterInput} />
         <div className="title-button-div">
           <div className="activities-title">Activity Types List</div>
           <button className="add-activity-button" onClick={this.handleCreateActivityType}>Create Activity Type</button>

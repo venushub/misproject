@@ -179,6 +179,7 @@ class ActivityFormN extends Component {
       activityDate : todaydate,
       activityStartTime : nowtime,
       activityEndTime : nowtime,
+      displayUoR : false,
     })
   }
 
@@ -291,26 +292,6 @@ class ActivityFormN extends Component {
       submit_button_content : "Add Activity +",
     })
 
-
-    // console.log("date isssssssss", convDate)
-    // console.log("eeeeeee", this.props.editOption)
-  //   if(!this.state.display_form){
-  //   this.setState({
-  //     display_form : true,
-  //     button_content : 'Cancel',
-  //     submit_button_content : "Add Activity ⇧",
-  //     // activityStartTime : '',
-  //     // activityEndTime : '',
-  //
-  //     })
-  // }
-  //
-  // if(this.state.display_form){
-  // this.setState({
-  //   submit_button_content : "Add Activity ⇧",
-  // })
-  // }
-
   }
 
 
@@ -318,24 +299,17 @@ class ActivityFormN extends Component {
     if(this.props.editOption !== 0) {
       // console.log("bruh")
       if (this.props.editOption !== prevProps.editOption) {
-
-
         this.setState({
           displayUoR : true,
           display_form : true,
           button_content : 'Cancel',
         })
-
       }
-
-
     }
   }
 
 
   componentDidMount(){
-
-    // console.log("mooooooooooo", moment.duration('23:59:59'))
 
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');

@@ -370,7 +370,7 @@ class ProjectManagement extends Component {
     return(
       <div className="admin-sub-div">
       <div className="filter-details-my">
-        <input placeholder="Search Users Here" name="filterInput" className="filter-items-filter-my" type="text" onChange={this.handleFilterInputChange} value={this.state.filterInput} />
+        <input placeholder="Search Projects Here" name="filterInput" className="filter-items-filter-my" type="text" onChange={this.handleFilterInputChange} value={this.state.filterInput} />
         <div className="title-button-div">
         <div className="activities-title">Projects List</div>
         <button className="add-activity-button" onClick={this.handleCreateProject}>Create Project</button>

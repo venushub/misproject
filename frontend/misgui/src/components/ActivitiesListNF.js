@@ -1,14 +1,35 @@
 import React , {Component} from 'react'
+import CostCalc from './CostCalc'
 import moment from 'moment'
 var _ = require('lodash');
 
 
-class ActivitiesListN extends Component {
+
+class ActivitiesListNF extends Component {
+
+
   constructor(props){
     super(props)
 
-
+    this.state = {
+      detectChange : 0
+    }
   }
+
+
+  componentDidUpdate(prevProps){
+      if (this.props.filter_group_criteria !== prevProps.filter_group_criteria) {
+        let newdc;
+        if(this.state.detectChange === 0){
+          newdc = 1
+        } else if(this.state.detectChange === 1){
+          newdc = 0
+        }
+        this.setState({
+          detectChange : newdc
+        })
+      }
+    }
 
    // handleButtonPress = (activity) => {
    //   this.buttonPressTimer = setTimeout(() => {
@@ -37,6 +58,17 @@ class ActivitiesListN extends Component {
      })
    }
 
+
+  handleShowCosting = (resi, refbuilder) => {
+    console.log("hiiii", resi, refbuilder)
+    // this.refs.refbuilder.value = 100;
+    let cost = 0;
+    resi.map((activity, index) => {
+      cost = cost + activity.activityHours
+    })
+
+    alert(cost)
+  }
 
   render(){
 
@@ -89,18 +121,26 @@ class ActivitiesListN extends Component {
               <td className="activity-sub-item-div-4">{activity.activityTypeIdentifier.activityTypeIdentifierName}</td>
               <td className="activity-sub-item-div-7">{activity.activityTypeIdentifier.activityTypeIdentifierSubCat}</td>
               <td className="activity-sub-item-div-5">{activity.activityDescription}</td>
-
-             <td className="activity-sub-item-div-7">{activity.activityHours} Hrs</td>
+              <td className="activity-sub-item-div-7">{activity.activityStartTime.substring(0,10)}</td>
+              <td className="activity-sub-item-div-7">{activity.activityHours} Hrs</td>
           </tr>
         )
       })
 
       sub_activities_total = sub_activities_total.toFixed(2)
 
+      let refbuilder = "ref-sat" + index.toString()
+
+
       return(
         <div  key={index} className="activity-block">  <table className="my-table">
           <tbody>{sub_activities_render}</tbody>
-        </table><div className="total-td">{sub_activities_total} Hrs</div></div>
+        </table>
+          <div className="total-td">
+          <CostCalc activities={resi} detectChange={this.state.detectChange} />
+         <div >{sub_activities_total} Hrs</div>
+         </div>
+       </div>
       )
 
       // resi.map((activity) => {
@@ -221,4 +261,6 @@ class ActivitiesListN extends Component {
 
 }
 
-export default ActivitiesListN
+
+
+export default ActivitiesListNF
